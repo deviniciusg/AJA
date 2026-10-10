@@ -1,0 +1,169 @@
+/*
+Theme Name: Aliança Jurídica pela Amazônia
+Theme URI: https://ajamazonia.org
+Author: Aliança Jurídica pela Amazônia (AJA)
+Author URI: https://ajamazonia.org
+Description: Tema institucional em WordPress para a Aliança Jurídica pela Amazônia (AJA), com suporte nativo a postagens dinâmicas de blog em três categorias principais: "Portfólio", "Editais" e "Publicações", mantendo o layout e design idênticos ao projeto original.
+Version: 1.0.0
+Tested up to: 6.7
+Requires at least: 5.8
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: aja
+*/
+
+/* ==========================================================================
+   TIPOGRAFIA OFICIAL: Neuething Sans
+   Conforme Manual de Identidade Visual da Aliança Jurídica pela Amazônia (AJA)
+   ========================================================================== */
+@font-face {
+  font-family: 'Neuething Sans';
+  src: url('assets/Fontes/NeuethingSans-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neuething Sans';
+  src: url('assets/Fontes/NeuethingSans-Meduim.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neuething Sans';
+  src: url('assets/Fontes/NeuethingSans-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neuething Sans';
+  src: url('assets/Fontes/NeuethingSans-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neuething Sans';
+  src: url('assets/Fontes/NeuethingSans-ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neuething Sans';
+  src: url('assets/Fontes/NeuethingSans-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-family-base: 'Neuething Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Neuething Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
+
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Ocultar barra de rolagem mantendo a funcionalidade */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Estilos de conteúdo gerado pelo editor do WordPress */
+.prose-aja p {
+  margin-bottom: 1.25rem;
+  line-height: 1.75;
+}
+
+.prose-aja h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #172330;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose-aja h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #172330;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-aja ul, .prose-aja ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-aja ul {
+  list-style-type: disc;
+}
+
+.prose-aja ol {
+  list-style-type: decimal;
+}
+
+.prose-aja blockquote {
+  border-left: 4px solid #771f1f;
+  padding-left: 1.25rem;
+  font-style: italic;
+  margin: 1.5rem 0;
+  color: #455260;
+}
+
+.prose-aja img {
+  border-radius: 0.75rem;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+}
+
+/* Correção crítica para Elementor: forçar imagens com object-cover / h-full a manter 100% de altura */
+.elementor img.object-cover,
+.elementor img.h-full,
+.elementor .object-cover,
+.elementor .h-full > img,
+img.object-cover {
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+}
+
+.hero-bg-cover,
+.elementor .hero-bg-cover {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+}

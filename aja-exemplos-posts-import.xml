@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/"
+>
+<channel>
+	<title>Aliança Jurídica pela Amazônia</title>
+	<link>http://aja-modelo.local</link>
+	<description>Exemplos de Teste Completos para o Portfólio, Editais e Publicações da AJA</description>
+	<pubDate>Mon, 05 Oct 2026 20:02:24 +0000</pubDate>
+	<language>pt-BR</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>http://aja-modelo.local</wp:base_site_url>
+	<wp:base_blog_url>http://aja-modelo.local</wp:base_blog_url>
+
+	<!-- Categorias -->
+	<wp:category>
+		<wp:term_id>101</wp:term_id>
+		<wp:category_nicename>portfolio</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Portfólio]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>102</wp:term_id>
+		<wp:category_nicename>editais</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Editais]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>103</wp:term_id>
+		<wp:category_nicename>publicacoes</wp:category_nicename>
+		<wp:category_parent></wp:category_parent>
+		<wp:cat_name><![CDATA[Publicações]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>104</wp:term_id>
+		<wp:category_nicename>advocacia</wp:category_nicename>
+		<wp:category_parent>portfolio</wp:category_parent>
+		<wp:cat_name><![CDATA[Advocacia Popular & Coletivos]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>105</wp:term_id>
+		<wp:category_nicename>pesquisa</wp:category_nicename>
+		<wp:category_parent>portfolio</wp:category_parent>
+		<wp:cat_name><![CDATA[Pesquisa & Clínicas Jurídicas]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>106</wp:term_id>
+		<wp:category_nicename>sociedade</wp:category_nicename>
+		<wp:category_parent>portfolio</wp:category_parent>
+		<wp:cat_name><![CDATA[Organizações da Sociedade Civil]]></wp:cat_name>
+	</wp:category>
+
+	<!-- ITEM 1: PORTFÓLIO - PROFISSIONAL (ADVOCACIA POPULAR / PARÁ / GT 01) -->
+	<item>
+		<title>Coletivo de Advocacia Popular Tapajós</title>
+		<link>http://aja-modelo.local/coletivo-advocacia-popular-tapajos/</link>
+		<pubDate>Mon, 05 Oct 2026 20:02:24 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://aja-modelo.local/?p=2001</guid>
+		<description></description>
+		<content:encoded><![CDATA[O Coletivo de Advocacia Popular Tapajós atua na defesa dos direitos territoriais de povos e comunidades tradicionais da Amazônia paraense. Integrante ativo do GT 01 da Aliança Jurídica pela Amazônia, o coletivo desenvolve ações de monitoramento de conflitos socioambientais, capacitação jurídica de lideranças de base e incidência em litígios climáticos e fundiários.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Atuação jurídica em litígios estratégicos, demarcação e assessoria comunitária a povos indígenas e ribeirinhos na bacia do Baixo Tapajós.]]></excerpt:encoded>
+		<wp:post_id>2001</wp:post_id>
+		<wp:post_date>2026-10-05 20:02:24</wp:post_date>
+		<wp:post_date_gmt>2026-10-05 20:02:24</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>coletivo-advocacia-popular-tapajos</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>post</wp:post_type>
+		<category domain="category" nicename="portfolio"><![CDATA[Portfólio]]></category>
+		<category domain="category" nicename="advocacia"><![CDATA[Advocacia Popular & Coletivos]]></category>
+		<wp:postmeta>
+			<wp:meta_key>_aja_type</wp:meta_key>
+			<wp:meta_value><![CDATA[profissional]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_territory</wp:meta_key>
+			<wp:meta_value><![CDATA[pa]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_theme</wp:meta_key>
+			<wp:meta_value><![CDATA[gt-01]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_badge</wp:meta_key>
+			<wp:meta_value><![CDATA[Advocacia Popular]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_subtitle</wp:meta_key>
+			<wp:meta_value><![CDATA[Defesa Territorial & PIQCTs]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_location</wp:meta_key>
+			<wp:meta_value><![CDATA[Santarém / Pará • Baixo Tapajós]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_pdf_url</wp:meta_key>
+			<wp:meta_value><![CDATA[#]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- ITEM 2: PORTFÓLIO - ORGANIZAÇÃO (SOCIEDADE CIVIL / DF / GT 03) -->
+	<item>
+		<title>Instituto Sociedade, População e Família (ISPN)</title>
+		<link>http://aja-modelo.local/instituto-sociedade-populacao-e-familia-ispn/</link>
+		<pubDate>Mon, 05 Oct 2026 20:02:24 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://aja-modelo.local/?p=2002</guid>
+		<description></description>
+		<content:encoded><![CDATA[O ISPN atua pelo fortalecimento da sociedade civil organizada, incentivo a cadeias socioprodutivas justas e incidência jurídica em políticas públicas ambientais, conectando redes territoriais aos espaços de governança em Brasília.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Fortalecimento da sociedade civil organizada, incentivo a cadeias socioprodutivas sustentáveis e incidência em políticas ambientais.]]></excerpt:encoded>
+		<wp:post_id>2002</wp:post_id>
+		<wp:post_date>2026-10-05 20:02:24</wp:post_date>
+		<wp:post_date_gmt>2026-10-05 20:02:24</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>instituto-sociedade-populacao-e-familia-ispn</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>post</wp:post_type>
+		<category domain="category" nicename="portfolio"><![CDATA[Portfólio]]></category>
+		<category domain="category" nicename="sociedade"><![CDATA[Organizações da Sociedade Civil]]></category>
+		<wp:postmeta>
+			<wp:meta_key>_aja_type</wp:meta_key>
+			<wp:meta_value><![CDATA[organizacao]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_territory</wp:meta_key>
+			<wp:meta_value><![CDATA[df]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_theme</wp:meta_key>
+			<wp:meta_value><![CDATA[gt-03]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_badge</wp:meta_key>
+			<wp:meta_value><![CDATA[Organizações da Sociedade Civil]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_subtitle</wp:meta_key>
+			<wp:meta_value><![CDATA[Finanças & Bioeconomia]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_location</wp:meta_key>
+			<wp:meta_value><![CDATA[Brasília / DF • Articulação Nacional]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_pdf_url</wp:meta_key>
+			<wp:meta_value><![CDATA[#]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- ITEM 3: PORTFÓLIO - PESQUISADOR (ACADEMIA / AMAZONAS / GT 02) -->
+	<item>
+		<title>Centro de Estudos de Litigância Climática da Amazônia</title>
+		<link>http://aja-modelo.local/centro-de-estudos-de-litigancia-climatica/</link>
+		<pubDate>Mon, 05 Oct 2026 20:02:24 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://aja-modelo.local/?p=2003</guid>
+		<description></description>
+		<content:encoded><![CDATA[Núcleo de pesquisa jurídica dedicado à análise e produção de precedentes jurisprudenciais do STF, justiça climática, nexo de causalidade em desmatamentos e responsabilidade civil ambiental na Pan-Amazônia.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Pesquisa aplicada e pareceres jurídicos sobre precedentes jurisprudenciais do STF, justiça climática e responsabilidade ambiental.]]></excerpt:encoded>
+		<wp:post_id>2003</wp:post_id>
+		<wp:post_date>2026-10-05 20:02:24</wp:post_date>
+		<wp:post_date_gmt>2026-10-05 20:02:24</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>centro-de-estudos-de-litigancia-climatica</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>post</wp:post_type>
+		<category domain="category" nicename="portfolio"><![CDATA[Portfólio]]></category>
+		<category domain="category" nicename="pesquisa"><![CDATA[Pesquisa & Clínicas Jurídicas]]></category>
+		<wp:postmeta>
+			<wp:meta_key>_aja_type</wp:meta_key>
+			<wp:meta_value><![CDATA[pesquisador]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_territory</wp:meta_key>
+			<wp:meta_value><![CDATA[am]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_theme</wp:meta_key>
+			<wp:meta_value><![CDATA[gt-02]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_badge</wp:meta_key>
+			<wp:meta_value><![CDATA[Pesquisa & Clínicas Jurídicas]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_subtitle</wp:meta_key>
+			<wp:meta_value><![CDATA[Litigância Estratégica & Clima]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_location</wp:meta_key>
+			<wp:meta_value><![CDATA[Manaus / Amazonas • Rio Negro]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_pdf_url</wp:meta_key>
+			<wp:meta_value><![CDATA[#]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- ITEM 4: EDITAIS - DESTAQUE COM BANNER -->
+	<item>
+		<title>Chamada Pública 01/2026: Submissão de Artigos de Opinião e Teses Socioambientais</title>
+		<link>http://aja-modelo.local/edital-submissao-artigos-2026/</link>
+		<pubDate>Mon, 05 Oct 2026 20:02:24 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://aja-modelo.local/?p=2004</guid>
+		<description></description>
+		<content:encoded><![CDATA[A Aliança Jurídica pela Amazônia (AJA) torna pública a chamada para submissão de artigos de opinião jurídicos, notas de conjuntura e propostas de teses voltadas ao fortalecimento do debate sobre justiça, democracia socioambiental e Estado de Direito na Amazônia. As submissões serão avaliadas pelo comitê técnico da rede com foco nas agendas estratégicas da COP30.]]></content:encoded>
+		<excerpt:encoded><![CDATA[A AJA abre chamada pública para artigos jurídicos de opinião voltados ao fortalecimento do debate socioambiental e Estado de Direito na Amazônia.]]></excerpt:encoded>
+		<wp:post_id>2004</wp:post_id>
+		<wp:post_date>2026-10-05 20:02:24</wp:post_date>
+		<wp:post_date_gmt>2026-10-05 20:02:24</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>edital-submissao-artigos-2026</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>post</wp:post_type>
+		<category domain="category" nicename="editais"><![CDATA[Editais]]></category>
+		<wp:postmeta>
+			<wp:meta_key>_aja_featured</wp:meta_key>
+			<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_badge</wp:meta_key>
+			<wp:meta_value><![CDATA[Chamada Pública Aberta]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_subtitle</wp:meta_key>
+			<wp:meta_value><![CDATA[Comitê Editorial & GTs]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_location</wp:meta_key>
+			<wp:meta_value><![CDATA[Prazo: 30 de Outubro de 2026 • Amazônia Legal]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_pdf_url</wp:meta_key>
+			<wp:meta_value><![CDATA[mailto:info@ajamazonia.org?subject=Submissao%20de%20Artigo%20AJA]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- ITEM 5: PUBLICAÇÕES - NOTA TÉCNICA -->
+	<item>
+		<title>Nota Técnica: Salvaguardas Territoriais e o Protocolo de Consulta Prévia na Amazônia</title>
+		<link>http://aja-modelo.local/nota-tecnica-salvaguardas-territoriais/</link>
+		<pubDate>Mon, 05 Oct 2026 20:02:24 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://aja-modelo.local/?p=2005</guid>
+		<description></description>
+		<content:encoded><![CDATA[Esta Nota Técnica elaborada pelos membros do GT 01 da AJA examina os parâmetros jurídicos de aplicação da Convenção 169 da OIT e o dever de consulta prévia, livre e informada perante projetos de infraestrutura, mercado de carbono e transição ecológica no bioma amazônico.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Análise jurídica sobre a efetivação da Convenção 169 da OIT e salvaguardas territoriais diante de grandes projetos e transição ecológica na Amazônia.]]></excerpt:encoded>
+		<wp:post_id>2005</wp:post_id>
+		<wp:post_date>2026-10-05 20:02:24</wp:post_date>
+		<wp:post_date_gmt>2026-10-05 20:02:24</wp:post_date_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>nota-tecnica-salvaguardas-territoriais</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>post</wp:post_type>
+		<category domain="category" nicename="publicacoes"><![CDATA[Publicações]]></category>
+		<wp:postmeta>
+			<wp:meta_key>_aja_badge</wp:meta_key>
+			<wp:meta_value><![CDATA[Nota Técnica 01/26]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_subtitle</wp:meta_key>
+			<wp:meta_value><![CDATA[GT 01 • Territórios & PIQCTs]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_location</wp:meta_key>
+			<wp:meta_value><![CDATA[Publicado em 2026]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_aja_pdf_url</wp:meta_key>
+			<wp:meta_value><![CDATA[#]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+</channel>
+</rss>

@@ -42,10 +42,28 @@
     ::-webkit-scrollbar {
       display: none;
     }
+
+    /* Correção de altura para imagens de fundo no mobile */
+    img.object-cover,
+    .object-cover {
+      height: 100% !important;
+      max-width: none !important;
+      object-fit: cover !important;
+    }
+
+    .hero-bg-cover {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 100% !important;
+      max-width: none !important;
+      object-fit: cover !important;
+    }
   </style>
   <script src="https://cdn.tailwindcss.com"></script>
   <script
-    id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "moss-light": "#6f7740", "on-secondary-container": "#741d1d", "on-tertiary": "#ffffff", "ink-primary": "#202115", "on-secondary-fixed": "#410004", "surface-container": "#ede8e1", "inverse-primary": "#c6ca96", "on-tertiary-container": "#f8be51", "on-error": "#ffffff", "surface-tint": "#5d6136", "on-primary-fixed": "#1a1d00", "surface-container-highest": "#e5e2de", "primary-fixed": "#e3e7b0", "background": "#fcf9f5", "on-secondary": "#ffffff", "inverse-surface": "#31302e", "tertiary-fixed": "#ffdeaa", "outline-variant": "#c8c7b9", "tertiary-container": "#6f4d00", "on-tertiary-fixed": "#271900", "secondary": "#a13e3b", "on-surface-variant": "#47473c", "surface-container-low": "#f5f1eb", "border-subtle": "#e2ded7", "secondary-fixed": "#ffdad7", "surface-container-lowest": "#ffffff", "cyan-accent": "#00d3fc", "secondary-fixed-dim": "#ffb3ae", "surface-container-high": "#ebe8e4", "on-background": "#1c1c1a", "on-primary": "#ffffff", "on-error-container": "#93000a", "outline": "#78786b", "primary": "#3b3f17", "inverse-on-surface": "#f3f0ec", "canvas-paper": "#f7f4f0", "on-secondary-fixed-variant": "#812726", "on-surface": "#1c1c1a", "tertiary": "#513700", "surface-dim": "#dcdad6", "error": "#ba1a1a", "earth-dark": "#431d11", "clay-warm": "#825748", "error-container": "#ffdad6", "on-tertiary-fixed-variant": "#5f4100", "surface": "#fcf9f5", "tertiary-fixed-dim": "#f7bd50", "primary-fixed-dim": "#c6ca96", "primary-container": "#52562c", "river-sky": "#a6bfe2", "secondary-container": "#fe857f", "on-primary-fixed-variant": "#464a21", "on-primary-container": "#c7cb96", "surface-variant": "#e5e2de", "surface-bright": "#fcf9f5" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "3rem", "margin": "3rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "gutter-mobile": "1rem", "space-md": "1rem", "margin-mobile": "1.25rem", "gutter": "1.5rem", "space-lg": "1.75rem" }, fontFamily: { "body-lg": ["Epilogue"], "body-sm": ["Epilogue"], "display-lg": ["Epilogue"], "label-lg": ["Epilogue"], "label-md": ["Epilogue"], "headline-md": ["Epilogue"], "display-lg-mobile": ["Epilogue"], "headline-lg": ["Epilogue"], "title-lg": ["Epilogue"], "headline-lg-mobile": ["Epilogue"], "body-md": ["Epilogue"], "title-md": ["Epilogue"], "label-sm": ["Epilogue"], "headline-sm": ["Epilogue"] }, fontSize: { "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }], "body-sm": ["13px", { lineHeight: "20px", fontWeight: "400" }], "display-lg": ["56px", { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "600" }], "label-lg": ["13px", { lineHeight: "18px", letterSpacing: "0.04em", fontWeight: "600" }], "label-md": ["11px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "600" }], "headline-md": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "500" }], "display-lg-mobile": ["38px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "600" }], "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "500" }], "title-lg": ["19px", { lineHeight: "26px", fontWeight: "600" }], "headline-lg-mobile": ["30px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "500" }], "body-md": ["15px", { lineHeight: "24px", fontWeight: "400" }], "title-md": ["17px", { lineHeight: "24px", fontWeight: "500" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.1em", fontWeight: "600" }], "headline-sm": ["22px", { lineHeight: "28px", fontWeight: "600" }] } } } };</script>
+    id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#416284", "on-primary": "#ffffff", "primary-container": "#2d4663", "on-primary-container": "#d4e3f5", "primary-fixed": "#a6bfe2", "primary-fixed-dim": "#8eaed7", "on-primary-fixed": "#0c2138", "on-primary-fixed-variant": "#2a4666", "surface-tint": "#416284", "inverse-primary": "#a6bfe2", "river-sky": "#a6bfe2", "cyan-accent": "#a6bfe2", "secondary": "#771f1f", "on-secondary": "#ffffff", "secondary-container": "#963232", "on-secondary-container": "#ffdada", "secondary-fixed": "#fbdcd9", "secondary-fixed-dim": "#e59b95", "on-secondary-fixed": "#3b0707", "on-secondary-fixed-variant": "#5c1313", "tertiary": "#f2b84c", "on-tertiary": "#241800", "tertiary-container": "#705011", "on-tertiary-container": "#fbe3ab", "tertiary-fixed": "#fae2b1", "tertiary-fixed-dim": "#f2b84c", "on-tertiary-fixed": "#291800", "on-tertiary-fixed-variant": "#6b4600", "forest-olive": "#52562c", "moss-light": "#6f7740", "earth-dark": "#431d11", "clay-warm": "#825748", "canvas-paper": "#f7f4f0", "surface": "#fcfbf9", "background": "#fcfbf9", "surface-dim": "#d9d5ce", "surface-bright": "#fcfbf9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f5f2ed", "surface-container": "#eeeae3", "surface-container-high": "#e8e3dc", "surface-container-highest": "#e2ddd5", "border-subtle": "#ded8cf", "outline": "#737c86", "outline-variant": "#c2c9d1", "ink-primary": "#172330", "on-surface": "#1c2630", "on-surface-variant": "#455260", "on-background": "#1c2630", "inverse-surface": "#2b3744", "inverse-on-surface": "#f1f4f8", "error": "#ba1a1a", "on-error": "#ffffff", "error-container": "#ffdad6", "on-error-container": "#93000a" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "3rem", "margin": "3rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "gutter-mobile": "1rem", "space-md": "1rem", "margin-mobile": "1.25rem", "gutter": "1.5rem", "space-lg": "1.75rem" }, fontFamily: { "body-lg": ["Epilogue"], "body-sm": ["Epilogue"], "display-lg": ["Epilogue"], "label-lg": ["Epilogue"], "label-md": ["Epilogue"], "headline-md": ["Epilogue"], "display-lg-mobile": ["Epilogue"], "headline-lg": ["Epilogue"], "title-lg": ["Epilogue"], "headline-lg-mobile": ["Epilogue"], "body-md": ["Epilogue"], "title-md": ["Epilogue"], "label-sm": ["Epilogue"], "headline-sm": ["Epilogue"] }, fontSize: { "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }], "body-sm": ["13px", { lineHeight: "20px", fontWeight: "400" }], "display-lg": ["56px", { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "600" }], "label-lg": ["13px", { lineHeight: "18px", letterSpacing: "0.04em", fontWeight: "600" }], "label-md": ["11px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "600" }], "headline-md": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "500" }], "display-lg-mobile": ["38px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "600" }], "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "500" }], "title-lg": ["19px", { lineHeight: "26px", fontWeight: "600" }], "headline-lg-mobile": ["30px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "500" }], "body-md": ["15px", { lineHeight: "24px", fontWeight: "400" }], "title-md": ["17px", { lineHeight: "24px", fontWeight: "500" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.1em", fontWeight: "600" }], "headline-sm": ["22px", { lineHeight: "28px", fontWeight: "600" }] } } } };</script>
 </head>
 
 <body
@@ -57,7 +75,7 @@
         <img alt="Logotipo AJA" class="w-9 h-9 object-contain rounded" src="assets/logos/Prancheta 7@3x-8.png" />
         <div class="flex flex-col">
           <span class="font-title-lg text-title-lg tracking-tight text-ink-primary font-bold">AJA</span>
-          <span class="font-label-sm text-label-sm tracking-widest uppercase text-clay-warm">Aliança Jurídica Amazônia</span>
+          <span class="font-label-sm text-label-sm tracking-widest uppercase text-clay-warm">Aliança Jurídica pela Amazônia</span>
         </div>
       </a>
 
@@ -168,11 +186,12 @@
     <div class="flex flex-col w-full">
 
       <!-- HERO SECTION: PLATAFORMA DE ARTICULAÇÃO & ESTADO DE DIREITO -->
-      <section class="relative w-full overflow-hidden bg-primary -mt-20 pt-28 pb-12 lg:pb-16 min-h-[660px] lg:min-h-[100vh] xl:min-h-[100vh] flex items-center">
+      <section class="relative w-full overflow-hidden bg-primary -mt-20 pt-24 pb-6 lg:pt-24 lg:pb-6 min-h-[560px] lg:min-h-[calc(100vh-68px)] flex items-center">
         <!-- Background Image with Scrim (Split vertical: Forest on left, Vibrant Amazon Elements Collage on right) -->
         <div class="absolute inset-0 z-0">
           <img alt="Colagem de elementos da Amazônia - Aliança Jurídica pela Amazônia"
-            class="w-full h-full object-cover object-[50%_center] lg:object-right"
+            class="hero-bg-cover w-full h-full object-cover object-[50%_center] lg:object-right pointer-events-none select-none"
+            style="position: absolute; inset: 0; width: 100% !important; height: 100% !important; min-height: 100% !important; max-width: none !important; object-fit: cover !important;"
             src="assets/homebg.png" />
           <!-- Mobile Scrim: Gradiente vertical escuro para máxima legibilidade dos textos -->
           <div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/85 to-primary/50 lg:hidden"></div>
@@ -235,38 +254,69 @@
         </div>
       </section>
 
-      <!-- INDICADORES DE IMPACTO & ALICERCE TERRITORIAL (A Força da Rede em Números) -->
-      <section class="w-full bg-earth-dark text-surface-container-lowest py-8 sm:py-10 lg:py-14 relative z-20 shadow-md" id="indicadores">
+      <!-- INDICADORES DE IMPACTO COMPACTOS (CABE NO 100VH) -->
+      <section class="w-full bg-earth-dark/95 backdrop-blur-md text-surface-container-lowest py-3.5 lg:py-4 relative z-20 border-t border-white/10 shadow-lg" id="indicadores">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-margin-mobile lg:px-margin">
-          <!-- 1 coluna no mobile muito estreito, 2 colunas a partir de sm (640px) ou telas médias, e 4 colunas em desktop -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-6 lg:gap-8">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 items-center">
             
-            <!-- Item 1 -->
-            <div class="flex flex-col border-l-2 border-tertiary-fixed pl-4 sm:pl-5 min-w-0">
-              <span class="font-display-lg text-2xl sm:text-[32px] lg:text-[48px] font-bold text-surface-container-lowest leading-tight mb-1.5 break-words">3 GTs</span>
-              <span class="font-label-md text-xs sm:text-label-md text-tertiary-fixed uppercase tracking-wider font-bold">Grupos Temáticos</span>
-              <span class="font-body-sm text-xs sm:text-body-sm text-surface-container-high mt-1 leading-relaxed break-words">Território, Litigância Estratégica e Finanças Sustentáveis</span>
+            <!-- 01. 3 GTs -->
+            <div class="flex items-center gap-3">
+              <span class="font-display-lg text-2xl lg:text-[28px] font-bold text-surface-container-lowest tracking-tight leading-none shrink-0">
+                3 GTs
+              </span>
+              <div class="flex flex-col border-l-2 border-tertiary-fixed/70 pl-2.5 min-w-0">
+                <span class="text-[10px] lg:text-[11px] font-label-md uppercase tracking-wider text-tertiary-fixed font-bold leading-tight">
+                  Grupos Temáticos
+                </span>
+                <span class="text-[11px] lg:text-[12px] text-surface-container-high/85 leading-tight truncate mt-0.5" title="Território, Litigância Estratégica e Finanças Sustentáveis">
+                  Território, Litigância e Finanças
+                </span>
+              </div>
             </div>
 
-            <!-- Item 2 -->
-            <div class="flex flex-col border-l-2 border-cyan-accent pl-4 sm:pl-5 min-w-0">
-              <span class="font-display-lg text-2xl sm:text-[32px] lg:text-[48px] font-bold text-surface-container-lowest leading-tight mb-1.5 break-words">9 Estados</span>
-              <span class="font-label-md text-xs sm:text-label-md text-cyan-accent uppercase tracking-wider font-bold">Amazônia Legal</span>
-              <span class="font-body-sm text-xs sm:text-body-sm text-surface-container-high mt-1 leading-relaxed break-words">Presença nos 9 estados amazônicos com polo de incidência no DF</span>
+            <!-- 02. Territórios -->
+            <div class="flex items-center gap-3">
+              <span class="font-display-lg text-2xl lg:text-[28px] font-bold text-surface-container-lowest tracking-tight leading-none shrink-0">
+                Territórios
+              </span>
+              <div class="flex flex-col border-l-2 border-cyan-accent/70 pl-2.5 min-w-0">
+                <span class="text-[10px] lg:text-[11px] font-label-md uppercase tracking-wider text-cyan-accent font-bold leading-tight">
+                  Capilaridade Ampla
+                </span>
+                <span class="text-[11px] lg:text-[12px] text-surface-container-high/85 leading-tight truncate mt-0.5" title="Presença em múltiplos territórios e centros estratégicos">
+                  Presença ampla na Amazônia e polos nacionais
+                </span>
+              </div>
             </div>
 
-            <!-- Item 3 -->
-            <div class="flex flex-col border-l-2 border-tertiary-fixed pl-4 sm:pl-5 min-w-0">
-              <span class="font-display-lg text-2xl sm:text-[32px] lg:text-[48px] font-bold text-surface-container-lowest leading-tight mb-1.5 break-words">PIQCTs</span>
-              <span class="font-label-md text-xs sm:text-label-md text-tertiary-fixed uppercase tracking-wider font-bold">Salvaguardas</span>
-              <span class="font-body-sm text-xs sm:text-body-sm text-surface-container-high mt-1 leading-relaxed break-words">Centralidade aos povos indígenas, quilombolas e comunidades</span>
+            <!-- 03. PIQCTs -->
+            <div class="flex items-center gap-3">
+              <span class="font-display-lg text-2xl lg:text-[28px] font-bold text-surface-container-lowest tracking-tight leading-none shrink-0">
+                PIQCTs
+              </span>
+              <div class="flex flex-col border-l-2 border-tertiary-fixed/70 pl-2.5 min-w-0">
+                <span class="text-[10px] lg:text-[11px] font-label-md uppercase tracking-wider text-tertiary-fixed font-bold leading-tight">
+                  Salvaguardas
+                </span>
+                <span class="text-[11px] lg:text-[12px] text-surface-container-high/85 leading-tight truncate mt-0.5" title="Centralidade aos povos indígenas, quilombolas e comunidades">
+                  Povos indígenas e comunidades
+                </span>
+              </div>
             </div>
 
-            <!-- Item 4 -->
-            <div class="flex flex-col border-l-2 border-secondary-container pl-4 sm:pl-5 min-w-0">
-              <span class="font-display-lg text-2xl sm:text-[32px] lg:text-[48px] font-bold text-tertiary-fixed leading-tight mb-1.5 break-words">Aliança</span>
-              <span class="font-label-md text-xs sm:text-label-md text-primary-fixed uppercase tracking-wider font-bold">Rede Articuladora</span>
-              <span class="font-body-sm text-xs sm:text-body-sm text-surface-container-high mt-1 leading-relaxed break-words">Espaço plural para advocacia popular, clínicas e sociedade civil</span>
+            <!-- 04. Aliança -->
+            <div class="flex items-center gap-3">
+              <span class="font-display-lg text-2xl lg:text-[28px] font-bold text-tertiary-fixed tracking-tight leading-none shrink-0">
+                Aliança
+              </span>
+              <div class="flex flex-col border-l-2 border-primary-fixed/70 pl-2.5 min-w-0">
+                <span class="text-[10px] lg:text-[11px] font-label-md uppercase tracking-wider text-primary-fixed font-bold leading-tight">
+                  Rede Articuladora
+                </span>
+                <span class="text-[11px] lg:text-[12px] text-surface-container-high/85 leading-tight truncate mt-0.5" title="Espaço plural para advocacia popular e sociedade civil">
+                  Advocacia popular e sociedade civil
+                </span>
+              </div>
             </div>
 
           </div>
@@ -616,130 +666,355 @@
               </h2>
             </div>
             <p class="font-body-md text-body-md text-on-surface-variant max-w-md">
-              Uma rede viva e capilarizada que conecta advogados populares, pesquisadores acadêmicos, clínicas de direitos e organizações nos 9 estados da Amazônia Legal.
+              Uma rede viva e capilarizada que conecta advogados populares, pesquisadores acadêmicos, clínicas de direitos e organizações comprometidas com a defesa dos povos e territórios da Amazônia.
             </p>
           </div>
 
-          <!-- Network Interactive Tabs Filter -->
-          <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 text-nowrap" id="network-filter-tabs">
-            <button
-              class="network-tab active px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider transition-colors shadow-sm"
-              data-target="all" type="button">Todos os Membros</button>
-            <button
-              class="network-tab px-4 py-2 rounded-lg bg-surface-container-lowest border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-high transition-colors shadow-sm"
-              data-target="advocacia" type="button">Advocacia Popular & Coletivos</button>
-            <button
-              class="network-tab px-4 py-2 rounded-lg bg-surface-container-lowest border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-high transition-colors shadow-sm"
-              data-target="pesquisa" type="button">Pesquisa & Clínicas Jurídicas</button>
-            <button
-              class="network-tab px-4 py-2 rounded-lg bg-surface-container-lowest border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-high transition-colors shadow-sm"
-              data-target="sociedade" type="button">Organizações da Sociedade Civil</button>
-            <button
-              class="network-tab px-4 py-2 rounded-lg bg-surface-container-lowest border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-high transition-colors shadow-sm"
-              data-target="diretoria" type="button">Articulação & Conselho</button>
+          <!-- SISTEMA DE FILTRAGEM AVANÇADA DO PORTFÓLIO: TIPO + TERRITÓRIO + TEMA + BUSCA -->
+          <div class="mb-8 flex flex-col gap-4 bg-surface-container-lowest/90 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-border-subtle shadow-sm" id="portfolio-filter-system">
+            
+            <!-- 1. Barra de Busca Instantânea -->
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline">
+                <span class="material-symbols-outlined text-[22px]">search</span>
+              </div>
+              <input 
+                type="text" 
+                id="portfolio-search-input"
+                placeholder="Buscar por nome, organização, cidade, estado, GT ou palavra-chave..." 
+                class="w-full pl-12 pr-10 py-3 bg-surface rounded-xl border border-border-subtle text-ink-primary font-body-md text-body-md placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner"
+              />
+              <button 
+                type="button" 
+                id="portfolio-search-clear" 
+                class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-outline hover:text-ink-primary transition-colors hidden"
+                aria-label="Limpar busca">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+              </button>
+            </div>
+
+            <!-- 2. Linha de Controles: Tipo de Membro (Pills) + Dropdowns (Território e Tema) -->
+            <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 pt-1">
+              
+              <!-- Pílulas de Tipo de Membro -->
+              <div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 text-nowrap" id="portfolio-type-tabs">
+                <button 
+                  type="button" 
+                  class="portfolio-type-pill active px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider transition-all shadow-sm font-bold flex items-center gap-1.5" 
+                  data-type="all">
+                  <span>Todos</span>
+                </button>
+                <button 
+                  type="button" 
+                  class="portfolio-type-pill px-4 py-2 rounded-lg bg-surface hover:bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider transition-all shadow-sm flex items-center gap-1.5" 
+                  data-type="organizacao">
+                  <span class="material-symbols-outlined text-[16px]">apartment</span>
+                  <span>Organizações</span>
+                </button>
+                <button 
+                  type="button" 
+                  class="portfolio-type-pill px-4 py-2 rounded-lg bg-surface hover:bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider transition-all shadow-sm flex items-center gap-1.5" 
+                  data-type="profissional">
+                  <span class="material-symbols-outlined text-[16px]">gavel</span>
+                  <span>Profissionais</span>
+                </button>
+                <button 
+                  type="button" 
+                  class="portfolio-type-pill px-4 py-2 rounded-lg bg-surface hover:bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider transition-all shadow-sm flex items-center gap-1.5" 
+                  data-type="pesquisador">
+                  <span class="material-symbols-outlined text-[16px]">school</span>
+                  <span>Pesquisadores</span>
+                </button>
+              </div>
+
+              <!-- Dropdowns de Território e Tema -->
+              <div class="flex flex-wrap sm:flex-nowrap items-center gap-3">
+                
+                <!-- Select Território -->
+                <div class="relative w-full sm:w-auto min-w-[190px]">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary">
+                    <span class="material-symbols-outlined text-[18px]">location_on</span>
+                  </div>
+                  <select 
+                    id="portfolio-territory-select" 
+                    class="w-full pl-9 pr-8 py-2.5 bg-surface rounded-lg border border-border-subtle text-ink-primary font-label-md text-label-md font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer appearance-none">
+                    <option value="all">Todos os Territórios</option>
+                    <option value="pa">Pará (PA)</option>
+                    <option value="am">Amazonas (AM)</option>
+                    <option value="mt">Mato Grosso (MT)</option>
+                    <option value="ma">Maranhão (MA)</option>
+                    <option value="ro">Rondônia (RO)</option>
+                    <option value="ac">Acre (AC)</option>
+                    <option value="ap">Amapá (AP)</option>
+                    <option value="rr">Roraima (RR)</option>
+                    <option value="to">Tocantins (TO)</option>
+                    <option value="df">Distrito Federal (DF)</option>
+                    <option value="pan-amazonia">Pan-Amazônia</option>
+                  </select>
+                  <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-outline">
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                  </div>
+                </div>
+
+                <!-- Select Tema / GT -->
+                <div class="relative w-full sm:w-auto min-w-[210px]">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-tertiary">
+                    <span class="material-symbols-outlined text-[18px]">hub</span>
+                  </div>
+                  <select 
+                    id="portfolio-theme-select" 
+                    class="w-full pl-9 pr-8 py-2.5 bg-surface rounded-lg border border-border-subtle text-ink-primary font-label-md text-label-md font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer appearance-none">
+                    <option value="all">Todos os Temas / GTs</option>
+                    <option value="gt-01">GT 01 • Territórios &amp; PIQCTs</option>
+                    <option value="gt-02">GT 02 • Litigância &amp; Clima</option>
+                    <option value="gt-03">GT 03 • Finanças &amp; Bioeconomia</option>
+                    <option value="direitos-humanos">Direitos Humanos &amp; Salvaguardas</option>
+                  </select>
+                  <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none text-outline">
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                  </div>
+                </div>
+
+                <!-- Botão Limpar Filtros -->
+                <button 
+                  type="button" 
+                  id="portfolio-reset-all" 
+                  class="hidden px-3.5 py-2.5 rounded-lg text-secondary hover:bg-secondary/10 font-label-md text-label-md font-semibold transition-colors flex items-center gap-1 shrink-0" 
+                  title="Limpar todos os filtros">
+                  <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+                  <span class="hidden sm:inline">Limpar</span>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- 3. Barra de Contagem de Resultados Ativa -->
+            <div class="flex items-center justify-between text-xs text-on-surface-variant/80 border-t border-border-subtle/60 pt-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyan-accent"></span>
+                <span id="portfolio-results-counter" class="font-medium">Carregando membros...</span>
+              </div>
+            </div>
+
           </div>
 
-          <!-- Grid of Leaders & Nodes -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-space-xl">
-            <!-- Card 1 -->
-            <div
-              class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle"
-              data-category="advocacia">
+          <!-- Grid of Leaders & Nodes (8 Exemplos Ricos para Testagem Completa) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-space-xl" id="network-cards-container">
+            
+            <!-- Card 1: Advocacia Popular / PA / GT 01 -->
+            <div class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle" 
+                 data-type="profissional" data-territory="pa" data-theme="gt-01" 
+                 data-search="coletivo de advocacia popular tapajos santarem para baixo tapajos defesa territorial piqcts">
               <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
                 <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
-                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">
-                  Imagem a ser colocada
-                </span>
+                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">Imagem a ser colocada</span>
               </div>
               <div class="p-6 flex flex-col flex-1 justify-between">
                 <div>
                   <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Advocacia Popular</span>
-                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Nome do Integrante (Exemplo)</h3>
+                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Coletivo de Advocacia Popular Tapajós</h3>
                   <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
-                    Isto é um exemplo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Atuação jurídica em litígios estratégicos, demarcação e assessoria comunitária a povos indígenas e ribeirinhos na bacia do Tapajós.
                   </p>
                 </div>
-                <div
-                  class="flex items-center gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
-                  <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Estado / Região • GT
+                <div class="flex items-center justify-between gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  <span class="inline-flex items-center gap-1 truncate">
+                    <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Santarém / Pará • Baixo Tapajós
+                  </span>
+                  <span class="text-[10px] uppercase font-bold text-clay-warm shrink-0 truncate max-w-[120px]">GT 01 • Territórios</span>
                 </div>
               </div>
             </div>
 
-            <!-- Card 2 -->
-            <div
-              class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle"
-              data-category="diretoria">
+            <!-- Card 2: Organização / DF / GT 03 -->
+            <div class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle" 
+                 data-type="organizacao" data-territory="df" data-theme="gt-03" 
+                 data-search="instituto sociedade populacao e familia ispn brasilia df articulacao nacional financas bioeconomia">
               <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
                 <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
-                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">
-                  Imagem a ser colocada
-                </span>
-              </div>
-              <div class="p-6 flex flex-col flex-1 justify-between">
-                <div>
-                  <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">Articulação & Conselho</span>
-                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Nome do Integrante (Exemplo)</h3>
-                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
-                    Isto é um exemplo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-                  </p>
-                </div>
-                <div
-                  class="flex items-center gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
-                  <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Estado / Região • GT
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div
-              class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle"
-              data-category="pesquisa">
-              <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
-                <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
-                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">
-                  Imagem a ser colocada
-                </span>
-              </div>
-              <div class="p-6 flex flex-col flex-1 justify-between">
-                <div>
-                  <span class="font-label-sm text-label-sm text-moss-light font-bold uppercase tracking-wider">Pesquisa & Clínicas Jurídicas</span>
-                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Nome da Instituição ou Integrante (Exemplo)</h3>
-                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
-                    Isto é um exemplo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis.
-                  </p>
-                </div>
-                <div
-                  class="flex items-center gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
-                  <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Estado / Região • GT
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div
-              class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle"
-              data-category="sociedade">
-              <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
-                <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
-                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">
-                  Imagem a ser colocada
-                </span>
+                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">Imagem a ser colocada</span>
               </div>
               <div class="p-6 flex flex-col flex-1 justify-between">
                 <div>
                   <span class="font-label-sm text-label-sm text-clay-warm font-bold uppercase tracking-wider">Organizações da Sociedade Civil</span>
-                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Nome da Organização ou Integrante (Exemplo)</h3>
+                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Instituto Sociedade, População e Família (ISPN)</h3>
                   <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
-                    Isto é um exemplo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                    Fortalecimento da sociedade civil organizada, incentivo a cadeias socioprodutivas justas e incidência jurídica em políticas públicas ambientais.
                   </p>
                 </div>
-                <div
-                  class="flex items-center gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
-                  <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Estado / Região • GT
+                <div class="flex items-center justify-between gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  <span class="inline-flex items-center gap-1 truncate">
+                    <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Brasília / DF • Articulação Nacional
+                  </span>
+                  <span class="text-[10px] uppercase font-bold text-clay-warm shrink-0 truncate max-w-[120px]">GT 03 • Finanças</span>
                 </div>
               </div>
             </div>
+
+            <!-- Card 3: Pesquisador / PA / Direitos Humanos -->
+            <div class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle" 
+                 data-type="pesquisador" data-territory="pa" data-theme="direitos-humanos" 
+                 data-search="clinica de direitos humanos da amazonia ufpa belem para universidade federal direitos humanos salvaguardas">
+              <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
+                <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
+                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">Imagem a ser colocada</span>
+              </div>
+              <div class="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-label-sm text-label-sm text-moss-light font-bold uppercase tracking-wider">Pesquisa & Clínicas Jurídicas</span>
+                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Clínica de Direitos Humanos da Amazônia (UFPA)</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
+                    Pesquisa empírica aplicada, elaboração de amicus curiae em tribunais superiores e monitoramento de salvaguardas de populações tradicionais.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  <span class="inline-flex items-center gap-1 truncate">
+                    <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Belém / Pará • Universidade Federal
+                  </span>
+                  <span class="text-[10px] uppercase font-bold text-clay-warm shrink-0 truncate max-w-[120px]">Direitos Humanos</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: Organização / PA / GT 02 -->
+            <div class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle" 
+                 data-type="organizacao" data-territory="pa" data-theme="gt-02" 
+                 data-search="observatorio de justica socioambiental do xingu altamira para bacia do xingu litigancia clima">
+              <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
+                <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
+                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">Imagem a ser colocada</span>
+              </div>
+              <div class="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-label-sm text-label-sm text-clay-warm font-bold uppercase tracking-wider">Organizações da Sociedade Civil</span>
+                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Observatório de Justiça Socioambiental do Xingu</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
+                    Monitoramento territorial independente, denúncia de violações e litígios estratégicos contra o desmatamento ilegal na bacia do Xingu.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  <span class="inline-flex items-center gap-1 truncate">
+                    <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Altamira / Pará • Bacia do Xingu
+                  </span>
+                  <span class="text-[10px] uppercase font-bold text-clay-warm shrink-0 truncate max-w-[120px]">GT 02 • Clima</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 5: Profissional / RO / GT 01 -->
+            <div class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle" 
+                 data-type="profissional" data-territory="ro" data-theme="gt-01" 
+                 data-search="rede de defensoras populares e tradicionais porto velho rondonia rio madeira territorios salvaguardas">
+              <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
+                <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
+                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">Imagem a ser colocada</span>
+              </div>
+              <div class="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Advocacia Popular</span>
+                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Rede de Defensoras Populares e Tradicionais</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
+                    Rede de advogadas e lideranças comunitárias dedicadas à defesa de mulheres indígenas e comunidades extrativistas ameaçadas por conflitos agrários.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  <span class="inline-flex items-center gap-1 truncate">
+                    <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Porto Velho / Rondônia • Rio Madeira
+                  </span>
+                  <span class="text-[10px] uppercase font-bold text-clay-warm shrink-0 truncate max-w-[120px]">GT 01 • Territórios</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 6: Pesquisador / AM / GT 02 -->
+            <div class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle" 
+                 data-type="pesquisador" data-territory="am" data-theme="gt-02" 
+                 data-search="centro de estudos de litigancia climatica da amazonia manaus amazonas rio negro litigancia estrategica clima">
+              <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
+                <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
+                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">Imagem a ser colocada</span>
+              </div>
+              <div class="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-label-sm text-label-sm text-moss-light font-bold uppercase tracking-wider">Pesquisa & Clínicas Jurídicas</span>
+                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Centro de Estudos de Litigância Climática</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
+                    Produção acadêmica e pareceres técnicos sobre precedentes jurisprudenciais do STF, justiça climática e responsabilidade civil ambiental.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  <span class="inline-flex items-center gap-1 truncate">
+                    <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Manaus / Amazonas • Rio Negro
+                  </span>
+                  <span class="text-[10px] uppercase font-bold text-clay-warm shrink-0 truncate max-w-[120px]">GT 02 • Clima</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 7: Profissional / PA / GT 01 -->
+            <div class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle" 
+                 data-type="profissional" data-territory="pa" data-theme="gt-01" 
+                 data-search="coletivo juridico maparajuba belem para amazonia oriental advocacia popular piqcts">
+              <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
+                <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
+                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">Imagem a ser colocada</span>
+              </div>
+              <div class="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Advocacia Popular</span>
+                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Coletivo Jurídico Maparajuba</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
+                    Assessoria jurídica popular aos povos da floresta, quilombolas e ribeirinhos na garantia de seus direitos originários e posse da terra.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  <span class="inline-flex items-center gap-1 truncate">
+                    <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Belém / Pará • Amazônia Oriental
+                  </span>
+                  <span class="text-[10px] uppercase font-bold text-clay-warm shrink-0 truncate max-w-[120px]">GT 01 • Territórios</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 8: Organização / MT / GT 03 -->
+            <div class="network-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group border border-border-subtle" 
+                 data-type="organizacao" data-territory="mt" data-theme="gt-03" 
+                 data-search="alianca pelos rios vivos e territorios do guapore cuiaba mato grosso bacia do guapore financas bioeconomia">
+              <div class="h-56 bg-surface-container flex flex-col items-center justify-center p-6 text-center border-b border-border-subtle select-none">
+                <span class="material-symbols-outlined text-4xl text-outline mb-1.5 opacity-60">image</span>
+                <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-medium">Imagem a ser colocada</span>
+              </div>
+              <div class="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-label-sm text-label-sm text-clay-warm font-bold uppercase tracking-wider">Organizações da Sociedade Civil</span>
+                  <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-1">Aliança pelos Rios Vivos e Territórios do Guaporé</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
+                    Articulação de cooperativas e entidades de base para proteção das águas, fomento à bioeconomia comunitária e governança climática.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between gap-2 mt-4 pt-4 border-t border-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  <span class="inline-flex items-center gap-1 truncate">
+                    <span class="material-symbols-outlined text-[16px] text-primary">location_on</span> Cuiabá / Mato Grosso • Bacia do Guaporé
+                  </span>
+                  <span class="text-[10px] uppercase font-bold text-clay-warm shrink-0 truncate max-w-[120px]">GT 03 • Finanças</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Empty State (Nenhum Resultado Encontrado) -->
+          <div id="portfolio-empty-state" class="hidden py-16 px-6 text-center bg-surface-container-lowest rounded-2xl border border-border-subtle mb-space-xl flex flex-col items-center justify-center">
+            <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-outline mb-4">
+              <span class="material-symbols-outlined text-4xl">search_off</span>
+            </div>
+            <h3 class="font-title-lg text-title-lg text-ink-primary font-bold">Nenhum membro encontrado</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-2">
+              Não encontramos nenhum membro com os critérios e filtros selecionados. Tente ajustar o termo de pesquisa ou limpar os filtros.
+            </p>
+            <button type="button" id="portfolio-empty-reset-btn" class="mt-6 px-6 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider font-bold shadow-sm hover:bg-moss-light transition-colors">
+              Limpar Filtros e Ver Todos
+            </button>
           </div>
 
           <!-- BANCO DE MAPEAMENTO & PORTFÓLIO ESCALÁVEL -->
@@ -768,9 +1043,9 @@
             class="w-full bg-surface-container-lowest rounded-xl p-8 border border-border-subtle shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
             <div class="flex flex-col gap-2 max-w-xl">
               <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">Capilaridade Territorial</span>
-              <h3 class="font-headline-md text-headline-md text-ink-primary font-medium">9 Estados da Amazônia Legal + Brasília</h3>
+              <h3 class="font-headline-md text-headline-md text-ink-primary font-medium">Capilaridade Territorial & Articulação Ampla</h3>
               <p class="font-body-md text-body-md text-on-surface-variant">
-                Presença estratégica em Acre, Amapá, Amazonas, Maranhão, Mato Grosso, Pará, Rondônia, Roraima e Tocantins, além de ponto de articulação em Brasília (DF) para acompanhamento direto perante tribunais superiores e órgãos federais.
+                Presença ativa e conectada em múltiplos territórios da Amazônia e centros estratégicos do país, articulando defensores populares, centros de pesquisa e incidência direta perante tribunais e órgãos federais.
               </p>
             </div>
             <div class="flex items-center gap-3 flex-wrap justify-end">
@@ -1383,31 +1658,153 @@
             });
           }
 
-          // Network Tabs Filter
-          const tabs = document.querySelectorAll('.network-tab');
-          const cards = document.querySelectorAll('.network-card');
+                    // Sistema Avançado de Filtros do Portfólio (Tipo, Território, Tema e Busca Instantânea)
+          const portfolioSearchInput = document.getElementById('portfolio-search-input');
+          const portfolioSearchClear = document.getElementById('portfolio-search-clear');
+          const portfolioTypePills = document.querySelectorAll('.portfolio-type-pill');
+          const portfolioTerritorySelect = document.getElementById('portfolio-territory-select');
+          const portfolioThemeSelect = document.getElementById('portfolio-theme-select');
+          const portfolioResetAllBtn = document.getElementById('portfolio-reset-all');
+          const portfolioCounter = document.getElementById('portfolio-results-counter');
+          const portfolioEmptyState = document.getElementById('portfolio-empty-state');
+          const portfolioEmptyResetBtn = document.getElementById('portfolio-empty-reset-btn');
+          const portfolioCards = document.querySelectorAll('#network-cards-container .network-card');
 
-          tabs.forEach(tab => {
-            tab.addEventListener('click', function () {
-              tabs.forEach(t => {
-                t.classList.remove('bg-primary', 'text-on-primary', 'active');
-                t.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+          let pCurrentType = 'all';
+          let pCurrentTerritory = 'all';
+          let pCurrentTheme = 'all';
+          let pCurrentSearch = '';
+
+          function pNormalize(str) {
+            return (str || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+          }
+
+          function pApplyFilters() {
+            let visibleCount = 0;
+            const totalCount = portfolioCards.length;
+            const term = pNormalize(pCurrentSearch);
+
+            portfolioCards.forEach(card => {
+              const cardType = card.getAttribute('data-type') || 'all';
+              const cardTerritory = card.getAttribute('data-territory') || 'all';
+              const cardTheme = card.getAttribute('data-theme') || 'all';
+              const cardSearch = pNormalize(card.getAttribute('data-search') || card.textContent);
+
+              const matchType = (pCurrentType === 'all' || cardType === pCurrentType);
+              const matchTerritory = (pCurrentTerritory === 'all' || cardTerritory === pCurrentTerritory);
+              const matchTheme = (pCurrentTheme === 'all' || cardTheme === pCurrentTheme);
+              const matchSearch = (!term || cardSearch.indexOf(term) !== -1);
+
+              if (matchType && matchTerritory && matchTheme && matchSearch) {
+                card.style.display = 'flex';
+                visibleCount++;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+
+            if (portfolioCounter) {
+              portfolioCounter.textContent = `Exibindo ${visibleCount} de ${totalCount} membros da rede`;
+            }
+
+            if (portfolioEmptyState) {
+              if (visibleCount === 0) {
+                portfolioEmptyState.classList.remove('hidden');
+                portfolioEmptyState.style.display = 'flex';
+              } else {
+                portfolioEmptyState.classList.add('hidden');
+                portfolioEmptyState.style.display = 'none';
+              }
+            }
+
+            const hasActiveFilters = (pCurrentType !== 'all' || pCurrentTerritory !== 'all' || pCurrentTheme !== 'all' || term.length > 0);
+            if (portfolioResetAllBtn) {
+              if (hasActiveFilters) {
+                portfolioResetAllBtn.classList.remove('hidden');
+              } else {
+                portfolioResetAllBtn.classList.add('hidden');
+              }
+            }
+
+            if (portfolioSearchClear) {
+              if (term.length > 0) {
+                portfolioSearchClear.classList.remove('hidden');
+              } else {
+                portfolioSearchClear.classList.add('hidden');
+              }
+            }
+          }
+
+          portfolioTypePills.forEach(pill => {
+            pill.addEventListener('click', function () {
+              portfolioTypePills.forEach(p => {
+                p.classList.remove('bg-primary', 'text-on-primary', 'active', 'font-bold');
+                p.classList.add('bg-surface', 'text-on-surface-variant');
               });
-
-              this.classList.add('bg-primary', 'text-on-primary', 'active');
-              this.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
-
-              const target = this.getAttribute('data-target');
-
-              cards.forEach(card => {
-                if (target === 'all' || card.getAttribute('data-category') === target) {
-                  card.style.display = 'flex';
-                } else {
-                  card.style.display = 'none';
-                }
-              });
+              this.classList.add('bg-primary', 'text-on-primary', 'active', 'font-bold');
+              this.classList.remove('bg-surface', 'text-on-surface-variant');
+              pCurrentType = this.getAttribute('data-type') || 'all';
+              pApplyFilters();
             });
           });
+
+          if (portfolioSearchInput) {
+            portfolioSearchInput.addEventListener('input', function () {
+              pCurrentSearch = this.value;
+              pApplyFilters();
+            });
+          }
+
+          if (portfolioSearchClear) {
+            portfolioSearchClear.addEventListener('click', function () {
+              if (portfolioSearchInput) portfolioSearchInput.value = '';
+              pCurrentSearch = '';
+              pApplyFilters();
+              if (portfolioSearchInput) portfolioSearchInput.focus();
+            });
+          }
+
+          if (portfolioTerritorySelect) {
+            portfolioTerritorySelect.addEventListener('change', function () {
+              pCurrentTerritory = this.value;
+              pApplyFilters();
+            });
+          }
+
+          if (portfolioThemeSelect) {
+            portfolioThemeSelect.addEventListener('change', function () {
+              pCurrentTheme = this.value;
+              pApplyFilters();
+            });
+          }
+
+          function pResetAll() {
+            pCurrentType = 'all';
+            pCurrentTerritory = 'all';
+            pCurrentTheme = 'all';
+            pCurrentSearch = '';
+
+            if (portfolioSearchInput) portfolioSearchInput.value = '';
+            if (portfolioTerritorySelect) portfolioTerritorySelect.value = 'all';
+            if (portfolioThemeSelect) portfolioThemeSelect.value = 'all';
+
+            portfolioTypePills.forEach(p => {
+              if (p.getAttribute('data-type') === 'all') {
+                p.classList.add('bg-primary', 'text-on-primary', 'active', 'font-bold');
+                p.classList.remove('bg-surface', 'text-on-surface-variant');
+              } else {
+                p.classList.remove('bg-primary', 'text-on-primary', 'active', 'font-bold');
+                p.classList.add('bg-surface', 'text-on-surface-variant');
+              }
+            });
+
+            pApplyFilters();
+          }
+
+          if (portfolioResetAllBtn) portfolioResetAllBtn.addEventListener('click', pResetAll);
+          if (portfolioEmptyResetBtn) portfolioEmptyResetBtn.addEventListener('click', pResetAll);
+
+          pApplyFilters();
         });
       </script>
     </div>
