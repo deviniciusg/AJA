@@ -256,7 +256,7 @@ function aja_register_required_categories() {
         ),
         'equipe' => array(
             'cat_name'             => 'Equipe',
-            'category_description' => 'Membros da coordenação e equipe técnica do projeto AJA',
+            'category_description' => 'Membros das instâncias de governança da AJA (Comitê, Conselho e GTs)',
             'category_nicename'    => 'equipe',
         ),
         'noticias' => array(
@@ -368,7 +368,7 @@ function aja_render_post_metabox($post) {
                     <span style="font-size: 16px;">👤</span> Portfólio (Membros da Rede)
                 </button>
                 <button type="button" class="aja-tab-button" data-target="tab-equipe" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">🏛️</span> Estrutura (Comitê, Conselho, GTs & Equipe)
+                    <span style="font-size: 16px;">🏛️</span> Estrutura (Comitê, Conselho & GTs)
                 </button>
                 <button type="button" class="aja-tab-button" data-target="tab-editais" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
                     <span style="font-size: 16px;">📢</span> Editais (Chamadas & Oportunidades)
@@ -521,7 +521,6 @@ function aja_render_post_metabox($post) {
                         <option value="comite" <?php selected($team_instance, 'comite'); ?>>🏛️ Comitê Executivo</option>
                         <option value="conselho" <?php selected($team_instance, 'conselho'); ?>>⚖️ Conselho Consultivo</option>
                         <option value="lideres" <?php selected($team_instance, 'lideres'); ?>>🌳 Líderes de GT (Grupos Temáticos)</option>
-                        <option value="equipe" <?php selected($team_instance, 'equipe'); ?>>👥 Equipe Técnica & Coordenação</option>
                     </select>
                     <span style="display:block; font-size:12px; color:#64748b; margin-top:4px;">Define em qual aba ou bloco da seção "Estrutura" este integrante será apresentado na página inicial.</span>
                 </div>
@@ -530,7 +529,7 @@ function aja_render_post_metabox($post) {
                     <label for="equipe_role" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #1e40af;">
                         💼 Cargo / Papel no Projeto:
                     </label>
-                    <input type="text" id="equipe_role" name="equipe_role" value="<?php echo esc_attr($badge); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Coordenação Geral, Articulador Territorial, Assessoria Jurídica">
+                    <input type="text" id="equipe_role" name="equipe_role" value="<?php echo esc_attr($badge); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Direção Executiva, Conselheiro, Líder Temático">
                     <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Exibido como badge de destaque no card do membro.</span>
                 </div>
 

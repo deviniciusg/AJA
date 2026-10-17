@@ -123,7 +123,7 @@ get_header();
               Estrutura &amp; Governança
             </h3>
             <p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5 leading-relaxed">
-              Comitê Executivo, Conselho Consultivo, Líderes de GTs e Equipe Técnica que conduzem as frentes de trabalho.
+              Comitê Executivo, Conselho Consultivo e Líderes de GTs que conduzem as frentes de trabalho.
             </p>
           </div>
           <div class="pt-6 mt-6 border-t border-border-subtle flex items-center gap-1.5 text-primary font-bold text-xs uppercase tracking-wider">

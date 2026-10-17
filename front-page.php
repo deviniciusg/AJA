@@ -218,8 +218,6 @@ get_header();
         <!-- SUB-SEÇÃO: ESTRUTURA DE GOVERNANÇA & INSTÂNCIAS (SOBRE NÓS)       -->
         <!-- ============================================================== -->
         <div class="mt-16 pt-12 border-t border-border-subtle scroll-mt-24" id="estrutura">
-          <!-- Âncora de compatibilidade retroativa -->
-          <span id="equipe" class="hidden"></span>
 
           <!-- Cabeçalho Principal da Estrutura -->
           <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
@@ -251,9 +249,6 @@ get_header();
             <button type="button" class="estrutura-tab-btn px-4 py-2.5 rounded-lg bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider font-bold hover:bg-surface-container-high transition-all duration-200 shadow-sm" data-target="lideres">
               🌳 Líderes de GTs
             </button>
-            <button type="button" class="estrutura-tab-btn px-4 py-2.5 rounded-lg bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider font-bold hover:bg-surface-container-high transition-all duration-200 shadow-sm" data-target="equipe">
-              👥 Equipe Técnica
-            </button>
           </div>
 
           <?php
@@ -268,7 +263,6 @@ get_header();
           $comite_posts   = array();
           $conselho_posts = array();
           $lideres_posts  = array();
-          $equipe_posts   = array();
 
           if ($all_team_query->have_posts()) {
               while ($all_team_query->have_posts()) {
@@ -281,10 +275,8 @@ get_header();
                           $instance = 'conselho';
                       } elseif (strpos($badge_txt, 'lider') !== false || strpos($badge_txt, 'líder') !== false || strpos($badge_txt, 'gt 0') !== false) {
                           $instance = 'lideres';
-                      } elseif (strpos($badge_txt, 'comitê') !== false || strpos($badge_txt, 'executiv') !== false || strpos($badge_txt, 'geral') !== false) {
-                          $instance = 'comite';
                       } else {
-                          $instance = 'equipe';
+                          $instance = 'comite';
                       }
                   }
 
@@ -292,9 +284,7 @@ get_header();
                       $conselho_posts[] = $p;
                   } elseif ($instance === 'lideres') {
                       $lideres_posts[] = $p;
-                  } elseif ($instance === 'equipe') {
-                      $equipe_posts[] = $p;
-                  } else {
+                  } elseif ($instance === 'comite') {
                       $comite_posts[] = $p;
                   }
               }
@@ -664,93 +654,6 @@ get_header();
                     $render_placeholder_card($gt_placeholders[$i]);
                 }
                 ?>
-              </div>
-            </div>
-
-            <!-- ============================================================== -->
-            <!-- BLOCO 4: EQUIPE TÉCNICA & COORDENAÇÃO OPERACIONAL               -->
-            <!-- ============================================================== -->
-            <div class="estrutura-instance-block" data-instance="equipe" id="bloco-equipe">
-              <div class="p-6 bg-surface-container-low border border-border-subtle rounded-2xl mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div class="flex items-start gap-4">
-                  <div class="w-12 h-12 rounded-xl bg-earth-dark text-on-primary flex items-center justify-center shrink-0 shadow-sm">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                  </div>
-                  <div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-xs font-bold uppercase tracking-wider text-earth-dark">Assessoria &amp; Execução</span>
-                      <span class="text-xs text-outline">•</span>
-                      <span class="text-xs text-on-surface-variant font-medium">Equipe Multidisciplinar</span>
-                    </div>
-                    <h4 class="font-display-lg text-xl sm:text-2xl font-bold text-ink-primary mt-0.5">
-                      Equipe Técnica &amp; Coordenação
-                    </h4>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 max-w-2xl leading-relaxed">
-                      Profissionais, assessores jurídicos, articuladores locais e pesquisadores dedicados à execução dos projetos, produção técnica e apoio direto aos grupos temáticos.
-                    </p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-2 shrink-0">
-                  <span class="px-3 py-1 rounded-full bg-earth-dark/10 text-earth-dark font-label-sm text-[12px] font-bold">
-                    👥 Apoio Técnico
-                  </span>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <?php
-                if (!empty($equipe_posts)) {
-                    foreach ($equipe_posts as $ep) {
-                        $render_team_card($ep, 'bg-surface-container-high text-ink-primary border-border-subtle');
-                    }
-                }
-
-                // Placeholders de suporte para a equipe técnica
-                $equipe_placeholders = array(
-                    array(
-                        'role'        => 'Assessoria Jurídica',
-                        'name'        => '[Nome a preencher]',
-                        'subtitle'    => '[Cargo / Função a preencher]',
-                        'desc'        => '[Descrição a preencher]',
-                        'location'    => '[A preencher]',
-                        'badge_style' => 'bg-surface-container-high text-ink-primary border-border-subtle',
-                        'status'      => 'A preencher'
-                    ),
-                    array(
-                        'role'        => 'Articulação de Campo',
-                        'name'        => '[Nome a preencher]',
-                        'subtitle'    => '[Cargo / Função a preencher]',
-                        'desc'        => '[Descrição a preencher]',
-                        'location'    => '[A preencher]',
-                        'badge_style' => 'bg-surface-container-high text-ink-primary border-border-subtle',
-                        'status'      => 'A preencher'
-                    ),
-                    array(
-                        'role'        => 'Pesquisa Sociojurídica',
-                        'name'        => '[Nome a preencher]',
-                        'subtitle'    => '[Cargo / Função a preencher]',
-                        'desc'        => '[Descrição a preencher]',
-                        'location'    => '[A preencher]',
-                        'badge_style' => 'bg-surface-container-high text-ink-primary border-border-subtle',
-                        'status'      => 'A preencher'
-                    ),
-                    array(
-                        'role'        => 'Secretaria Executiva',
-                        'name'        => '[Nome a preencher]',
-                        'subtitle'    => '[Cargo / Função a preencher]',
-                        'desc'        => '[Descrição a preencher]',
-                        'location'    => '[A preencher]',
-                        'badge_style' => 'bg-surface-container-high text-ink-primary border-border-subtle',
-                        'status'      => 'A preencher'
-                    ),
-                );
-
-                $needed_equipe = max(0, 4 - count($equipe_posts));
-                for ($i = 0; $i < $needed_equipe; $i++) {
-                    $render_placeholder_card($equipe_placeholders[$i]);
-                }
-                ?>
-              </div>
             </div>
           </div>
         </div>
