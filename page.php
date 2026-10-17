@@ -1,8 +1,8 @@
 <?php
 /**
- * Aliança Jurídica pela Amazônia (AJA) - page.php
+ * AlianÃ§a JurÃ­dica pela AmazÃ´nia (AJA) - page.php
  *
- * Modelo padrão para páginas estáticas do WordPress.
+ * Modelo padrÃ£o para pÃ¡ginas estÃ¡ticas do WordPress.
  */
 
 get_header();
