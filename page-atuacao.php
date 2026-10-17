@@ -119,16 +119,6 @@ get_header();
               <h3 class="font-title-lg text-xl text-ink-primary font-bold leading-snug">
                 GT de Território, Segurança e Acesso à Justiça
               </h3>
-
-              <!-- Destaque da Liderança -->
-              <div class="mt-4 p-3.5 rounded-xl border flex items-start gap-3 bg-surface-container-lowest/90" style="border-color: rgba(242, 185, 80, 0.45);">
-                <img src="<?php echo esc_url(aja_asset('Membros/lincon-aguiar.png')); ?>" alt="Lincon Aguiar" class="w-10 h-10 rounded-full object-cover shrink-0" />
-                <div class="min-w-0">
-                  <span class="text-[10px] uppercase font-bold tracking-wider block" style="color: #7C1F1F;">Liderança do GT</span>
-                  <h4 class="text-sm font-bold text-ink-primary leading-tight">Lincon Aguiar</h4>
-                  <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">Mestre em Educação na Amazônia pela Ufopa e advogado popular do Coletivo Maparajuba.</p>
-                </div>
-              </div>
             </div>
 
             <!-- Descrição Editorial Completa -->
@@ -141,12 +131,6 @@ get_header();
               </p>
               <p>
                 O GT busca discutir e construir estratégias transversais, produzindo conhecimento coletivo, elaborando propostas e articulando respostas integradas. Parte do entendimento de que proteger o território é também proteger vidas e culturas.
-              </p>
-              <p>
-                A partir de uma lógica de inteligência coletiva, conecta profissionais de diferentes áreas para estruturar respostas mais coordenadas, consistentes e eficazes. A atuação é guiada por uma perspectiva de Direitos Humanos, com atenção central a povos indígenas, quilombolas e comunidades tradicionais.
-              </p>
-              <p class="text-[11.5px] text-outline pt-2 border-t border-border-subtle/70">
-                Espaço colaborativo aberto aos membros da rede, reunindo profissionais do Direito, pesquisadores, organizações da sociedade civil, clínicas jurídicas e escritórios pelo fortalecimento do Estado de Direito na Amazônia.
               </p>
 
               <!-- Tags de Eixos Temáticos -->
@@ -189,16 +173,6 @@ get_header();
               <h3 class="font-title-lg text-xl text-ink-primary font-bold leading-snug">
                 GT de Litigância e Ativismo Judicial
               </h3>
-
-              <!-- Destaque da Liderança -->
-              <div class="mt-4 p-3.5 rounded-xl border flex items-start gap-3 bg-surface-container-lowest/90" style="border-color: rgba(166, 190, 228, 0.55);">
-                <img src="<?php echo esc_url(aja_asset('Membros/marina-fiorini.png')); ?>" alt="Marina Fiorini" class="w-10 h-10 rounded-full object-cover shrink-0" />
-                <div class="min-w-0">
-                  <span class="text-[10px] uppercase font-bold tracking-wider block" style="color: #406284;">Liderança do GT</span>
-                  <h4 class="text-sm font-bold text-ink-primary leading-tight">Marina Fiorini</h4>
-                  <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">Advogada, cofundadora e diretora do Instituto Advocaris, atuando na intersecção entre Direito, Consciência e Regeneração.</p>
-                </div>
-              </div>
             </div>
 
             <!-- Descrição Editorial Completa -->
@@ -208,12 +182,6 @@ get_header();
               </p>
               <p>
                 O grupo atua na construção de estratégias jurídicas voltadas à justiça climática, ao direito ambiental e à defesa de direitos difusos e coletivos.
-              </p>
-              <p>
-                A partir de uma lógica de inteligência coletiva, o GT conecta profissionais de diferentes áreas para estruturar respostas mais coordenadas, consistentes e eficazes. A atuação é guiada por uma perspectiva de Direitos Humanos, com atenção central a povos indígenas, quilombolas e comunidades tradicionais.
-              </p>
-              <p class="text-[11.5px] text-outline pt-2 border-t border-border-subtle/70">
-                Espaço colaborativo aberto aos membros da rede, reunindo profissionais do Direito, pesquisadores, organizações da sociedade civil, clínicas jurídicas e escritórios pelo fortalecimento do Estado de Direito na Amazônia.
               </p>
 
               <!-- Tags de Eixos Temáticos -->
@@ -256,16 +224,6 @@ get_header();
               <h3 class="font-title-lg text-xl text-ink-primary font-bold leading-snug">
                 GT de Finanças Sustentáveis e Economias da Sociobiodiversidade
               </h3>
-
-              <!-- Destaque da Liderança -->
-              <div class="mt-4 p-3.5 rounded-xl border flex items-start gap-3 bg-surface-container-lowest/90" style="border-color: rgba(110, 118, 66, 0.45);">
-                <img src="<?php echo esc_url(aja_asset('Membros/isayana-silva.png')); ?>" alt="Isayana Silva" class="w-10 h-10 rounded-full object-cover shrink-0" />
-                <div class="min-w-0">
-                  <span class="text-[10px] uppercase font-bold tracking-wider block" style="color: #761F20;">Liderança do GT</span>
-                  <h4 class="text-sm font-bold text-ink-primary leading-tight">Isayana Silva</h4>
-                  <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">Bacharel em Direito, socioambientalista, ativista climática, Líder G_DeZ 2026, Alumni IVLP 2024 e consultora em projetos de sociobioeconomia.</p>
-                </div>
-              </div>
             </div>
 
             <!-- Descrição Editorial Completa -->
@@ -275,12 +233,6 @@ get_header();
               </p>
               <p>
                 O grupo articula o campo jurídico com a realidade econômica dos povos e comunidades tradicionais, construindo estratégias para que a bioeconomia também seja uma economia de justiça. Parte do reconhecimento de que a floresta tem valor e trabalha para que esse valor se traduza em direitos, prosperidade e proteção.
-              </p>
-              <p>
-                A partir de uma lógica de inteligência coletiva, o GT conecta profissionais de diferentes áreas para estruturar respostas mais coordenadas, consistentes e eficazes. A atuação é guiada por uma perspectiva de Direitos Humanos, com atenção central a povos indígenas, quilombolas e comunidades tradicionais.
-              </p>
-              <p class="text-[11.5px] text-outline pt-2 border-t border-border-subtle/70">
-                Espaço colaborativo aberto aos membros da rede, reunindo profissionais do Direito, pesquisadores, organizações da sociedade civil, clínicas jurídicas e escritórios pelo fortalecimento do Estado de Direito na Amazônia.
               </p>
 
               <!-- Tags de Eixos Temáticos -->

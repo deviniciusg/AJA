@@ -59,7 +59,7 @@
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/portfolio/')); ?>">Portfólio / Membros</a></li>
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/parcerias/')); ?>">Parceiros Estratégicos</a></li>
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/publicacoes/')); ?>">Publicações & Notas</a></li>
-            <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/editais/')); ?>">Editais & Chamadas</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/editais/')); ?>">Editais & Oportunidades</a></li>
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/noticias/')); ?>">Notícias & Mídia</a></li>
           </ul>
         </div>

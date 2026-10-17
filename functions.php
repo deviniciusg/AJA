@@ -246,7 +246,7 @@ function aja_register_required_categories() {
         ),
         'editais' => array(
             'cat_name'             => 'Editais',
-            'category_description' => 'Chamadas públicas para artigos, editais e oportunidades contínuas da AJA',
+            'category_description' => 'Editais institucionais e oportunidades contínuas da AJA',
             'category_nicename'    => 'editais',
         ),
         'publicacoes' => array(
@@ -578,9 +578,9 @@ function aja_render_post_metabox($post) {
         <!-- ========================================== -->
         <div id="tab-editais" class="aja-tab-content" style="display: none;">
             <div style="background: #fff7ed; border-left: 4px solid #ea580c; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
-                <strong style="color: #9a3412; font-size: 13px;">📢 Cadastrando Edital ou Chamada AJA</strong>
+                <strong style="color: #9a3412; font-size: 13px;">📢 Cadastrando Edital Institucional AJA</strong>
                 <p style="margin: 4px 0 0 0; font-size: 12px; color: #c2410c;">
-                    Preencha os prazos e links de submissão para artigos, chamadas públicas ou vagas.
+                    Preencha os prazos e links de inscrição para editais institucionais ou oportunidades.
                 </p>
             </div>
 
@@ -589,7 +589,7 @@ function aja_render_post_metabox($post) {
                     <label for="edital_badge" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #9a3412;">
                         🏷️ Status da Chamada / Selo:
                     </label>
-                    <input type="text" id="edital_badge" name="edital_badge" value="<?php echo esc_attr($badge); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Chamada Aberta, Inscrições Prorrogadas, Edital 01/2026">
+                    <input type="text" id="edital_badge" name="edital_badge" value="<?php echo esc_attr($badge); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Edital Institucional, Inscrições Prorrogadas, Edital 01/2026">
                     <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Exibido com destaque colorido no card.</span>
                 </div>
 
@@ -621,8 +621,8 @@ function aja_render_post_metabox($post) {
                     <label for="edital_btn" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #9a3412;">
                         🔘 Texto do Botão de Ação:
                     </label>
-                    <input type="text" id="edital_btn" name="edital_btn" value="<?php echo esc_attr($action_label); ?>" style="width: 100%; max-width: 400px; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Acessar Edital & Submissão, Baixar Edital (PDF), Inscrever-se">
-                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Padrão: "Acessar Edital & Submissão".</span>
+                    <input type="text" id="edital_btn" name="edital_btn" value="<?php echo esc_attr($action_label); ?>" style="width: 100%; max-width: 400px; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Acessar Edital, Baixar Edital (PDF), Inscrever-se">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Padrão: "Acessar Edital".</span>
                 </div>
             </div>
 
@@ -1150,35 +1150,7 @@ function aja_create_sample_posts() {
     }
 
     // Amostras de Editais
-    $editais_samples = array(
-        array(
-            'title'    => 'Chamada para Submissão de Artigos de Opinião Jurídicos',
-            'content'  => 'A Aliança Jurídica pela Amazônia (AJA) torna pública a chamada para submissão de artigos de opinião jurídicos voltados ao fortalecimento do debate sobre justiça, democracia socioambiental e Estado de Direito na Amazônia. A iniciativa é destinada aos membros da AJA e busca reunir contribuições inéditas sobre temas jurídicos contemporâneos.',
-            'badge'    => 'Chamada Pública Aberta',
-            'subtitle' => 'Destinada aos Membros da AJA',
-            'link'     => 'mailto:info@ajamazonia.org?subject=Submissao%20de%20Artigo%20AJA',
-            'label'    => 'Acessar Edital & Submissão',
-            'featured' => '1',
-        ),
-        array(
-            'title'    => 'Chamada Contínua: Banco de Especialistas em Perícia Ambiental',
-            'content'  => 'Credenciamento de peritos independentes, cartógrafos sociais e antropólogos para auxílio pro bono em laudos técnicos de demarcação territorial, licenciamento e combate a crimes ambientais.',
-            'badge'    => 'Perícia & Cartografia',
-            'subtitle' => 'Credenciamento de Membros • Fluxo Contínuo',
-            'link'     => 'mailto:info@ajamazonia.org?subject=Credenciamento%20Banco%20de%20Especialistas',
-            'label'    => 'Manifestar Interesse',
-            'featured' => '0',
-        ),
-        array(
-            'title'    => 'Proposição de Teses e Memoriais para Tribunais Superiores',
-            'content'  => 'Envio de memoriais e notas técnicas fundamentadas para validação e submissão conjunta sob a chancela da AJA perante o Supremo Tribunal Federal (STF) e Superior Tribunal de Justiça (STJ).',
-            'badge'    => 'Amicus Curiae',
-            'subtitle' => 'Avaliação pelo GT 02 • Fluxo Contínuo',
-            'link'     => 'mailto:info@ajamazonia.org?subject=Proposicao%20Amicus%20Curiae%20AJA',
-            'label'    => 'Submeter Proposição',
-            'featured' => '0',
-        ),
-    );
+    $editais_samples = array();
 
     foreach ($editais_samples as $item) {
         $post_id = wp_insert_post(array(

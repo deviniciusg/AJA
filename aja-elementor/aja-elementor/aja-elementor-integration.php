@@ -959,13 +959,13 @@ function aja_render_editais_grid() {
     if ($featured_query->have_posts()) {
         $featured_query->the_post();
         $featured_id = get_the_ID();
-        $badge = get_post_meta($featured_id, '_aja_badge', true) ?: 'Chamada Pública Aberta';
+        $badge = get_post_meta($featured_id, '_aja_badge', true) ?: 'Edital Institucional';
         $location = get_post_meta($featured_id, '_aja_location', true) ?: 'Destinada aos Membros da AJA';
         $pdf_url = get_post_meta($featured_id, '_aja_pdf_url', true) ?: 'mailto:info@ajamazonia.org?subject=Submissao%20de%20Artigo%20AJA';
         $thumb = get_the_post_thumbnail_url($featured_id, 'full') ?: aja_get_asset_url('fotos/corredeira-floresta-pedras.jpg');
         $content = get_the_excerpt() ?: wp_trim_words(get_the_content(), 45);
         ?>
-        <!-- Featured Callout Card: CHAMADA PARA SUBMISSÃO DE ARTIGOS -->
+        <!-- Featured Callout Card: EDITAL INSTITUCIONAL -->
         <div class="w-full relative overflow-hidden text-surface-container-lowest rounded-2xl p-8 lg:p-12 mb-8 shadow-sm flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 group">
             <div class="absolute inset-0 z-0">
                 <img alt="<?php echo esc_attr(get_the_title()); ?>" class="w-full h-full object-cover opacity-25 mix-blend-luminosity scale-105 transition-transform duration-700 group-hover:scale-110" src="<?php echo esc_url($thumb); ?>" />
@@ -1000,35 +1000,29 @@ function aja_render_editais_grid() {
         wp_reset_postdata();
     } else {
         // Fallback banner from code.html
-        $banner_bg = aja_get_asset_url('fotos/corredeira-floresta-pedras.jpg');
         ?>
-        <div class="w-full relative overflow-hidden text-surface-container-lowest rounded-2xl p-8 lg:p-12 mb-8 shadow-sm flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 group">
-            <div class="absolute inset-0 z-0">
-                <img alt="Floresta e corredeiras amazônicas" class="w-full h-full object-cover opacity-25 mix-blend-luminosity scale-105 transition-transform duration-700 group-hover:scale-110" src="<?php echo esc_url($banner_bg); ?>" />
-                <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary-container/90"></div>
-            </div>
-            <div class="relative z-10 flex flex-col gap-4 max-w-3xl">
-                <div class="flex items-center gap-3">
-                    <span class="px-3 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm uppercase tracking-wider font-bold">
-                        Chamada Pública Aberta
+        <!-- Estado Informativo: Nenhuma chamada aberta no momento -->
+        <div class="p-8 lg:p-12 rounded-2xl bg-surface-container-low border border-border-subtle flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-surface-container text-outline flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[28px]">folder_open</span>
+                </div>
+                <div>
+                    <span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-[11px] font-bold uppercase tracking-wider inline-block mb-2">
+                        Status Atual
                     </span>
-                    <span class="font-label-sm text-label-sm text-primary-fixed-dim">Destinada aos Membros da AJA</span>
-                </div>
-                <h3 class="font-headline-md text-headline-md font-bold leading-tight">
-                    Chamada para Submissão de Artigos de Opinião Jurídicos
-                </h3>
-                <p class="font-body-md text-body-md text-surface-container leading-relaxed">
-                    A Aliança Jurídica pela Amazônia (AJA) torna pública a chamada para submissão de artigos de opinião jurídicos voltados ao fortalecimento do debate sobre justiça, democracia socioambiental e Estado de Direito na Amazônia.
-                </p>
-                <div class="flex items-center gap-2 pt-1 text-primary-fixed text-body-sm">
-                    <span class="material-symbols-outlined text-[18px]">info</span>
-                    <span>Dúvidas sobre a chamada: <strong>info@ajamazonia.org</strong></span>
+                    <h3 class="font-title-lg text-title-lg text-ink-primary font-bold">
+                        Nenhuma chamada aberta no momento
+                    </h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-2xl leading-relaxed">
+                        Não há editais ou chamadas públicas para artigos com inscrições abertas no momento e não há previsão de novas chamadas.
+                    </p>
                 </div>
             </div>
-            <div class="relative z-10 flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
-                <a class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-container font-label-lg text-label-lg uppercase tracking-wider transition-colors font-bold text-center shadow-md flex items-center justify-center gap-2" href="mailto:info@ajamazonia.org?subject=Submissao%20de%20Artigo%20AJA">
-                    <span>Acessar Edital &amp; Submissão</span>
-                    <span class="material-symbols-outlined text-[18px]">download</span>
+            <div class="shrink-0 w-full md:w-auto">
+                <a href="#contato" class="w-full md:w-auto px-5 py-3 rounded-lg bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">mail</span>
+                    <span>Fale Conosco</span>
                 </a>
             </div>
         </div>
@@ -1139,7 +1133,7 @@ function aja_render_editais_grid() {
     return ob_get_clean();
 }
 
-// C) Publicações, Artigos & Notas Técnicas Grid com Navegação por Eixos e Espaço de Chamada Aberta
+// C) Publicações, Artigos & Notas Técnicas Grid com Navegação por Eixos e Espaço de Publicações da Rede
 function aja_render_publicacoes_grid($limit = 12) {
     $query = new WP_Query([
         'category_name'  => 'publicacoes,publicações',
@@ -1157,59 +1151,6 @@ function aja_render_publicacoes_grid($limit = 12) {
 
     ob_start();
     ?>
-    <!-- 1. ESPAÇO DEDICADO: CHAMADA ABERTA DE ARTIGOS JURÍDICOS & PRODUÇÕES AJA -->
-    <div class="mb-10 relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-[#2e4763] to-earth-dark text-on-primary p-6 sm:p-8 lg:p-10 shadow-lg border border-white/10" id="chamada-artigos">
-        <!-- Ícone decorativo em marca d'água -->
-        <div class="absolute right-0 top-0 bottom-0 w-1/3 opacity-10 pointer-events-none hidden md:flex items-center justify-center overflow-hidden">
-            <span class="material-symbols-outlined text-[280px] -mr-12 text-white select-none">article</span>
-        </div>
-
-        <div class="relative z-10 max-w-3xl flex flex-col gap-4">
-            <!-- Badge de Status -->
-            <div class="flex flex-wrap items-center gap-3">
-                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest/15 backdrop-blur-md text-primary-fixed font-label-md text-label-md uppercase tracking-widest border border-white/15">
-                    <span class="w-2 h-2 rounded-full bg-cyan-accent animate-pulse"></span>
-                    Chamada Aberta de Artigos Jurídicos
-                </span>
-                <span class="text-surface-container-highest/80 font-label-md text-label-md uppercase tracking-wider text-[12px]">
-                    Fluxo Contínuo • Produções da Rede AJA
-                </span>
-            </div>
-
-            <!-- Título Principal do Banner -->
-            <h3 class="font-display-lg text-[24px] sm:text-[30px] lg:text-[34px] font-bold text-surface-container-lowest leading-tight tracking-tight">
-                Contribua com o Pensamento Jurídico e a Litigância Socioambiental na Amazônia
-            </h3>
-
-            <!-- Descrição Acolhedora -->
-            <p class="font-body-md text-body-md text-surface-container-high/90 leading-relaxed max-w-2xl">
-                A Aliança Jurídica pela Amazônia convida advogados populares, pesquisadores acadêmicos, clínicas de direito e coletivos a submeter artigos de opinião, pareceres técnicos, teses socioambientais e notas de pesquisa para publicação e ampla difusão na Amazônia Legal.
-            </p>
-
-            <!-- Eixos Temáticos de Submissão -->
-            <div class="flex flex-wrap items-center gap-2 pt-1 text-xs">
-                <span class="text-surface-container-highest font-bold uppercase tracking-wider mr-1 text-[11px]">Eixos Temáticos:</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/10 backdrop-blur-sm text-surface-container-lowest border border-white/10">⚖️ Litigância Climática</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/10 backdrop-blur-sm text-surface-container-lowest border border-white/10">🌳 Direitos Territoriais & PIQCTs</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/10 backdrop-blur-sm text-surface-container-lowest border border-white/10">💰 Finanças & Bioeconomia</span>
-                <span class="px-2.5 py-1 rounded-md bg-white/10 backdrop-blur-sm text-surface-container-lowest border border-white/10">📜 Salvaguardas & Consulta Prévia</span>
-            </div>
-
-            <!-- Botões de Ação -->
-            <div class="flex flex-wrap items-center gap-3 pt-3">
-                <a href="<?php echo esc_url(home_url('/submissoes/')); ?>" 
-                   class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md uppercase tracking-wider font-bold transition-all duration-200 hover:bg-tertiary-fixed-dim hover:shadow-lg shadow-md">
-                    <span class="material-symbols-outlined text-[18px]">description</span>
-                    Ver Normas & Edital de Submissão
-                </a>
-                <a href="mailto:info@ajamazonia.org?subject=Submissao%20de%20Artigo%20Juridico%20AJA" 
-                   class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-surface-container-lowest/15 backdrop-blur-md text-surface-container-lowest font-label-md text-label-md uppercase tracking-wider transition-all duration-200 hover:bg-surface-container-lowest/25 border border-white/20">
-                    <span class="material-symbols-outlined text-[18px]">mail</span>
-                    Enviar Artigo por E-mail
-                </a>
-            </div>
-        </div>
-    </div>
 
     <!-- 2. SISTEMA DE NAVEGAÇÃO ORGANIZADA POR EIXOS & BUSCA EM TEMPO REAL -->
     <div class="mb-8 flex flex-col gap-4 bg-surface-container-lowest/90 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-border-subtle shadow-sm" id="pub-filter-system">

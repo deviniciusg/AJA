@@ -112,11 +112,6 @@ get_header();
                 Faça Parte da Rede
                 <span class="material-symbols-outlined ml-1.5 text-[18px]">arrow_forward</span>
               </a>
-              <a class="inline-flex items-center justify-center px-4 py-3 rounded-lg text-primary-fixed hover:text-white font-label-lg text-label-lg uppercase tracking-wider transition-colors inline-flex items-center gap-1.5"
-                href="#editais">
-                <span class="material-symbols-outlined text-[18px]">article</span>
-                Chamada de Artigos
-              </a>
               <a class="inline-flex items-center justify-center px-4 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 border border-white/20 hover:border-white/40 gap-1.5 backdrop-blur-md shadow-sm font-semibold"
                 href="#newsletter" title="Assinar o Boletim Territorial da AJA">
                 <span class="material-symbols-outlined text-[18px]">forward_to_inbox</span>
@@ -211,7 +206,7 @@ get_header();
                 <div class="flex items-start gap-3">
                   <span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs shrink-0 font-bold mt-0.5">3</span>
                   <div>
-                    <strong class="text-ink-primary">Abrir caminhos de engajamento:</strong> Adesão à rede, submissão de artigos, editais e produção coletiva de conhecimento.
+                    <strong class="text-ink-primary">Abrir caminhos de engajamento:</strong> Adesão à rede, editais, parcerias e produção coletiva de conhecimento.
                   </div>
                 </div>
               </div>
@@ -925,16 +920,6 @@ get_header();
                 <h3 class="font-title-lg text-title-lg text-ink-primary font-bold leading-snug">
                   GT de Território, Segurança e Acesso à Justiça
                 </h3>
-
-                <!-- Destaque da Liderança -->
-                <div class="mt-4 p-3.5 rounded-xl border flex items-start gap-3 bg-surface-container-lowest/90" style="border-color: rgba(242, 185, 80, 0.45);">
-                  <img src="<?php echo esc_url(aja_asset('Membros/lincon-aguiar.png')); ?>" alt="Lincon Aguiar" class="w-10 h-10 rounded-full object-cover shrink-0" />
-                  <div class="min-w-0">
-                    <span class="text-[10px] uppercase font-bold tracking-wider block" style="color: #7C1F1F;">Liderança do GT</span>
-                    <h4 class="text-sm font-bold text-ink-primary leading-tight">Lincon Aguiar</h4>
-                    <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">Mestre em Educação na Amazônia pela Ufopa e advogado popular do Coletivo Maparajuba.</p>
-                  </div>
-                </div>
               </div>
 
               <!-- Descrição Editorial Completa -->
@@ -947,12 +932,6 @@ get_header();
                 </p>
                 <p>
                   O GT busca discutir e construir estratégias transversais, produzindo conhecimento coletivo, elaborando propostas e articulando respostas integradas. Parte do entendimento de que proteger o território é também proteger vidas e culturas.
-                </p>
-                <p>
-                  A partir de uma lógica de inteligência coletiva, conecta profissionais de diferentes áreas para estruturar respostas mais coordenadas, consistentes e eficazes. A atuação é guiada por uma perspectiva de Direitos Humanos, com atenção central a povos indígenas, quilombolas e comunidades tradicionais.
-                </p>
-                <p class="text-[11.5px] text-outline pt-2 border-t border-border-subtle/70">
-                  Espaço colaborativo aberto aos membros da rede, reunindo profissionais do Direito, pesquisadores, organizações da sociedade civil, clínicas jurídicas e escritórios pelo fortalecimento do Estado de Direito na Amazônia.
                 </p>
 
                 <!-- Tags de Eixos Temáticos -->
@@ -995,16 +974,6 @@ get_header();
                 <h3 class="font-title-lg text-title-lg text-ink-primary font-bold leading-snug">
                   GT de Litigância e Ativismo Judicial
                 </h3>
-
-                <!-- Destaque da Liderança -->
-                <div class="mt-4 p-3.5 rounded-xl border flex items-start gap-3 bg-surface-container-lowest/90" style="border-color: rgba(166, 190, 228, 0.55);">
-                  <img src="<?php echo esc_url(aja_asset('Membros/marina-fiorini.png')); ?>" alt="Marina Fiorini" class="w-10 h-10 rounded-full object-cover shrink-0" />
-                  <div class="min-w-0">
-                    <span class="text-[10px] uppercase font-bold tracking-wider block" style="color: #406284;">Liderança do GT</span>
-                    <h4 class="text-sm font-bold text-ink-primary leading-tight">Marina Fiorini</h4>
-                    <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">Advogada, cofundadora e diretora do Instituto Advocaris, atuando na intersecção entre Direito, Consciência e Regeneração.</p>
-                  </div>
-                </div>
               </div>
 
               <!-- Descrição Editorial Completa -->
@@ -1014,12 +983,6 @@ get_header();
                 </p>
                 <p>
                   O grupo atua na construção de estratégias jurídicas voltadas à justiça climática, ao direito ambiental e à defesa de direitos difusos e coletivos.
-                </p>
-                <p>
-                  A partir de uma lógica de inteligência coletiva, o GT conecta profissionais de diferentes áreas para estruturar respostas mais coordenadas, consistentes e eficazes. A atuação é guiada por uma perspectiva de Direitos Humanos, com atenção central a povos indígenas, quilombolas e comunidades tradicionais.
-                </p>
-                <p class="text-[11.5px] text-outline pt-2 border-t border-border-subtle/70">
-                  Espaço colaborativo aberto aos membros da rede, reunindo profissionais do Direito, pesquisadores, organizações da sociedade civil, clínicas jurídicas e escritórios pelo fortalecimento do Estado de Direito na Amazônia.
                 </p>
 
                 <!-- Tags de Eixos Temáticos -->
@@ -1062,16 +1025,6 @@ get_header();
                 <h3 class="font-title-lg text-title-lg text-ink-primary font-bold leading-snug">
                   GT de Finanças Sustentáveis e Economias da Sociobiodiversidade
                 </h3>
-
-                <!-- Destaque da Liderança -->
-                <div class="mt-4 p-3.5 rounded-xl border flex items-start gap-3 bg-surface-container-lowest/90" style="border-color: rgba(110, 118, 66, 0.45);">
-                  <img src="<?php echo esc_url(aja_asset('Membros/isayana-silva.png')); ?>" alt="Isayana Silva" class="w-10 h-10 rounded-full object-cover shrink-0" />
-                  <div class="min-w-0">
-                    <span class="text-[10px] uppercase font-bold tracking-wider block" style="color: #761F20;">Liderança do GT</span>
-                    <h4 class="text-sm font-bold text-ink-primary leading-tight">Isayana Silva</h4>
-                    <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">Bacharel em Direito, socioambientalista, ativista climática, Líder G_DeZ 2026, Alumni IVLP 2024 e consultora em projetos de sociobioeconomia.</p>
-                  </div>
-                </div>
               </div>
 
               <!-- Descrição Editorial Completa -->
@@ -1081,12 +1034,6 @@ get_header();
                 </p>
                 <p>
                   O grupo articula o campo jurídico com a realidade econômica dos povos e comunidades tradicionais, construindo estratégias para que a bioeconomia também seja uma economia de justiça. Parte do reconhecimento de que a floresta tem valor e trabalha para que esse valor se traduza em direitos, prosperidade e proteção.
-                </p>
-                <p>
-                  A partir de uma lógica de inteligência coletiva, o GT conecta profissionais de diferentes áreas para estruturar respostas mais coordenadas, consistentes e eficazes. A atuação é guiada por uma perspectiva de Direitos Humanos, com atenção central a povos indígenas, quilombolas e comunidades tradicionais.
-                </p>
-                <p class="text-[11.5px] text-outline pt-2 border-t border-border-subtle/70">
-                  Espaço colaborativo aberto aos membros da rede, reunindo profissionais do Direito, pesquisadores, organizações da sociedade civil, clínicas jurídicas e escritórios pelo fortalecimento do Estado de Direito na Amazônia.
                 </p>
 
                 <!-- Tags de Eixos Temáticos -->
@@ -1612,205 +1559,52 @@ get_header();
     </section>
 
     <!-- ========================================================================= -->
-    <!-- SECTION 7: EDITAIS & SUBMISSÕES (CATEGORIA 2: "editais")                  -->
+    <!-- SECTION 7: EDITAIS & OPORTUNIDADES (CATEGORIA 2: "editais")                  -->
     <!-- ========================================================================= -->
     <section class="w-full py-space-xl bg-surface border-t border-border-subtle" id="editais">
       <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
         <!-- Section Header -->
         <div class="flex items-center gap-3 mb-2">
           <span class="w-8 h-[2px] bg-secondary"></span>
-          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Submissões & Oportunidades</span>
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Editais &amp; Oportunidades</span>
         </div>
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-4">
           <div>
             <h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-ink-primary font-medium">
-              Editais e Chamadas para Submissão
+              Editais e Oportunidades
             </h2>
           </div>
           <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
-            Mecanismos públicos e transparentes para mobilização de inteligência jurídica, artigos inéditos e pareceres na Amazônia.
+            Mecanismos públicos e transparentes para mobilização de inteligência jurídica, parcerias e iniciativas na Amazônia.
           </p>
         </div>
 
-        <?php
-        $editais_query = new WP_Query(array(
-            'category_name'  => 'editais',
-            'posts_per_page' => 10,
-            'post_status'    => 'publish',
-        ));
-
-        if ($editais_query->have_posts()) :
-            // Procura o post com meta featured ou usa o primeiro post
-            $featured_post = null;
-            $other_posts   = array();
-
-            while ($editais_query->have_posts()) {
-                $editais_query->the_post();
-                $is_featured = get_post_meta(get_the_ID(), '_aja_featured_edital', true);
-                if ($is_featured === '1' && !$featured_post) {
-                    $featured_post = get_post();
-                } else {
-                    $other_posts[] = get_post();
-                }
-            }
-            wp_reset_postdata();
-
-            // Se nenhum tiver a flag 'featured', usa o primeiro
-            if (!$featured_post && !empty($other_posts)) {
-                $featured_post = array_shift($other_posts);
-            }
-
-            if ($featured_post) :
-                $feat_id     = $featured_post->ID;
-                $feat_badge  = aja_get_post_badge($feat_id, 'Chamada Pública Aberta');
-                $feat_sub    = aja_get_post_subtitle($feat_id, 'Destinada aos Membros da AJA');
-                $feat_link   = aja_get_post_action_link($feat_id);
-                $feat_label  = aja_get_post_action_label($feat_id, 'Acessar Edital & Submissão');
-                $feat_thumb  = has_post_thumbnail($feat_id) 
-                               ? get_the_post_thumbnail_url($feat_id, 'aja-banner') 
-                               : aja_asset('fotos/corredeira-floresta-pedras.jpg');
-                ?>
-                <!-- Featured Callout Card Dinâmico -->
-                <div
-                  class="w-full relative overflow-hidden text-surface-container-lowest rounded-2xl p-8 lg:p-12 mb-8 shadow-sm flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 group">
-                  <div class="absolute inset-0 z-0">
-                    <img alt="<?php echo esc_attr($featured_post->post_title); ?>"
-                      class="w-full h-full object-cover opacity-25 mix-blend-luminosity scale-105 transition-transform duration-700 group-hover:scale-110"
-                      src="<?php echo esc_url($feat_thumb); ?>" />
-                    <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary-container/90"></div>
-                  </div>
-                  <div class="relative z-10 flex flex-col gap-4 max-w-3xl">
-                    <div class="flex items-center gap-3">
-                      <span
-                        class="px-3 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm uppercase tracking-wider font-bold">
-                        <?php echo esc_html($feat_badge); ?>
-                      </span>
-                      <span class="font-label-sm text-label-sm text-primary-fixed-dim">
-                        <?php echo esc_html($feat_sub); ?>
-                      </span>
-                    </div>
-                    <h3 class="font-headline-md text-headline-md font-bold leading-tight">
-                      <?php echo esc_html($featured_post->post_title); ?>
-                    </h3>
-                    <div class="font-body-md text-body-md text-surface-container leading-relaxed">
-                      <?php echo apply_filters('the_excerpt', $featured_post->post_excerpt ?: wp_trim_words($featured_post->post_content, 40)); ?>
-                    </div>
-                    <div class="flex items-center gap-2 pt-1 text-primary-fixed text-body-sm">
-                      <span class="material-symbols-outlined text-[18px]">info</span>
-                      <span>Dúvidas sobre a chamada: <strong>info@ajamazonia.org</strong></span>
-                    </div>
-                  </div>
-                  <div class="relative z-10 flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
-                    <a class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-container font-label-lg text-label-lg uppercase tracking-wider transition-colors font-bold text-center shadow-md flex items-center justify-center gap-2"
-                      href="<?php echo esc_url($feat_link); ?>">
-                      <span><?php echo esc_html($feat_label); ?></span>
-                      <span class="material-symbols-outlined text-[18px]">download</span>
-                    </a>
-                  </div>
-                </div>
-            <?php endif; ?>
-
-            <!-- Secondary Continuous Opportunities Dinâmicos -->
-            <?php if (!empty($other_posts)) : ?>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-                  <?php foreach (array_slice($other_posts, 0, 4) as $index => $op_post) : 
-                      $op_id    = $op_post->ID;
-                      $op_badge = aja_get_post_badge($op_id, 'Fluxo Contínuo');
-                      $op_sub   = aja_get_post_subtitle($op_id, 'Credenciamento de Membros');
-                      $op_link  = aja_get_post_action_link($op_id);
-                      $op_label = aja_get_post_action_label($op_id, 'Manifestar Interesse');
-                      $badge_class = ($index % 2 === 0) ? 'bg-secondary-fixed text-on-secondary-fixed' : 'bg-primary-fixed text-on-primary-fixed';
-                      ?>
-                      <div class="p-8 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between border border-border-subtle">
-                        <div>
-                          <div class="flex items-center justify-between mb-4">
-                            <span
-                              class="px-2.5 py-1 rounded <?php echo esc_attr($badge_class); ?> font-label-sm text-label-sm font-semibold uppercase tracking-wider">
-                              <?php echo esc_html($op_badge); ?>
-                            </span>
-                            <span class="font-label-sm text-label-sm text-on-surface-variant">Fluxo Contínuo</span>
-                          </div>
-                          <h4 class="font-title-lg text-title-lg text-ink-primary font-bold mb-2">
-                            <a href="<?php echo esc_url(get_permalink($op_id)); ?>" class="hover:text-primary transition-colors">
-                              <?php echo esc_html($op_post->post_title); ?>
-                            </a>
-                          </h4>
-                          <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                            <?php echo apply_filters('the_excerpt', $op_post->post_excerpt ?: wp_trim_words($op_post->post_content, 30)); ?>
-                          </div>
-                        </div>
-                        <div class="mt-6 pt-4 border-t border-surface-container flex items-center justify-between">
-                          <span class="font-label-sm text-label-sm text-clay-warm font-semibold"><?php echo esc_html($op_sub); ?></span>
-                          <a class="font-label-md text-label-md text-primary font-bold hover:underline inline-flex items-center gap-1"
-                            href="<?php echo esc_url($op_link); ?>">
-                            <?php echo esc_html($op_label); ?> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
-                          </a>
-                        </div>
-                      </div>
-                  <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-
-        <?php else : ?>
-            <!-- Fallback: Editais originais de modelo caso ainda não existam posts cadastrados -->
-            <!-- Featured Callout Card: CHAMADA PARA SUBMISSÃO DE ARTIGOS -->
-            <div
-              class="w-full relative overflow-hidden text-surface-container-lowest rounded-2xl p-8 lg:p-12 mb-8 shadow-sm flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 group">
-              <div class="absolute inset-0 z-0">
-                <img alt="Floresta e corredeiras amazônicas"
-                  class="w-full h-full object-cover opacity-25 mix-blend-luminosity scale-105 transition-transform duration-700 group-hover:scale-110"
-                  src="<?php echo esc_url(aja_asset('fotos/corredeira-floresta-pedras.jpg')); ?>" />
-                <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary-container/90"></div>
-              </div>
-              <div class="relative z-10 flex flex-col gap-4 max-w-3xl">
-                <div class="flex items-center gap-3">
-                  <span
-                    class="px-3 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm uppercase tracking-wider font-bold">
-                    Chamada Pública Aberta
-                  </span>
-                  <span class="font-label-sm text-label-sm text-primary-fixed-dim">Destinada aos Membros da AJA</span>
-                </div>
-                <h3 class="font-headline-md text-headline-md font-bold leading-tight">
-                  Chamada para Submissão de Artigos de Opinião Jurídicos
-                </h3>
-                <p class="font-body-md text-body-md text-surface-container leading-relaxed">
-                  A Aliança Jurídica pela Amazônia (AJA) torna pública a chamada para submissão de artigos de opinião jurídicos voltados ao fortalecimento do debate sobre justiça, democracia socioambiental e Estado de Direito na Amazônia.
-                </p>
-                <p class="font-body-sm text-body-sm text-surface-container-high leading-relaxed">
-                  A iniciativa é destinada aos membros da AJA e busca reunir contribuições inéditas sobre temas jurídicos contemporâneos relacionados à Amazônia, aos direitos humanos e à proteção socioambiental. O edital e formulário completo contém informações sobre critérios, eixos temáticos, prazos e orientações para submissão.
-                </p>
-                <div class="flex items-center gap-2 pt-1 text-primary-fixed text-body-sm">
-                  <span class="material-symbols-outlined text-[18px]">info</span>
-                  <span>Dúvidas sobre a chamada: <strong>info@ajamazonia.org</strong></span>
-                </div>
-              </div>
-              <div class="relative z-10 flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
-                <a class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-container font-label-lg text-label-lg uppercase tracking-wider transition-colors font-bold text-center shadow-md flex items-center justify-center gap-2"
-                  href="mailto:info@ajamazonia.org?subject=Submissao%20de%20Artigo%20AJA">
-                  <span>Acessar Edital & Submissão</span>
-                  <span class="material-symbols-outlined text-[18px]">download</span>
-                </a>
-              </div>
+        <!-- Estado Informativo: Nenhuma chamada aberta no momento -->
+        <div class="p-8 lg:p-12 rounded-2xl bg-surface-container-low border border-border-subtle flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-surface-container text-outline flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[28px]">folder_open</span>
             </div>
-
-            <!-- Link para Página Completa de Editais -->
-            <div class="mt-8 p-6 bg-surface-container-low rounded-xl border border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div class="flex items-center gap-3">
-                <span class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
-                  <span class="material-symbols-outlined text-[22px]">description</span>
-                </span>
-                <div>
-                  <h4 class="font-title-sm text-sm font-bold text-ink-primary">Edital Completo &amp; Formulário de Submissão</h4>
-                  <p class="text-xs text-on-surface-variant">Consulte critérios, eixos temáticos, prazos e orientações para submissão de artigos.</p>
-                </div>
-              </div>
-              <a href="<?php echo esc_url(home_url('/editais/')); ?>"
-                 class="px-5 py-2.5 rounded-lg bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-1.5 shrink-0">
-                <span>Ver Página de Editais</span>
-                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-              </a>
+            <div>
+              <span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-[11px] font-bold uppercase tracking-wider inline-block mb-2">
+                Status Atual
+              </span>
+              <h3 class="font-title-lg text-title-lg text-ink-primary font-bold">
+                Nenhuma chamada aberta no momento
+              </h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-2xl leading-relaxed">
+                Não há editais ou chamadas públicas para artigos com inscrições abertas no momento e não há previsão de novas chamadas. Novas oportunidades serão comunicadas oportunamente através dos canais oficiais da Aliança.
+              </p>
             </div>
-        <?php endif; ?>
+          </div>
+          <div class="shrink-0 w-full md:w-auto">
+            <a href="<?php echo esc_url(home_url('/contato/')); ?>"
+               class="w-full md:w-auto px-5 py-3 rounded-lg bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">mail</span>
+              <span>Fale Conosco</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1829,13 +1623,6 @@ get_header();
             <h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-ink-primary font-medium">
               Publicações, Artigos e Notas Técnicas
             </h2>
-          </div>
-          <div class="flex items-center gap-3">
-            <a href="<?php echo esc_url(home_url('/submissoes/')); ?>"
-              class="px-4 py-2 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md uppercase tracking-wider shadow-sm hover:bg-surface-container transition-colors inline-flex items-center gap-1.5 font-bold">
-              <span class="material-symbols-outlined text-[18px]">add_circle</span>
-              Publicar Artigo
-            </a>
           </div>
         </div>
 

@@ -109,9 +109,9 @@ get_header();
                 <span class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center mb-3">
                   <span class="material-symbols-outlined text-[20px]">help_outline</span>
                 </span>
-                <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Dúvidas &amp; Submissões</span>
+                <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Dúvidas &amp; Informações</span>
                 <h4 class="font-title-md text-base font-bold text-ink-primary mt-0.5">Adesões &amp; Editais</h4>
-                <p class="text-xs text-on-surface-variant mt-1">Dúvidas sobre o formulário de adesão ou chamada de artigos.</p>
+                <p class="text-xs text-on-surface-variant mt-1">Dúvidas sobre o formulário de adesão, editais ou contato institucional.</p>
               </div>
               <a href="mailto:info@ajamazonia.org" class="mt-4 pt-3 border-t border-border-subtle text-xs font-bold text-secondary hover:underline">
                 info@ajamazonia.org
@@ -166,7 +166,7 @@ get_header();
               </div>
             </div>
             <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
-              Receba análises jurídicas exclusivas, notas técnicas sobre julgamentos ambientais e convocações para chamadas da rede.
+              Receba análises jurídicas exclusivas, notas técnicas sobre julgamentos ambientais e comunicados institucionais da rede.
             </p>
             <div class="flex flex-col sm:flex-row gap-2 mt-1">
               <input
