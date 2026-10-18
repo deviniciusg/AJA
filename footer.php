@@ -99,6 +99,214 @@
     </div>
   </footer>
 
+  <!-- MODAL GLOBAL DE BIO COMPLETA DOS MEMBROS (COMITÊ, CONSELHO E LÍDERES DE GT) -->
+  <div id="aja-member-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 bg-ink-primary/65 backdrop-blur-xs transition-opacity duration-200" role="dialog" aria-modal="true" aria-labelledby="aja-modal-member-name">
+    <div id="aja-member-modal-dialog" class="relative w-full max-w-xl bg-surface-container-lowest border border-border-subtle rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-fadeIn">
+
+      <!-- Botão de fechar ( canto superior direito ) -->
+      <button type="button" id="aja-member-modal-close" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-ink-primary flex items-center justify-center transition-colors z-10" aria-label="Fechar janela">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <!-- Cabeçalho do Perfil -->
+      <div class="p-6 sm:p-7 pb-5 border-b border-border-subtle/80 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left bg-surface-container-low/50">
+        <div id="aja-modal-member-avatar-wrap" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden shrink-0 bg-transparent flex items-center justify-center">
+          <img id="aja-modal-member-img" src="" alt="" class="w-full h-full object-cover object-center hidden" />
+          <svg id="aja-modal-member-fallback" class="w-12 h-12 text-outline opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
+
+        <div class="flex flex-col items-center sm:items-start flex-1 pr-0 sm:pr-8">
+          <span id="aja-modal-member-badge" class="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded border mb-2 bg-primary-fixed/40 text-primary border-primary-fixed">
+            Integrante AJA
+          </span>
+
+          <h3 id="aja-modal-member-name" class="font-headline-sm text-xl sm:text-2xl font-bold text-ink-primary leading-tight">
+            Nome do Integrante
+          </h3>
+
+          <p id="aja-modal-member-subtitle" class="text-xs sm:text-sm font-semibold text-secondary mt-1">
+          </p>
+
+          <div id="aja-modal-member-location-wrap" class="hidden items-center gap-1.5 text-xs text-outline mt-2">
+            <svg class="w-3.5 h-3.5 text-secondary shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span id="aja-modal-member-location"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Corpo com a Bio Completa (Rolável se muito extensa) -->
+      <div class="p-6 sm:p-7 overflow-y-auto flex-1">
+        <span class="font-label-sm text-[10px] uppercase tracking-widest text-outline font-bold block mb-2.5">
+          Trajetória &amp; Atuação
+        </span>
+        <div id="aja-modal-member-bio" class="font-body-md text-sm sm:text-[15px] text-on-surface-variant leading-relaxed space-y-3">
+        </div>
+      </div>
+
+      <!-- Rodapé do Modal -->
+      <div class="px-6 py-4 bg-surface-container-low border-t border-border-subtle flex items-center justify-between gap-3">
+        <a id="aja-modal-member-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-moss-light font-label-md text-xs uppercase tracking-wider font-bold transition-colors shadow-xs">
+          <span>Acessar Perfil / Currículo</span>
+          <span class="material-symbols-outlined text-[15px]">open_in_new</span>
+        </a>
+        <button type="button" id="aja-member-modal-close-btn" class="ml-auto px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high border border-border-subtle text-ink-primary font-label-md text-xs uppercase tracking-wider font-bold transition-colors">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    function initAjaMemberModal() {
+      var modal = document.getElementById('aja-member-modal');
+      var dialog = document.getElementById('aja-member-modal-dialog');
+      var closeBtn = document.getElementById('aja-member-modal-close');
+      var closeFooterBtn = document.getElementById('aja-member-modal-close-btn');
+      if (!modal) return;
+
+      var imgEl = document.getElementById('aja-modal-member-img');
+      var fallbackEl = document.getElementById('aja-modal-member-fallback');
+      var badgeEl = document.getElementById('aja-modal-member-badge');
+      var nameEl = document.getElementById('aja-modal-member-name');
+      var subtitleEl = document.getElementById('aja-modal-member-subtitle');
+      var locWrap = document.getElementById('aja-modal-member-location-wrap');
+      var locEl = document.getElementById('aja-modal-member-location');
+      var bioEl = document.getElementById('aja-modal-member-bio');
+      var linkEl = document.getElementById('aja-modal-member-link');
+
+      function openMemberModal(card) {
+        var name = card.getAttribute('data-member-name') || '';
+        if (!name) {
+          var h4 = card.querySelector('h4');
+          if (h4) name = h4.textContent.trim();
+        }
+
+        var badge = card.getAttribute('data-member-badge') || '';
+        if (!badge) {
+          var bSpan = card.querySelector('span.inline-block');
+          if (bSpan) badge = bSpan.textContent.trim();
+        }
+
+        var badgeStyle = card.getAttribute('data-member-badge-style') || 'bg-primary-fixed/40 text-primary border-primary-fixed';
+        var badgeInline = card.getAttribute('data-member-badge-inline') || '';
+        var subtitle = card.getAttribute('data-member-subtitle') || '';
+        var subtitleInline = card.getAttribute('data-member-subtitle-inline') || '';
+        var location = card.getAttribute('data-member-location') || '';
+        var link = card.getAttribute('data-member-link') || '';
+        var imgSrc = card.getAttribute('data-member-img') || '';
+        if (!imgSrc) {
+          var cardImg = card.querySelector('img');
+          if (cardImg) imgSrc = cardImg.getAttribute('src') || '';
+        }
+
+        var bioHtml = '';
+        var tpl = card.querySelector('template.aja-member-bio-content');
+        if (tpl) {
+          bioHtml = tpl.innerHTML.trim();
+        } else {
+          var bioP = card.querySelector('p.line-clamp-3');
+          if (bioP) {
+            bioHtml = '<p>' + bioP.innerHTML.trim() + '</p>';
+          }
+        }
+
+        nameEl.textContent = name;
+        badgeEl.textContent = badge || 'Integrante AJA';
+        badgeEl.className = 'inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded border mb-2 ' + (badgeInline ? '' : badgeStyle);
+        badgeEl.setAttribute('style', badgeInline);
+
+        if (subtitle) {
+          subtitleEl.textContent = subtitle;
+          subtitleEl.className = 'text-xs sm:text-sm font-semibold mt-1 ' + (subtitleInline ? '' : 'text-secondary');
+          subtitleEl.setAttribute('style', subtitleInline);
+        } else {
+          subtitleEl.textContent = '';
+          subtitleEl.className = 'text-xs sm:text-sm font-semibold text-secondary mt-1 hidden';
+          subtitleEl.setAttribute('style', '');
+        }
+
+        if (location && location !== '[A preencher]') {
+          locEl.textContent = location;
+          locWrap.classList.remove('hidden');
+          locWrap.classList.add('flex');
+        } else {
+          locEl.textContent = '';
+          locWrap.classList.add('hidden');
+          locWrap.classList.remove('flex');
+        }
+
+        if (imgSrc) {
+          imgEl.src = imgSrc;
+          imgEl.alt = name;
+          imgEl.classList.remove('hidden');
+          fallbackEl.classList.add('hidden');
+        } else {
+          imgEl.src = '';
+          imgEl.classList.add('hidden');
+          fallbackEl.classList.remove('hidden');
+        }
+
+        bioEl.innerHTML = bioHtml || '<p>Integrante da Aliança Jurídica pela Amazônia (AJA).</p>';
+
+        if (link && link !== '#') {
+          linkEl.href = link;
+          linkEl.classList.remove('hidden');
+          linkEl.classList.add('inline-flex');
+        } else {
+          linkEl.href = '#';
+          linkEl.classList.add('hidden');
+          linkEl.classList.remove('inline-flex');
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMemberModal() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+
+      document.addEventListener('click', function(e) {
+        var card = e.target.closest('.aja-member-card');
+        if (card && !e.target.closest('a[href]')) {
+          e.preventDefault();
+          openMemberModal(card);
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeMemberModal();
+          return;
+        }
+        if ((e.key === 'Enter' || e.key === ' ') && document.activeElement && document.activeElement.classList.contains('aja-member-card')) {
+          e.preventDefault();
+          openMemberModal(document.activeElement);
+        }
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', closeMemberModal);
+      if (closeFooterBtn) closeFooterBtn.addEventListener('click', closeMemberModal);
+
+      modal.addEventListener('click', function(e) {
+        if (dialog && !dialog.contains(e.target)) {
+          closeMemberModal();
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAjaMemberModal);
+    } else {
+      initAjaMemberModal();
+    }
+  })();
+  </script>
+
   <?php wp_footer(); ?>
 </body>
 

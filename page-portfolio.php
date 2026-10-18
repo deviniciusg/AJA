@@ -26,7 +26,7 @@ get_header();
           </div>
 
           <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-ink-primary font-bold leading-tight max-w-3xl">
-            Membros da Rede &amp; Portfólio de Atuação
+            Portfólio de Membros da AJA
           </h1>
 
           <p class="font-body-lg text-body-md text-on-surface-variant max-w-2xl mt-4 leading-relaxed">
@@ -69,8 +69,40 @@ get_header();
     </div>
   </section>
 
-  <!-- SEÇÃO INTERATIVA DO PORTFÓLIO -->
-  <section class="w-full py-16 lg:py-20 bg-surface-container border-b border-border-subtle" id="portfolio-grid">
+  <!-- SEÇÃO ATIVA: DESCRIÇÃO DO PORTFÓLIO DE MEMBROS DA AJA (VERSÃO SIMPLIFICADA) -->
+  <section class="w-full py-16 lg:py-20 bg-surface-container border-b border-border-subtle" id="portfolio">
+    <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="bg-surface-container-lowest border-2 border-dashed border-border-subtle rounded-2xl p-8 lg:p-10 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        <div class="flex flex-col gap-4 max-w-3xl">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed/40 text-primary border border-primary-fixed text-xs font-bold uppercase tracking-wider">
+              Portfólio de Membros da AJA
+            </span>
+            <span class="text-[11px] uppercase font-semibold text-outline-variant bg-surface-container px-2.5 py-1 rounded">
+              Texto a preencher
+            </span>
+          </div>
+
+          <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-3">
+            <p class="text-outline italic">
+              [A preencher — Espaço reservado para o texto institucional que descreve o Portfólio de Membros da Aliança Jurídica pela Amazônia (AJA), sua diversidade de atuação e capilaridade nos territórios.]
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full lg:w-auto">
+          <a class="px-6 py-4 rounded-lg bg-primary hover:bg-moss-light text-on-primary font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 inline-flex items-center justify-center gap-2 shadow-sm hover:shadow-md text-center font-bold"
+            href="#faca-parte">
+            <span>Acessar Portfólio Completo</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO INTERATIVA DO PORTFÓLIO (OCULTA PARA USO FUTURO) -->
+  <section class="hidden w-full py-16 lg:py-20 bg-surface-container border-b border-border-subtle" id="portfolio-grid" style="display: none;" aria-hidden="true">
     <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
       
       <!-- Network Interactive Tabs Filter -->

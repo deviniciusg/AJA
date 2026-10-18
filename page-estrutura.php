@@ -127,22 +127,75 @@ get_header();
       }
 
       // Função para renderizar Card de Membro Real
-      $render_team_card = function($post_obj, $default_badge_style = 'bg-secondary-fixed/30 text-secondary border-secondary-fixed') {
-          $post_id   = $post_obj->ID;
-          $badge     = get_post_meta($post_id, '_aja_badge', true) ?: 'Integrante AJA';
-          $subtitle  = get_post_meta($post_id, '_aja_subtitle', true) ?: get_post_meta($post_id, '_aja_subtitle_gt', true);
-          $location  = get_post_meta($post_id, '_aja_location', true);
-          $link      = get_post_meta($post_id, '_aja_action_link', true) ?: get_post_meta($post_id, '_aja_pdf_url', true);
-          $excerpt   = get_the_excerpt($post_obj);
-          $has_thumb = has_post_thumbnail($post_id);
+      $render_team_card = function($post_obj, $default_badge_style = 'bg-secondary-fixed/30 text-secondary border-secondary-fixed', $gt_slot = '') {
+          $post_id       = $post_obj->ID;
+          $title         = get_the_title($post_id);
+          $badge         = get_post_meta($post_id, '_aja_badge', true) ?: 'Integrante AJA';
+          $subtitle      = get_post_meta($post_id, '_aja_subtitle', true) ?: get_post_meta($post_id, '_aja_subtitle_gt', true);
+          $location      = get_post_meta($post_id, '_aja_location', true);
+          $link          = get_post_meta($post_id, '_aja_action_link', true) ?: get_post_meta($post_id, '_aja_pdf_url', true);
+          $raw_content   = trim($post_obj->post_content);
+          $raw_excerpt   = trim($post_obj->post_excerpt);
+          $best_raw      = (mb_strlen(wp_strip_all_tags($raw_content)) >= mb_strlen(wp_strip_all_tags($raw_excerpt))) ? $raw_content : $raw_excerpt;
+          if (empty($best_raw)) {
+              $best_raw = get_the_excerpt($post_obj);
+          }
+          $short_bio     = wp_strip_all_tags($best_raw);
+          $full_bio_html = wpautop(wp_kses_post($best_raw));
+          $has_thumb     = has_post_thumbnail($post_id);
+          $thumb_url     = $has_thumb ? get_the_post_thumbnail_url($post_id, 'aja-square-thumb') : '';
+
+          // Detecção de paleta oficial de GT (GT 01, GT 02, GT 03)
+          $card_border_style     = '';
+          $badge_inline_style    = '';
+          $subtitle_inline_style = '';
+          $btn_inline_style      = '';
+          $dot_color             = '';
+
+          if (!empty($gt_slot)) {
+              $haystack = mb_strtolower($badge . ' ' . $subtitle . ' ' . $title . ' ' . $gt_slot);
+              if (strpos($haystack, 'gt 01') !== false || strpos($haystack, 'gt 1') !== false || strpos($haystack, 'territ') !== false || strpos($haystack, 'lincon') !== false || $gt_slot === 'gt-01') {
+                  $card_border_style     = 'border-top: 5px solid #F2B950;';
+                  $badge_inline_style    = 'background-color: #F2B950; color: #7C1F1F; border-color: #F2B950;';
+                  $subtitle_inline_style = 'color: #7C1F1F;';
+                  $btn_inline_style      = 'color: #7C1F1F;';
+                  $dot_color             = '#F2B950';
+              } elseif (strpos($haystack, 'gt 02') !== false || strpos($haystack, 'gt 2') !== false || strpos($haystack, 'litig') !== false || strpos($haystack, 'marina') !== false || strpos($haystack, 'júlia') !== false || strpos($haystack, 'julia') !== false || $gt_slot === 'gt-02') {
+                  $badge                 = 'Co-liderança • GT 02';
+                  $card_border_style     = 'border-top: 5px solid #406284;';
+                  $badge_inline_style    = 'background-color: #A6BEE4; color: #406284; border-color: #A6BEE4;';
+                  $subtitle_inline_style = 'color: #406284;';
+                  $btn_inline_style      = 'color: #406284;';
+                  $dot_color             = '#406284';
+              } else {
+                  $card_border_style     = 'border-top: 5px solid #6E7642;';
+                  $badge_inline_style    = 'background-color: #6E7642; color: #ffffff; border-color: #6E7642;';
+                  $subtitle_inline_style = 'color: #761F20;';
+                  $btn_inline_style      = 'color: #761F20;';
+                  $dot_color             = '#6E7642';
+              }
+          }
           ?>
-          <div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-5 flex flex-col justify-between hover:shadow-md hover:border-secondary/60 transition-all duration-300 group">
+          <div class="aja-member-card cursor-pointer bg-surface-container-lowest border border-border-subtle rounded-xl p-5 flex flex-col justify-between hover:shadow-md hover:border-secondary/60 transition-all duration-300 group"
+               <?php if ($card_border_style) : ?>style="<?php echo esc_attr($card_border_style); ?>"<?php endif; ?>
+               role="button"
+               tabindex="0"
+               aria-label="<?php echo esc_attr('Ver bio completa de ' . $title); ?>"
+               data-member-name="<?php echo esc_attr($title); ?>"
+               data-member-badge="<?php echo esc_attr($badge); ?>"
+               data-member-badge-style="<?php echo esc_attr($default_badge_style); ?>"
+               data-member-badge-inline="<?php echo esc_attr($badge_inline_style); ?>"
+               data-member-subtitle="<?php echo esc_attr($subtitle); ?>"
+               data-member-subtitle-inline="<?php echo esc_attr($subtitle_inline_style); ?>"
+               data-member-location="<?php echo esc_attr($location); ?>"
+               data-member-link="<?php echo esc_url($link); ?>"
+               data-member-img="<?php echo esc_url($thumb_url); ?>">
             <div>
               <div class="w-full aspect-square rounded-full overflow-hidden mb-4 bg-transparent flex items-center justify-center relative">
                 <?php if ($has_thumb) : ?>
                   <?php echo get_the_post_thumbnail($post_id, 'aja-square-thumb', array(
-                      'class' => 'w-full h-full object-cover object-center rounded-full',
-                      'alt'   => get_the_title($post_id)
+                      'class' => 'w-full h-full object-cover object-center rounded-full group-hover:scale-105 transition-transform duration-500',
+                      'alt'   => $title
                   )); ?>
                 <?php else : ?>
                   <div class="w-full h-full rounded-full flex flex-col items-center justify-center text-outline bg-surface-container">
@@ -152,43 +205,51 @@ get_header();
                 <?php endif; ?>
               </div>
 
-              <span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded border mb-2 <?php echo esc_attr($default_badge_style); ?>">
+              <span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded border mb-2 <?php echo esc_attr($badge_inline_style ? '' : $default_badge_style); ?>"
+                    <?php if ($badge_inline_style) : ?>style="<?php echo esc_attr($badge_inline_style); ?>"<?php endif; ?>>
                 <?php echo esc_html($badge); ?>
               </span>
 
               <h4 class="font-title-lg text-title-lg font-bold text-ink-primary leading-snug group-hover:text-primary transition-colors">
-                <?php echo esc_html(get_the_title($post_id)); ?>
+                <?php echo esc_html($title); ?>
               </h4>
 
               <?php if (!empty($subtitle)) : ?>
-                <p class="text-xs font-semibold text-secondary mt-1">
+                <p class="text-xs font-semibold <?php echo esc_attr($subtitle_inline_style ? '' : 'text-secondary'); ?> mt-1"
+                   <?php if ($subtitle_inline_style) : ?>style="<?php echo esc_attr($subtitle_inline_style); ?>"<?php endif; ?>>
                   <?php echo esc_html($subtitle); ?>
                 </p>
               <?php endif; ?>
 
-              <?php if (!empty($excerpt)) : ?>
+              <?php if (!empty($short_bio)) : ?>
                 <p class="text-xs text-on-surface-variant leading-relaxed mt-2.5 line-clamp-3">
-                  <?php echo esc_html(wp_strip_all_tags($excerpt)); ?>
+                  <?php echo esc_html($short_bio); ?>
                 </p>
+                <template class="aja-member-bio-content"><?php echo $full_bio_html; ?></template>
               <?php endif; ?>
             </div>
 
-            <?php if (!empty($location) || !empty($link)) : ?>
             <div class="mt-4 pt-3 border-t border-border-subtle/80 flex items-center justify-between gap-2 text-[11px]">
-              <?php if (!empty($location)) : ?>
-              <div class="flex items-center gap-1.5 text-outline truncate" title="<?php echo esc_attr($location); ?>">
-                <svg class="w-3.5 h-3.5 text-secondary shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                <span class="truncate"><?php echo esc_html($location); ?></span>
-              </div>
-              <?php endif; ?>
+              <span class="aja-open-bio-btn inline-flex items-center gap-1 font-bold <?php echo esc_attr($btn_inline_style ? 'hover:opacity-80' : 'text-primary group-hover:text-secondary'); ?> transition-colors"
+                    <?php if ($btn_inline_style) : ?>style="<?php echo esc_attr($btn_inline_style); ?>"<?php endif; ?>>
+                <span>Ler bio completa</span>
+                <span class="material-symbols-outlined text-[15px] group-hover:translate-x-0.5 transition-transform">open_in_full</span>
+              </span>
+
               <?php if (!empty($link)) : ?>
-                <a href="<?php echo esc_url($link); ?>" target="_blank" rel="noopener noreferrer" class="font-bold text-primary hover:text-primary-dark shrink-0 flex items-center gap-0.5 ml-auto">
+                <a href="<?php echo esc_url($link); ?>" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" class="font-bold text-on-surface-variant hover:text-primary shrink-0 flex items-center gap-0.5 ml-auto">
                   <span>Perfil</span>
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
+              <?php elseif (!empty($location)) : ?>
+                <div class="flex items-center gap-1 text-outline truncate max-w-[130px]" title="<?php echo esc_attr($location); ?>">
+                  <svg class="w-3.5 h-3.5 text-secondary shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  <span class="truncate"><?php echo esc_html($location); ?></span>
+                </div>
+              <?php elseif (!empty($dot_color)) : ?>
+                <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: <?php echo esc_attr($dot_color); ?>;"></span>
               <?php endif; ?>
             </div>
-            <?php endif; ?>
           </div>
           <?php
       };
@@ -196,16 +257,33 @@ get_header();
       // Função para renderizar Card Placeholder Padronizado
       $render_placeholder_card = function($item) {
           $badge_style = !empty($item['badge_style']) ? $item['badge_style'] : 'bg-primary-fixed/40 text-primary border-primary-fixed';
+          $card_border_style = !empty($item['card_border_style']) ? $item['card_border_style'] : '';
+          $badge_inline_style = !empty($item['badge_inline_style']) ? $item['badge_inline_style'] : '';
+          $subtitle_inline_style = !empty($item['subtitle_inline_style']) ? $item['subtitle_inline_style'] : '';
+          $btn_inline_style = !empty($item['btn_inline_style']) ? $item['btn_inline_style'] : $subtitle_inline_style;
+          $dot_color = !empty($item['dot_color']) ? $item['dot_color'] : '';
           ?>
-          <div class="bg-surface-container-lowest/80 border-2 border-dashed border-border-subtle hover:border-primary/50 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition-all duration-300 group">
+          <div class="aja-member-card cursor-pointer bg-surface-container-lowest/80 border-2 border-dashed border-border-subtle hover:border-primary/50 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition-all duration-300 group"
+               <?php if ($card_border_style) : ?>style="<?php echo esc_attr($card_border_style); ?>"<?php endif; ?>
+               role="button"
+               tabindex="0"
+               aria-label="<?php echo esc_attr('Ver bio completa de ' . $item['name']); ?>"
+               data-member-name="<?php echo esc_attr($item['name']); ?>"
+               data-member-badge="<?php echo esc_attr($item['role']); ?>"
+               data-member-badge-style="<?php echo esc_attr($badge_style); ?>"
+               data-member-badge-inline="<?php echo esc_attr($badge_inline_style); ?>"
+               data-member-subtitle="<?php echo esc_attr($item['subtitle']); ?>"
+               data-member-subtitle-inline="<?php echo esc_attr($subtitle_inline_style); ?>"
+               data-member-location="<?php echo esc_attr(!empty($item['location']) ? $item['location'] : ''); ?>">
             <div>
               <div class="w-full aspect-square rounded-full mb-4 bg-surface-container flex flex-col items-center justify-center text-outline relative overflow-hidden group-hover:bg-surface-container-high transition-colors">
                 <svg class="w-16 h-16 opacity-35 mb-1 text-on-surface-variant" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                <span class="text-[10px] font-bold text-ink-primary/70 uppercase tracking-widest bg-surface-container-lowest/90 px-2 py-0.5 rounded shadow-xs">AJA • Placeholder</span>
+                <span class="text-[10px] font-bold text-ink-primary/70 uppercase tracking-widest bg-surface-container-lowest/90 px-2 py-0.5 rounded shadow-xs">[Foto a preencher]</span>
               </div>
 
               <div class="flex items-center justify-between gap-1 mb-2">
-                <span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border <?php echo esc_attr($badge_style); ?>">
+                <span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded border <?php echo esc_attr($badge_inline_style ? '' : $badge_style); ?>"
+                      <?php if ($badge_inline_style) : ?>style="<?php echo esc_attr($badge_inline_style); ?>"<?php endif; ?>>
                   <?php echo esc_html($item['role']); ?>
                 </span>
                 <span class="text-[10px] uppercase font-semibold text-outline-variant bg-surface-container px-1.5 py-0.5 rounded">
@@ -213,28 +291,31 @@ get_header();
                 </span>
               </div>
 
-              <h4 class="font-title-lg text-title-lg font-bold text-ink-primary leading-snug">
+              <h4 class="font-title-lg text-title-lg font-bold text-ink-primary leading-snug group-hover:text-primary transition-colors">
                 <?php echo esc_html($item['name']); ?>
               </h4>
 
-              <p class="text-xs font-semibold text-secondary mt-1">
+              <p class="text-xs font-semibold <?php echo esc_attr($subtitle_inline_style ? '' : 'text-secondary'); ?> mt-1"
+                 <?php if ($subtitle_inline_style) : ?>style="<?php echo esc_attr($subtitle_inline_style); ?>"<?php endif; ?>>
                 <?php echo esc_html($item['subtitle']); ?>
               </p>
 
               <p class="text-xs text-on-surface-variant leading-relaxed mt-2.5 line-clamp-3">
                 <?php echo esc_html($item['desc']); ?>
               </p>
+              <template class="aja-member-bio-content"><p><?php echo esc_html($item['desc']); ?></p></template>
             </div>
 
-            <?php if (!empty($item['location']) && $item['location'] !== '[A preencher]') : ?>
-            <div class="mt-4 pt-3 border-t border-border-subtle/80 flex items-center justify-between text-[11px] text-outline">
-              <div class="flex items-center gap-1.5 truncate">
-                <svg class="w-3.5 h-3.5 text-secondary shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                <span class="truncate"><?php echo esc_html($item['location']); ?></span>
-              </div>
-              <span class="font-bold text-outline-variant">AJA</span>
+            <div class="mt-4 pt-3 border-t border-border-subtle/80 flex items-center justify-between gap-2 text-[11px]">
+              <span class="aja-open-bio-btn inline-flex items-center gap-1 font-bold <?php echo esc_attr($btn_inline_style ? 'hover:opacity-80' : 'text-primary group-hover:text-secondary'); ?> transition-colors"
+                    <?php if ($btn_inline_style) : ?>style="<?php echo esc_attr($btn_inline_style); ?>"<?php endif; ?>>
+                <span>Ler bio completa</span>
+                <span class="material-symbols-outlined text-[15px] group-hover:translate-x-0.5 transition-transform">open_in_full</span>
+              </span>
+              <?php if (!empty($dot_color)) : ?>
+                <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: <?php echo esc_attr($dot_color); ?>;"></span>
+              <?php endif; ?>
             </div>
-            <?php endif; ?>
           </div>
           <?php
       };
@@ -353,58 +434,25 @@ get_header();
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <?php
-            if (!empty($conselho_posts)) {
-                foreach ($conselho_posts as $cp) {
-                    $render_team_card($cp, 'bg-secondary-fixed/40 text-secondary border-secondary-fixed');
-                }
-            }
+          <div class="bg-surface-container-lowest border-2 border-dashed border-border-subtle rounded-2xl p-6 sm:p-8 flex flex-col gap-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/40 text-secondary border border-secondary-fixed text-xs font-bold uppercase tracking-wider">
+                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                Conselho em processo de formação
+              </span>
+              <span class="text-[11px] uppercase font-semibold text-outline-variant bg-surface-container px-2.5 py-1 rounded">
+                Texto a preencher
+              </span>
+            </div>
 
-            $conselho_placeholders = array(
-                array(
-                    'role'        => 'Conselheiro(a) Consultivo(a)',
-                    'name'        => '[Nome a preencher]',
-                    'subtitle'    => '[Área de Atuação a preencher]',
-                    'desc'        => '[Descrição a preencher]',
-                    'location'    => '[A preencher]',
-                    'badge_style' => 'bg-secondary-fixed/40 text-secondary border-secondary-fixed',
-                    'status'      => 'A preencher'
-                ),
-                array(
-                    'role'        => 'Conselheiro(a) Jurídico(a)',
-                    'name'        => '[Nome a preencher]',
-                    'subtitle'    => '[Área de Atuação a preencher]',
-                    'desc'        => '[Descrição a preencher]',
-                    'location'    => '[A preencher]',
-                    'badge_style' => 'bg-secondary-fixed/40 text-secondary border-secondary-fixed',
-                    'status'      => 'A preencher'
-                ),
-                array(
-                    'role'        => 'Conselheiro(a) Científico(a)',
-                    'name'        => '[Nome a preencher]',
-                    'subtitle'    => '[Área de Atuação a preencher]',
-                    'desc'        => '[Descrição a preencher]',
-                    'location'    => '[A preencher]',
-                    'badge_style' => 'bg-secondary-fixed/40 text-secondary border-secondary-fixed',
-                    'status'      => 'A preencher'
-                ),
-                array(
-                    'role'        => 'Conselheiro(a) Consultivo(a)',
-                    'name'        => '[Nome a preencher]',
-                    'subtitle'    => '[Área de Atuação a preencher]',
-                    'desc'        => '[Descrição a preencher]',
-                    'location'    => '[A preencher]',
-                    'badge_style' => 'bg-secondary-fixed/40 text-secondary border-secondary-fixed',
-                    'status'      => 'A preencher'
-                ),
-            );
-
-            $needed_conselho = max(0, 4 - count($conselho_posts));
-            for ($i = 0; $i < $needed_conselho; $i++) {
-                $render_placeholder_card($conselho_placeholders[$i]);
-            }
-            ?>
+            <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-3">
+              <p class="font-medium text-ink-primary">
+                O Conselho Consultivo da Aliança Jurídica pela Amazônia (AJA) encontra-se atualmente em processo de formação.
+              </p>
+              <p class="text-outline italic">
+                [Espaço reservado para texto descritivo sobre o Conselho Consultivo — papel institucional, critérios de composição, diversidade epistêmica e atribuições estratégicas a preencher.]
+              </p>
+            </div>
           </div>
         </div>
 
@@ -436,46 +484,101 @@ get_header();
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php
+            $julia_gt02_placeholder = array(
+                'role'                  => 'Co-liderança • GT 02',
+                'name'                  => 'Júlia',
+                'subtitle'              => 'GT Litigância e Ativismo Judicial',
+                'desc'                  => '[A preencher]',
+                'location'              => '[A preencher]',
+                'badge_style'           => 'text-[#406284] border-[#A6BEE4] bg-[#A6BEE4]',
+                'card_border_style'     => 'border-top: 5px solid #406284;',
+                'badge_inline_style'    => 'background-color: #A6BEE4; color: #406284; border-color: #A6BEE4;',
+                'subtitle_inline_style' => 'color: #406284;',
+                'btn_inline_style'      => 'color: #406284;',
+                'dot_color'             => '#406284',
+                'status'                => 'A preencher'
+            );
+
+            $has_julia_post = false;
             if (!empty($lideres_posts)) {
-                foreach ($lideres_posts as $lp) {
-                    $render_team_card($lp, 'bg-tertiary-fixed/40 text-tertiary border-tertiary-fixed');
+                foreach ($lideres_posts as $lp_check) {
+                    $t_lower = mb_strtolower($lp_check->post_title);
+                    if (strpos($t_lower, 'júlia') !== false || strpos($t_lower, 'julia') !== false) {
+                        $has_julia_post = true;
+                        break;
+                    }
+                }
+            }
+
+            $julia_rendered = false;
+
+            if (!empty($lideres_posts)) {
+                foreach ($lideres_posts as $gt_idx => $lp) {
+                    $gt_slot = 'gt-0' . (($gt_idx % 3) + 1);
+                    $render_team_card($lp, 'bg-tertiary-fixed/40 text-tertiary border-tertiary-fixed', $gt_slot);
+
+                    $lp_haystack = mb_strtolower(get_post_meta($lp->ID, '_aja_badge', true) . ' ' . get_post_meta($lp->ID, '_aja_subtitle', true) . ' ' . $lp->post_title);
+                    if (!$has_julia_post && !$julia_rendered && (strpos($lp_haystack, 'gt 02') !== false || strpos($lp_haystack, 'litig') !== false || strpos($lp_haystack, 'marina') !== false || $gt_idx === 1)) {
+                        $render_placeholder_card($julia_gt02_placeholder);
+                        $julia_rendered = true;
+                    }
                 }
             }
 
             $gt_placeholders = array(
                 array(
-                    'role'        => 'Liderança • GT 01',
-                    'name'        => '[Nome a preencher]',
-                    'subtitle'    => 'GT Território, Segurança e Acesso à Justiça',
-                    'desc'        => '[Descrição a preencher]',
-                    'location'    => '[A preencher]',
-                    'badge_style' => 'text-[#7C1F1F] border-[#F2B950] bg-[#F2B950]/25',
-                    'status'      => 'A preencher'
+                    'role'                  => 'Liderança • GT 01',
+                    'name'                  => '[Nome a preencher]',
+                    'subtitle'              => 'GT Território, Segurança e Acesso à Justiça',
+                    'desc'                  => '[Descrição a preencher]',
+                    'location'              => '[A preencher]',
+                    'badge_style'           => 'text-[#7C1F1F] border-[#F2B950] bg-[#F2B950]',
+                    'card_border_style'     => 'border-top: 5px solid #F2B950;',
+                    'badge_inline_style'    => 'background-color: #F2B950; color: #7C1F1F; border-color: #F2B950;',
+                    'subtitle_inline_style' => 'color: #7C1F1F;',
+                    'btn_inline_style'      => 'color: #7C1F1F;',
+                    'dot_color'             => '#F2B950',
+                    'status'                => 'A preencher'
                 ),
                 array(
-                    'role'        => 'Liderança • GT 02',
-                    'name'        => '[Nome a preencher]',
-                    'subtitle'    => 'GT Litigância e Ativismo Judicial',
-                    'desc'        => '[Descrição a preencher]',
-                    'location'    => '[A preencher]',
-                    'badge_style' => 'text-[#406284] border-[#A6BEE4] bg-[#A6BEE4]/30',
-                    'status'      => 'A preencher'
+                    'role'                  => 'Co-liderança • GT 02',
+                    'name'                  => '[Nome a preencher]',
+                    'subtitle'              => 'GT Litigância e Ativismo Judicial',
+                    'desc'                  => '[Descrição a preencher]',
+                    'location'              => '[A preencher]',
+                    'badge_style'           => 'text-[#406284] border-[#A6BEE4] bg-[#A6BEE4]',
+                    'card_border_style'     => 'border-top: 5px solid #406284;',
+                    'badge_inline_style'    => 'background-color: #A6BEE4; color: #406284; border-color: #A6BEE4;',
+                    'subtitle_inline_style' => 'color: #406284;',
+                    'btn_inline_style'      => 'color: #406284;',
+                    'dot_color'             => '#406284',
+                    'status'                => 'A preencher'
                 ),
+                $julia_gt02_placeholder,
                 array(
-                    'role'        => 'Liderança • GT 03',
-                    'name'        => '[Nome a preencher]',
-                    'subtitle'    => 'GT Finanças Sustentáveis & Sociobiodiversidade',
-                    'desc'        => '[Descrição a preencher]',
-                    'location'    => '[A preencher]',
-                    'badge_style' => 'text-[#761F20] border-[#6E7642] bg-[#6E7642]/25',
-                    'status'      => 'A preencher'
+                    'role'                  => 'Liderança • GT 03',
+                    'name'                  => '[Nome a preencher]',
+                    'subtitle'              => 'GT Finanças Sustentáveis & Sociobiodiversidade',
+                    'desc'                  => '[Descrição a preencher]',
+                    'location'              => '[A preencher]',
+                    'badge_style'           => 'text-white border-[#6E7642] bg-[#6E7642]',
+                    'card_border_style'     => 'border-top: 5px solid #6E7642;',
+                    'badge_inline_style'    => 'background-color: #6E7642; color: #ffffff; border-color: #6E7642;',
+                    'subtitle_inline_style' => 'color: #761F20;',
+                    'btn_inline_style'      => 'color: #761F20;',
+                    'dot_color'             => '#6E7642',
+                    'status'                => 'A preencher'
                 ),
             );
 
-            $needed_gt = max(0, 3 - count($lideres_posts));
+            $rendered_total = count($lideres_posts) + ($julia_rendered ? 1 : 0);
+            $needed_gt = max(0, 4 - $rendered_total);
             for ($i = 0; $i < $needed_gt; $i++) {
+                if ($i === 2 && $julia_rendered) {
+                    continue;
+                }
                 $render_placeholder_card($gt_placeholders[$i]);
             }
             ?>
