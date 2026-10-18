@@ -287,21 +287,39 @@ get_header();
           </p>
         </div>
 
-        <!-- Highlight Box: Plenárias & Metodologia -->
-        <div class="p-6 lg:p-8 bg-surface-container-lowest rounded-2xl shadow-sm border border-border-subtle mb-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-          <div class="md:col-span-8 flex flex-col gap-3">
-            <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Governança Coletiva & Produção Técnica</span>
-            <h3 class="font-title-lg text-title-lg text-ink-primary font-bold">Reuniões Plenárias e Grupos Temáticos (GTs)</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              As plenárias reúnem a totalidade de membros para alinhamentos estratégicos horizontais, enquanto os GTs atuam como polos vivos de produção de conhecimento, desenho de estratégias e articulações práticas para responder aos desafios centrais da Amazônia.
-            </p>
+        <!-- Highlight Box: Governança Coletiva & Metodologia com Imagem do Universo Jurídico -->
+        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-border-subtle mb-10 overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch reveal interactive-card">
+          <div class="lg:col-span-7 p-6 lg:p-8 flex flex-col justify-between gap-6">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Governança Coletiva &amp; Prática Jurídica</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-ink-primary font-bold">Reuniões Plenárias e Grupos Temáticos (GTs)</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                As plenárias reúnem a totalidade de membros para alinhamentos estratégicos horizontais, enquanto os GTs atuam como polos vivos de produção de conhecimento jurídico, desenho de estratégias e articulações práticas para responder aos desafios centrais da Amazônia.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-border-subtle/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span class="font-label-md text-label-md uppercase tracking-wider text-secondary font-bold block">Como Atuar</span>
+                <span class="font-body-sm text-xs text-on-surface-variant">Membros associados integram um ou mais GTs de acordo com sua área técnica de incidência.</span>
+              </div>
+              <a class="interactive-btn arrow-hover font-label-md text-label-md text-primary font-bold hover:text-moss-light inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0" href="#faca-parte">
+                <span>Inscrever-se para um GT</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+            </div>
           </div>
-          <div class="md:col-span-4 flex flex-col gap-3 border-t md:border-t-0 md:border-l border-border-subtle pt-4 md:pt-0 md:pl-6">
-            <span class="font-label-md text-label-md uppercase tracking-wider text-secondary font-bold">Como Atuar</span>
-            <p class="font-body-sm text-body-sm text-on-surface-variant">Membros associados integram um ou mais GTs de acordo com sua área técnica de incidência.</p>
-            <a class="font-label-md text-label-md text-primary font-bold hover:text-moss-light inline-flex items-center gap-1 transition-colors" href="#faca-parte">
-              Inscrever-se para um GT <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </a>
+          <div class="lg:col-span-5 relative min-h-[250px] lg:min-h-full overflow-hidden bg-surface-container-high group">
+            <img src="<?php echo esc_url(aja_asset('fotos/advocacia-juridica-amazonia.jpg')); ?>"
+                 alt="Profissional do Direito em análise jurídica com a Deusa da Justiça (Thêmis) ao fundo"
+                 class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/25 to-transparent flex flex-col justify-end p-5 text-surface-container-lowest">
+              <span class="font-label-sm text-[10px] uppercase tracking-widest text-tertiary-fixed font-bold">Prática Jurídica &amp; Estado de Direito</span>
+              <p class="text-sm font-bold text-surface-container-lowest mt-0.5">Rigor Técnico e Defesa Socioambiental</p>
+              <p class="text-[11px] text-surface-container-highest/90">Construindo teses e garantias para os povos e o bioma amazônico.</p>
+            </div>
           </div>
         </div>
 

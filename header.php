@@ -83,8 +83,13 @@ $is_cur_faca_parte  = is_page(array('faca-parte', 'seja-membro'));
           href="<?php echo esc_url(home_url('/noticias/')); ?>">Notícias</a>
       </nav>
 
-      <!-- 6. FAÇA PARTE (Porta de entrada para quem quer integrar os Grupos Temáticos) -->
+      <!-- 6. FAÇA PARTE & Idiomas (GTranslate) -->
       <div class="flex items-center gap-3">
+        <!-- GTranslate (Desktop) -->
+        <div class="hidden md:flex items-center aja-gtranslate-desktop">
+          <?php echo do_shortcode('[gtranslate]'); ?>
+        </div>
+
         <div class="hidden sm:flex flex-col items-end">
           <a class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg tracking-wider uppercase transition-colors hover:bg-moss-light shadow-sm font-bold group/btn"
             href="<?php echo esc_url(home_url('/faca-parte/')); ?>" title="Porta de entrada para quem quer integrar os Grupos Temáticos">
@@ -141,6 +146,17 @@ $is_cur_faca_parte  = is_page(array('faca-parte', 'seja-membro'));
       <a class="py-2.5 px-3 rounded-lg text-on-surface font-label-lg text-label-lg hover:bg-surface-container transition-colors"
         href="<?php echo esc_url(home_url('/noticias/')); ?>">Notícias</a>
 
+      <!-- Seletor de Idiomas (GTranslate - Mobile) -->
+      <div class="pt-3 pb-1 border-t border-border-subtle/80 flex items-center justify-between">
+        <span class="font-label-sm text-xs text-on-surface-variant font-medium flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px]">translate</span>
+          Idioma / Language:
+        </span>
+        <div class="aja-gtranslate-mobile">
+          <?php echo do_shortcode('[gtranslate]'); ?>
+        </div>
+      </div>
+
       <!-- 6. FAÇA PARTE (Destaque mobile com subtítulo: Porta de entrada para integrar os GTs) -->
       <div class="pt-2 border-t border-border-subtle mt-1 flex flex-col gap-1.5">
         <a class="w-full inline-flex items-center justify-center py-3 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg tracking-wider uppercase font-bold shadow-sm"
@@ -150,6 +166,7 @@ $is_cur_faca_parte  = is_page(array('faca-parte', 'seja-membro'));
         <span class="text-[11px] font-label-sm text-center text-on-surface-variant">
           Porta de entrada para quem quer integrar os Grupos Temáticos
         </span>
+      </div>
     </div>
   </header>
 

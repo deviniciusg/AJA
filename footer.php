@@ -85,7 +85,11 @@
       <div
         class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-md text-surface-container text-body-sm font-body-sm border-t border-surface-container-high/20">
         <p>© <?php echo date('Y'); ?> Aliança Jurídica pela Amazônia. Todos os direitos reservados.</p>
-        <div class="flex items-center gap-space-md font-label-sm text-label-sm">
+        <div class="flex flex-wrap items-center gap-space-md font-label-sm text-label-sm">
+          <div class="aja-gtranslate-footer">
+            <?php echo do_shortcode('[gtranslate]'); ?>
+          </div>
+          <span class="opacity-30">|</span>
           <a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/')); ?>">Início</a>
           <span class="opacity-30">|</span>
           <a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/sobre-nos/')); ?>">Sobre</a>

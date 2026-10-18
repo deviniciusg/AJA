@@ -57,10 +57,11 @@ get_header();
           </div>
         </div>
         <div class="lg:col-span-5 relative min-h-[220px] lg:min-h-full overflow-hidden bg-surface-container-high group">
-          <img src="<?php echo esc_url(aja_asset('fotos/painel-debate-aja.jpg')); ?>" alt="Painel e plenária da Aliança Jurídica pela Amazônia" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/80 via-transparent to-transparent flex flex-col justify-end p-4 text-surface-container-lowest">
-            <span class="font-label-sm text-[10px] uppercase tracking-widest text-tertiary-fixed font-bold">Diálogo &amp; Deliberação</span>
-            <p class="text-xs font-medium text-surface-container-lowest">Reuniões plenárias e deliberação coletiva da rede</p>
+          <img src="<?php echo esc_url(aja_asset('fotos/advocacia-juridica-amazonia.jpg')); ?>" alt="Profissional do Direito em análise jurídica com a Deusa da Justiça (Thêmis) ao fundo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/25 to-transparent flex flex-col justify-end p-5 text-surface-container-lowest">
+            <span class="font-label-sm text-[10px] uppercase tracking-widest text-tertiary-fixed font-bold">Prática Jurídica &amp; Estado de Direito</span>
+            <p class="text-sm font-bold text-surface-container-lowest mt-0.5">Rigor Técnico e Defesa Socioambiental</p>
+            <p class="text-[11px] text-surface-container-highest/90">Construindo teses e garantias para os povos e o bioma amazônico.</p>
           </div>
         </div>
       </div>

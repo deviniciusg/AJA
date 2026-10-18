@@ -398,3 +398,64 @@ header.header-scrolled {
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   7. GTranslate: Integração e Estilização do Seletor de Idiomas
+   ========================================================================== */
+.aja-gtranslate-desktop,
+.aja-gtranslate-mobile,
+.aja-gtranslate-footer {
+  display: inline-flex;
+  align-items: center;
+}
+
+.aja-gtranslate-desktop .gtranslate_wrapper,
+.aja-gtranslate-mobile .gtranslate_wrapper,
+.aja-gtranslate-footer .gtranslate_wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Padronização de selects nativos do GTranslate */
+.aja-gtranslate-desktop select,
+.aja-gtranslate-mobile select,
+.aja-gtranslate-footer select {
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(222, 216, 207, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #172330;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.aja-gtranslate-desktop select:focus,
+.aja-gtranslate-mobile select:focus,
+.aja-gtranslate-footer select:focus {
+  border-color: #416284;
+  box-shadow: 0 0 0 2px rgba(65, 98, 132, 0.15);
+}
+
+/* Ajuste específico para o seletor no rodapé escuro */
+.aja-gtranslate-footer select {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fcfbf9;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.aja-gtranslate-footer select option {
+  background-color: #211d19;
+  color: #fcfbf9;
+}
+
+/* Suporte para seletores com bandeiras e lista suspensa */
+.gtranslate_wrapper img {
+  vertical-align: middle;
+  border-radius: 2px;
+}
+

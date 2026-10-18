@@ -88,12 +88,12 @@ function aja_enqueue_assets() {
         '1.0.0'
     );
 
-    // Script customizado do tema (Menu mobile, filtros de abas, smooth scroll)
+    // Script customizado do tema (Menu mobile, filtros de abas, smooth scroll, regra de tradução AJA)
     wp_enqueue_script(
         'aja-main',
         get_template_directory_uri() . '/assets/js/main.js',
         array(),
-        '1.0.0',
+        '1.1.0',
         true
     );
 }
@@ -1394,5 +1394,24 @@ add_action('wp_head', function() {
         }
     }
 }, 5);
+
+/**
+ * 9. Suporte e Fallback Seguro para o Shortcode [gtranslate]
+ * Garante que se o plugin GTranslate estiver ativo, o plugin assume nativamente;
+ * caso o plugin não esteja ativo no ambiente local, um widget elegante de idiomas é exibido sem erros ou códigos crus.
+ */
+add_action('init', function() {
+    if (!shortcode_exists('gtranslate')) {
+        add_shortcode('gtranslate', function($atts = array()) {
+            return '<div class="gtranslate_wrapper aja-gtranslate-placeholder inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container/80 border border-border-subtle text-xs font-label-sm text-ink-primary select-none" title="Tradução Automática • GTranslate">' .
+                   '<span class="material-symbols-outlined text-[15px] text-secondary">translate</span>' .
+                   '<span class="font-bold text-primary">PT</span>' .
+                   '<span class="text-outline/40">|</span>' .
+                   '<span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" onclick="if(window.doGTranslate){window.doGTranslate(\'pt|en\');}">EN</span>' .
+                   '</div>';
+        });
+    }
+}, 99);
+
 
 
