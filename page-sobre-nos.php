@@ -121,10 +121,10 @@ get_header();
             </div>
             <span class="font-label-sm text-[11px] uppercase tracking-wider text-tertiary font-bold block mb-1">Estrutura Operacional</span>
             <h2 class="font-title-lg text-xl font-bold text-ink-primary group-hover:text-primary transition-colors">
-              Nossa Atuação: Espaços de Construção Contínua
+              Nossa Atuação
             </h2>
             <p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5 leading-relaxed">
-              A atuação da AJA é estruturada em espaços de construção contínua: as reuniões plenárias, que reúnem todos os membros para alinhamento estratégico e tomada de decisões coletivas, e os Grupos Temáticos (GTs), que são o coração do trabalho técnico e colaborativo da rede.
+              Espaços de construção contínua: reuniões plenárias e os três Grupos Temáticos (GTs) da rede.
             </p>
           </div>
           <div class="pt-6 mt-6 border-t border-border-subtle flex items-center gap-1.5 text-tertiary font-bold text-xs uppercase tracking-wider">
@@ -142,10 +142,10 @@ get_header();
             </div>
             <span class="font-label-sm text-[11px] uppercase tracking-wider text-primary font-bold block mb-1">Governança &amp; Estrutura</span>
             <h2 class="font-title-lg text-xl font-bold text-ink-primary group-hover:text-primary transition-colors">
-              Estrutura da Aliança Jurídica pela Amazônia
+              Estrutura da Aliança
             </h2>
             <p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5 leading-relaxed">
-              Responsável pela gestão estratégica contínua, representação institucional, articulação política nacional e coordenação operacional permanente das iniciativas da Aliança.
+              Comitê Executivo, Conselho Consultivo e Líderes de Grupos Temáticos (GTs).
             </p>
           </div>
           <div class="pt-6 mt-6 border-t border-border-subtle flex items-center gap-1.5 text-primary font-bold text-xs uppercase tracking-wider">

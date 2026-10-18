@@ -116,6 +116,7 @@ get_header();
                 href="#newsletter" title="Assinar o Boletim Territorial da AJA">
                 <span class="material-symbols-outlined text-[18px]">forward_to_inbox</span>
                 <span>Newsletter</span>
+              </a>
             </div>
 
             <!-- Card da Foto da Garça para Mobile -->
@@ -136,9 +137,9 @@ get_header();
 
     <!-- SECTION 1: SOBRE NÓS (APRESENTAR QUEM SOMOS) -->
     <section class="w-full py-space-xl bg-surface" id="sobre-nos">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
         <!-- Section Tagline -->
-        <div class="flex items-center gap-3 mb-space-md">
+        <div class="flex items-center gap-3 mb-space-md reveal">
           <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
           <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Apresentar Quem Somos</span>
         </div>
@@ -146,7 +147,7 @@ get_header();
         <!-- Split Editorial Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
           <!-- Left Column: Manifesto & Narrative -->
-          <div class="lg:col-span-7 flex flex-col gap-space-lg">
+          <div class="lg:col-span-7 flex flex-col gap-space-lg reveal">
             <h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg font-medium text-ink-primary leading-tight">
               Uma rede jurídica diversa e representativa pelo fortalecimento do Estado de Direito
             </h2>
