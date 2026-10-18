@@ -4,14 +4,14 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-space-xl">
         <div class="lg:col-span-5 flex flex-col gap-space-md">
           <div class="flex items-center gap-space-md">
-            <img alt="Logotipo AJA" class="w-9 h-9 object-contain rounded" src="<?php echo esc_url(aja_asset('logos/Prancheta 7@3x-8.png')); ?>" />
+            <img alt="Logotipo AJA" class="w-9 h-9 object-contain rounded" src="<?php echo esc_url(aja_asset('logos/logo-azul.png')); ?>" />
             <div class="flex flex-col">
               <span class="font-title-lg text-title-lg text-surface-container-lowest font-bold">AJA</span>
               <span class="font-label-sm text-label-sm uppercase tracking-wider text-river-sky">Aliança Jurídica pela Amazônia</span>
             </div>
           </div>
           <p class="font-body-md text-body-md text-surface-container-high max-w-md">
-            Rede articuladora e colaborativa voltada ao fortalecimento do Estado de Direito, à governança territorial e à justiça socioambiental na Amazônia brasileira.
+            Rede Jurídica voltada à articulação e colaboração de diversos atores em prol do fortalecimento do Estado de Direito, da governança territorial e da justiça socioambiental na Amazônia brasileira.
           </p>
           <div class="flex items-center gap-2 mt-2">
             <span class="w-2 h-2 rounded-full bg-cyan-accent inline-block"></span>
@@ -44,7 +44,6 @@
           <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed-dim font-bold mb-2">Quem Somos</span>
           <ul class="flex flex-col gap-2 font-body-sm text-body-sm text-surface-container-high">
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/sobre-nos/')); ?>">Sobre a Aliança</a></li>
-            <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/sobre-nos/#principios')); ?>">Carta de Princípios</a></li>
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/nossa-historia/')); ?>">Nossa História</a></li>
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/atuacao/')); ?>">Atuação & GTs</a></li>
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/estrutura/')); ?>">Estrutura</a></li>
@@ -58,9 +57,9 @@
           <ul class="flex flex-col gap-2 font-body-sm text-body-sm text-surface-container-high">
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/portfolio/')); ?>">Portfólio / Membros</a></li>
             <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/parcerias/')); ?>">Parceiros Estratégicos</a></li>
-            <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/publicacoes/')); ?>">Publicações & Notas</a></li>
-            <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/editais/')); ?>">Editais & Oportunidades</a></li>
-            <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/noticias/')); ?>">Notícias & Mídia</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/publicacoes/')); ?>">Publicações</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/editais/')); ?>">Editais</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="<?php echo esc_url(home_url('/noticias/')); ?>">Notícias</a></li>
           </ul>
         </div>
 
@@ -110,8 +109,8 @@
 
       <!-- Cabeçalho do Perfil -->
       <div class="p-6 sm:p-7 pb-5 border-b border-border-subtle/80 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left bg-surface-container-low/50">
-        <div id="aja-modal-member-avatar-wrap" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden shrink-0 bg-transparent flex items-center justify-center">
-          <img id="aja-modal-member-img" src="" alt="" class="w-full h-full object-cover object-center hidden" />
+        <div id="aja-modal-member-avatar-wrap" class="w-24 h-24 sm:w-28 sm:h-28 shrink-0 bg-transparent flex items-center justify-center">
+          <img id="aja-modal-member-img" src="" alt="" class="w-full h-full object-contain object-center drop-shadow-sm hidden" />
           <svg id="aja-modal-member-fallback" class="w-12 h-12 text-outline opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
         </div>
 
@@ -303,6 +302,65 @@
       document.addEventListener('DOMContentLoaded', initAjaMemberModal);
     } else {
       initAjaMemberModal();
+    }
+  })();
+
+  // -------------------------------------------------------------
+  // ANIMAÇÕES INSTITUCIONAIS AJA (Scroll Reveal & Hero Effects)
+  // -------------------------------------------------------------
+  (function initAjaAnimations() {
+    function onHeroReady() {
+      var heroGarca = document.querySelector('.hero-garca-img');
+      if (heroGarca) {
+        if (heroGarca.complete) {
+          heroGarca.classList.add('hero-garca-loaded');
+        } else {
+          heroGarca.addEventListener('load', function() {
+            heroGarca.classList.add('hero-garca-loaded');
+          });
+        }
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', onHeroReady);
+    } else {
+      onHeroReady();
+    }
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries, obs) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.08
+      });
+
+      var revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-fade, .accent-line-expand, .stagger-grid');
+      revealElements.forEach(function(el) {
+        observer.observe(el);
+      });
+    } else {
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-fade, .accent-line-expand, .stagger-grid').forEach(function(el) {
+        el.classList.add('is-revealed');
+      });
+    }
+
+    var header = document.querySelector('header');
+    if (header) {
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 20) {
+          header.classList.add('header-scrolled');
+        } else {
+          header.classList.remove('header-scrolled');
+        }
+      }, { passive: true });
     }
   })();
   </script>

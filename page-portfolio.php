@@ -208,61 +208,6 @@ get_header();
         <?php endif; ?>
       </div>
 
-      <!-- BANCO DE MAPEAMENTO & CAPILARIDADE TERRITORIAL -->
-      <div class="p-8 lg:p-12 rounded-2xl bg-surface-container-low border border-border-subtle flex flex-col lg:flex-row items-center justify-between gap-8 mb-12">
-        <div class="flex flex-col gap-3 max-w-2xl">
-          <span class="font-label-sm text-xs uppercase tracking-widest text-primary font-bold">
-            Mapeamento Colaborativo
-          </span>
-          <h3 class="font-headline-md text-2xl font-bold text-ink-primary">
-            Cadastre sua Iniciativa na Rede da AJA
-          </h3>
-          <p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
-            A AJA está estruturando o mapeamento colaborativo de iniciativas, litígios estratégicos, notas técnicas e pareceres produzidos pelos seus membros para conectar demandas territoriais a especialistas.
-          </p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full lg:w-auto">
-          <a class="px-6 py-3.5 rounded-lg bg-primary hover:bg-moss-light text-on-primary font-label-lg text-xs uppercase tracking-wider transition-colors text-center font-bold"
-            href="<?php echo esc_url(home_url('/faca-parte/')); ?>">
-            Cadastrar Iniciativa na Rede
-          </a>
-        </div>
-      </div>
-
-      <!-- Territorial Geographic Banner -->
-      <div class="w-full bg-surface-container-lowest rounded-2xl p-8 border border-border-subtle shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
-        <div class="flex flex-col gap-2 max-w-xl">
-          <span class="font-label-sm text-xs uppercase tracking-widest text-secondary font-bold">Capilaridade Territorial</span>
-          <h3 class="font-headline-md text-xl font-bold text-ink-primary">Capilaridade Territorial & Articulação Ampla</h3>
-          <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
-            Presença ativa e conectada em múltiplos territórios da Amazônia e centros estratégicos do país, articulando defensores populares, centros de pesquisa e incidência direta perante tribunais e órgãos federais.
-          </p>
-        </div>
-        <div class="flex items-center gap-3 flex-wrap justify-end">
-          <div class="px-4 py-3 rounded-lg bg-surface-container-low border border-border-subtle flex items-center gap-3">
-            <span class="w-3 h-3 rounded-full bg-moss-light"></span>
-            <div class="flex flex-col">
-              <span class="font-label-md text-xs font-bold text-on-surface">Polo Norte</span>
-              <span class="font-label-sm text-[11px] text-on-surface-variant">Belém &amp; Macapá</span>
-            </div>
-          </div>
-          <div class="px-4 py-3 rounded-lg bg-surface-container-low border border-border-subtle flex items-center gap-3">
-            <span class="w-3 h-3 rounded-full bg-clay-warm"></span>
-            <div class="flex flex-col">
-              <span class="font-label-md text-xs font-bold text-on-surface">Polo Ocidental</span>
-              <span class="font-label-sm text-[11px] text-on-surface-variant">Manaus &amp; Rio Branco</span>
-            </div>
-          </div>
-          <div class="px-4 py-3 rounded-lg bg-surface-container-low border border-border-subtle flex items-center gap-3">
-            <span class="w-3 h-3 rounded-full bg-secondary"></span>
-            <div class="flex flex-col">
-              <span class="font-label-md text-xs font-bold text-on-surface">Polo Institucional</span>
-              <span class="font-label-sm text-[11px] text-on-surface-variant">Brasília (DF)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 

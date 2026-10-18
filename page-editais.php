@@ -17,12 +17,12 @@ get_header();
           <div class="flex items-center gap-2.5 mb-3">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="font-label-sm text-xs text-on-surface-variant hover:text-primary transition-colors">Início</a>
             <span class="text-xs text-outline">/</span>
-            <span class="font-label-sm text-xs text-secondary font-bold uppercase tracking-wider">Editais &amp; Oportunidades</span>
+            <span class="font-label-sm text-xs text-secondary font-bold uppercase tracking-wider">Editais</span>
           </div>
 
           <div class="flex items-center gap-3 mb-2">
             <span class="w-8 h-[2px] bg-secondary"></span>
-            <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Editais Institucionais</span>
+            <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Editais</span>
           </div>
 
           <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-ink-primary font-bold leading-tight max-w-3xl">
@@ -54,7 +54,7 @@ get_header();
                 "Fortalecendo o debate sobre justiça, democracia socioambiental e Estado de Direito na Amazônia."
               </p>
               <p class="text-surface-container-high text-xs mt-1 font-body-sm opacity-90">
-                Aliança Jurídica pela Amazônia • Editais &amp; Oportunidades
+                Aliança Jurídica pela Amazônia • Editais
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ get_header();
               Nenhuma chamada aberta no momento
             </h2>
             <p class="font-body-md text-base text-on-surface-variant mt-2 max-w-2xl leading-relaxed">
-              Não há editais ou chamadas públicas para submissão de artigos abertas no momento e não há previsão de novas aberturas. Acompanhe os canais oficiais da Aliança Jurídica pela Amazônia para futuras oportunidades e editais institucionais.
+              Não há editais ou chamadas públicas para artigos com inscrições abertas no momento. Novas oportunidades serão comunicadas oportunamente através dos canais oficiais da Aliança.
             </p>
           </div>
         </div>

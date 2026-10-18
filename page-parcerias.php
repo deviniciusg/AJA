@@ -24,7 +24,7 @@ get_header();
       </div>
 
       <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-ink-primary font-bold leading-tight max-w-4xl">
-        Parceiros Estratégicos e Redes Conectadas
+        Parceiros Institucionais
       </h1>
 
       <p class="font-body-lg text-body-md text-on-surface-variant max-w-3xl mt-4 leading-relaxed">

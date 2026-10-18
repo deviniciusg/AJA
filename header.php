@@ -31,7 +31,7 @@ $is_cur_faca_parte  = is_page(array('faca-parte', 'seja-membro'));
         <img alt="Logotipo AJA" class="w-9 h-9 object-contain rounded" src="<?php echo esc_url(aja_asset('logos/logo-azul.png')); ?>" />
         <div class="flex flex-col">
           <span class="font-title-lg text-title-lg tracking-tight text-ink-primary font-bold">AJA</span>
-          <span class="font-label-sm text-label-sm tracking-widest uppercase text-clay-warm">Aliança Jurídica pela Amazônia</span>
+          <span class="font-label-sm text-label-sm tracking-widest uppercase text-primary">Aliança Jurídica pela Amazônia</span>
         </div>
       </a>
 

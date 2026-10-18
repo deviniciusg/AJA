@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="web_standard" name="shell-type" />
+  <title>Nossa Atuação | Aliança Jurídica pela Amazônia (AJA)</title>
+  <link rel="icon" type="image/png" href="assets/logos/logo-azul.png" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    @layer base {
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        overscroll-behavior: none;
+      }
+
+      main > :first-child {
+        margin-top: 0 !important;
+      }
+
+      main > :last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    img.object-cover,
+    .object-cover {
+      height: 100% !important;
+      max-width: none !important;
+      object-fit: cover !important;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#416284",
+            "on-primary": "#ffffff",
+            "primary-container": "#2d4663",
+            "on-primary-container": "#d4e3f5",
+            "primary-fixed": "#a6bfe2",
+            "primary-fixed-dim": "#8eaed7",
+            "on-primary-fixed": "#0c2138",
+            "on-primary-fixed-variant": "#2a4666",
+            "surface-tint": "#416284",
+            "inverse-primary": "#a6bfe2",
+
+            "river-sky": "#a6bfe2",
+            "cyan-accent": "#a6bfe2",
+
+            "secondary": "#771f1f",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#963232",
+            "on-secondary-container": "#ffdada",
+            "secondary-fixed": "#fbdcd9",
+            "secondary-fixed-dim": "#e59b95",
+            "on-secondary-fixed": "#3b0707",
+            "on-secondary-fixed-variant": "#5c1313",
+
+            "tertiary": "#f2b84c",
+            "on-tertiary": "#241800",
+            "tertiary-container": "#705011",
+            "on-tertiary-container": "#fbe3ab",
+            "tertiary-fixed": "#fae2b1",
+            "tertiary-fixed-dim": "#f2b84c",
+            "on-tertiary-fixed": "#291800",
+            "on-tertiary-fixed-variant": "#6b4600",
+
+            "forest-olive": "#52562c",
+            "moss-light": "#6f7740",
+            "earth-dark": "#431d11",
+            "clay-warm": "#825748",
+
+            "canvas-paper": "#f7f4f0",
+            "surface": "#fcfbf9",
+            "background": "#fcfbf9",
+            "surface-dim": "#d9d5ce",
+            "surface-bright": "#fcfbf9",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f5f2ed",
+            "surface-container": "#eeeae3",
+            "surface-container-high": "#e8e3dc",
+            "surface-container-highest": "#e2ddd5",
+            "border-subtle": "#ded8cf",
+            "outline": "#737c86",
+            "outline-variant": "#c2c9d1",
+
+            "ink-primary": "#172330",
+            "on-surface": "#1c2630",
+            "on-surface-variant": "#455260",
+            "on-background": "#1c2630",
+            "inverse-surface": "#2b3744",
+            "inverse-on-surface": "#f1f4f8",
+
+            "error": "#ba1a1a",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-xl": "3rem",
+            "margin": "3rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "gutter-mobile": "1rem",
+            "space-md": "1rem",
+            "margin-mobile": "1.25rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.75rem"
+          },
+          fontFamily: {
+            "body-lg": ["'Neuething Sans'", "sans-serif"],
+            "body-sm": ["'Neuething Sans'", "sans-serif"],
+            "display-lg": ["'Neuething Sans'", "sans-serif"],
+            "label-lg": ["'Neuething Sans'", "sans-serif"],
+            "label-md": ["'Neuething Sans'", "sans-serif"],
+            "headline-md": ["'Neuething Sans'", "sans-serif"],
+            "display-lg-mobile": ["'Neuething Sans'", "sans-serif"],
+            "headline-lg": ["'Neuething Sans'", "sans-serif"],
+            "title-lg": ["'Neuething Sans'", "sans-serif"],
+            "headline-lg-mobile": ["'Neuething Sans'", "sans-serif"],
+            "body-md": ["'Neuething Sans'", "sans-serif"],
+            "title-md": ["'Neuething Sans'", "sans-serif"],
+            "label-sm": ["'Neuething Sans'", "sans-serif"],
+            "headline-sm": ["'Neuething Sans'", "sans-serif"],
+            "sans": ["'Neuething Sans'", "sans-serif"]
+          },
+          fontSize: {
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+            "body-sm": ["13px", { lineHeight: "20px", fontWeight: "400" }],
+            "display-lg": ["56px", { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "600" }],
+            "label-lg": ["13px", { lineHeight: "18px", letterSpacing: "0.04em", fontWeight: "600" }],
+            "label-md": ["11px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "600" }],
+            "headline-md": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "500" }],
+            "display-lg-mobile": ["38px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "500" }],
+            "title-lg": ["19px", { lineHeight: "26px", fontWeight: "600" }],
+            "headline-lg-mobile": ["30px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "500" }],
+            "body-md": ["15px", { lineHeight: "24px", fontWeight: "400" }],
+            "title-md": ["17px", { lineHeight: "24px", fontWeight: "500" }],
+            "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.1em", fontWeight: "600" }],
+            "headline-sm": ["22px", { lineHeight: "28px", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary">
+
+  <!-- HEADER COM NAVEGAÇÃO INSTITUCIONAL -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-border-subtle/50">
+    <div class="h-20 max-w-[1440px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between">
+      <a class="flex items-center gap-space-md group" data-path="inicio" href="code.html">
+        <img alt="Logotipo AJA" class="w-9 h-9 object-contain rounded" src="assets/logos/logo-azul.png" />
+        <div class="flex flex-col">
+          <span class="font-title-lg text-title-lg tracking-tight text-ink-primary font-bold">AJA</span>
+          <span class="font-label-sm text-label-sm tracking-widest uppercase text-primary">Aliança Jurídica pela Amazônia</span>
+        </div>
+      </a>
+
+      <!-- Menu Principal (Desktop) -->
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+        <div class="relative group">
+          <a href="sobre-nos.html"
+             class="flex items-center gap-1 px-3.5 py-2 font-label-lg text-label-lg rounded-lg transition-colors group-hover:text-primary text-primary font-bold bg-surface-container/80">
+            <span>Sobre nós</span>
+            <span class="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:rotate-180">expand_more</span>
+          </a>
+          <div class="absolute top-full left-0 pt-1.5 hidden group-hover:block z-50">
+            <div class="bg-surface-container-lowest rounded-xl shadow-xl border border-border-subtle py-2 min-w-[210px] flex flex-col">
+              <a class="px-4 py-2.5 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center gap-2.5"
+                href="nossa-historia.html">
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                <span>Nossa História</span>
+              </a>
+              <a class="px-4 py-2.5 font-label-md text-label-md uppercase tracking-wider text-primary font-bold bg-surface-container/60 transition-colors flex items-center gap-2.5"
+                href="atuacao.html">
+                <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                <span>Atuação</span>
+              </a>
+              <a class="px-4 py-2.5 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors flex items-center gap-2.5"
+                href="estrutura.html">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                <span>Estrutura</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a class="px-3.5 py-2 font-label-lg text-label-lg rounded-lg transition-colors text-on-surface-variant hover:text-ink-primary hover:bg-surface-container/60"
+          href="code.html#portfolio">Portfólio</a>
+        <a class="px-3.5 py-2 font-label-lg text-label-lg rounded-lg transition-colors text-on-surface-variant hover:text-ink-primary hover:bg-surface-container/60"
+          href="code.html#editais">Editais</a>
+        <a class="px-3.5 py-2 font-label-lg text-label-lg rounded-lg transition-colors text-on-surface-variant hover:text-ink-primary hover:bg-surface-container/60"
+          href="code.html#conhecimento">Publicações</a>
+        <a class="px-3.5 py-2 font-label-lg text-label-lg rounded-lg transition-colors text-on-surface-variant hover:text-ink-primary hover:bg-surface-container/60"
+          href="code.html#noticias">Notícias</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex flex-col items-end">
+          <a class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg tracking-wider uppercase transition-colors hover:bg-moss-light shadow-sm font-bold group/btn"
+            href="code.html#faca-parte" title="Porta de entrada para quem quer integrar os Grupos Temáticos">
+            <span>FAÇA PARTE</span>
+            <span class="material-symbols-outlined ml-1.5 text-[18px] group-hover/btn:translate-x-0.5 transition-transform">arrow_forward</span>
+          </a>
+          <span class="text-[10px] text-on-surface-variant font-label-sm tracking-tight mt-0.5">
+            Porta de entrada para integrar os Grupos Temáticos
+          </span>
+        </div>
+        <div class="flex sm:hidden items-center">
+          <a class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg tracking-wider uppercase font-bold"
+            href="code.html#faca-parte">
+            <span>FAÇA PARTE</span>
+          </a>
+        </div>
+        <button id="mobile-menu-toggle" class="lg:hidden p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" aria-label="Abrir menu de navegação">
+          <span class="material-symbols-outlined text-[26px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-surface-container-lowest border-b border-border-subtle px-margin-mobile py-4 shadow-lg flex flex-col gap-2">
+      <div class="flex flex-col">
+        <a href="sobre-nos.html" class="py-2.5 px-3 rounded-lg text-ink-primary font-bold font-label-lg text-label-lg hover:bg-surface-container transition-colors flex items-center justify-between">
+          <span>Sobre nós</span>
+          <span class="material-symbols-outlined text-[18px] text-outline">expand_more</span>
+        </a>
+        <div class="pl-4 flex flex-col border-l-2 border-primary/20 ml-3 my-1 gap-1">
+          <a class="py-2 px-3 rounded-md text-on-surface-variant font-label-md text-label-md uppercase tracking-wider hover:text-primary hover:bg-surface-container transition-colors"
+            href="nossa-historia.html">Nossa História</a>
+          <a class="py-2 px-3 rounded-md text-primary font-bold font-label-md text-label-md uppercase tracking-wider bg-surface-container transition-colors"
+            href="atuacao.html">Atuação</a>
+          <a class="py-2 px-3 rounded-md text-on-surface-variant font-label-md text-label-md uppercase tracking-wider hover:text-primary hover:bg-surface-container transition-colors"
+            href="estrutura.html">Estrutura</a>
+        </div>
+      </div>
+      <a class="py-2.5 px-3 rounded-lg text-on-surface font-label-lg text-label-lg hover:bg-surface-container transition-colors"
+        href="code.html#portfolio">Portfólio</a>
+      <a class="py-2.5 px-3 rounded-lg text-on-surface font-label-lg text-label-lg hover:bg-surface-container transition-colors"
+        href="code.html#editais">Editais</a>
+      <a class="py-2.5 px-3 rounded-lg text-on-surface font-label-lg text-label-lg hover:bg-surface-container transition-colors"
+        href="code.html#conhecimento">Publicações</a>
+      <a class="py-2.5 px-3 rounded-lg text-on-surface font-label-lg text-label-lg hover:bg-surface-container transition-colors"
+        href="code.html#noticias">Notícias</a>
+      <div class="pt-2 border-t border-border-subtle mt-1 flex flex-col gap-1.5">
+        <a class="w-full inline-flex items-center justify-center py-3 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg tracking-wider uppercase font-bold shadow-sm"
+          href="code.html#faca-parte">
+          FAÇA PARTE
+        </a>
+        <span class="text-[11px] font-label-sm text-center text-on-surface-variant">
+          Porta de entrada para quem quer integrar os Grupos Temáticos
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]">
+
+    <!-- SEÇÃO PRINCIPAL: ATUAÇÃO (PLENÁRIAS, GRUPOS TEMÁTICOS E PIQCTS - FIEL À HOME) -->
+    <section class="w-full py-16 lg:py-20 bg-surface border-b border-border-subtle" id="atuacao">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2.5 mb-4">
+          <a href="code.html" class="font-label-sm text-xs text-on-surface-variant hover:text-primary transition-colors">Início</a>
+          <span class="text-xs text-outline">/</span>
+          <a href="sobre-nos.html" class="font-label-sm text-xs text-on-surface-variant hover:text-primary transition-colors">Sobre nós</a>
+          <span class="text-xs text-outline">/</span>
+          <span class="font-label-sm text-xs text-secondary font-bold uppercase tracking-wider">Atuação</span>
+        </div>
+
+        <div class="flex items-center gap-3 mb-2">
+          <span class="w-8 h-[2px] bg-secondary"></span>
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Estrutura Operacional</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-4">
+          <div>
+            <h1 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-ink-primary font-medium">
+              Nossa Atuação: Espaços de Construção Contínua
+            </h1>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-lg">
+            A atuação da AJA é estruturada em espaços de construção contínua: as reuniões plenárias, que reúnem todos os membros para alinhamento estratégico e tomada de decisões coletivas, e os Grupos Temáticos (GTs), que são o coração do trabalho técnico e colaborativo da rede.
+          </p>
+        </div>
+
+        <!-- Highlight Box: Plenárias & Metodologia com Registro Real -->
+        <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-border-subtle mb-10 overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch">
+          <div class="lg:col-span-7 p-6 lg:p-8 flex flex-col justify-between gap-6">
+            <div class="flex flex-col gap-3">
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Governança Coletiva &amp; Produção Técnica</span>
+              <h2 class="font-title-lg text-title-lg text-ink-primary font-bold">Reuniões Plenárias e Grupos Temáticos (GTs)</h2>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                As plenárias reúnem a totalidade de membros para alinhamentos estratégicos horizontais, enquanto os GTs atuam como polos vivos de produção de conhecimento, desenho de estratégias e articulações práticas para responder aos desafios centrais da Amazônia.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-border-subtle/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <span class="font-body-sm text-xs text-on-surface-variant">Membros associados integram um ou mais GTs conforme sua área de atuação.</span>
+              <a class="font-label-md text-label-md text-primary font-bold hover:text-moss-light inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0" href="code.html#faca-parte">
+                <span>Inscrever-se</span> <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5 relative min-h-[220px] lg:min-h-full overflow-hidden bg-surface-container-high group">
+            <img src="assets/fotos/painel-debate-aja.jpg" alt="Painel e plenária da Aliança Jurídica pela Amazônia" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/80 via-transparent to-transparent flex flex-col justify-end p-4 text-surface-container-lowest">
+              <span class="font-label-sm text-[10px] uppercase tracking-widest text-tertiary-fixed font-bold">Diálogo &amp; Deliberação</span>
+              <p class="text-xs font-medium text-surface-container-lowest">Reuniões plenárias e deliberação coletiva da rede</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARDS DOS 3 GTS COM PALETAS OFICIAIS -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-10">
+          
+          <!-- GT 01: Território, Segurança e Acesso à Justiça -->
+          <div class="bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden border border-border-subtle group"
+               style="border-top: 5px solid #F2B950;">
+            <div class="flex flex-col">
+              <div class="p-6 pb-5 border-b border-border-subtle/80 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(242, 185, 80, 0.16) 0%, rgba(124, 31, 31, 0.05) 100%);">
+                <img src="assets/elementos_web/elemento-escuro-02.png" alt="" class="absolute -right-4 -bottom-4 w-24 h-24 opacity-10 pointer-events-none select-none object-contain" />
+                <div class="flex items-center justify-between gap-2 mb-3 relative z-10">
+                  <span class="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider shadow-2xs"
+                        style="background-color: #F2B950; color: #7C1F1F;">
+                    GT 01
+                  </span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider" style="color: #7C1F1F;">
+                    Território &amp; Segurança
+                  </span>
+                </div>
+                <h3 class="font-title-lg text-title-lg text-ink-primary font-bold leading-snug">
+                  GT de Território, Segurança e Acesso à Justiça
+                </h3>
+              </div>
+
+              <div class="p-6 flex flex-col gap-3 font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-[13.5px]">
+                <p>
+                  Entre as frentes estratégicas da Aliança Jurídica pela Amazônia, o GT de Território, Segurança e Acesso à Justiça atua na construção de respostas integradas para os desafios que envolvem direitos territoriais, segurança pública e garantia de direitos na região.
+                </p>
+                <p>
+                  O grupo trabalha com temas como direitos territoriais, regularização e gestão fundiária, territórios tradicionais e Amazônia urbana, além de segurança pública e enfrentamento a crimes ambientais.
+                </p>
+                <p>
+                  O GT busca discutir e construir estratégias transversais, produzindo conhecimento coletivo, elaborando propostas e articulando respostas integradas. Parte do entendimento de que proteger o território é também proteger vidas e culturas.
+                </p>
+
+                <div class="flex flex-wrap gap-1.5 pt-2">
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(242, 185, 80, 0.18); color: #7C1F1F;">Direitos Territoriais</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(242, 185, 80, 0.18); color: #7C1F1F;">Gestão Fundiária</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(242, 185, 80, 0.18); color: #7C1F1F;">Segurança Pública</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(242, 185, 80, 0.18); color: #7C1F1F;">Crimes Ambientais</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-4 border-t border-surface-container flex items-center justify-between">
+              <a class="font-label-md text-label-md uppercase tracking-wider font-bold inline-flex items-center gap-1.5 transition-colors group/link hover:opacity-85"
+                 style="color: #7C1F1F;"
+                 href="code.html#faca-parte">
+                <span>Integrar este GT</span>
+                <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="w-2.5 h-2.5 rounded-full" style="background-color: #F2B950;"></span>
+            </div>
+          </div>
+
+          <!-- GT 02: Litigância e Ativismo Judicial -->
+          <div class="bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden border border-border-subtle group"
+               style="border-top: 5px solid #406284;">
+            <div class="flex flex-col">
+              <div class="p-6 pb-5 border-b border-border-subtle/80 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(166, 190, 228, 0.22) 0%, rgba(64, 98, 132, 0.06) 100%);">
+                <img src="assets/elementos_web/elemento-escuro-12.png" alt="" class="absolute -right-4 -bottom-4 w-24 h-24 opacity-10 pointer-events-none select-none object-contain" />
+                <div class="flex items-center justify-between gap-2 mb-3 relative z-10">
+                  <span class="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider shadow-2xs"
+                        style="background-color: #A6BEE4; color: #406284;">
+                    GT 02
+                  </span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider" style="color: #406284;">
+                    Incidência Estratégica
+                  </span>
+                </div>
+                <h3 class="font-title-lg text-title-lg text-ink-primary font-bold leading-snug">
+                  GT de Litigância e Ativismo Judicial
+                </h3>
+              </div>
+
+              <div class="p-6 flex flex-col gap-3 font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-[13.5px]">
+                <p>
+                  Para construir espaços de coordenação entre profissionais e organizações que atuam estrategicamente no sistema de justiça, o GT de Litigância e Ativismo Judicial fortalece esse campo por meio da troca de experiências, da construção coletiva de estratégias e do fortalecimento da atuação diante dos desafios socioambientais da Amazônia. Embora a AJA não seja uma organização de litigância, entendemos a importância de fomentar esse debate e fortalecer iniciativas que atuam nessa frente.
+                </p>
+                <p>
+                  O grupo atua na construção de estratégias jurídicas voltadas à justiça climática, ao direito ambiental e à defesa de direitos difusos e coletivos.
+                </p>
+
+                <div class="flex flex-wrap gap-1.5 pt-2">
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(166, 190, 228, 0.25); color: #406284;">Justiça Climática</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(166, 190, 228, 0.25); color: #406284;">Direito Ambiental</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(166, 190, 228, 0.25); color: #406284;">Direitos Difusos</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(166, 190, 228, 0.25); color: #406284;">STF / STJ</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-4 border-t border-surface-container flex items-center justify-between">
+              <a class="font-label-md text-label-md uppercase tracking-wider font-bold inline-flex items-center gap-1.5 transition-colors group/link hover:opacity-85"
+                 style="color: #406284;"
+                 href="code.html#faca-parte">
+                <span>Integrar este GT</span>
+                <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="w-2.5 h-2.5 rounded-full" style="background-color: #406284;"></span>
+            </div>
+          </div>
+
+          <!-- GT 03: Finanças Sustentáveis e Economias da Sociobiodiversidade -->
+          <div class="bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden border border-border-subtle group"
+               style="border-top: 5px solid #6E7642;">
+            <div class="flex flex-col">
+              <div class="p-6 pb-5 border-b border-border-subtle/80 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(110, 118, 66, 0.18) 0%, rgba(118, 31, 32, 0.05) 100%);">
+                <img src="assets/elementos_web/elemento-escuro-03.png" alt="" class="absolute -right-4 -bottom-4 w-24 h-24 opacity-10 pointer-events-none select-none object-contain" />
+                <div class="flex items-center justify-between gap-2 mb-3 relative z-10">
+                  <span class="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider shadow-2xs"
+                        style="background-color: #6E7642; color: #ffffff;">
+                    GT 03
+                  </span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider" style="color: #761F20;">
+                    Sociobiodiversidade
+                  </span>
+                </div>
+                <h3 class="font-title-lg text-title-lg text-ink-primary font-bold leading-snug">
+                  GT de Finanças Sustentáveis e Economias da Sociobiodiversidade
+                </h3>
+              </div>
+
+              <div class="p-6 flex flex-col gap-3 font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-[13.5px]">
+                <p>
+                  Na Aliança Jurídica pela Amazônia, os Grupos Temáticos conectam diferentes áreas para enfrentar desafios estratégicos da região. Um deles é o GT de Finanças Sustentáveis e Economias da Sociobiodiversidade, que atua com direito intelectual e cultural associado à sociobiodiversidade, negócios justos, uso da biodiversidade e do conhecimento tradicional, além de bioeconomia e bens ambientais, como carbono, água e PSA.
+                </p>
+                <p>
+                  O grupo articula o campo jurídico com a realidade econômica dos povos e comunidades tradicionais, construindo estratégias para que a bioeconomia também seja uma economia de justiça. Parte do reconhecimento de que a floresta tem valor e trabalha para que esse valor se traduza em direitos, prosperidade e proteção.
+                </p>
+
+                <div class="flex flex-wrap gap-1.5 pt-2">
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(110, 118, 66, 0.18); color: #761F20;">Conhecimento Tradicional</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(110, 118, 66, 0.18); color: #761F20;">Negócios Justos</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(110, 118, 66, 0.18); color: #761F20;">Créditos de Carbono</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background-color: rgba(110, 118, 66, 0.18); color: #761F20;">PSA &amp; Bioeconomia</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-4 border-t border-surface-container flex items-center justify-between">
+              <a class="font-label-md text-label-md uppercase tracking-wider font-bold inline-flex items-center gap-1.5 transition-colors group/link hover:opacity-85"
+                 style="color: #761F20;"
+                 href="code.html#faca-parte">
+                <span>Integrar este GT</span>
+                <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="w-2.5 h-2.5 rounded-full" style="background-color: #6E7642;"></span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TRANSVERSALIDADE PIQCTS (DESTAQUE INEGOCIÁVEL - FIEL À HOME) -->
+        <div class="w-full bg-surface-container-low rounded-2xl p-8 lg:p-10 border-2 border-primary/20 shadow-sm flex flex-col md:flex-row items-center gap-8">
+          <div class="w-16 h-16 rounded-2xl bg-primary text-surface-container-lowest flex items-center justify-center shrink-0 shadow-md">
+            <span class="material-symbols-outlined text-[36px]">group_work</span>
+          </div>
+          <div class="flex flex-col gap-2 flex-1">
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">
+              Abordagem Transversal Obrigatória
+            </span>
+            <h3 class="font-title-lg text-title-lg text-ink-primary font-bold">
+              Defesa dos Direitos Humanos e Observância aos Direitos dos PIQCTs
+            </h3>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Todos os grupos temáticos adotam uma abordagem transversal de defesa aos Direitos Humanos, garantindo observância aos direitos dos povos indígenas, quilombolas e comunidades tradicionais (PIQCTs) nas discussões e decisões de cada GT — colocando a Amazônia no centro, e não na margem, das soluções jurídicas e institucionais.
+            </p>
+          </div>
+        </div>
+
+        <!-- NAVEGAÇÃO ENTRE SUBSEÇÕES DE SOBRE NÓS -->
+        <div class="mt-16 p-6 rounded-2xl bg-surface-container-low border border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div></div>
+          <div class="flex items-center gap-3">
+            <a href="nossa-historia.html"
+               class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-border-subtle hover:border-secondary text-ink-primary hover:text-secondary font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-1.5">
+              <span>Ver Nossa História</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+            <a href="estrutura.html"
+               class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-1.5">
+              <span>Ver Estrutura</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA FAÇA PARTE NO FINAL DA PÁGINA -->
+    <section class="w-full py-space-xl bg-surface-container border-t border-border-subtle cta-faca-parte-section" id="faca-parte-cta">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+        <div class="bg-surface-container-lowest rounded-3xl p-8 lg:p-14 border border-border-subtle shadow-md relative overflow-hidden">
+          <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-primary/5 pointer-events-none blur-3xl"></div>
+          <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-secondary/5 pointer-events-none blur-3xl"></div>
+          <img src="assets/elementos_web/elemento-escuro-11.png" alt="" class="absolute -right-12 -bottom-12 w-80 h-80 opacity-[0.06] pointer-events-none select-none object-contain" />
+          <img src="assets/elementos_web/elemento-escuro-04.png" alt="" class="absolute -left-12 -top-12 w-64 h-64 opacity-[0.05] pointer-events-none select-none object-contain" />
+
+          <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div class="lg:col-span-7 flex flex-col gap-4">
+              <div class="flex items-center gap-2.5">
+                <span class="w-7 h-[2px] bg-secondary"></span>
+                <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">
+                  Seja Membro
+                </span>
+              </div>
+
+              <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-ink-primary font-bold leading-tight">
+                Faça Parte da Aliança Jurídica pela Amazônia
+              </h2>
+
+              <div class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                <p>
+                  A Aliança Jurídica pela Amazônia é um espaço aberto à colaboração de advogados(as), pesquisadores(as), organizações da sociedade civil, escritórios de advocacia, coletivos jurídicos e clínicas de direitos que compartilham do nosso propósito e dos princípios que orientam nossa atuação.
+                </p>
+                <p>
+                  Se você acredita em uma Amazônia com justiça, integridade territorial e protagonismo dos povos, queremos caminhar junto com você.
+                </p>
+                <p class="font-medium text-ink-primary">
+                  Preencha o formulário de adesão e venha contribuir com esta rede.
+                </p>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 flex flex-col gap-4 bg-surface-container-low p-6 lg:p-8 rounded-2xl border border-border-subtle shadow-xs">
+              <div class="flex items-center justify-between pb-3 border-b border-border-subtle">
+                <span class="px-3 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-xs font-bold uppercase tracking-wider">
+                  Adesão Aberta
+                </span>
+                <span class="text-xs font-semibold text-outline">Formulário Oficial</span>
+              </div>
+
+              <p class="text-xs text-on-surface-variant leading-relaxed">
+                Preencha o formulário de adesão e venha contribuir com esta rede.
+              </p>
+
+              <div class="flex flex-col gap-3 pt-1">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeAuZ5N3FxsVX0HrQ9dhrCqyEPuAmWgR-IOEXm1m35Z_Nxjhg/viewform?usp=send_form"
+                   target="_blank" rel="noopener noreferrer"
+                   class="w-full py-3.5 px-5 rounded-xl bg-primary hover:bg-moss-light text-on-primary font-label-md text-sm uppercase tracking-wider font-bold transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow text-center">
+                  <span>Preencher Formulário de Adesão</span>
+                  <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+                </a>
+
+                <div class="flex items-center gap-2">
+                  <a href="code.html#faca-parte"
+                     class="flex-1 py-2.5 px-3 rounded-lg border border-border-subtle hover:border-primary bg-surface-container-lowest text-ink-primary hover:text-primary font-label-sm text-xs font-bold uppercase tracking-wider text-center transition-colors">
+                    Saiba Mais
+                  </a>
+                  <a href="code.html#contato"
+                     class="flex-1 py-2.5 px-3 rounded-lg border border-border-subtle hover:border-primary bg-surface-container-lowest text-ink-primary hover:text-primary font-label-sm text-xs font-bold uppercase tracking-wider text-center transition-colors">
+                    Fale Conosco
+                  </a>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-border-subtle text-center">
+                <p class="text-[11px] text-outline">
+                  Em caso de dúvidas, entre em contato pelo e-mail <a href="mailto:info@ajamazonia.org" class="text-primary font-semibold hover:underline">info@ajamazonia.org</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer class="w-full bg-earth-dark text-surface-container-lowest border-t border-border-subtle/20">
+    <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin pt-space-xl pb-space-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-space-xl">
+        <div class="lg:col-span-5 flex flex-col gap-space-md">
+          <div class="flex items-center gap-space-md">
+            <img alt="Logotipo AJA" class="w-9 h-9 object-contain rounded" src="assets/logos/logo-azul.png" />
+            <div class="flex flex-col">
+              <span class="font-title-lg text-title-lg text-surface-container-lowest font-bold">AJA</span>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-river-sky">Aliança Jurídica pela Amazônia</span>
+            </div>
+          </div>
+          <p class="font-body-md text-body-md text-surface-container-high max-w-md">
+            Rede Jurídica voltada à articulação e colaboração de diversos atores em prol do fortalecimento do Estado de Direito, da governança territorial e da justiça socioambiental na Amazônia brasileira.
+          </p>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="w-2 h-2 rounded-full bg-cyan-accent inline-block"></span>
+            <span class="font-label-sm text-label-sm text-surface-container-high tracking-wider uppercase">Plataforma de Articulação Ativa</span>
+          </div>
+
+          <div class="flex items-center gap-3 mt-3">
+            <a href="https://www.instagram.com/ajamazonia/" target="_blank" rel="noopener noreferrer"
+              class="w-9 h-9 rounded-lg bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20 flex items-center justify-center text-surface-container-lowest hover:text-white transition-colors"
+              aria-label="Instagram da AJA" title="Instagram">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/alian%C3%A7a-jur%C3%ADdica-pela-amaz%C3%B4nia/?originalSubdomain=br" target="_blank" rel="noopener noreferrer"
+              class="w-9 h-9 rounded-lg bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20 flex items-center justify-center text-surface-container-lowest hover:text-white transition-colors"
+              aria-label="LinkedIn da AJA" title="LinkedIn">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 flex flex-col gap-space-sm">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed-dim font-bold mb-2">Quem Somos</span>
+          <ul class="flex flex-col gap-2 font-body-sm text-body-sm text-surface-container-high">
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="sobre-nos.html">Sobre a Aliança</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="nossa-historia.html">Nossa História</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="atuacao.html">Atuação &amp; GTs</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="estrutura.html">Estrutura</a></li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-2 flex flex-col gap-space-sm">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed-dim font-bold mb-2">Rede &amp; Produção</span>
+          <ul class="flex flex-col gap-2 font-body-sm text-body-sm text-surface-container-high">
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="code.html#portfolio">Portfólio / Membros</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="code.html#parceiros">Parceiros Estratégicos</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="code.html#conhecimento">Publicações</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="code.html#editais">Editais</a></li>
+            <li><a class="hover:text-surface-container-lowest transition-colors" href="code.html#noticias">Notícias</a></li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-3 flex flex-col gap-space-md">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed-dim font-bold">Faça Parte</span>
+          <p class="font-body-sm text-body-sm text-surface-container-high">
+            Espaço aberto para advogados(as), pesquisadores(as), coletivos, clínicas e entidades socioambientais.
+          </p>
+          <div class="flex flex-col gap-2">
+            <a class="inline-flex items-center justify-center px-4 py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded-lg uppercase tracking-wider hover:bg-moss-light transition-colors font-bold text-center shadow-sm"
+              href="code.html#faca-parte">
+              Adesão à Rede AJA
+            </a>
+            <a class="inline-flex items-center justify-center px-4 py-2 bg-surface-container-lowest/10 text-surface-container-lowest font-label-sm text-xs rounded-lg uppercase tracking-wider hover:bg-surface-container-lowest/20 transition-colors font-medium text-center"
+              href="code.html#contato">
+              Fale Conosco
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-md text-surface-container text-body-sm font-body-sm border-t border-surface-container-high/20">
+        <p>© 2026 Aliança Jurídica pela Amazônia. Todos os direitos reservados.</p>
+        <div class="flex items-center gap-space-md font-label-sm text-label-sm">
+          <a class="hover:text-surface-container-lowest transition-colors" href="code.html">Início</a>
+          <span class="opacity-30">|</span>
+          <a class="hover:text-surface-container-lowest transition-colors" href="sobre-nos.html">Sobre</a>
+          <span class="opacity-30">|</span>
+          <a class="hover:text-surface-container-lowest transition-colors" href="code.html#faca-parte">Adesão</a>
+          <span class="opacity-30">|</span>
+          <a class="hover:text-surface-container-lowest transition-colors" href="code.html#contato">Contato</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuBtn = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          mobileMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function (e) {
+          if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+            mobileMenu.classList.add('hidden');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
+

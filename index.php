@@ -32,20 +32,22 @@ get_header();
         ?>
           <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between border border-border-subtle group">
             <div class="flex flex-col">
-              <div class="h-48 overflow-hidden relative bg-surface-container">
-                <?php if (has_post_thumbnail()) : ?>
+              <?php if (has_post_thumbnail()) : ?>
+                <div class="h-48 overflow-hidden relative bg-surface-container">
                   <?php the_post_thumbnail('aja-card-thumb', array('class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105')); ?>
-                <?php else : ?>
-                  <div class="w-full h-full flex flex-col items-center justify-center p-6 text-center select-none">
-                    <span class="material-symbols-outlined text-4xl text-outline mb-1 opacity-60">article</span>
-                    <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">AJA</span>
+                  <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-surface-container-lowest/90 backdrop-blur font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider shadow-sm">
+                    <?php echo esc_html($badge); ?>
+                  </span>
+                </div>
+              <?php endif; ?>
+              <div class="p-6">
+                <?php if (!has_post_thumbnail()) : ?>
+                  <div class="mb-3">
+                    <span class="inline-flex px-2.5 py-1 rounded bg-surface-container font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider shadow-2xs">
+                      <?php echo esc_html($badge); ?>
+                    </span>
                   </div>
                 <?php endif; ?>
-                <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-surface-container-lowest/90 backdrop-blur font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider shadow-sm">
-                  <?php echo esc_html($badge); ?>
-                </span>
-              </div>
-              <div class="p-6">
                 <?php if (!empty($subtitle)) : ?>
                   <span class="font-label-sm text-label-sm text-clay-warm font-semibold block mb-1">
                     <?php echo esc_html($subtitle); ?>

@@ -9,79 +9,47 @@ get_header();
 
 <main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]">
 
-  <!-- HERO DA SUBSEÇÃO ESTRUTURA -->
-  <section class="w-full py-16 lg:py-20 bg-surface-container-low border-b border-border-subtle relative overflow-hidden">
+  <!-- SEÇÃO PRINCIPAL: ESTRUTURA (EXATAMENTE IGUAL À HOME #estrutura) -->
+  <section class="w-full py-space-xl bg-surface border-b border-border-subtle relative overflow-hidden" id="estrutura">
+    <!-- Marca d'água oficial da identidade visual AJA -->
+    <img src="<?php echo esc_url(aja_asset('elementos_web/elemento-escuro-03.png')); ?>" alt="" class="hidden lg:block absolute -left-16 top-16 w-80 h-80 opacity-[0.04] pointer-events-none select-none object-contain" />
     <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-        <div class="lg:col-span-7 flex flex-col justify-center">
-          <div class="flex items-center gap-2.5 mb-3">
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="font-label-sm text-xs text-on-surface-variant hover:text-primary transition-colors">Início</a>
-            <span class="text-xs text-outline">/</span>
-            <a href="<?php echo esc_url(home_url('/sobre-nos/')); ?>" class="font-label-sm text-xs text-on-surface-variant hover:text-primary transition-colors">Sobre nós</a>
-            <span class="text-xs text-outline">/</span>
-            <span class="font-label-sm text-xs text-secondary font-bold uppercase tracking-wider">Estrutura</span>
-          </div>
 
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2.5 mb-4">
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="font-label-sm text-xs text-on-surface-variant hover:text-primary transition-colors">Início</a>
+        <span class="text-xs text-outline">/</span>
+        <a href="<?php echo esc_url(home_url('/sobre-nos/')); ?>" class="font-label-sm text-xs text-on-surface-variant hover:text-primary transition-colors">Sobre nós</a>
+        <span class="text-xs text-outline">/</span>
+        <span class="font-label-sm text-xs text-secondary font-bold uppercase tracking-wider">Estrutura</span>
+      </div>
+
+      <!-- Cabeçalho Principal da Estrutura -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
           <div class="flex items-center gap-3 mb-2">
             <span class="w-8 h-[2px] bg-secondary"></span>
-            <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Subseção • Governança da Rede</span>
+            <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Governança &amp; Estrutura</span>
           </div>
-
-          <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-ink-primary font-bold leading-tight max-w-3xl">
-            Estrutura &amp; Governança da Aliança Jurídica pela Amazônia
+          <h1 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg font-medium text-ink-primary leading-tight">
+            Estrutura da Aliança Jurídica pela Amazônia
           </h1>
-
-          <p class="font-body-lg text-body-md text-on-surface-variant max-w-2xl mt-4 leading-relaxed">
-            A governança da AJA é descentralizada e participativa, articulando coordenação executiva permanente, conselho consultivo pluriepistêmico e lideranças temáticas territoriais.
-          </p>
-
-          <div class="flex flex-wrap items-center gap-2.5 mt-8 pt-6 border-t border-border-subtle/80">
-            <span class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle text-xs font-bold text-ink-primary">
-              🏛️ Comitê Executivo
-            </span>
-            <span class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle text-xs font-bold text-ink-primary">
-              ⚖️ Conselho Consultivo
-            </span>
-            <span class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle text-xs font-bold text-ink-primary">
-              🌳 Líderes de GTs
-            </span>
-          </div>
-        </div>
-
-        <div class="lg:col-span-5">
-          <div class="relative rounded-2xl overflow-hidden shadow-lg border border-border-subtle group h-[360px] sm:h-[420px] lg:h-[440px] bg-earth-dark">
-            <img src="<?php echo esc_url(aja_asset('fotos/pexels-oncy-oni-406315867-37820619.jpg')); ?>"
-                 alt="Bacia hidrográfica amazônica vista do alto em meio à floresta e neblina matinal"
-                 class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/30 to-transparent flex flex-col justify-end p-6 sm:p-7">
-              <span class="px-2.5 py-1 rounded bg-secondary text-white font-label-sm text-[11px] font-bold uppercase tracking-wider w-fit mb-2">Governança Viva</span>
-              <p class="text-white font-title-sm text-sm sm:text-base font-semibold leading-snug">
-                "Uma rede integrada que conecta instâncias deliberativas à imensidão do bioma amazônico."
-              </p>
-              <p class="text-surface-container-high text-xs mt-1 font-body-sm opacity-90">
-                Aliança Jurídica pela Amazônia • Estrutura
-              </p>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- SEÇÃO PRINCIPAL DE INSTÂNCIAS COM ABAS -->
-  <section class="w-full py-16 lg:py-20 bg-surface border-b border-border-subtle" id="instancias">
-    <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
       
       <!-- MENU DE ABAS INTERATIVAS -->
       <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-4 mb-10 border-b border-border-subtle" id="estrutura-tabs-nav">
-        <button type="button" class="estrutura-tab-btn px-4 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-xs uppercase tracking-wider font-bold transition-all duration-200 shadow-sm" data-target="comite">
+        <button type="button" class="estrutura-tab-btn px-4 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-xs uppercase tracking-wider font-bold transition-all duration-200 shadow-sm" data-target="all">
+          📋 Toda a Estrutura
+        </button>
+        <button type="button" class="estrutura-tab-btn px-4 py-2.5 rounded-lg bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-xs uppercase tracking-wider font-bold hover:bg-surface-container-high transition-all duration-200 shadow-sm" data-target="comite">
           🏛️ Comitê Executivo
         </button>
         <button type="button" class="estrutura-tab-btn px-4 py-2.5 rounded-lg bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-xs uppercase tracking-wider font-bold hover:bg-surface-container-high transition-all duration-200 shadow-sm" data-target="conselho">
           ⚖️ Conselho Consultivo
         </button>
         <button type="button" class="estrutura-tab-btn px-4 py-2.5 rounded-lg bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-xs uppercase tracking-wider font-bold hover:bg-surface-container-high transition-all duration-200 shadow-sm" data-target="lideres">
-          🌳 Líderes de cada GT
+          🌳 Líderes de GTs
         </button>
       </div>
 
@@ -143,7 +111,7 @@ get_header();
           $short_bio     = wp_strip_all_tags($best_raw);
           $full_bio_html = wpautop(wp_kses_post($best_raw));
           $has_thumb     = has_post_thumbnail($post_id);
-          $thumb_url     = $has_thumb ? get_the_post_thumbnail_url($post_id, 'aja-square-thumb') : '';
+          $thumb_url     = $has_thumb ? get_the_post_thumbnail_url($post_id, 'full') : '';
 
           // Detecção de paleta oficial de GT (GT 01, GT 02, GT 03)
           $card_border_style     = '';
@@ -153,20 +121,20 @@ get_header();
           $dot_color             = '';
 
           if (!empty($gt_slot)) {
-              $haystack = mb_strtolower($badge . ' ' . $subtitle . ' ' . $title . ' ' . $gt_slot);
-              if (strpos($haystack, 'gt 01') !== false || strpos($haystack, 'gt 1') !== false || strpos($haystack, 'territ') !== false || strpos($haystack, 'lincon') !== false || $gt_slot === 'gt-01') {
-                  $card_border_style     = 'border-top: 5px solid #F2B950;';
-                  $badge_inline_style    = 'background-color: #F2B950; color: #7C1F1F; border-color: #F2B950;';
-                  $subtitle_inline_style = 'color: #7C1F1F;';
-                  $btn_inline_style      = 'color: #7C1F1F;';
-                  $dot_color             = '#F2B950';
-              } elseif (strpos($haystack, 'gt 02') !== false || strpos($haystack, 'gt 2') !== false || strpos($haystack, 'litig') !== false || strpos($haystack, 'marina') !== false || strpos($haystack, 'júlia') !== false || strpos($haystack, 'julia') !== false || $gt_slot === 'gt-02') {
+              $haystack = mb_strtolower($badge . ' ' . $subtitle . ' ' . $title);
+              if (strpos($haystack, 'gt 02') !== false || strpos($haystack, 'gt 2') !== false || strpos($haystack, 'litig') !== false || strpos($haystack, 'marina') !== false || strpos($haystack, 'júlia') !== false || strpos($haystack, 'julia') !== false || $gt_slot === 'gt-02') {
                   $badge                 = 'Co-liderança • GT 02';
                   $card_border_style     = 'border-top: 5px solid #406284;';
                   $badge_inline_style    = 'background-color: #A6BEE4; color: #406284; border-color: #A6BEE4;';
                   $subtitle_inline_style = 'color: #406284;';
                   $btn_inline_style      = 'color: #406284;';
                   $dot_color             = '#406284';
+              } elseif (strpos($haystack, 'gt 01') !== false || strpos($haystack, 'gt 1') !== false || strpos($haystack, 'territ') !== false || strpos($haystack, 'lincon') !== false || $gt_slot === 'gt-01') {
+                  $card_border_style     = 'border-top: 5px solid #F2B950;';
+                  $badge_inline_style    = 'background-color: #F2B950; color: #7C1F1F; border-color: #F2B950;';
+                  $subtitle_inline_style = 'color: #7C1F1F;';
+                  $btn_inline_style      = 'color: #7C1F1F;';
+                  $dot_color             = '#F2B950';
               } else {
                   $card_border_style     = 'border-top: 5px solid #6E7642;';
                   $badge_inline_style    = 'background-color: #6E7642; color: #ffffff; border-color: #6E7642;';
@@ -176,7 +144,7 @@ get_header();
               }
           }
           ?>
-          <div class="aja-member-card cursor-pointer bg-surface-container-lowest border border-border-subtle rounded-xl p-5 flex flex-col justify-between hover:shadow-md hover:border-secondary/60 transition-all duration-300 group"
+          <div class="aja-member-card cursor-pointer bg-surface-container-lowest border border-border-subtle rounded-xl p-5 flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg hover:border-secondary/60 transition-all duration-300 ease-out group"
                <?php if ($card_border_style) : ?>style="<?php echo esc_attr($card_border_style); ?>"<?php endif; ?>
                role="button"
                tabindex="0"
@@ -191,14 +159,14 @@ get_header();
                data-member-link="<?php echo esc_url($link); ?>"
                data-member-img="<?php echo esc_url($thumb_url); ?>">
             <div>
-              <div class="w-full aspect-square rounded-full overflow-hidden mb-4 bg-transparent flex items-center justify-center relative">
+              <div class="w-full aspect-square mb-4 p-1 bg-transparent flex items-center justify-center relative">
                 <?php if ($has_thumb) : ?>
-                  <?php echo get_the_post_thumbnail($post_id, 'aja-square-thumb', array(
-                      'class' => 'w-full h-full object-cover object-center rounded-full group-hover:scale-105 transition-transform duration-500',
+                  <?php echo get_the_post_thumbnail($post_id, 'full', array(
+                      'class' => 'w-full h-full object-contain object-center transition-all duration-300 ease-out group-hover:-translate-y-1.5 group-hover:drop-shadow-md',
                       'alt'   => $title
                   )); ?>
                 <?php else : ?>
-                  <div class="w-full h-full rounded-full flex flex-col items-center justify-center text-outline bg-surface-container">
+                  <div class="w-full h-full rounded-full flex flex-col items-center justify-center text-outline bg-surface-container transition-transform duration-300 ease-out group-hover:-translate-y-1">
                     <svg class="w-16 h-16 opacity-40 mb-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                     <span class="text-[10px] font-bold uppercase tracking-widest text-outline">AJA • Membro</span>
                   </div>
@@ -263,7 +231,7 @@ get_header();
           $btn_inline_style = !empty($item['btn_inline_style']) ? $item['btn_inline_style'] : $subtitle_inline_style;
           $dot_color = !empty($item['dot_color']) ? $item['dot_color'] : '';
           ?>
-          <div class="aja-member-card cursor-pointer bg-surface-container-lowest/80 border-2 border-dashed border-border-subtle hover:border-primary/50 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition-all duration-300 group"
+          <div class="aja-member-card cursor-pointer bg-surface-container-lowest/80 border-2 border-dashed border-border-subtle hover:border-primary/50 rounded-xl p-5 flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-out group"
                <?php if ($card_border_style) : ?>style="<?php echo esc_attr($card_border_style); ?>"<?php endif; ?>
                role="button"
                tabindex="0"
@@ -276,7 +244,7 @@ get_header();
                data-member-subtitle-inline="<?php echo esc_attr($subtitle_inline_style); ?>"
                data-member-location="<?php echo esc_attr(!empty($item['location']) ? $item['location'] : ''); ?>">
             <div>
-              <div class="w-full aspect-square rounded-full mb-4 bg-surface-container flex flex-col items-center justify-center text-outline relative overflow-hidden group-hover:bg-surface-container-high transition-colors">
+              <div class="w-full aspect-square rounded-full mb-4 bg-surface-container flex flex-col items-center justify-center text-outline relative overflow-hidden group-hover:bg-surface-container-high group-hover:-translate-y-1 transition-all duration-300 ease-out">
                 <svg class="w-16 h-16 opacity-35 mb-1 text-on-surface-variant" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                 <span class="text-[10px] font-bold text-ink-primary/70 uppercase tracking-widest bg-surface-container-lowest/90 px-2 py-0.5 rounded shadow-xs">[Foto a preencher]</span>
               </div>
@@ -488,17 +456,17 @@ get_header();
             <?php
             $julia_gt02_placeholder = array(
                 'role'                  => 'Co-liderança • GT 02',
-                'name'                  => 'Júlia',
+                'name'                  => 'Júlia Soares',
                 'subtitle'              => 'GT Litigância e Ativismo Judicial',
-                'desc'                  => '[A preencher]',
-                'location'              => '[A preencher]',
+                'desc'                  => 'Bacharela em Direito pela USP, atua em direitos dos povos indígenas e comunidades tradicionais, participação social e políticas públicas. Analista de Políticas Públicas Jr. no IDEC.',
+                'location'              => 'São Paulo - SP',
                 'badge_style'           => 'text-[#406284] border-[#A6BEE4] bg-[#A6BEE4]',
                 'card_border_style'     => 'border-top: 5px solid #406284;',
                 'badge_inline_style'    => 'background-color: #A6BEE4; color: #406284; border-color: #A6BEE4;',
                 'subtitle_inline_style' => 'color: #406284;',
                 'btn_inline_style'      => 'color: #406284;',
                 'dot_color'             => '#406284',
-                'status'                => 'A preencher'
+                'img'                   => 'assets/Membros/julia-soares.png'
             );
 
             $has_julia_post = false;
@@ -589,20 +557,21 @@ get_header();
 
       <!-- NAVEGAÇÃO ENTRE SUBSEÇÕES DE SOBRE NÓS -->
       <div class="mt-16 p-6 rounded-2xl bg-surface-container-low border border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-outline block">Continue conhecendo a AJA:</span>
-          <h4 class="text-lg font-bold text-ink-primary mt-0.5">Explore as outras subseções institucionais</h4>
-        </div>
         <div class="flex items-center gap-3">
-          <a href="<?php echo esc_url(home_url('/nossa-historia/')); ?>"
-             class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-border-subtle hover:border-secondary text-ink-primary hover:text-secondary font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-1.5">
-            <span>Ver Nossa História</span>
-            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-          </a>
           <a href="<?php echo esc_url(home_url('/atuacao/')); ?>"
              class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-border-subtle hover:border-tertiary text-ink-primary hover:text-tertiary font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-1.5">
-            <span>Ver Atuação &amp; GTs</span>
-            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+            <span>Nossa Atuação</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="<?php echo esc_url(home_url('/sobre-nos/')); ?>"
+             class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-border-subtle hover:border-secondary text-ink-primary hover:text-secondary font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-1.5">
+            <span>Sobre nós</span>
+          </a>
+          <a href="<?php echo esc_url(home_url('/nossa-historia/')); ?>"
+             class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-border-subtle hover:border-secondary text-ink-primary hover:text-secondary font-bold text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-1.5">
+            <span>Nossa História</span>
           </a>
         </div>
       </div>
@@ -633,7 +602,7 @@ get_header();
           this.classList.add('bg-primary', 'text-on-primary');
 
           blocks.forEach(function(block) {
-            if (block.getAttribute('data-instance') === target) {
+            if (target === 'all' || block.getAttribute('data-instance') === target) {
               block.style.display = 'block';
               block.classList.add('animate-fadeIn');
             } else {
@@ -641,11 +610,6 @@ get_header();
             }
           });
         });
-      });
-
-      // Abre a primeira aba por padrão
-      blocks.forEach(function(block, idx) {
-        if (idx !== 0) block.style.display = 'none';
       });
     }
 

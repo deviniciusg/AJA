@@ -48,9 +48,9 @@ get_header();
       <!-- Split Background: Cor Sólida à Esquerda e Foto da Garça em Voo à Direita -->
       <div class="absolute inset-0 z-0 pointer-events-none select-none">
         <!-- Metade Direita: Foto da Garça em Voo (Desktop) -->
-        <div class="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2 xl:w-[52%] h-full overflow-hidden">
+        <div class="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2 xl:w-[52%] h-full overflow-hidden hero-garca-wrap">
           <img alt="Garça em voo sobre as águas amazônicas - Aliança Jurídica pela Amazônia"
-            class="w-full h-full object-cover object-[center_center]"
+            class="w-full h-full object-cover object-[center_center] hero-garca-img"
             src="<?php echo esc_url(aja_asset('home-garca.jpg')); ?>" />
           <!-- Suave transição degradê na borda esquerda para fundir na cor sólida -->
           <div class="absolute inset-y-0 left-0 w-36 xl:w-52 bg-gradient-to-r from-primary via-primary/75 to-transparent"></div>
@@ -62,13 +62,13 @@ get_header();
         <!-- Mobile: Imagem de fundo sutil com véu escuro garantindo contraste total -->
         <div class="lg:hidden absolute inset-0 overflow-hidden">
           <img alt="Garça em voo sobre as águas amazônicas"
-            class="w-full h-full object-cover object-center"
+            class="w-full h-full object-cover object-center hero-garca-img"
             src="<?php echo esc_url(aja_asset('home-garca.jpg')); ?>" />
           <div class="absolute inset-0 bg-primary/90 backdrop-blur-[1px]"></div>
         </div>
 
         <!-- Marca d'água oficial da identidade visual AJA no Hero -->
-        <div class="hidden lg:block absolute left-[-40px] bottom-[-40px] w-96 h-96 pointer-events-none select-none opacity-[0.08]">
+        <div class="hidden lg:block absolute left-[-40px] bottom-[-40px] w-96 h-96 pointer-events-none select-none opacity-[0.08] hero-watermark">
           <img src="<?php echo esc_url(aja_asset('elementos_web/elemento-claro-01.png')); ?>" alt="" class="w-full h-full object-contain" />
         </div>
       </div>
@@ -79,10 +79,10 @@ get_header();
           <!-- Metade da Esquerda (50% / 6 colunas): Textos e Chamadas sobre a cor sólida -->
           <div class="lg:col-span-6 xl:col-span-6 flex flex-col gap-6 max-w-xl xl:max-w-2xl">
             <!-- Header Badge -->
-            <div class="flex flex-wrap items-center gap-3">
+            <div class="flex flex-wrap items-center gap-3 hero-fade-in hero-delay-1">
               <span
                 class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-lowest/15 backdrop-blur-md rounded-lg text-primary-fixed text-label-md font-label-md uppercase tracking-widest border border-white/10">
-                <span class="w-2 h-2 rounded-full bg-cyan-accent animate-pulse"></span>
+                <span class="w-2 h-2 rounded-full bg-cyan-accent radar-pulse"></span>
                 Plataforma de Articulação Jurídica
               </span>
               <span class="text-surface-container-highest/80 text-label-md font-label-md uppercase tracking-wider">
@@ -92,31 +92,30 @@ get_header();
 
             <!-- Main Headline -->
             <h1
-              class="font-display-lg text-display-lg-mobile lg:text-[42px] xl:text-display-lg text-surface-container-lowest font-bold tracking-tight leading-[1.12]">
+              class="font-display-lg text-display-lg-mobile lg:text-[42px] xl:text-display-lg text-surface-container-lowest font-bold tracking-tight leading-[1.12] hero-fade-in hero-delay-2">
               Fortalecendo o <span class="text-tertiary-fixed font-bold">Estado de Direito</span> na Amazônia Brasileira
             </h1>
 
             <!-- Subtitle -->
-            <p class="font-body-lg text-body-lg text-surface-container leading-relaxed">
+            <p class="font-body-lg text-body-lg text-surface-container leading-relaxed hero-fade-in hero-delay-3">
               A Aliança Jurídica pela Amazônia (AJA) é uma rede jurídica diversa e representativa que conecta advogados, pesquisadores, organizações da sociedade civil, clínicas de direito e coletivos de base para potencializar a justiça socioambiental, povos e territórios.
             </p>
 
             <!-- Chamadas & Botões de Ação -->
-            <div class="flex flex-wrap items-center gap-3 pt-2">
-              <a class="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-surface-container-lowest/15 backdrop-blur-md text-surface-container-lowest font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 hover:bg-surface-container-lowest/25 border border-white/20"
+            <div class="flex flex-wrap items-center gap-3 pt-2 hero-fade-in hero-delay-4">
+              <a class="interactive-btn inline-flex items-center justify-center px-5 py-3 rounded-lg bg-surface-container-lowest/15 backdrop-blur-md text-surface-container-lowest font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 hover:bg-surface-container-lowest/25 border border-white/20"
                 href="#sobre-nos">
                 Conheça a AJA
               </a>
-              <a class="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 hover:bg-tertiary-fixed-dim hover:shadow-lg font-bold shadow-md"
+              <a class="interactive-btn arrow-hover inline-flex items-center justify-center px-5 py-3 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 hover:bg-tertiary-fixed-dim hover:shadow-lg font-bold shadow-md"
                 href="#faca-parte">
-                Faça Parte da Rede
+                <span>Faça Parte da Rede</span>
                 <span class="material-symbols-outlined ml-1.5 text-[18px]">arrow_forward</span>
               </a>
-              <a class="inline-flex items-center justify-center px-4 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 border border-white/20 hover:border-white/40 gap-1.5 backdrop-blur-md shadow-sm font-semibold"
+              <a class="interactive-btn inline-flex items-center justify-center px-4 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 border border-white/20 hover:border-white/40 gap-1.5 backdrop-blur-md shadow-sm font-semibold"
                 href="#newsletter" title="Assinar o Boletim Territorial da AJA">
                 <span class="material-symbols-outlined text-[18px]">forward_to_inbox</span>
-                Newsletter
-              </a>
+                <span>Newsletter</span>
             </div>
 
             <!-- Card da Foto da Garça para Mobile -->
@@ -137,10 +136,10 @@ get_header();
 
     <!-- SECTION 1: SOBRE NÓS (APRESENTAR QUEM SOMOS) -->
     <section class="w-full py-space-xl bg-surface" id="sobre-nos">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
         <!-- Section Tagline -->
         <div class="flex items-center gap-3 mb-space-md">
-          <span class="w-8 h-[2px] bg-secondary"></span>
+          <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
           <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Apresentar Quem Somos</span>
         </div>
 
@@ -172,43 +171,30 @@ get_header();
             </blockquote>
           </div>
 
-          <!-- Right Column: Visual & 3 Central Functions -->
-          <div class="lg:col-span-5 flex flex-col gap-6">
-            <div class="relative overflow-hidden rounded-xl bg-surface-container-high h-[340px] shadow-md group">
-              <img alt="Liderança indígena segurando cocar tradicional na canoa em águas amazônicas"
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                src="<?php echo esc_url(aja_asset('fotos/pessoa-segurando-cocar-na-canoa.jpg')); ?>" />
+          <!-- Right Column: Visual & Registros da Rede AJA -->
+          <div class="lg:col-span-5 flex flex-col gap-5 reveal">
+            <!-- Foto Principal: Encontro da Rede AJA -->
+            <div class="relative overflow-hidden rounded-2xl bg-surface-container-high h-[300px] lg:h-[320px] shadow-md group interactive-card">
+              <img alt="Integrantes e parceiros da Aliança Jurídica pela Amazônia reunidos em encontro da rede"
+                class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                src="<?php echo esc_url(aja_asset('fotos/encontro-rede-aja.jpg')); ?>" />
               <div
-                class="absolute inset-0 bg-gradient-to-t from-earth-dark/85 via-earth-dark/30 to-transparent flex flex-col justify-end p-6 text-surface-container-lowest">
-                <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed-dim">Plataforma de Articulação</span>
-                <p class="font-title-md text-title-md font-medium mt-1">Conectando saberes jurídicos e tradicionais nos territórios.</p>
+                class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/35 to-transparent flex flex-col justify-end p-5 text-surface-container-lowest">
+                <span class="font-label-sm text-[11px] uppercase tracking-widest text-primary-fixed-dim font-bold">Plataforma de Articulação</span>
+                <p class="font-title-md text-title-md font-bold mt-1">Integrantes da AJA em encontro da rede</p>
+                <p class="text-xs text-surface-container-highest/90 mt-0.5 leading-snug">Conectando advogados, pesquisadores e organizações pelos direitos territoriais.</p>
               </div>
             </div>
 
-            <!-- 3 Platform Functions Box -->
-            <div class="p-6 bg-surface-container rounded-xl flex flex-col gap-4">
-              <span class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold">
-                As Três Funções da Plataforma
-              </span>
-              <div class="flex flex-col gap-3 font-body-sm text-body-sm text-on-surface">
-                <div class="flex items-start gap-3">
-                  <span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs shrink-0 font-bold mt-0.5">1</span>
-                  <div>
-                    <strong class="text-ink-primary">Apresentar quem somos:</strong> Missão, história, princípios orientadores e governança horizontal.
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs shrink-0 font-bold mt-0.5">2</span>
-                  <div>
-                    <strong class="text-ink-primary">Dar visibilidade a quem faz parte:</strong> Mapeamento da rede, portfólio de ações, coletivos, clínicas e defensores.
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs shrink-0 font-bold mt-0.5">3</span>
-                  <div>
-                    <strong class="text-ink-primary">Abrir caminhos de engajamento:</strong> Adesão à rede, editais, parcerias e produção coletiva de conhecimento.
-                  </div>
-                </div>
+            <!-- Foto Secundária: Diálogos e Debates Estratégicos -->
+            <div class="relative overflow-hidden rounded-2xl bg-surface-container-high h-[210px] shadow-sm group interactive-card">
+              <img alt="Painel de debates e construção coletiva da Aliança Jurídica pela Amazônia"
+                class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                src="<?php echo esc_url(aja_asset('fotos/painel-debate-aja.jpg')); ?>" />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/30 to-transparent flex flex-col justify-end p-4 text-surface-container-lowest">
+                <span class="font-label-sm text-[10px] uppercase tracking-widest text-tertiary-fixed font-bold">Diálogo &amp; Cooperação</span>
+                <p class="text-sm font-bold text-surface-container-lowest">Espaços de construção contínua e incidência política</p>
               </div>
             </div>
           </div>
@@ -218,9 +204,9 @@ get_header();
 
     <!-- SECTION 2: NOSSA HISTÓRIA (MEMÓRIA & CONSTRUÇÃO COLETIVA) -->
     <section class="w-full py-space-xl bg-surface-container border-t border-border-subtle" id="historia">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
         <div class="flex items-center gap-3 mb-space-md">
-          <span class="w-8 h-[2px] bg-primary"></span>
+          <span class="w-8 h-[2px] bg-primary accent-line-expand"></span>
           <span class="font-label-md text-label-md text-primary uppercase tracking-widest font-bold">Origem e Trajetória</span>
         </div>
 
@@ -238,10 +224,16 @@ get_header();
                 "O que podemos fazer juntos para fortalecer a atuação jurídica no combate a tantos conflitos socioambientais e violações de direitos na Amazônia?"
               </p>
             </div>
-            <div class="rounded-xl overflow-hidden shadow-sm">
-              <img alt="Floresta primária com densa vegetação"
-                class="w-full object-cover"
-                src="<?php echo esc_url(aja_asset('fotos/pexels-gustavodenuncio-29759409.jpg')); ?>" />
+            <!-- Registro Histórico: Coquetel de Lançamento da AJA -->
+            <div class="relative rounded-2xl overflow-hidden shadow-md group interactive-card border border-border-subtle bg-surface-container-high">
+              <img alt="Coquetel de lançamento da Aliança Jurídica pela Amazônia"
+                class="w-full h-64 object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                src="<?php echo esc_url(aja_asset('fotos/coquetel-lancamento-aja.jpg')); ?>" />
+              <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/25 to-transparent flex flex-col justify-end p-4 text-surface-container-lowest">
+                <span class="font-label-sm text-[10px] uppercase tracking-widest text-secondary-fixed font-bold">Construção Coletiva</span>
+                <p class="text-sm font-bold text-surface-container-lowest mt-0.5">Coquetel de Lançamento da AJA</p>
+                <p class="text-[11px] text-surface-container-highest/90">Mobilização e integração dos membros fundadores da rede.</p>
+              </div>
             </div>
           </div>
 
@@ -267,12 +259,9 @@ get_header();
             </div>
 
             <div class="p-6 bg-primary text-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-3">
-              <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed font-bold">O Modelo de Aliança Permanente</span>
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed font-bold">O Modelo de Aliança</span>
               <p class="leading-relaxed">
-                Ao longo desse percurso, consolidou-se a compreensão de que a iniciativa deveria se constituir como uma aliança, e não como um projeto isolado ou mesmo uma organização prestadora de serviços. A escolha pelo modelo de aliança reflete uma decisão estratégica: articular atores autônomos, preservar suas identidades institucionais e potencializar, de forma coordenada, as agendas já existentes. A AJA foi concebida como um catalisador político-jurídico, capaz de validar, conectar e amplificar ações, pesquisas e estratégias desenvolvidas por seus membros, fortalecendo sua incidência sistêmica sem centralizar ou substituir iniciativas.
-              </p>
-              <p class="text-surface-container-high text-body-sm leading-relaxed border-t border-white/20 pt-3">
-                Assim, a Aliança Jurídica pela Amazônia se estabelece como um espaço permanente de articulação, diálogo e incidência jurídica, comprometido com a defesa dos direitos humanos, a proteção do bioma amazônico e o fortalecimento das instituições do Sistema de Justiça.
+                A escolha pelo modelo de aliança reflete uma decisão estratégica: articular atores autônomos, preservar suas identidades institucionais e potencializar, de forma coordenada, as agendas já existentes. A AJA foi concebida como um catalisador político-jurídico, capaz de validar, conectar e amplificar ações, pesquisas e estratégias desenvolvidas por seus membros, fortalecendo sua incidência sistêmica sem centralizar ou substituir iniciativas.
               </p>
             </div>
           </div>
@@ -282,9 +271,9 @@ get_header();
 
     <!-- SECTION 3: ATUAÇÃO (PLENÁRIAS, GRUPOS TEMÁTICOS E PIQCTS) -->
     <section class="w-full py-space-xl bg-surface border-t border-border-subtle" id="atuacao">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
         <div class="flex items-center gap-3 mb-2">
-          <span class="w-8 h-[2px] bg-secondary"></span>
+          <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
           <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Estrutura Operacional</span>
         </div>
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-4">
@@ -317,10 +306,10 @@ get_header();
         </div>
 
         <!-- The 3 Thematic Groups (GTs) Cards (Sem Fotos, com Paleta Própria e Lideranças) -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-10 stagger-grid">
           
           <!-- GT 01: Território, Segurança e Acesso à Justiça -->
-          <div class="bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden border border-border-subtle group"
+          <div class="bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden border border-border-subtle group interactive-card card-border-glow"
                style="border-top: 5px solid #F2B950;">
             <div class="flex flex-col">
               <!-- Top Banner Temático Colorido (Sem Foto) -->
@@ -374,7 +363,7 @@ get_header();
           </div>
 
           <!-- GT 02: Litigância e Ativismo Judicial -->
-          <div class="bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden border border-border-subtle group"
+          <div class="bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden border border-border-subtle group interactive-card card-border-glow"
                style="border-top: 5px solid #406284;">
             <div class="flex flex-col">
               <!-- Top Banner Temático Colorido (Sem Foto) -->
@@ -425,7 +414,7 @@ get_header();
           </div>
 
           <!-- GT 03: Finanças Sustentáveis e Economias da Sociobiodiversidade -->
-          <div class="bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden border border-border-subtle group"
+          <div class="bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden border border-border-subtle group interactive-card card-border-glow"
                style="border-top: 5px solid #6E7642;">
             <div class="flex flex-col">
               <!-- Top Banner Temático Colorido (Sem Foto) -->
@@ -490,7 +479,7 @@ get_header();
               Defesa dos Direitos Humanos e Observância aos Direitos dos PIQCTs
             </h3>
             <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              Todos os grupos de trabalho adotam uma abordagem transversal de defesa aos Direitos Humanos, garantindo observância aos direitos dos povos indígenas, quilombolas e comunidades tradicionais (PIQCTs) nas discussões e decisões de cada GT — colocando a Amazônia no centro, e não na margem, das soluções jurídicas e institucionais.
+              Todos os grupos temáticos adotam uma abordagem transversal de defesa aos Direitos Humanos, garantindo observância aos direitos dos povos indígenas, quilombolas e comunidades tradicionais (PIQCTs) nas discussões e decisões de cada GT — colocando a Amazônia no centro, e não na margem, das soluções jurídicas e institucionais.
             </p>
           </div>
         </div>
@@ -501,22 +490,19 @@ get_header();
     <!-- SECTION 4: ESTRUTURA E GOVERNANÇA                              -->
     <!-- ============================================================== -->
     <section class="w-full py-space-xl bg-surface-container-low border-t border-border-subtle scroll-mt-20" id="estrutura">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
 
         <!-- Cabeçalho Principal da Estrutura -->
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
             <div class="flex items-center gap-3 mb-2">
-              <span class="w-8 h-[2px] bg-secondary"></span>
+              <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
               <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Governança &amp; Estrutura</span>
             </div>
             <h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg font-medium text-ink-primary leading-tight">
               Estrutura da Aliança Jurídica pela Amazônia
             </h2>
           </div>
-          <p class="font-body-md text-body-sm text-on-surface-variant max-w-lg leading-relaxed">
-            A governança da AJA é descentralizada e participativa, articulando coordenação executiva permanente, conselho consultivo pluriepistêmico e lideranças temáticas na Amazônia Legal.
-          </p>
         </div>
 
         <!-- Abas Interativas de Navegação da Estrutura -->
@@ -592,7 +578,7 @@ get_header();
             $short_bio     = wp_strip_all_tags($best_raw);
             $full_bio_html = wpautop(wp_kses_post($best_raw));
             $has_thumb     = has_post_thumbnail($post_id);
-            $thumb_url     = $has_thumb ? get_the_post_thumbnail_url($post_id, 'aja-square-thumb') : '';
+            $thumb_url     = $has_thumb ? get_the_post_thumbnail_url($post_id, 'full') : '';
 
             // Detecção de paleta oficial de GT (GT 01, GT 02, GT 03)
             $card_border_style     = '';
@@ -602,20 +588,20 @@ get_header();
             $dot_color             = '';
 
             if (!empty($gt_slot)) {
-                $haystack = mb_strtolower($badge . ' ' . $subtitle . ' ' . $title . ' ' . $gt_slot);
-                if (strpos($haystack, 'gt 01') !== false || strpos($haystack, 'gt 1') !== false || strpos($haystack, 'territ') !== false || strpos($haystack, 'lincon') !== false || $gt_slot === 'gt-01') {
-                    $card_border_style     = 'border-top: 5px solid #F2B950;';
-                    $badge_inline_style    = 'background-color: #F2B950; color: #7C1F1F; border-color: #F2B950;';
-                    $subtitle_inline_style = 'color: #7C1F1F;';
-                    $btn_inline_style      = 'color: #7C1F1F;';
-                    $dot_color             = '#F2B950';
-                } elseif (strpos($haystack, 'gt 02') !== false || strpos($haystack, 'gt 2') !== false || strpos($haystack, 'litig') !== false || strpos($haystack, 'marina') !== false || strpos($haystack, 'júlia') !== false || strpos($haystack, 'julia') !== false || $gt_slot === 'gt-02') {
+                $haystack = mb_strtolower($badge . ' ' . $subtitle . ' ' . $title);
+                if (strpos($haystack, 'gt 02') !== false || strpos($haystack, 'gt 2') !== false || strpos($haystack, 'litig') !== false || strpos($haystack, 'marina') !== false || strpos($haystack, 'júlia') !== false || strpos($haystack, 'julia') !== false || $gt_slot === 'gt-02') {
                     $badge                 = 'Co-liderança • GT 02';
                     $card_border_style     = 'border-top: 5px solid #406284;';
                     $badge_inline_style    = 'background-color: #A6BEE4; color: #406284; border-color: #A6BEE4;';
                     $subtitle_inline_style = 'color: #406284;';
                     $btn_inline_style      = 'color: #406284;';
                     $dot_color             = '#406284';
+                } elseif (strpos($haystack, 'gt 01') !== false || strpos($haystack, 'gt 1') !== false || strpos($haystack, 'territ') !== false || strpos($haystack, 'lincon') !== false || $gt_slot === 'gt-01') {
+                    $card_border_style     = 'border-top: 5px solid #F2B950;';
+                    $badge_inline_style    = 'background-color: #F2B950; color: #7C1F1F; border-color: #F2B950;';
+                    $subtitle_inline_style = 'color: #7C1F1F;';
+                    $btn_inline_style      = 'color: #7C1F1F;';
+                    $dot_color             = '#F2B950';
                 } else {
                     $card_border_style     = 'border-top: 5px solid #6E7642;';
                     $badge_inline_style    = 'background-color: #6E7642; color: #ffffff; border-color: #6E7642;';
@@ -625,7 +611,7 @@ get_header();
                 }
             }
             ?>
-            <div class="aja-member-card cursor-pointer bg-surface-container-lowest border border-border-subtle rounded-xl p-5 flex flex-col justify-between hover:shadow-md hover:border-secondary/60 transition-all duration-300 group"
+            <div class="aja-member-card cursor-pointer bg-surface-container-lowest border border-border-subtle rounded-xl p-5 flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg hover:border-secondary/60 transition-all duration-300 ease-out group interactive-card card-border-glow"
                  <?php if ($card_border_style) : ?>style="<?php echo esc_attr($card_border_style); ?>"<?php endif; ?>
                  role="button"
                  tabindex="0"
@@ -640,14 +626,14 @@ get_header();
                  data-member-link="<?php echo esc_url($link); ?>"
                  data-member-img="<?php echo esc_url($thumb_url); ?>">
               <div>
-                <div class="w-full aspect-square rounded-full overflow-hidden mb-4 bg-transparent flex items-center justify-center relative">
+                <div class="w-full aspect-square mb-4 p-1 bg-transparent flex items-center justify-center relative">
                   <?php if ($has_thumb) : ?>
-                    <?php echo get_the_post_thumbnail($post_id, 'aja-square-thumb', array(
-                        'class' => 'w-full h-full object-cover object-center rounded-full group-hover:scale-105 transition-transform duration-500',
+                    <?php echo get_the_post_thumbnail($post_id, 'full', array(
+                        'class' => 'w-full h-full object-contain object-center transition-all duration-300 ease-out group-hover:-translate-y-1.5 group-hover:drop-shadow-md',
                         'alt'   => $title
                     )); ?>
                   <?php else : ?>
-                    <div class="w-full h-full rounded-full flex flex-col items-center justify-center bg-surface-container-high text-outline">
+                    <div class="w-full h-full rounded-full flex flex-col items-center justify-center bg-surface-container-high text-outline transition-transform duration-300 ease-out group-hover:-translate-y-1">
                       <svg class="w-16 h-16 opacity-40 mb-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                       <span class="text-[11px] font-bold text-ink-primary/60 uppercase tracking-wider">AJA</span>
                     </div>
@@ -712,7 +698,7 @@ get_header();
             $btn_inline_style = !empty($item['btn_inline_style']) ? $item['btn_inline_style'] : $subtitle_inline_style;
             $dot_color = !empty($item['dot_color']) ? $item['dot_color'] : '';
             ?>
-            <div class="aja-member-card cursor-pointer bg-surface-container-lowest/80 border-2 border-dashed border-border-subtle hover:border-primary/50 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition-all duration-300 group"
+            <div class="aja-member-card cursor-pointer bg-surface-container-lowest/80 border-2 border-dashed border-border-subtle hover:border-primary/50 rounded-xl p-5 flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-out group interactive-card"
                  <?php if ($card_border_style) : ?>style="<?php echo esc_attr($card_border_style); ?>"<?php endif; ?>
                  role="button"
                  tabindex="0"
@@ -725,7 +711,7 @@ get_header();
                  data-member-subtitle-inline="<?php echo esc_attr($subtitle_inline_style); ?>"
                  data-member-location="<?php echo esc_attr(!empty($item['location']) ? $item['location'] : ''); ?>">
               <div>
-                <div class="w-full aspect-square rounded-full mb-4 bg-surface-container flex flex-col items-center justify-center text-outline relative overflow-hidden group-hover:bg-surface-container-high transition-colors">
+                <div class="w-full aspect-square rounded-full mb-4 bg-surface-container flex flex-col items-center justify-center text-outline relative overflow-hidden group-hover:bg-surface-container-high group-hover:-translate-y-1 transition-all duration-300 ease-out">
                   <svg class="w-16 h-16 opacity-35 mb-1 text-on-surface-variant" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                   <span class="text-[10px] font-bold text-ink-primary/70 uppercase tracking-widest bg-surface-container-lowest/90 px-2 py-0.5 rounded shadow-xs">[Foto a preencher]</span>
                 </div>
@@ -801,7 +787,7 @@ get_header();
               </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 stagger-grid">
               <?php
               if (!empty($comite_posts)) {
                   foreach ($comite_posts as $cp) {
@@ -940,21 +926,21 @@ get_header();
             </div>
 
             <!-- Grid com 4 colunas dedicadas às lideranças e co-lideranças dos 3 GTs -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-grid">
               <?php
               $julia_gt02_placeholder = array(
                   'role'                  => 'Co-liderança • GT 02',
-                  'name'                  => 'Júlia',
+                  'name'                  => 'Júlia Soares',
                   'subtitle'              => 'GT Litigância e Ativismo Judicial',
-                  'desc'                  => '[A preencher]',
-                  'location'              => '[A preencher]',
+                  'desc'                  => 'Bacharela em Direito pela USP, atua em direitos dos povos indígenas e comunidades tradicionais, participação social e políticas públicas. Analista de Políticas Públicas Jr. no IDEC.',
+                  'location'              => 'São Paulo - SP',
                   'badge_style'           => 'text-[#406284] border-[#A6BEE4] bg-[#A6BEE4]/30',
                   'card_border_style'     => 'border-top: 5px solid #406284;',
                   'badge_inline_style'    => 'background-color: #A6BEE4; color: #406284; border-color: #A6BEE4;',
                   'subtitle_inline_style' => 'color: #406284;',
                   'btn_inline_style'      => 'color: #406284;',
                   'dot_color'             => '#406284',
-                  'status'                => 'A preencher'
+                  'img'                   => 'assets/Membros/julia-soares.png'
               );
 
               $has_julia_post = false;
@@ -1099,10 +1085,10 @@ get_header();
     <!-- SECTION 4 (ATIVA): PORTFÓLIO DE MEMBROS DA AJA (VERSÃO SIMPLIFICADA)      -->
     <!-- ========================================================================= -->
     <section class="w-full py-space-xl bg-surface-container border-t border-border-subtle" id="portfolio">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
         <!-- Section Header -->
         <div class="flex items-center gap-3 mb-2">
-          <span class="w-8 h-[2px] bg-primary"></span>
+          <span class="w-8 h-[2px] bg-primary accent-line-expand"></span>
           <span class="font-label-md text-label-md text-primary uppercase tracking-widest font-bold">Dar Visibilidade a Quem Faz Parte</span>
         </div>
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-4">
@@ -1117,7 +1103,7 @@ get_header();
         </div>
 
         <!-- Bloco Descritivo do Portfólio [A preencher] + Botão para Portfólio Completo -->
-        <div class="bg-surface-container-lowest border-2 border-dashed border-border-subtle rounded-2xl p-8 lg:p-10 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        <div class="bg-surface-container-lowest border-2 border-dashed border-border-subtle rounded-2xl p-8 lg:p-10 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-8 interactive-card">
           <div class="flex flex-col gap-4 max-w-3xl">
             <div class="flex flex-wrap items-center gap-3">
               <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed/40 text-primary border border-primary-fixed text-xs font-bold uppercase tracking-wider">
@@ -1136,7 +1122,7 @@ get_header();
           </div>
 
           <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full lg:w-auto">
-            <a class="px-6 py-4 rounded-lg bg-primary hover:bg-moss-light text-on-primary font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 inline-flex items-center justify-center gap-2 shadow-sm hover:shadow-md text-center font-bold"
+            <a class="interactive-btn arrow-hover px-6 py-4 rounded-lg bg-primary hover:bg-moss-light text-on-primary font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 inline-flex items-center justify-center gap-2 shadow-sm hover:shadow-md text-center font-bold"
               href="<?php echo esc_url(home_url('/portfolio/')); ?>">
               <span>Acessar Portfólio Completo</span>
               <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
@@ -1390,75 +1376,19 @@ get_header();
               </div>
           <?php endif; ?>
         </div>
-
-        <!-- BANCO DE MAPEAMENTO & PORTFÓLIO ESCALÁVEL -->
-        <div class="p-8 lg:p-12 rounded-2xl bg-surface-container-low border border-border-subtle flex flex-col lg:flex-row items-center justify-between gap-8 mb-space-xl">
-          <div class="flex flex-col gap-3 max-w-2xl">
-            <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">
-              Arquitetura Escalável de Informação
-            </span>
-            <h3 class="font-headline-md text-headline-md text-ink-primary font-medium">
-              Mapeamento Contínuo para Criação do Portfólio da Rede
-            </h3>
-            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              A AJA está estruturando o mapeamento colaborativo de iniciativas, litígios estratégicos, notas técnicas e pareceres produzidos pelos seus membros. Uma vitrine pública que dará transparência à incidência jurídica e conectará novas demandas territoriais aos especialistas da rede.
-            </p>
-          </div>
-          <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full lg:w-auto">
-            <a class="px-6 py-3.5 rounded-lg bg-primary hover:bg-moss-light text-on-primary font-label-lg text-label-lg uppercase tracking-wider transition-colors text-center font-bold"
-              href="#faca-parte">
-              Cadastrar Iniciativa na Rede
-            </a>
-          </div>
-        </div>
-
-        <!-- Territorial Geographic Banner -->
-        <div
-          class="w-full bg-surface-container-lowest rounded-xl p-8 border border-border-subtle shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div class="flex flex-col gap-2 max-w-xl">
-            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">Capilaridade Territorial</span>
-            <h3 class="font-headline-md text-headline-md text-ink-primary font-medium">Capilaridade Territorial & Articulação Ampla</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">
-              Presença ativa e conectada em múltiplos territórios da Amazônia e centros estratégicos do país, articulando defensores populares, centros de pesquisa e incidência direta perante tribunais e órgãos federais.
-            </p>
-          </div>
-          <div class="flex items-center gap-3 flex-wrap justify-end">
-            <div class="px-4 py-3 rounded-lg bg-surface-container-low border border-border-subtle flex items-center gap-3">
-              <span class="w-3 h-3 rounded-full bg-moss-light"></span>
-              <div class="flex flex-col">
-                <span class="font-label-md text-label-md font-bold text-on-surface">Polo Norte</span>
-                <span class="font-label-sm text-label-sm text-on-surface-variant">Belém & Macapá</span>
-              </div>
-            </div>
-            <div class="px-4 py-3 rounded-lg bg-surface-container-low border border-border-subtle flex items-center gap-3">
-              <span class="w-3 h-3 rounded-full bg-clay-warm"></span>
-              <div class="flex flex-col">
-                <span class="font-label-md text-label-md font-bold text-on-surface">Polo Ocidental</span>
-                <span class="font-label-sm text-label-sm text-on-surface-variant">Manaus & Rio Branco</span>
-              </div>
-            </div>
-            <div class="px-4 py-3 rounded-lg bg-surface-container-low border border-border-subtle flex items-center gap-3">
-              <span class="w-3 h-3 rounded-full bg-secondary"></span>
-              <div class="flex flex-col">
-                <span class="font-label-md text-label-md font-bold text-on-surface">Polo Institucional</span>
-                <span class="font-label-sm text-label-sm text-on-surface-variant">Brasília (DF)</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
     <!-- SECTION 5: COOPERAÇÃO E PARCEIROS ESTRATÉGICOS -->
     <section class="w-full py-16 bg-surface border-t border-border-subtle" id="parceiros">
       <a id="apoiadores" class="sr-only"></a>
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
         <div class="flex flex-col items-center text-center mb-10">
           <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Articulação Coletiva</span>
-          <h3 class="font-headline-sm text-headline-sm text-ink-primary font-medium mt-1">Parceiros Estratégicos e Redes Conectadas</h3>
+          <h3 class="font-headline-sm text-headline-sm text-ink-primary font-medium mt-1">Parceiros Institucionais</h3>
         </div>
         <!-- Partners Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-stretch py-2">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-stretch py-2 stagger-grid">
           <!-- 1. Amazon Investor Coalition -->
           <a href="https://amazoninvestor.org/" target="_blank" rel="noopener noreferrer"
             class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
@@ -1536,12 +1466,12 @@ get_header();
 
     <!-- SECTION 6: SEJA MEMBRO / FAÇA PARTE -->
     <section class="w-full py-space-xl bg-surface-container border-t border-border-subtle" id="faca-parte">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
           <!-- Guidelines Column -->
           <div class="lg:col-span-6 flex flex-col gap-6">
             <div class="flex items-center gap-3">
-              <span class="w-8 h-[2px] bg-secondary"></span>
+              <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
               <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">
                 Faça Parte • Porta de entrada para integrar os Grupos Temáticos
               </span>
@@ -1571,7 +1501,7 @@ get_header();
 
           <!-- Conversion Action Box -->
           <div class="lg:col-span-6">
-            <div class="bg-surface-container-lowest p-8 lg:p-12 rounded-2xl shadow-sm border border-border-subtle flex flex-col gap-6">
+            <div class="bg-surface-container-lowest p-8 lg:p-12 rounded-2xl shadow-sm border border-border-subtle flex flex-col gap-6 interactive-card">
               <div class="flex items-center justify-between">
                 <span class="px-3 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold uppercase tracking-wider">
                   Adesão Aberta
@@ -1622,16 +1552,16 @@ get_header();
     <!-- SECTION 7: EDITAIS & OPORTUNIDADES (CATEGORIA 2: "editais")                  -->
     <!-- ========================================================================= -->
     <section class="w-full py-space-xl bg-surface border-t border-border-subtle" id="editais">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
         <!-- Section Header -->
         <div class="flex items-center gap-3 mb-2">
-          <span class="w-8 h-[2px] bg-secondary"></span>
-          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Editais &amp; Oportunidades</span>
+          <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
+          <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Editais</span>
         </div>
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-4">
           <div>
             <h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-ink-primary font-medium">
-              Editais e Oportunidades
+              Editais
             </h2>
           </div>
           <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
@@ -1640,7 +1570,7 @@ get_header();
         </div>
 
         <!-- Estado Informativo: Nenhuma chamada aberta no momento -->
-        <div class="p-8 lg:p-12 rounded-2xl bg-surface-container-low border border-border-subtle flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="p-8 lg:p-12 rounded-2xl bg-surface-container-low border border-border-subtle flex flex-col md:flex-row items-center justify-between gap-6 interactive-card">
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 rounded-xl bg-surface-container text-outline flex items-center justify-center shrink-0">
               <span class="material-symbols-outlined text-[28px]">folder_open</span>
@@ -1653,7 +1583,7 @@ get_header();
                 Nenhuma chamada aberta no momento
               </h3>
               <p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-2xl leading-relaxed">
-                Não há editais ou chamadas públicas para artigos com inscrições abertas no momento e não há previsão de novas chamadas. Novas oportunidades serão comunicadas oportunamente através dos canais oficiais da Aliança.
+                Não há editais ou chamadas públicas para artigos com inscrições abertas no momento. Novas oportunidades serão comunicadas oportunamente através dos canais oficiais da Aliança.
               </p>
             </div>
           </div>
@@ -1672,10 +1602,10 @@ get_header();
     <!-- SECTION 8: CONHECIMENTO & PRODUÇÃO INTELECTUAL (CATEGORIA 3: "publicacoes")-->
     <!-- ========================================================================= -->
     <section class="w-full py-space-xl bg-surface-container border-t border-border-subtle" id="conhecimento">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
         <!-- Section Header -->
         <div class="flex items-center gap-3 mb-2">
-          <span class="w-8 h-[2px] bg-secondary"></span>
+          <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
           <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Vitrine de Conhecimento</span>
         </div>
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-4">
@@ -1700,10 +1630,10 @@ get_header();
     <!-- SECTION: NOTÍCIAS & ATUALIDADES DA REDE (CATEGORIA: "noticias") -->
     <!-- ========================================================================= -->
     <section class="w-full py-space-xl bg-surface border-t border-border-subtle" id="noticias">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
         <!-- Section Header -->
         <div class="flex items-center gap-3 mb-2">
-          <span class="w-8 h-[2px] bg-secondary"></span>
+          <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
           <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Comunicação & Atualidades</span>
         </div>
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-4">
@@ -1771,7 +1701,7 @@ get_header();
           </div>
 
           <!-- Grade de Cards de Notícias -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" id="noticias-cards-grid">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter stagger-grid" id="noticias-cards-grid">
             <?php
             while ($noticias_query->have_posts()) : $noticias_query->the_post();
                 $news_id       = get_the_ID();
@@ -1782,9 +1712,8 @@ get_header();
                 $news_btn      = aja_get_post_action_label($news_id, 'Ler Notícia Completa');
                 $news_date     = get_the_date('d \d\e F, Y');
                 $news_excerpt  = get_the_excerpt() ?: wp_trim_words(get_the_content(), 24);
-                $news_thumb    = has_post_thumbnail($news_id) 
-                                 ? get_the_post_thumbnail_url($news_id, 'large') 
-                                 : aja_asset('fotos/corredeira-floresta-pedras.jpg');
+                $has_thumb     = has_post_thumbnail($news_id);
+                $news_thumb    = $has_thumb ? get_the_post_thumbnail_url($news_id, 'large') : '';
 
                 // Categorização para os filtros
                 $text_all = mb_strtolower(get_the_title() . ' ' . $news_badge . ' ' . $news_sub . ' ' . $news_excerpt . ' ' . $news_loc);
@@ -1798,14 +1727,23 @@ get_header();
                 <div class="noticia-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col border border-border-subtle group"
                      data-category="<?php echo esc_attr($filter_cat); ?>"
                      data-search="<?php echo esc_attr($text_all); ?>">
+                  <?php if ($has_thumb && !empty($news_thumb)) : ?>
                   <div class="h-48 overflow-hidden relative">
                     <img alt="<?php echo esc_attr(get_the_title()); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="<?php echo esc_url($news_thumb); ?>" />
                     <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-surface-container-lowest/95 backdrop-blur text-secondary font-label-sm text-[11px] font-bold uppercase tracking-wider shadow-sm">
                       <?php echo esc_html($news_badge); ?>
                     </span>
                   </div>
+                  <?php endif; ?>
                   <div class="p-6 flex flex-col flex-1 justify-between">
                     <div>
+                      <?php if (!$has_thumb || empty($news_thumb)) : ?>
+                      <div class="mb-3">
+                        <span class="inline-flex px-2.5 py-1 rounded bg-surface-container text-secondary font-label-sm text-[11px] font-bold uppercase tracking-wider shadow-2xs">
+                          <?php echo esc_html($news_badge); ?>
+                        </span>
+                      </div>
+                      <?php endif; ?>
                       <div class="flex items-center justify-between text-xs text-on-surface-variant mb-2">
                         <span class="font-label-sm text-clay-warm font-semibold truncate max-w-[60%]"><?php echo esc_html($news_sub); ?></span>
                         <span class="inline-flex items-center gap-1 font-label-sm text-outline shrink-0">
@@ -2016,8 +1954,8 @@ get_header();
 
     <!-- SECTION 9: CONTATO INSTITUCIONAL ("VAMOS CONVERSAR?") -->
     <section class="w-full py-space-xl bg-surface border-t border-border-subtle" id="contato">
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
-        <div class="bg-surface-container-lowest rounded-2xl p-8 lg:p-14 shadow-sm border border-border-subtle">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
+        <div class="bg-surface-container-lowest rounded-2xl p-8 lg:p-14 shadow-sm border border-border-subtle interactive-card">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
             <div class="lg:col-span-6 flex flex-col gap-4">
               <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">Canais Oficiais</span>

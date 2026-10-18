@@ -962,13 +962,15 @@ function aja_render_editais_grid() {
         $badge = get_post_meta($featured_id, '_aja_badge', true) ?: 'Edital Institucional';
         $location = get_post_meta($featured_id, '_aja_location', true) ?: 'Destinada aos Membros da AJA';
         $pdf_url = get_post_meta($featured_id, '_aja_pdf_url', true) ?: 'mailto:info@ajamazonia.org?subject=Submissao%20de%20Artigo%20AJA';
-        $thumb = get_the_post_thumbnail_url($featured_id, 'full') ?: aja_get_asset_url('fotos/corredeira-floresta-pedras.jpg');
+        $thumb = get_the_post_thumbnail_url($featured_id, 'full');
         $content = get_the_excerpt() ?: wp_trim_words(get_the_content(), 45);
         ?>
         <!-- Featured Callout Card: EDITAL INSTITUCIONAL -->
         <div class="w-full relative overflow-hidden text-surface-container-lowest rounded-2xl p-8 lg:p-12 mb-8 shadow-sm flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 group">
             <div class="absolute inset-0 z-0">
+                <?php if (!empty($thumb)) : ?>
                 <img alt="<?php echo esc_attr(get_the_title()); ?>" class="w-full h-full object-cover opacity-25 mix-blend-luminosity scale-105 transition-transform duration-700 group-hover:scale-110" src="<?php echo esc_url($thumb); ?>" />
+                <?php endif; ?>
                 <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary-container/90"></div>
             </div>
             <div class="relative z-10 flex flex-col gap-4 max-w-3xl">
@@ -1225,14 +1227,8 @@ function aja_render_publicacoes_grid($limit = 12) {
                     }
                 }
 
-                if (!$thumb) {
-                    $fallback_thumbs = [
-                        $get_img('fotos/pexels-diego-agudelo-257100874-12577779.jpg'),
-                        $get_img('fotos/pexels-eduardo-amorim-2155150050-33570703.jpg'),
-                        $get_img('fotos/pexels-eliezer-nunes-300283905-26146919.jpg')
-                    ];
-                    $thumb = $fallback_thumbs[$idx % count($fallback_thumbs)];
-                }
+                // Se o post não possui imagem destacada, permanece estritamente sem imagem
+                $has_image = !empty($thumb);
 
                 // Estilo e rótulo do selo de acordo com o eixo
                 $axis_badge_style = 'text-primary';
@@ -1267,14 +1263,23 @@ function aja_render_publicacoes_grid($limit = 12) {
                 <div class="pub-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col border border-border-subtle group"
                      data-axis="<?php echo esc_attr($axis); ?>"
                      data-search="<?php echo esc_attr($search_text); ?>">
+                    <?php if ($has_image) : ?>
                     <div class="h-48 overflow-hidden relative">
                         <img alt="<?php echo esc_attr(get_the_title()); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="<?php echo esc_url($thumb); ?>"/>
                         <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-surface-container-lowest/95 backdrop-blur <?php echo esc_attr($axis_badge_style); ?> font-label-sm text-[11px] font-bold uppercase tracking-wider shadow-sm">
                             <?php echo esc_html($badge_text); ?>
                         </span>
                     </div>
+                    <?php endif; ?>
                     <div class="p-6 flex flex-col flex-1 justify-between">
                         <div>
+                            <?php if (!$has_image) : ?>
+                            <div class="mb-3">
+                                <span class="inline-flex px-2.5 py-1 rounded bg-surface-container <?php echo esc_attr($axis_badge_style); ?> font-label-sm text-[11px] font-bold uppercase tracking-wider shadow-2xs">
+                                    <?php echo esc_html($badge_text); ?>
+                                </span>
+                            </div>
+                            <?php endif; ?>
                             <span class="font-label-sm text-label-sm text-clay-warm font-semibold"><?php echo esc_html($gt_text); ?></span>
                             <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-2">
                                 <a href="<?php echo esc_url(get_permalink()); ?>" class="hover:text-primary transition-colors">
@@ -1301,7 +1306,7 @@ function aja_render_publicacoes_grid($limit = 12) {
             wp_reset_postdata();
         endif;
 
-        // Fallback enriquecido: se houver poucos posts reais cadastrados, adiciona demonstração rica de cada eixo
+        // Fallback demonstrativo (caso não existam posts cadastrados) - respeita a ausência de imagens
         if ($query->post_count < 4) {
             $fallback_pubs = [
                 [
@@ -1314,7 +1319,7 @@ function aja_render_publicacoes_grid($limit = 12) {
                     'loc'   => 'Artigo Científico • 28 págs',
                     'btn'   => 'Ver Artigo',
                     'link'  => home_url('/submissoes/'),
-                    'img'   => $get_img('fotos/pexels-diego-agudelo-257100874-12577779.jpg')
+                    'img'   => ''
                 ],
                 [
                     'axis'  => 'noticias',
@@ -1326,7 +1331,7 @@ function aja_render_publicacoes_grid($limit = 12) {
                     'loc'   => 'Notícia • Outubro 2026',
                     'btn'   => 'Ler Notícia Completa',
                     'link'  => home_url('/submissoes/'),
-                    'img'   => $get_img('fotos/pexels-eduardo-amorim-2155150050-33570703.jpg')
+                    'img'   => ''
                 ],
                 [
                     'axis'  => 'notas',
@@ -1338,7 +1343,7 @@ function aja_render_publicacoes_grid($limit = 12) {
                     'loc'   => 'Nota Técnica • 42 págs',
                     'btn'   => 'Baixar Nota Técnica (PDF)',
                     'link'  => home_url('/submissoes/'),
-                    'img'   => $get_img('fotos/pexels-eliezer-nunes-300283905-26146919.jpg')
+                    'img'   => ''
                 ],
                 [
                     'axis'  => 'dossies',
@@ -1350,7 +1355,7 @@ function aja_render_publicacoes_grid($limit = 12) {
                     'loc'   => 'Dossiê • 64 págs',
                     'btn'   => 'Acessar Dossiê',
                     'link'  => home_url('/submissoes/'),
-                    'img'   => $get_img('fotos/corredeira-floresta-pedras.jpg')
+                    'img'   => ''
                 ],
                 [
                     'axis'  => 'artigos',
@@ -1362,24 +1367,34 @@ function aja_render_publicacoes_grid($limit = 12) {
                     'loc'   => 'Artigo • 16 págs',
                     'btn'   => 'Ver Artigo',
                     'link'  => home_url('/submissoes/'),
-                    'img'   => $get_img('fotos/pexels-diego-agudelo-257100874-12577779.jpg')
+                    'img'   => ''
                 ]
             ];
 
             foreach ($fallback_pubs as $f) :
                 $search_text = esc_attr(mb_strtolower($f['title'] . ' ' . $f['badge'] . ' ' . $f['gt'] . ' ' . $f['desc'] . ' ' . $f['loc'] . ' ' . $f['axis']));
+                $has_f_img = !empty($f['img']);
                 ?>
                 <div class="pub-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col border border-border-subtle group"
                      data-axis="<?php echo esc_attr($f['axis']); ?>"
                      data-search="<?php echo esc_attr($search_text); ?>">
+                    <?php if ($has_f_img) : ?>
                     <div class="h-48 overflow-hidden relative">
                         <img alt="<?php echo esc_attr($f['title']); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="<?php echo esc_url($f['img']); ?>" />
                         <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-surface-container-lowest/95 backdrop-blur <?php echo esc_attr($f['color']); ?> font-label-sm text-[11px] font-bold uppercase tracking-wider shadow-sm">
                             <?php echo esc_html($f['badge']); ?>
                         </span>
                     </div>
+                    <?php endif; ?>
                     <div class="p-6 flex flex-col flex-1 justify-between">
                         <div>
+                            <?php if (!$has_f_img) : ?>
+                            <div class="mb-3">
+                                <span class="inline-flex px-2.5 py-1 rounded bg-surface-container <?php echo esc_attr($f['color']); ?> font-label-sm text-[11px] font-bold uppercase tracking-wider shadow-2xs">
+                                    <?php echo esc_html($f['badge']); ?>
+                                </span>
+                            </div>
+                            <?php endif; ?>
                             <span class="font-label-sm text-label-sm text-clay-warm font-semibold"><?php echo esc_html($f['gt']); ?></span>
                             <h3 class="font-title-lg text-title-lg text-ink-primary font-bold mt-2">
                                 <a href="<?php echo esc_url($f['link']); ?>" class="hover:text-primary transition-colors">

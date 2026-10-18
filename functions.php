@@ -1289,6 +1289,13 @@ add_filter('template_include', function($template) {
         }
     }
 
+    if (is_single()) {
+        $theme_template = locate_template('single.php');
+        if (!empty($theme_template) && file_exists($theme_template)) {
+            return $theme_template;
+        }
+    }
+
     if (is_singular('page')) {
         $post_id = get_the_ID();
         $page_template = get_page_template_slug($post_id);
@@ -1334,6 +1341,30 @@ add_filter('template_include', function($template) {
 if (!function_exists('aja_render_faca_parte_cta')) {
     function aja_render_faca_parte_cta() {
         get_template_part('template-parts/cta-faca-parte');
+    }
+}
+
+/**
+ * Helper para identificação e exibição de autoria de artigos e publicações.
+ * Suporta override institucional via postmeta '_aja_author' para posts assinados por especialistas da rede.
+ */
+if (!function_exists('aja_get_post_author')) {
+    function aja_get_post_author($post_id = null) {
+        if (!$post_id) {
+            $post_id = get_the_ID();
+        }
+        if (!$post_id) {
+            return get_the_author();
+        }
+        $custom_author = get_post_meta($post_id, '_aja_author', true);
+        if (!empty($custom_author)) {
+            return $custom_author;
+        }
+        $author = get_the_author_meta('display_name', get_post_field('post_author', $post_id));
+        if (empty($author) || strpos($author, '@') !== false) {
+            return 'Aliança Jurídica pela Amazônia';
+        }
+        return $author;
     }
 }
 

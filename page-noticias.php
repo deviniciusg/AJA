@@ -135,9 +135,8 @@ get_header();
               $news_btn      = aja_get_post_action_label($news_id, 'Ler Notícia Completa');
               $news_date     = get_the_date('d \d\e F, Y');
               $news_excerpt  = get_the_excerpt() ?: wp_trim_words(get_the_content(), 24);
-              $news_thumb    = has_post_thumbnail($news_id) 
-                               ? get_the_post_thumbnail_url($news_id, 'large') 
-                               : aja_asset('fotos/corredeira-floresta-pedras.jpg');
+              $has_thumb     = has_post_thumbnail($news_id);
+              $news_thumb    = $has_thumb ? get_the_post_thumbnail_url($news_id, 'large') : '';
 
               // Categorização para os filtros
               $text_all = mb_strtolower(get_the_title() . ' ' . $news_badge . ' ' . $news_sub . ' ' . $news_excerpt . ' ' . $news_loc);
@@ -151,14 +150,23 @@ get_header();
               <div class="noticia-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col border border-border-subtle group"
                    data-category="<?php echo esc_attr($filter_cat); ?>"
                    data-search="<?php echo esc_attr($text_all); ?>">
+                <?php if ($has_thumb && !empty($news_thumb)) : ?>
                 <div class="h-48 overflow-hidden relative">
                   <img alt="<?php echo esc_attr(get_the_title()); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="<?php echo esc_url($news_thumb); ?>" />
                   <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-surface-container-lowest/95 backdrop-blur text-secondary font-label-sm text-[11px] font-bold uppercase tracking-wider shadow-sm">
                     <?php echo esc_html($news_badge); ?>
                   </span>
                 </div>
+                <?php endif; ?>
                 <div class="p-6 flex flex-col flex-1 justify-between">
                   <div>
+                    <?php if (!$has_thumb || empty($news_thumb)) : ?>
+                    <div class="mb-3">
+                      <span class="inline-flex px-2.5 py-1 rounded bg-surface-container text-secondary font-label-sm text-[11px] font-bold uppercase tracking-wider shadow-2xs">
+                        <?php echo esc_html($news_badge); ?>
+                      </span>
+                    </div>
+                    <?php endif; ?>
                     <div class="flex items-center justify-between text-xs text-on-surface-variant mb-2">
                       <span class="font-label-sm text-clay-warm font-semibold truncate max-w-[60%]"><?php echo esc_html($news_sub); ?></span>
                       <span class="inline-flex items-center gap-1 font-label-sm text-outline shrink-0">

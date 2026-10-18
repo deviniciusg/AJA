@@ -5,10 +5,10 @@
  */
 ?>
 <section class="w-full py-space-xl bg-surface-container border-t border-border-subtle cta-faca-parte-section" id="faca-parte-cta">
-  <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+  <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
     
     <!-- Caixa Destaque de Conversão -->
-    <div class="bg-surface-container-lowest rounded-3xl p-8 lg:p-14 border border-border-subtle shadow-md relative overflow-hidden">
+    <div class="bg-surface-container-lowest rounded-3xl p-8 lg:p-14 border border-border-subtle shadow-md relative overflow-hidden interactive-card">
       <!-- Elemento Decorativo Sutil de Fundo -->
       <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-primary/5 pointer-events-none blur-3xl"></div>
       <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-secondary/5 pointer-events-none blur-3xl"></div>
@@ -21,7 +21,7 @@
         <!-- Coluna de Texto e Apresentação -->
         <div class="lg:col-span-7 flex flex-col gap-4">
           <div class="flex items-center gap-2.5">
-            <span class="w-7 h-[2px] bg-secondary"></span>
+            <span class="w-7 h-[2px] bg-secondary accent-line-expand"></span>
             <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">
               Seja Membro
             </span>
@@ -54,7 +54,7 @@
           </div>
 
           <p class="text-xs text-on-surface-variant leading-relaxed">
-            Junte-se à Aliança Jurídica pela Amazônia para fortalecer o ecossistema institucional e defender os direitos dos povos e territórios.
+            Preencha o formulário de adesão e venha contribuir com esta rede.
           </p>
 
           <div class="flex flex-col gap-3 pt-1">

@@ -63,7 +63,7 @@ while (have_posts()) : the_post();
       <div class="flex items-center gap-4 text-body-sm font-body-sm text-on-surface-variant pt-2 border-t border-border-subtle">
         <span>Publicado em: <strong><?php echo get_the_date('d/m/Y'); ?></strong></span>
         <span>•</span>
-        <span>Por: <strong><?php the_author(); ?></strong></span>
+        <span>Por: <strong><?php echo esc_html(function_exists('aja_get_post_author') ? aja_get_post_author($post_id) : get_the_author()); ?></strong></span>
       </div>
     </header>
 
