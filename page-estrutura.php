@@ -402,24 +402,24 @@ get_header();
             </div>
           </div>
 
-          <div class="bg-surface-container-lowest border-2 border-dashed border-border-subtle rounded-2xl p-6 sm:p-8 flex flex-col gap-4">
+          <div class="bg-surface-container-lowest border border-border-subtle rounded-2xl p-6 sm:p-8 flex flex-col gap-5 shadow-xs">
             <div class="flex flex-wrap items-center justify-between gap-3">
               <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/40 text-secondary border border-secondary-fixed text-xs font-bold uppercase tracking-wider">
                 <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
                 Conselho em processo de formação
               </span>
-              <span class="text-[11px] uppercase font-semibold text-outline-variant bg-surface-container px-2.5 py-1 rounded">
-                Texto a preencher
-              </span>
             </div>
 
-            <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-3">
-              <p class="font-medium text-ink-primary">
-                O Conselho Consultivo da Aliança Jurídica pela Amazônia (AJA) encontra-se atualmente em processo de formação.
+            <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4">
+              <p>
+                Pensar o Direito a partir da Amazônia exige reunir saberes que raramente se encontram. Por isso o Conselho Consultivo da Aliança Jurídica pela Amazônia (AJA), sua instância de aconselhamento estratégico, reúne juristas, pesquisadores, representantes da sociedade civil e lideranças territoriais de credibilidade reconhecida. O Conselho orienta as prioridades da AJA, emite pareceres sobre temas relevantes e fortalece a atuação da rede em defesa do Estado Democrático de Direito na Amazônia.
               </p>
-              <p class="text-outline italic">
-                [Espaço reservado para texto descritivo sobre o Conselho Consultivo — papel institucional, critérios de composição, diversidade epistêmica e atribuições estratégicas a preencher.]
-              </p>
+              <div class="p-4 rounded-xl bg-surface-container-low border border-border-subtle/80 flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-[22px] shrink-0">info</span>
+                <p class="text-xs text-on-surface-variant font-medium leading-snug">
+                  O Conselho Consultivo está em processo de formação, e sua composição será divulgada em breve.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -458,7 +458,7 @@ get_header();
                 'role'                  => 'Co-liderança • GT 02',
                 'name'                  => 'Júlia Soares',
                 'subtitle'              => 'GT Litigância e Ativismo Judicial',
-                'desc'                  => 'Bacharela em Direito pela USP, atua em direitos dos povos indígenas e comunidades tradicionais, participação social e políticas públicas. Analista de Políticas Públicas Jr. no IDEC.',
+                'desc'                  => 'Advogada, mestre e doutoranda em Direito pela USP. Pesquisadora vinculada à FLACSO Argentina e Advocacy na Amazon Underworld. Coordenadora Jurídica do Instituto Internacional ARAYARA e do NDCCult/USP.',
                 'location'              => 'São Paulo - SP',
                 'badge_style'           => 'text-[#406284] border-[#A6BEE4] bg-[#A6BEE4]',
                 'card_border_style'     => 'border-top: 5px solid #406284;',

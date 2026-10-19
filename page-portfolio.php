@@ -51,13 +51,13 @@ get_header();
 
         <div class="lg:col-span-5">
           <div class="relative rounded-2xl overflow-hidden shadow-lg border border-border-subtle group h-[360px] sm:h-[420px] lg:h-[440px] bg-earth-dark">
-            <img src="<?php echo esc_url(aja_asset('fotos/crianca-na-canoa.jpg')); ?>"
-                 alt="Criança ribeirinha em canoa de madeira às margens do rio na Amazônia"
+            <img src="<?php echo esc_url(aja_asset('fotos/portfolio-membros-rede.jpg')); ?>"
+                 alt="Membros e parceiros da Aliança Jurídica pela Amazônia reunidos em encontro da rede"
                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/30 to-transparent flex flex-col justify-end p-6 sm:p-7">
-              <span class="px-2.5 py-1 rounded bg-primary text-white font-label-sm text-[11px] font-bold uppercase tracking-wider w-fit mb-2">Futuro dos Territórios</span>
+              <span class="px-2.5 py-1 rounded bg-primary text-white font-label-sm text-[11px] font-bold uppercase tracking-wider w-fit mb-2">Quem Faz Parte</span>
               <p class="text-white font-title-sm text-sm sm:text-base font-semibold leading-snug">
-                "Nossa articulação jurídica existe para salvaguardar o futuro das presentes e próximas gerações amazônidas."
+                "Uma rede viva e colaborativa de profissionais comprometidos com a defesa dos povos e territórios da Amazônia."
               </p>
               <p class="text-surface-container-high text-xs mt-1 font-body-sm opacity-90">
                 Aliança Jurídica pela Amazônia • Membros &amp; Coletivos
@@ -72,20 +72,20 @@ get_header();
   <!-- SEÇÃO ATIVA: DESCRIÇÃO DO PORTFÓLIO DE MEMBROS DA AJA (VERSÃO SIMPLIFICADA) -->
   <section class="w-full py-16 lg:py-20 bg-surface-container border-b border-border-subtle" id="portfolio">
     <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
-      <div class="bg-surface-container-lowest border-2 border-dashed border-border-subtle rounded-2xl p-8 lg:p-10 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+      <div class="bg-surface-container-lowest border border-border-subtle rounded-2xl p-8 lg:p-10 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-8">
         <div class="flex flex-col gap-4 max-w-3xl">
           <div class="flex flex-wrap items-center gap-3">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed/40 text-primary border border-primary-fixed text-xs font-bold uppercase tracking-wider">
               Portfólio de Membros da AJA
             </span>
-            <span class="text-[11px] uppercase font-semibold text-outline-variant bg-surface-container px-2.5 py-1 rounded">
-              Texto a preencher
-            </span>
           </div>
 
           <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-3">
-            <p class="text-outline italic">
-              [A preencher — Espaço reservado para o texto institucional que descreve o Portfólio de Membros da Aliança Jurídica pela Amazônia (AJA), sua diversidade de atuação e capilaridade nos territórios.]
+            <p class="font-bold text-ink-primary">
+              Na Amazônia, defender direitos é trabalho de muitas mãos.
+            </p>
+            <p>
+              O Portfólio de Membros da Aliança Jurídica pela Amazônia (AJA) reúne os diferentes atores que compõem a rede: advogadas e advogados, pesquisadores, professores, defensores de direitos, lideranças, comunicadores e organizações da sociedade civil que atuam em toda a Amazônia Legal. Cada perfil apresenta quem é o membro, onde atua, quais são suas áreas de trabalho e como entrar em contato. É um espaço para conhecer quem constrói a defesa de direitos na região e encontrar profissionais e instituições com quem dialogar, colaborar e construir parcerias pela proteção dos territórios, pela justiça socioambiental e pela garantia de direitos dos povos e comunidades da Amazônia.
             </p>
           </div>
         </div>
@@ -93,7 +93,7 @@ get_header();
         <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full lg:w-auto">
           <a class="px-6 py-4 rounded-lg bg-primary hover:bg-moss-light text-on-primary font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 inline-flex items-center justify-center gap-2 shadow-sm hover:shadow-md text-center font-bold"
             href="#faca-parte">
-            <span>Acessar Portfólio Completo</span>
+            <span>Acesse o portfólio completo</span>
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
           </a>
         </div>

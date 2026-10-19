@@ -400,7 +400,7 @@ header.header-scrolled {
 }
 
 /* ==========================================================================
-   7. GTranslate: Integração e Estilização do Seletor de Idiomas
+   7. GTranslate: Integração e Estilização Compacta do Seletor de Idiomas
    ========================================================================== */
 .aja-gtranslate-desktop,
 .aja-gtranslate-mobile,
@@ -411,20 +411,190 @@ header.header-scrolled {
 
 .aja-gtranslate-desktop .gtranslate_wrapper,
 .aja-gtranslate-mobile .gtranslate_wrapper,
-.aja-gtranslate-footer .gtranslate_wrapper {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.aja-gtranslate-footer .gtranslate_wrapper,
+.gtranslate_wrapper,
+#gt_float_wrapper {
+  display: inline-flex !important;
+  align-items: center !important;
 }
 
-/* Padronização de selects nativos do GTranslate */
+/* 7.1 Botão Flutuante Compacto (GTranslate Float Switcher) */
+.gtranslate_wrapper .gt_float_switcher,
+#gt_float_wrapper .gt_float_switcher {
+  font-family: inherit !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(222, 216, 207, 0.9) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s ease !important;
+  vertical-align: middle !important;
+}
+
+.gtranslate_wrapper .gt_float_switcher:hover,
+#gt_float_wrapper .gt_float_switcher:hover {
+  border-color: #416284 !important;
+  box-shadow: 0 2px 4px rgba(65, 98, 132, 0.12) !important;
+}
+
+/* Botão selecionado ativo (tamanho compacto e alinhamento elegante) */
+.gtranslate_wrapper .gt_float_switcher .gt-selected {
+  background-color: transparent !important;
+  border-radius: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.gtranslate_wrapper .gt_float_switcher .gt-selected .gt-current-lang {
+  box-sizing: border-box !important;
+  height: 28px !important;
+  padding: 0 7px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  color: #172330 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+}
+
+/* Miniatura da bandeira */
+.gtranslate_wrapper .gt_float_switcher img,
+.gtranslate_wrapper .gt_options a img {
+  width: 16px !important;
+  height: 11px !important;
+  max-width: 16px !important;
+  max-height: 11px !important;
+  object-fit: cover !important;
+  margin: 0 !important;
+  border-radius: 2px !important;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25) !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+/* Código do idioma */
+.gtranslate_wrapper .gt_float_switcher .gt-selected .gt-current-lang span.gt-lang-code {
+  position: static !important;
+  top: 0 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  color: #172330 !important;
+}
+
+/* Seta discreta do seletor */
+.gtranslate_wrapper .gt_float_switcher .gt-selected .gt-current-lang span.gt_float_switcher-arrow {
+  display: inline-block !important;
+  width: 10px !important;
+  height: 12px !important;
+  background-size: 7px !important;
+  margin-left: 1px !important;
+}
+
+/* Menu Dropdown de opções compacto */
+.gtranslate_wrapper .gt_float_switcher .gt_options,
+#gt_float_wrapper .gt_float_switcher .gt_options {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(222, 216, 207, 0.9) !important;
+  border-radius: 6px 6px 0 0 !important;
+  max-width: none !important;
+  min-width: 100% !important;
+  width: auto !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+.gtranslate_wrapper .gt_float_switcher .gt_options.gt-open,
+#gt_float_wrapper .gt_float_switcher .gt_options.gt-open {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Oculta o idioma atual da lista (pois já está selecionado) */
+.gtranslate_wrapper .gt_float_switcher .gt_options a.gt-current,
+#gt_float_wrapper .gt_float_switcher .gt_options a.gt-current {
+  display: none !important;
+}
+
+/* Exibe a opção alternativa com alinhamento, ícone e tipografia elegantes */
+.gtranslate_wrapper .gt_float_switcher .gt_options a:not(.gt-current),
+#gt_float_wrapper .gt_float_switcher .gt_options a:not(.gt-current) {
+  padding: 5px 8px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #172330 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+.gtranslate_wrapper .gt_float_switcher .gt_options a:hover {
+  background-color: #f4efe9 !important;
+  color: #416284 !important;
+}
+
+/* 7.2 Estilo específico para o Rodapé Escuro */
+.aja-gtranslate-footer .gtranslate_wrapper .gt_float_switcher,
+.aja-gtranslate-footer #gt_float_wrapper .gt_float_switcher {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+}
+
+.aja-gtranslate-footer .gtranslate_wrapper .gt_float_switcher:hover,
+.aja-gtranslate-footer #gt_float_wrapper .gt_float_switcher:hover {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.aja-gtranslate-footer .gtranslate_wrapper .gt_float_switcher .gt-selected .gt-current-lang {
+  color: #fcfbf9 !important;
+}
+
+.aja-gtranslate-footer .gtranslate_wrapper .gt_float_switcher .gt-selected .gt-current-lang span.gt-lang-code {
+  color: #fcfbf9 !important;
+}
+
+.aja-gtranslate-footer .gtranslate_wrapper .gt_float_switcher .gt-selected .gt-current-lang span.gt_float_switcher-arrow {
+  filter: invert(1) brightness(1.5) !important;
+}
+
+.aja-gtranslate-footer .gtranslate_wrapper .gt_float_switcher .gt_options {
+  background: #211d19 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.aja-gtranslate-footer .gtranslate_wrapper .gt_float_switcher .gt_options a:not(.gt-current) {
+  color: #fcfbf9 !important;
+}
+
+.aja-gtranslate-footer .gtranslate_wrapper .gt_float_switcher .gt_options a:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+}
+
+/* 7.3 Estilo específico para o Menu Mobile */
+.aja-gtranslate-mobile .gtranslate_wrapper .gt_float_switcher {
+  box-shadow: none !important;
+  border-color: rgba(222, 216, 207, 0.9) !important;
+}
+
+/* 7.4 Compatibilidade com selects nativos caso configurado em outro modo */
 .aja-gtranslate-desktop select,
 .aja-gtranslate-mobile select,
 .aja-gtranslate-footer select {
   font-family: inherit;
-  font-size: 13px;
-  line-height: 1.4;
-  padding: 4px 8px;
+  font-size: 11px;
+  line-height: 1.2;
+  height: 28px;
+  padding: 2px 6px;
   border-radius: 6px;
   border: 1px solid rgba(222, 216, 207, 0.9);
   background-color: rgba(255, 255, 255, 0.95);
@@ -441,7 +611,6 @@ header.header-scrolled {
   box-shadow: 0 0 0 2px rgba(65, 98, 132, 0.15);
 }
 
-/* Ajuste específico para o seletor no rodapé escuro */
 .aja-gtranslate-footer select {
   background-color: rgba(255, 255, 255, 0.08);
   color: #fcfbf9;
@@ -451,11 +620,5 @@ header.header-scrolled {
 .aja-gtranslate-footer select option {
   background-color: #211d19;
   color: #fcfbf9;
-}
-
-/* Suporte para seletores com bandeiras e lista suspensa */
-.gtranslate_wrapper img {
-  vertical-align: middle;
-  border-radius: 2px;
 }
 

@@ -85,7 +85,7 @@ function aja_enqueue_assets() {
         'aja-style',
         get_stylesheet_uri(),
         array(),
-        '1.0.0'
+        '1.1.3'
     );
 
     // Script customizado do tema (Menu mobile, filtros de abas, smooth scroll, regra de tradução AJA)

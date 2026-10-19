@@ -182,7 +182,7 @@ get_header();
               <div
                 class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/35 to-transparent flex flex-col justify-end p-5 text-surface-container-lowest">
                 <span class="font-label-sm text-[11px] uppercase tracking-widest text-primary-fixed-dim font-bold">Plataforma de Articulação</span>
-                <p class="font-title-md text-title-md font-bold mt-1">Integrantes da AJA em encontro da rede</p>
+                <p class="font-title-md text-title-md font-bold mt-1">Membros e parceiros em encontro da rede</p>
                 <p class="text-xs text-surface-container-highest/90 mt-0.5 leading-snug">Conectando advogados, pesquisadores e organizações pelos direitos territoriais.</p>
               </div>
             </div>
@@ -892,24 +892,24 @@ get_header();
               </div>
             </div>
 
-            <div class="bg-surface-container-lowest border-2 border-dashed border-border-subtle rounded-2xl p-6 sm:p-8 flex flex-col gap-4">
+            <div class="bg-surface-container-lowest border border-border-subtle rounded-2xl p-6 sm:p-8 flex flex-col gap-5 shadow-xs">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/40 text-secondary border border-secondary-fixed text-xs font-bold uppercase tracking-wider">
                   <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
                   Conselho em processo de formação
                 </span>
-                <span class="text-[11px] uppercase font-semibold text-outline-variant bg-surface-container px-2.5 py-1 rounded">
-                  Texto a preencher
-                </span>
               </div>
 
-              <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-3">
-                <p class="font-medium text-ink-primary">
-                  O Conselho Consultivo da Aliança Jurídica pela Amazônia (AJA) encontra-se atualmente em processo de formação.
+              <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4">
+                <p>
+                  Pensar o Direito a partir da Amazônia exige reunir saberes que raramente se encontram. Por isso o Conselho Consultivo da Aliança Jurídica pela Amazônia (AJA), sua instância de aconselhamento estratégico, reúne juristas, pesquisadores, representantes da sociedade civil e lideranças territoriais de credibilidade reconhecida. O Conselho orienta as prioridades da AJA, emite pareceres sobre temas relevantes e fortalece a atuação da rede em defesa do Estado Democrático de Direito na Amazônia.
                 </p>
-                <p class="text-outline italic">
-                  [Espaço reservado para texto descritivo sobre o Conselho Consultivo — papel institucional, critérios de composição, diversidade epistêmica e atribuições estratégicas a preencher.]
-                </p>
+                <div class="p-4 rounded-xl bg-surface-container-low border border-border-subtle/80 flex items-center gap-3">
+                  <span class="material-symbols-outlined text-secondary text-[22px] shrink-0">info</span>
+                  <p class="text-xs text-on-surface-variant font-medium leading-snug">
+                    O Conselho Consultivo está em processo de formação, e sua composição será divulgada em breve.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -951,7 +951,7 @@ get_header();
                   'role'                  => 'Co-liderança • GT 02',
                   'name'                  => 'Júlia Soares',
                   'subtitle'              => 'GT Litigância e Ativismo Judicial',
-                  'desc'                  => 'Bacharela em Direito pela USP, atua em direitos dos povos indígenas e comunidades tradicionais, participação social e políticas públicas. Analista de Políticas Públicas Jr. no IDEC.',
+                  'desc'                  => 'Advogada, mestre e doutoranda em Direito pela USP. Pesquisadora vinculada à FLACSO Argentina e Advocacy na Amazon Underworld. Coordenadora Jurídica do Instituto Internacional ARAYARA e do NDCCult/USP.',
                   'location'              => 'São Paulo - SP',
                   'badge_style'           => 'text-[#406284] border-[#A6BEE4] bg-[#A6BEE4]/30',
                   'card_border_style'     => 'border-top: 5px solid #406284;',
@@ -1121,21 +1121,21 @@ get_header();
           </p>
         </div>
 
-        <!-- Bloco Descritivo do Portfólio [A preencher] + Botão para Portfólio Completo -->
-        <div class="bg-surface-container-lowest border-2 border-dashed border-border-subtle rounded-2xl p-8 lg:p-10 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-8 interactive-card">
+        <!-- Bloco Descritivo do Portfólio + Botão para Portfólio Completo -->
+        <div class="bg-surface-container-lowest border border-border-subtle rounded-2xl p-8 lg:p-10 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-8 interactive-card">
           <div class="flex flex-col gap-4 max-w-3xl">
             <div class="flex flex-wrap items-center gap-3">
               <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed/40 text-primary border border-primary-fixed text-xs font-bold uppercase tracking-wider">
                 Portfólio da Rede
               </span>
-              <span class="text-[11px] uppercase font-semibold text-outline-variant bg-surface-container px-2.5 py-1 rounded">
-                Texto a preencher
-              </span>
             </div>
 
             <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-3">
-              <p class="text-outline italic">
-                [A preencher — Espaço reservado para o texto institucional que descreve o Portfólio de Membros da Aliança Jurídica pela Amazônia (AJA), sua diversidade de atuação e capilaridade nos territórios.]
+              <p class="font-bold text-ink-primary">
+                Na Amazônia, defender direitos é trabalho de muitas mãos.
+              </p>
+              <p>
+                O Portfólio de Membros da Aliança Jurídica pela Amazônia (AJA) reúne os diferentes atores que compõem a rede: advogadas e advogados, pesquisadores, professores, defensores de direitos, lideranças, comunicadores e organizações da sociedade civil que atuam em toda a Amazônia Legal. Cada perfil apresenta quem é o membro, onde atua, quais são suas áreas de trabalho e como entrar em contato. É um espaço para conhecer quem constrói a defesa de direitos na região e encontrar profissionais e instituições com quem dialogar, colaborar e construir parcerias pela proteção dos territórios, pela justiça socioambiental e pela garantia de direitos dos povos e comunidades da Amazônia.
               </p>
             </div>
           </div>
@@ -1143,7 +1143,7 @@ get_header();
           <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full lg:w-auto">
             <a class="interactive-btn arrow-hover px-6 py-4 rounded-lg bg-primary hover:bg-moss-light text-on-primary font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 inline-flex items-center justify-center gap-2 shadow-sm hover:shadow-md text-center font-bold"
               href="<?php echo esc_url(home_url('/portfolio/')); ?>">
-              <span>Acessar Portfólio Completo</span>
+              <span>Acesse o portfólio completo</span>
               <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
             </a>
           </div>
