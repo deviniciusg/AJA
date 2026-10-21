@@ -1142,7 +1142,7 @@ get_header();
 
           <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full lg:w-auto">
             <a class="interactive-btn arrow-hover px-6 py-4 rounded-lg bg-primary hover:bg-moss-light text-on-primary font-label-lg text-label-lg uppercase tracking-wider transition-all duration-200 inline-flex items-center justify-center gap-2 shadow-sm hover:shadow-md text-center font-bold"
-              href="<?php echo esc_url(home_url('/portfolio/')); ?>">
+              href="<?php echo esc_url(aja_asset('documentos/Portfolio_Membros_AJA_PF.pdf')); ?>" target="_blank" rel="noopener noreferrer">
               <span>Acesse o portfólio completo</span>
               <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
             </a>
