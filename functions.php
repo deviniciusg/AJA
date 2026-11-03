@@ -349,7 +349,7 @@ function aja_register_custom_admin_menus() {
     );
     add_menu_page(
         'Portfólio de Membros',
-        '👤 Portfólio',
+        '👤 Portfólio (desativado)',
         'edit_posts',
         'edit.php?category_name=portfolio',
         '',
@@ -516,13 +516,13 @@ function aja_render_post_metabox($post) {
         $noticia_tag = aja_get_noticia_tag($post->ID);
     }
 
-    // Detecta a aba inicial com base nas categorias do post
+    // Detecta a aba inicial com base nas categorias do post (padrão: notícias ativas)
     $post_categories = wp_get_post_categories($post->ID, ['fields' => 'slugs']);
-    $initial_tab = 'portfolio';
-    if (in_array('parceiros', $post_categories)) {
-        $initial_tab = 'parceiros';
-    } elseif (in_array('noticias', $post_categories)) {
+    $initial_tab = 'noticias';
+    if (in_array('noticias', $post_categories)) {
         $initial_tab = 'noticias';
+    } elseif (in_array('parceiros', $post_categories)) {
+        $initial_tab = 'parceiros';
     } elseif (in_array('equipe', $post_categories)) {
         $initial_tab = 'equipe';
     } elseif (in_array('editais', $post_categories) || !empty($featured)) {
@@ -546,11 +546,8 @@ function aja_render_post_metabox($post) {
             </div>
             
             <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="aja-tabs-nav">
-                <button type="button" class="aja-tab-button" data-target="tab-portfolio" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">👤</span> Portfólio (Membros da Rede)
-                </button>
-                <button type="button" class="aja-tab-button" data-target="tab-equipe" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">🏛️</span> Estrutura (Comitê, Conselho & GTs)
+                <button type="button" class="aja-tab-button" data-target="tab-noticias" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
+                    <span style="font-size: 16px;">📰</span> Notícias (Atualidades & Comunicados)
                 </button>
                 <button type="button" class="aja-tab-button" data-target="tab-editais" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
                     <span style="font-size: 16px;">📢</span> Editais (Chamadas & Oportunidades)
@@ -558,23 +555,29 @@ function aja_render_post_metabox($post) {
                 <button type="button" class="aja-tab-button" data-target="tab-publicacoes" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
                     <span style="font-size: 16px;">📚</span> Publicações (Estudos & Notas Técnicas)
                 </button>
-                <button type="button" class="aja-tab-button" data-target="tab-noticias" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">📰</span> Notícias (Atualidades & Comunicados)
-                </button>
                 <button type="button" class="aja-tab-button" data-target="tab-parceiros" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
                     <span style="font-size: 16px;">🤝</span> Parceiros (Institucionais & Redes)
+                </button>
+                <button type="button" class="aja-tab-button" data-target="tab-equipe" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
+                    <span style="font-size: 16px;">🏛️</span> Estrutura (Comitê, Conselho & GTs)
+                </button>
+                <button type="button" class="aja-tab-button" data-target="tab-portfolio" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; opacity: 0.85;">
+                    <span style="font-size: 16px;">👤</span> Portfólio <span style="font-size: 11px; font-weight: 700; background: #fee2e2; color: #991b1b; padding: 2px 7px; border-radius: 4px; border: 1px solid #fecaca; text-transform: uppercase;">(desativado)</span>
                 </button>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- ABA 1: PORTFÓLIO (MEMBROS DA REDE AJA)     -->
+        <!-- ABA 1: PORTFÓLIO (DESATIVADO TEMPORARIAMENTE) -->
         <!-- ========================================== -->
         <div id="tab-portfolio" class="aja-tab-content" style="display: none;">
-            <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
-                <strong style="color: #166534; font-size: 13px;">👤 Cadastrando Membro do Portfólio AJA</strong>
-                <p style="margin: 4px 0 0 0; font-size: 12px; color: #15803d;">
-                    Preencha os dados do advogado popular, pesquisador, clínica jurídica ou instituição parceira.
+            <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <strong style="color: #991b1b; font-size: 13px;">👤 Configurações de Post de Portfólio</strong>
+                    <span style="background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 4px; text-transform: uppercase;">(desativado)</span>
+                </div>
+                <p style="margin: 6px 0 0 0; font-size: 12px; color: #b91c1c;">
+                    <strong>Aviso aos administradores:</strong> Esta seção está <strong>desativada temporariamente</strong>. Por enquanto, os administradores não precisam mexer nestas configurações.
                 </p>
             </div>
 
@@ -1154,7 +1157,7 @@ function aja_render_post_metabox($post) {
             });
 
             // Ativa aba inicial
-            var currentInitial = 'tab-' + (activeTabInput ? activeTabInput.value : 'portfolio');
+            var currentInitial = 'tab-' + (activeTabInput ? activeTabInput.value : 'noticias');
             switchTab(currentInitial);
 
             // Escuta mudanças nos checkboxes de Categoria nativos do WordPress (Gutenberg ou Clássico)
@@ -1242,7 +1245,7 @@ function aja_save_post_metabox($post_id) {
         update_post_meta($post_id, '_aja_carousel_featured', '0');
     }
 
-    $active_tab = isset($_POST['aja_active_tab']) ? sanitize_text_field($_POST['aja_active_tab']) : 'portfolio';
+    $active_tab = isset($_POST['aja_active_tab']) ? sanitize_text_field($_POST['aja_active_tab']) : 'noticias';
 
     // Salva com base na aba ativa ou prioridade do formulário
     if ($active_tab === 'editais') {
