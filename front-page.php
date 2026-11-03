@@ -170,7 +170,7 @@ get_header();
     <section class="w-full py-10 lg:py-14 bg-surface-container-low border-b border-border-subtle relative select-none" id="destaques-carrossel">
       <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
         
-        <!-- Header da Seção: Apenas "em destaque" e controles de navegação -->
+        <!-- Header da Seção: Apenas "em destaque" -->
         <div class="flex items-center justify-between gap-4 mb-4 sm:mb-6">
           <div class="flex items-center gap-2.5">
             <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse shrink-0"></span>
@@ -179,27 +179,31 @@ get_header();
             </span>
           </div>
 
-          <!-- Controles de Navegação (Anterior / Próximo + Contador de Slides) -->
-          <div class="flex items-center gap-3">
-            <span id="destaques-counter" class="text-xs font-label-sm font-semibold text-outline">
+          <!-- Indicador Numérico de Slides -->
+          <div class="flex items-center gap-2">
+            <span id="destaques-counter" class="text-xs font-label-sm font-semibold text-outline px-2.5 py-1 rounded-md bg-surface-container">
               <span id="destaques-current-num">1</span> / <span><?php echo esc_html($total_slides); ?></span>
             </span>
-
-            <div class="flex items-center gap-1.5">
-              <button type="button" id="destaques-prev" aria-label="Post anterior"
-                      class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer">
-                <span class="material-symbols-outlined text-[20px]">chevron_left</span>
-              </button>
-              <button type="button" id="destaques-next" aria-label="Próximo post"
-                      class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer">
-                <span class="material-symbols-outlined text-[20px]">chevron_right</span>
-              </button>
-            </div>
           </div>
         </div>
 
-        <!-- Container do Carrossel em Largura Total (O post ocupa toda a seção) -->
-        <div class="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border-subtle bg-surface-container-lowest shadow-sm" id="destaques-container">
+        <!-- Wrapper do Carrossel com as Setas < e > nas Laterais dos Posts -->
+        <div class="relative group/carousel">
+          
+          <!-- Seta Esquerda (<) na Esquerda do Post -->
+          <button type="button" id="destaques-prev-side" aria-label="Post anterior"
+                  class="absolute -left-2 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-container-lowest/95 hover:bg-primary text-ink-primary hover:text-on-primary border border-border-subtle shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-90 focus:outline-none">
+            <span class="material-symbols-outlined text-[24px] sm:text-[28px]">chevron_left</span>
+          </button>
+
+          <!-- Seta Direita (>) na Direita do Post -->
+          <button type="button" id="destaques-next-side" aria-label="Próximo post"
+                  class="absolute -right-2 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-container-lowest/95 hover:bg-primary text-ink-primary hover:text-on-primary border border-border-subtle shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-90 focus:outline-none">
+            <span class="material-symbols-outlined text-[24px] sm:text-[28px]">chevron_right</span>
+          </button>
+
+          <!-- Container do Carrossel em Largura Total (O post ocupa toda a seção) -->
+          <div class="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border-subtle bg-surface-container-lowest shadow-sm" id="destaques-container">
           
           <!-- Pista deslizante (Slides Track) -->
           <div id="destaques-track" class="flex transition-transform duration-700 ease-out w-full" style="transform: translateX(0%);">
@@ -340,6 +344,7 @@ get_header();
             <div id="destaques-progress" class="h-full bg-primary/70 transition-all ease-linear" style="width: 0%;"></div>
           </div>
         </div>
+        </div>
 
         <!-- Indicadores / Dots de Navegação -->
         <div class="flex items-center justify-center gap-2 mt-4" id="destaques-dots">
@@ -359,8 +364,8 @@ get_header();
       function initDestaquesFullCarousel() {
         var container = document.getElementById('destaques-container');
         var track = document.getElementById('destaques-track');
-        var prevBtn = document.getElementById('destaques-prev');
-        var nextBtn = document.getElementById('destaques-next');
+        var prevBtns = document.querySelectorAll('#destaques-prev, #destaques-prev-side');
+        var nextBtns = document.querySelectorAll('#destaques-next, #destaques-next-side');
         var currentNumEl = document.getElementById('destaques-current-num');
         var progressBar = document.getElementById('destaques-progress');
         var dots = document.querySelectorAll('.destaques-dot');
@@ -450,19 +455,20 @@ get_header();
           isPaused = false;
         }
 
-        // Eventos de Botões Prev / Next
-        if (prevBtn) {
-          prevBtn.addEventListener('click', function(e) {
+        // Eventos de Botões Prev / Next (Setinhas < e > nas laterais)
+        prevBtns.forEach(function(btn) {
+          btn.addEventListener('click', function(e) {
             e.preventDefault();
             prevSlide();
           });
-        }
-        if (nextBtn) {
-          nextBtn.addEventListener('click', function(e) {
+        });
+
+        nextBtns.forEach(function(btn) {
+          btn.addEventListener('click', function(e) {
             e.preventDefault();
             nextSlide();
           });
-        }
+        });
 
         // Eventos de Clique nos Dots
         dots.forEach(function(dot) {
