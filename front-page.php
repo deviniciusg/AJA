@@ -1587,25 +1587,6 @@ get_header();
           </p>
         </div>
 
-        <!-- Estado Informativo: Nenhuma chamada aberta no momento -->
-        <div class="p-8 lg:p-12 rounded-2xl bg-surface-container-low border border-border-subtle flex flex-col md:flex-row items-center justify-between gap-6 interactive-card">
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-surface-container text-outline flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-[28px]">folder_open</span>
-            </div>
-            <div>
-              <span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-[11px] font-bold uppercase tracking-wider inline-block mb-2">
-                Status Atual
-              </span>
-              <h3 class="font-title-lg text-title-lg text-ink-primary font-bold">
-                Nenhuma chamada aberta no momento
-              </h3>
-              <p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-2xl leading-relaxed">
-                Não há editais ou chamadas públicas para artigos com inscrições abertas no momento. Novas oportunidades serão comunicadas oportunamente através dos canais oficiais da Aliança.
-              </p>
-            </div>
-          </div>
-
         <?php
         $editais_query = new WP_Query(array(
             'category_name'  => 'editais',
