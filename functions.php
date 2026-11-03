@@ -421,37 +421,39 @@ function aja_register_post_metaboxes() {
 add_action('add_meta_boxes', 'aja_register_post_metaboxes');
 
 /**
- * Metabox Lateral: Destaque no Carrossel da Home
+ * Metabox Lateral: Destaque no Topo do Site (Carrossel)
  */
 function aja_render_carousel_sidebar_metabox($post) {
     $carousel_featured = get_post_meta($post->ID, '_aja_carousel_featured', true);
+    $carousel_order    = get_post_meta($post->ID, '_aja_carousel_order', true);
+    if ($carousel_order === '' && $carousel_featured === '1') {
+        $carousel_order = '1';
+    }
     ?>
-    <div style="padding: 4px 0;">
-        <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 13px; font-weight: 600; color: #92400e; background: #fffbeb; padding: 10px 12px; border-radius: 6px; border: 1px solid #fde68a;">
-            <input type="checkbox" name="carousel_featured_side" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin-top: 1px; shrink: 0;">
-            <span>⭐ Adicionar em destaque no carrossel</span>
-        </label>
-        <p style="margin: 8px 0 0 4px; font-size: 11px; color: #64748b; line-height: 1.4;">
-            Disponível para <strong>Notícias</strong>, <strong>Editais</strong> e <strong>Publicações</strong>. O post aparecerá no carrossel entre a Home e o Quem Somos Nós.
-        </p>
+    <div id="aja-carousel-side-container" style="padding: 2px 0;">
+        <div id="aja-carousel-side-active-box" style="background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 8px; padding: 12px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
+            <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 13px; font-weight: 700; color: #92400e;">
+                <input type="checkbox" name="carousel_featured_side" id="carousel_featured_side" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin-top: 1px; flex-shrink: 0;">
+                <span>⭐ Marcar como Destaque no topo do site</span>
+            </label>
+            
+            <div id="carousel_order_side_wrap" style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #fcd34d; <?php echo ($carousel_featured === '1') ? 'display: block;' : 'display: none;'; ?>">
+                <label for="carousel_order_side" style="display: block; font-size: 12px; font-weight: 700; color: #78350f; margin-bottom: 5px;">
+                    🔢 Prioridade no Destaque:
+                </label>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <input type="number" id="carousel_order_side" name="carousel_order_side" value="<?php echo esc_attr($carousel_order !== '' ? $carousel_order : '1'); ?>" min="1" max="99" style="width: 70px; padding: 5px 8px; border-radius: 5px; border: 1.5px solid #d97706; font-weight: 700; font-size: 14px; text-align: center; color: #78350f; background: #ffffff;">
+                    <span style="font-size: 11px; color: #92400e; line-height: 1.3;">
+                        Quanto menor o número, antes aparece (<strong>1</strong> é o 1º, <strong>2</strong> o 2º...).
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="aja-carousel-side-notice" style="display: none; padding: 10px 12px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; font-size: 11px; color: #64748b; line-height: 1.4;">
+            ℹ️ A opção de destaque no topo é exclusiva para <strong>Notícias</strong>, <strong>Publicações</strong> e <strong>Editais</strong>.
+        </div>
     </div>
-    <script>
-    (function() {
-        var sideCb = document.querySelector('input[name="carousel_featured_side"]');
-        var mainCbs = document.querySelectorAll('input[name="carousel_featured"]');
-        if (sideCb && mainCbs.length) {
-            sideCb.addEventListener('change', function() {
-                var checked = this.checked;
-                mainCbs.forEach(function(cb) { cb.checked = checked; });
-            });
-            mainCbs.forEach(function(cb) {
-                cb.addEventListener('change', function() {
-                    sideCb.checked = this.checked;
-                });
-            });
-        }
-    })();
-    </script>
     <?php
 }
 
@@ -473,8 +475,10 @@ add_filter('manage_post_posts_columns', 'aja_add_carousel_column');
 function aja_render_carousel_column($column, $post_id) {
     if ($column === 'aja_carousel_col') {
         $featured = get_post_meta($post_id, '_aja_carousel_featured', true);
+        $order    = get_post_meta($post_id, '_aja_carousel_order', true);
         if ($featured === '1') {
-            echo '<span style="display:inline-flex; align-items:center; gap:3px; padding: 2px 7px; border-radius: 4px; background: #fef3c7; color: #b45309; font-weight: 700; font-size: 11px; border: 1px solid #fde68a;">⭐ No Carrossel</span>';
+            $order_label = ($order !== '' && is_numeric($order)) ? ' (#' . intval($order) . ')' : '';
+            echo '<span style="display:inline-flex; align-items:center; gap:3px; padding: 2px 7px; border-radius: 4px; background: #fef3c7; color: #b45309; font-weight: 700; font-size: 11px; border: 1px solid #fde68a;">⭐ Destaque' . esc_html($order_label) . '</span>';
         } else {
             echo '<span style="color: #cbd5e1;">—</span>';
         }
@@ -518,6 +522,10 @@ function aja_render_post_metabox($post) {
     $tooltip         = get_post_meta($post->ID, '_aja_tooltip', true);
     $noticia_tag     = get_post_meta($post->ID, '_aja_noticia_tag', true);
     $carousel_featured = get_post_meta($post->ID, '_aja_carousel_featured', true);
+    $carousel_order    = get_post_meta($post->ID, '_aja_carousel_order', true);
+    if ($carousel_order === '' && $carousel_featured === '1') {
+        $carousel_order = '1';
+    }
     if (empty($noticia_tag) && function_exists('aja_get_noticia_tag')) {
         $noticia_tag = aja_get_noticia_tag($post->ID);
     }
@@ -835,27 +843,26 @@ function aja_render_post_metabox($post) {
                     Se marcado, este edital ganhará um card grande com imagem de fundo no início da lista.
                 </span>
     
-            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DA HOME -->
-            <div style="margin-top: 18px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-                <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
-                    <input type="checkbox" name="carousel_featured" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
-                    ⭐ Adicionar em destaque no carrossel (Home)
-                </label>
-                <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
-                    Exibe este edital no carrossel de destaques entre a Home e o Quem Somos Nós
-                </span>
-            </div>
-        </div>
-
-            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DA HOME -->
-            <div style="margin-top: 18px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-                <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
-                    <input type="checkbox" name="carousel_featured" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
-                    ⭐ Adicionar em destaque no carrossel (Home)
-                </label>
-                <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
-                    Exibe este edital no carrossel de destaques entre a Home e o Quem Somos Nós
-                </span>
+            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DO TOPO -->
+            <div class="aja-carousel-metabox-card" style="margin-top: 20px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                    <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
+                        <input type="checkbox" name="carousel_featured" class="aja-carousel-featured-cb" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
+                        ⭐ Marcar como Destaque no topo do site
+                    </label>
+                    <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
+                        Exibe este edital no carrossel de destaques da página inicial
+                    </span>
+                </div>
+                <div class="aja-carousel-order-wrap" style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #fcd34d; display: <?php echo ($carousel_featured === '1') ? 'flex' : 'none'; ?>; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <label style="font-size: 12px; font-weight: 700; color: #78350f;">
+                        🔢 Prioridade no Destaque:
+                    </label>
+                    <input type="number" name="carousel_order" class="aja-carousel-order-input" value="<?php echo esc_attr($carousel_order !== '' ? $carousel_order : '1'); ?>" min="1" max="99" style="width: 70px; padding: 5px 8px; border-radius: 5px; border: 1.5px solid #d97706; font-weight: 700; font-size: 14px; text-align: center; color: #78350f; background: #ffffff;">
+                    <span style="font-size: 12px; color: #92400e;">
+                        Quanto menor o número, antes ele aparece (<strong>1</strong> é o primeiro, <strong>2</strong> o segundo, etc.).
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -928,15 +935,26 @@ function aja_render_post_metabox($post) {
                 </div>
             </div>
 
-            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DA HOME -->
-            <div style="margin-top: 18px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-                <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
-                    <input type="checkbox" name="carousel_featured" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
-                    ⭐ Adicionar em destaque no carrossel (Home)
-                </label>
-                <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
-                    Exibe esta publicação no carrossel de destaques entre a Home e o Quem Somos Nós
-                </span>
+            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DO TOPO -->
+            <div class="aja-carousel-metabox-card" style="margin-top: 20px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                    <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
+                        <input type="checkbox" name="carousel_featured" class="aja-carousel-featured-cb" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
+                        ⭐ Marcar como Destaque no topo do site
+                    </label>
+                    <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
+                        Exibe esta publicação no carrossel de destaques da página inicial
+                    </span>
+                </div>
+                <div class="aja-carousel-order-wrap" style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #fcd34d; display: <?php echo ($carousel_featured === '1') ? 'flex' : 'none'; ?>; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <label style="font-size: 12px; font-weight: 700; color: #78350f;">
+                        🔢 Prioridade no Destaque:
+                    </label>
+                    <input type="number" name="carousel_order" class="aja-carousel-order-input" value="<?php echo esc_attr($carousel_order !== '' ? $carousel_order : '1'); ?>" min="1" max="99" style="width: 70px; padding: 5px 8px; border-radius: 5px; border: 1.5px solid #d97706; font-weight: 700; font-size: 14px; text-align: center; color: #78350f; background: #ffffff;">
+                    <span style="font-size: 12px; color: #92400e;">
+                        Quanto menor o número, antes ele aparece (<strong>1</strong> é o primeiro, <strong>2</strong> o segundo, etc.).
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -1038,15 +1056,26 @@ function aja_render_post_metabox($post) {
                 </div>
             </div>
 
-            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DA HOME -->
-            <div style="margin-top: 18px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-                <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
-                    <input type="checkbox" name="carousel_featured" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
-                    ⭐ Adicionar em destaque no carrossel (Home)
-                </label>
-                <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
-                    Exibe esta notícia no carrossel de destaques entre a Home e o Quem Somos Nós
-                </span>
+            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DO TOPO -->
+            <div class="aja-carousel-metabox-card" style="margin-top: 20px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                    <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
+                        <input type="checkbox" name="carousel_featured" class="aja-carousel-featured-cb" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
+                        ⭐ Marcar como Destaque no topo do site
+                    </label>
+                    <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
+                        Exibe esta notícia no carrossel de destaques da página inicial
+                    </span>
+                </div>
+                <div class="aja-carousel-order-wrap" style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #fcd34d; display: <?php echo ($carousel_featured === '1') ? 'flex' : 'none'; ?>; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <label style="font-size: 12px; font-weight: 700; color: #78350f;">
+                        🔢 Prioridade no Destaque:
+                    </label>
+                    <input type="number" name="carousel_order" class="aja-carousel-order-input" value="<?php echo esc_attr($carousel_order !== '' ? $carousel_order : '1'); ?>" min="1" max="99" style="width: 70px; padding: 5px 8px; border-radius: 5px; border: 1.5px solid #d97706; font-weight: 700; font-size: 14px; text-align: center; color: #78350f; background: #ffffff;">
+                    <span style="font-size: 12px; color: #92400e;">
+                        Quanto menor o número, antes ele aparece (<strong>1</strong> é o primeiro, <strong>2</strong> o segundo, etc.).
+                    </span>
+                </div>
             </div>
 
             <div style="margin-top: 16px; padding: 12px 16px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; font-size: 12px; color: #475569; display: flex; align-items: center; gap: 10px;">
@@ -1160,6 +1189,9 @@ function aja_render_post_metabox($post) {
                 if (activeTabInput) {
                     activeTabInput.value = tabShort;
                 }
+
+                // Atualiza visibilidade do destaque na lateral
+                updateCarouselSideVisibility(tabId);
             }
 
             buttons.forEach(function(btn) {
@@ -1172,6 +1204,71 @@ function aja_render_post_metabox($post) {
             var currentInitial = 'tab-' + (activeTabInput ? activeTabInput.value : 'equipe');
             switchTab(currentInitial);
 
+            // Sincronização bidirecional do box de Destaque e Prioridade (Sidebar <-> Abas)
+            function initCarouselSync() {
+                var sideCb = document.getElementById('carousel_featured_side');
+                var sideOrderWrap = document.getElementById('carousel_order_side_wrap');
+                var sideOrderInput = document.getElementById('carousel_order_side');
+                var mainCbs = document.querySelectorAll('.aja-carousel-featured-cb');
+                var mainOrderWraps = document.querySelectorAll('.aja-carousel-order-wrap');
+                var mainOrderInputs = document.querySelectorAll('.aja-carousel-order-input');
+
+                function syncState(isChecked, orderVal) {
+                    if (sideCb) sideCb.checked = isChecked;
+                    if (sideOrderWrap) sideOrderWrap.style.display = isChecked ? 'block' : 'none';
+                    if (sideOrderInput && orderVal !== undefined) sideOrderInput.value = orderVal;
+
+                    mainCbs.forEach(function(cb) { cb.checked = isChecked; });
+                    mainOrderWraps.forEach(function(wrap) { wrap.style.display = isChecked ? 'flex' : 'none'; });
+                    if (orderVal !== undefined) {
+                        mainOrderInputs.forEach(function(inp) { inp.value = orderVal; });
+                    }
+                }
+
+                if (sideCb) {
+                    sideCb.addEventListener('change', function() {
+                        syncState(this.checked, sideOrderInput ? sideOrderInput.value : '1');
+                    });
+                }
+                if (sideOrderInput) {
+                    sideOrderInput.addEventListener('input', function() {
+                        syncState(sideCb ? sideCb.checked : false, this.value);
+                    });
+                }
+                mainCbs.forEach(function(cb) {
+                    cb.addEventListener('change', function() {
+                        var pWrap = this.closest('.aja-carousel-metabox-card');
+                        var orderVal = pWrap && pWrap.querySelector('.aja-carousel-order-input') ? pWrap.querySelector('.aja-carousel-order-input').value : '1';
+                        syncState(this.checked, orderVal);
+                    });
+                });
+                mainOrderInputs.forEach(function(inp) {
+                    inp.addEventListener('input', function() {
+                        syncState(sideCb ? sideCb.checked : false, this.value);
+                    });
+                });
+            }
+            initCarouselSync();
+
+            // Controla visibilidade do box de destaque lateral conforme categoria/aba
+            function updateCarouselSideVisibility(tabId) {
+                var sideBox = document.getElementById('aja_carousel_side_box');
+                var sideActive = document.getElementById('aja-carousel-side-active-box');
+                var sideNotice = document.getElementById('aja-carousel-side-notice');
+                if (!sideBox) return;
+
+                var isAllowed = (tabId === 'tab-noticias' || tabId === 'tab-editais' || tabId === 'tab-publicacoes');
+                var isRestricted = (tabId === 'tab-equipe' || tabId === 'tab-parceiros' || tabId === 'tab-portfolio');
+
+                if (isRestricted) {
+                    if (sideActive) sideActive.style.display = 'none';
+                    if (sideNotice) sideNotice.style.display = 'block';
+                } else if (isAllowed) {
+                    if (sideActive) sideActive.style.display = 'block';
+                    if (sideNotice) sideNotice.style.display = 'none';
+                }
+            }
+
             // Escuta mudanças nos checkboxes de Categoria nativos do WordPress (Gutenberg ou Clássico)
             function listenCategoryCheckboxes() {
                 var catCheckboxes = document.querySelectorAll('input[name="post_category[]"], #categorychecklist input[type="checkbox"], .editor-post-taxonomies__hierarchical-terms-list input[type="checkbox"]');
@@ -1180,16 +1277,22 @@ function aja_render_post_metabox($post) {
                         var label = this.parentElement ? this.parentElement.innerText.toLowerCase() : '';
                         if (label.indexOf('parceir') !== -1 && this.checked) {
                             switchTab('tab-parceiros');
+                            updateCarouselSideVisibility('tab-parceiros');
                         } else if (label.indexOf('notic') !== -1 && this.checked) {
                             switchTab('tab-noticias');
+                            updateCarouselSideVisibility('tab-noticias');
                         } else if (label.indexOf('equip') !== -1 && this.checked) {
                             switchTab('tab-equipe');
+                            updateCarouselSideVisibility('tab-equipe');
                         } else if (label.indexOf('edita') !== -1 && this.checked) {
                             switchTab('tab-editais');
+                            updateCarouselSideVisibility('tab-editais');
                         } else if (label.indexOf('publica') !== -1 && this.checked) {
                             switchTab('tab-publicacoes');
+                            updateCarouselSideVisibility('tab-publicacoes');
                         } else if (label.indexOf('portf') !== -1 && this.checked) {
                             switchTab('tab-portfolio');
+                            updateCarouselSideVisibility('tab-portfolio');
                         }
                     });
                 });
@@ -1250,11 +1353,21 @@ function aja_save_post_metabox($post_id) {
         return;
     }
 
-    // Salva a opção de Destaque no Carrossel da Home (válido para Notícias, Editais e Publicações)
-    if (isset($_POST['carousel_featured']) || isset($_POST['carousel_featured_side'])) {
-        update_post_meta($post_id, '_aja_carousel_featured', '1');
+    // Salva a opção de Destaque no Carrossel do Topo e Prioridade (apenas Notícias, Editais e Publicações)
+    $carousel_featured = (isset($_POST['carousel_featured']) || isset($_POST['carousel_featured_side'])) ? '1' : '0';
+    update_post_meta($post_id, '_aja_carousel_featured', $carousel_featured);
+
+    if ($carousel_featured === '1') {
+        $order = 1;
+        if (isset($_POST['carousel_order']) && $_POST['carousel_order'] !== '') {
+            $order = intval($_POST['carousel_order']);
+        } elseif (isset($_POST['carousel_order_side']) && $_POST['carousel_order_side'] !== '') {
+            $order = intval($_POST['carousel_order_side']);
+        }
+        if ($order <= 0) $order = 1;
+        update_post_meta($post_id, '_aja_carousel_order', $order);
     } else {
-        update_post_meta($post_id, '_aja_carousel_featured', '0');
+        delete_post_meta($post_id, '_aja_carousel_order');
     }
 
     $active_tab = isset($_POST['aja_active_tab']) ? sanitize_text_field($_POST['aja_active_tab']) : 'equipe';

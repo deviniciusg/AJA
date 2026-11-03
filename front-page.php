@@ -139,7 +139,7 @@ get_header();
     <!-- ========================================================================= -->
     <?php
     $carousel_query = new WP_Query(array(
-        'category_name'  => 'noticias,editais,publicacoes',
+        'category_name'  => 'noticias,editais,publicacoes,submissoes',
         'posts_per_page' => 12,
         'meta_query'     => array(
             array(
@@ -148,20 +148,30 @@ get_header();
                 'compare' => '='
             )
         ),
-        'post_status'    => 'publish',
-        'orderby'        => 'date',
-        'order'          => 'DESC'
+        'post_status'    => 'publish'
     ));
 
-    // Se ainda não houver nenhum post marcado manualmente com a flag, busca os mais recentes das 3 categorias
+    // Se ainda não houver nenhum post marcado manualmente com a flag, busca os mais recentes das categorias permitidas
     if (!$carousel_query->have_posts()) {
         $carousel_query = new WP_Query(array(
-            'category_name'  => 'noticias,editais,publicacoes',
+            'category_name'  => 'noticias,editais,publicacoes,submissoes',
             'posts_per_page' => 6,
             'post_status'    => 'publish',
             'orderby'        => 'date',
             'order'          => 'DESC'
         ));
+    } else {
+        // Ordena os posts em destaque pela prioridade definida pelo usuário (quanto menor o número, antes aparece: 1 é o 1º, 2 o 2º...)
+        usort($carousel_query->posts, function($a, $b) {
+            $order_a = get_post_meta($a->ID, '_aja_carousel_order', true);
+            $order_b = get_post_meta($b->ID, '_aja_carousel_order', true);
+            $val_a = ($order_a !== '' && is_numeric($order_a)) ? (int)$order_a : 999;
+            $val_b = ($order_b !== '' && is_numeric($order_b)) ? (int)$order_b : 999;
+            if ($val_a === $val_b) {
+                return strtotime($b->post_date) - strtotime($a->post_date);
+            }
+            return $val_a - $val_b;
+        });
     }
 
     if ($carousel_query->have_posts()) :
