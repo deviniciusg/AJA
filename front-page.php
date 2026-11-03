@@ -135,7 +135,7 @@ get_header();
     </section>
 
     <!-- ========================================================================= -->
-    <!-- SECTION DESTAQUES: CARROSSEL DE NOTÍCIAS, EDITAIS E PUBLICAÇÕES         -->
+    <!-- SECTION DESTAQUES: CARROSSEL DE NOTÍCIAS, EDITAIS E PUBLICAÇÕES (TELA CHEIA)-->
     <!-- ========================================================================= -->
     <?php
     $carousel_query = new WP_Query(array(
@@ -165,44 +165,46 @@ get_header();
     }
 
     if ($carousel_query->have_posts()) :
+        $total_slides = $carousel_query->post_count;
     ?>
-    <section class="w-full py-12 lg:py-16 bg-surface-container-low border-b border-border-subtle overflow-hidden relative" id="destaques-carrossel">
+    <section class="w-full py-10 lg:py-14 bg-surface-container-low border-b border-border-subtle relative select-none" id="destaques-carrossel">
       <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
         
-        <!-- Header da Seção de Destaques -->
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4 reveal">
-          <div>
-            <div class="flex items-center gap-3 mb-2">
-              <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
-              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Em Destaque</span>
-            </div>
-            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-ink-primary font-bold">
-              Destaques da Aliança
-            </h2>
-            <p class="font-body-md text-sm sm:text-base text-on-surface-variant mt-1.5 max-w-xl">
-              Notícias mais recentes, oportunidades abertas e publicações jurídicas em evidência na rede.
-            </p>
+        <!-- Header da Seção: Apenas "em destaque" e controles de navegação -->
+        <div class="flex items-center justify-between gap-4 mb-4 sm:mb-6">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse shrink-0"></span>
+            <span class="font-label-md text-xs sm:text-sm uppercase tracking-widest text-secondary font-bold">
+              Em Destaque
+            </span>
           </div>
 
-          <!-- Controles de Navegação (Anterior / Próximo) -->
-          <div class="flex items-center gap-2 self-start sm:self-end shrink-0">
-            <button type="button" id="destaques-prev" aria-label="Slide anterior"
-                    class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary flex items-center justify-center transition-all shadow-sm active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer">
-              <span class="material-symbols-outlined text-[24px]">chevron_left</span>
-            </button>
-            <button type="button" id="destaques-next" aria-label="Próximo slide"
-                    class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary flex items-center justify-center transition-all shadow-sm active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer">
-              <span class="material-symbols-outlined text-[24px]">chevron_right</span>
-            </button>
+          <!-- Controles de Navegação (Anterior / Próximo + Contador de Slides) -->
+          <div class="flex items-center gap-3">
+            <span id="destaques-counter" class="text-xs font-label-sm font-semibold text-outline">
+              <span id="destaques-current-num">1</span> / <span><?php echo esc_html($total_slides); ?></span>
+            </span>
+
+            <div class="flex items-center gap-1.5">
+              <button type="button" id="destaques-prev" aria-label="Post anterior"
+                      class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer">
+                <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+              </button>
+              <button type="button" id="destaques-next" aria-label="Próximo post"
+                      class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary flex items-center justify-center transition-all shadow-xs active:scale-95 cursor-pointer">
+                <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Pista do Carrossel (Snap Track) -->
-        <div class="relative -mx-margin-mobile px-margin-mobile lg:-mx-margin lg:px-margin">
-          <div id="destaques-track"
-               class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6 pt-1 items-stretch"
-               style="scrollbar-width: none; -ms-overflow-style: none;">
+        <!-- Container do Carrossel em Largura Total (O post ocupa toda a seção) -->
+        <div class="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border-subtle bg-surface-container-lowest shadow-sm" id="destaques-container">
+          
+          <!-- Pista deslizante (Slides Track) -->
+          <div id="destaques-track" class="flex transition-transform duration-700 ease-out w-full" style="transform: translateX(0%);">
             <?php
+            $slide_idx = 0;
             while ($carousel_query->have_posts()) :
                 $carousel_query->the_post();
                 $c_id       = get_the_ID();
@@ -213,7 +215,7 @@ get_header();
                 $is_pub     = in_array('publicacoes', $c_cats);
                 $is_news    = in_array('noticias', $c_cats);
                 
-                // Tipo e Rótulos Específicos
+                // Tipos e Rótulos Específicos
                 if ($is_edital) {
                     $type_label = '📢 Edital';
                     $type_badge_class = 'bg-amber-100 text-amber-900 border-amber-300';
@@ -237,163 +239,282 @@ get_header();
                 $c_btn      = aja_get_post_action_label($c_id, $c_btn_default);
                 $c_has_thumb= has_post_thumbnail($c_id);
                 $c_thumb    = $c_has_thumb ? get_the_post_thumbnail_url($c_id, 'large') : '';
-                $c_excerpt  = get_the_excerpt() ?: wp_trim_words(get_the_content(), 22);
-                $is_explicit_featured = (get_post_meta($c_id, '_aja_carousel_featured', true) === '1');
+                $c_excerpt  = get_the_excerpt() ?: wp_trim_words(get_the_content(), 28);
+                $is_external= filter_var($c_link, FILTER_VALIDATE_URL) && strpos($c_link, home_url()) === false;
                 ?>
-                <div class="destaques-slide snap-start shrink-0 w-[85vw] sm:w-[380px] lg:w-[calc(33.333%-16px)] flex flex-col">
-                  <article class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-border-subtle shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between h-full group relative">
+                <div class="destaques-slide w-full min-w-full shrink-0 flex flex-col justify-between" data-slide-index="<?php echo esc_attr($slide_idx); ?>">
+                  <article class="grid grid-cols-1 lg:grid-cols-12 min-h-[400px] lg:min-h-[460px] items-stretch">
                     
-                    <!-- Imagem ou Banner de Cabeçalho -->
-                    <div class="h-48 sm:h-52 w-full overflow-hidden relative bg-surface-container shrink-0">
-                      <?php if ($c_has_thumb && !empty($c_thumb)) : ?>
-                        <img src="<?php echo esc_url($c_thumb); ?>" alt="<?php echo esc_attr($c_title); ?>"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-                      <?php else : ?>
-                        <div class="w-full h-full bg-gradient-to-br from-primary/15 via-surface-container to-secondary/15 flex flex-col items-center justify-center p-6 text-center">
-                          <span class="material-symbols-outlined text-[48px] text-primary/40 group-hover:scale-110 transition-transform duration-300">
-                            <?php echo esc_attr($c_icon); ?>
-                          </span>
-                          <span class="text-xs font-label-sm uppercase tracking-wider text-outline font-bold mt-2">Aliança Jurídica pela Amazônia</span>
-                        </div>
-                      <?php endif; ?>
-
-                      <!-- Badges sobre a Imagem -->
-                      <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
-                        <span class="px-2.5 py-1 rounded-md text-[11px] font-label-sm font-bold uppercase tracking-wider border shadow-xs backdrop-blur-sm <?php echo esc_attr($type_badge_class); ?>">
-                          <?php echo esc_html($type_label); ?>
-                        </span>
-                        <?php if ($is_explicit_featured) : ?>
-                          <span class="px-2.5 py-1 rounded-md text-[10px] font-label-sm font-bold uppercase tracking-wider bg-amber-500 text-white shadow-xs flex items-center gap-1">
-                            <span class="material-symbols-outlined text-[13px]">star</span>
-                            <span>Destaque</span>
-                          </span>
-                        <?php endif; ?>
-                      </div>
-
-                      <!-- Data / Local sobre a foto -->
-                      <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-semibold text-white/95 text-shadow-sm pointer-events-none drop-shadow">
-                        <?php if (!empty($c_loc)) : ?>
-                          <span class="flex items-center gap-1 truncate max-w-[65%]">
-                            <span class="material-symbols-outlined text-[14px]"><?php echo $is_edital ? 'schedule' : 'location_on'; ?></span>
-                            <span class="truncate"><?php echo esc_html($c_loc); ?></span>
-                          </span>
-                        <?php else : ?>
-                          <span></span>
-                        <?php endif; ?>
-                        <span class="flex items-center gap-1 shrink-0 ml-auto">
-                          <span class="material-symbols-outlined text-[14px]">calendar_today</span>
-                          <span><?php echo esc_html(get_the_date('d/m/Y')); ?></span>
-                        </span>
-                      </div>
-                    </div>
-
-                    <!-- Conteúdo do Card -->
-                    <div class="p-6 flex flex-col flex-1 justify-between">
+                    <!-- Coluna de Texto e Ações (7 colunas no desktop) -->
+                    <div class="lg:col-span-7 p-6 sm:p-8 lg:p-12 flex flex-col justify-between order-2 lg:order-1">
                       <div>
-                        <!-- Chapéu / Subtítulo / Badge adicional -->
-                        <?php if (!empty($c_badge) || !empty($c_subtitle)) : ?>
-                          <div class="flex items-center gap-2 mb-2.5 flex-wrap">
-                            <?php if (!empty($c_badge)) : ?>
-                              <span class="text-[11px] font-label-sm font-bold text-secondary uppercase tracking-wider">
-                                <?php echo esc_html($c_badge); ?>
-                              </span>
-                            <?php endif; ?>
-                            <?php if (!empty($c_badge) && !empty($c_subtitle)) : ?>
-                              <span class="text-outline text-xs">•</span>
-                            <?php endif; ?>
-                            <?php if (!empty($c_subtitle)) : ?>
-                              <span class="text-xs font-semibold text-clay-warm truncate max-w-[220px]">
-                                <?php echo esc_html($c_subtitle); ?>
-                              </span>
-                            <?php endif; ?>
-                          </div>
+                        <!-- Badges Superiores e Data -->
+                        <div class="flex flex-wrap items-center gap-2.5 mb-4">
+                          <span class="px-3 py-1 rounded-md text-xs font-label-sm font-bold uppercase tracking-wider border shadow-2xs <?php echo esc_attr($type_badge_class); ?>">
+                            <?php echo esc_html($type_label); ?>
+                          </span>
+                          <?php if (!empty($c_badge)) : ?>
+                            <span class="px-2.5 py-1 rounded-md text-xs font-label-sm font-bold uppercase tracking-wider bg-surface-container text-secondary">
+                              <?php echo esc_html($c_badge); ?>
+                            </span>
+                          <?php endif; ?>
+                          <span class="text-xs font-label-sm text-outline flex items-center gap-1.5 ml-auto">
+                            <span class="material-symbols-outlined text-[15px]">calendar_today</span>
+                            <span><?php echo esc_html(get_the_date('d \d\e F, Y')); ?></span>
+                          </span>
+                        </div>
+
+                        <!-- Subtítulo / Chapéu -->
+                        <?php if (!empty($c_subtitle)) : ?>
+                          <p class="font-label-sm text-xs sm:text-sm font-semibold text-clay-warm uppercase tracking-wider mb-2 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">label</span>
+                            <span><?php echo esc_html($c_subtitle); ?></span>
+                          </p>
                         <?php endif; ?>
 
-                        <!-- Título -->
-                        <h3 class="font-title-lg text-lg font-bold text-ink-primary group-hover:text-primary transition-colors leading-snug line-clamp-2 mb-3">
-                          <a href="<?php echo esc_url($c_link); ?>" <?php echo (filter_var($c_link, FILTER_VALIDATE_URL) && strpos($c_link, home_url()) === false) ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
+                        <!-- Título do Post -->
+                        <h3 class="font-headline-lg text-xl sm:text-2xl lg:text-3xl text-ink-primary font-bold leading-tight mb-4 group-hover:text-primary transition-colors">
+                          <a href="<?php echo esc_url($c_link); ?>" <?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
                             <?php echo esc_html($c_title); ?>
                           </a>
                         </h3>
 
-                        <!-- Resumo -->
-                        <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed line-clamp-3">
+                        <!-- Resumo Descritivo -->
+                        <p class="font-body-md text-sm sm:text-base text-on-surface-variant leading-relaxed line-clamp-3 sm:line-clamp-4 max-w-2xl">
                           <?php echo esc_html($c_excerpt); ?>
                         </p>
+
+                        <!-- Informações Complementares (Prazo de Edital ou Localidade) -->
+                        <?php if (!empty($c_loc)) : ?>
+                          <div class="mt-4 flex items-center gap-1.5 text-xs font-semibold text-primary">
+                            <span class="material-symbols-outlined text-[16px]"><?php echo $is_edital ? 'schedule' : 'location_on'; ?></span>
+                            <span><?php echo esc_html($c_loc); ?></span>
+                          </div>
+                        <?php endif; ?>
                       </div>
 
-                      <!-- Rodapé do Card com Botão de Ação -->
-                      <div class="pt-5 mt-5 border-t border-border-subtle flex items-center justify-between gap-3">
-                        <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">
-                          AJA • Oficial
+                      <!-- Rodapé da Coluna com Botão de Ação -->
+                      <div class="pt-6 mt-6 border-t border-border-subtle flex flex-wrap items-center justify-between gap-4">
+                        <span class="text-xs font-label-sm text-outline font-semibold uppercase tracking-wider">
+                          Destaque Oficial • Aliança Jurídica
                         </span>
                         <a href="<?php echo esc_url($c_link); ?>"
-                           <?php echo (filter_var($c_link, FILTER_VALIDATE_URL) && strpos($c_link, home_url()) === false) ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>
-                           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container hover:bg-primary text-ink-primary hover:text-on-primary font-bold text-xs uppercase tracking-wider transition-all duration-200 group-hover:bg-primary group-hover:text-on-primary shadow-xs">
+                           <?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>
+                           class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary hover:bg-moss-light text-on-primary font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow active:scale-95">
                           <span><?php echo esc_html($c_btn); ?></span>
-                          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                         </a>
                       </div>
+                    </div>
+
+                    <!-- Coluna de Imagem / Fotografia (5 colunas no desktop) -->
+                    <div class="lg:col-span-5 relative overflow-hidden bg-surface-container min-h-[220px] sm:min-h-[280px] lg:min-h-full order-1 lg:order-2 flex items-center justify-center">
+                      <?php if ($c_has_thumb && !empty($c_thumb)) : ?>
+                        <img src="<?php echo esc_url($c_thumb); ?>" alt="<?php echo esc_attr($c_title); ?>"
+                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" />
+                        <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/50 via-transparent to-transparent"></div>
+                      <?php else : ?>
+                        <div class="w-full h-full bg-gradient-to-br from-primary/15 via-surface-container to-secondary/20 flex flex-col items-center justify-center p-8 text-center">
+                          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-surface-container-lowest/90 text-primary flex items-center justify-center shadow-sm mb-3">
+                            <span class="material-symbols-outlined text-[40px] sm:text-[48px]">
+                              <?php echo esc_attr($c_icon); ?>
+                            </span>
+                          </div>
+                          <span class="font-headline-sm text-xs sm:text-sm font-bold text-ink-primary">Aliança Jurídica pela Amazônia</span>
+                          <span class="text-[11px] text-on-surface-variant mt-1"><?php echo esc_html($type_label); ?></span>
+                        </div>
+                      <?php endif; ?>
                     </div>
 
                   </article>
                 </div>
             <?php
+                $slide_idx++;
             endwhile;
             wp_reset_postdata();
             ?>
           </div>
+
+          <!-- Barra de Progresso do Timer de 20s no rodapé do banner -->
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-surface-container overflow-hidden pointer-events-none">
+            <div id="destaques-progress" class="h-full bg-primary/70 transition-all ease-linear" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Indicadores / Dots de Navegação -->
+        <div class="flex items-center justify-center gap-2 mt-4" id="destaques-dots">
+          <?php for ($i = 0; $i < $total_slides; $i++) : ?>
+            <button type="button" class="destaques-dot w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer <?php echo ($i === 0) ? 'bg-primary w-8' : 'bg-surface-container-highest hover:bg-outline'; ?>"
+                    data-dot-index="<?php echo esc_attr($i); ?>"
+                    aria-label="<?php echo esc_attr("Ir para o slide " . ($i + 1)); ?>"></button>
+          <?php endfor; ?>
         </div>
 
       </div>
     </section>
 
-    <!-- SCRIPT DE CONTROLE DO CARROSSEL DE DESTAQUES -->
+    <!-- SCRIPT DE CONTROLE DO CARROSSEL DE DESTAQUES (20s + PAUSA NO HOVER) -->
     <script>
     (function() {
-      function initDestaquesCarousel() {
+      function initDestaquesFullCarousel() {
+        var container = document.getElementById('destaques-container');
         var track = document.getElementById('destaques-track');
         var prevBtn = document.getElementById('destaques-prev');
         var nextBtn = document.getElementById('destaques-next');
+        var currentNumEl = document.getElementById('destaques-current-num');
+        var progressBar = document.getElementById('destaques-progress');
+        var dots = document.querySelectorAll('.destaques-dot');
 
-        if (!track || !prevBtn || !nextBtn) return;
+        if (!track || !container) return;
 
-        function getCardWidth() {
-          var firstCard = track.querySelector('.destaques-slide');
-          return firstCard ? firstCard.offsetWidth + 24 : 380;
+        var slides = track.querySelectorAll('.destaques-slide');
+        var totalSlides = slides.length;
+        if (totalSlides <= 1) {
+          if (prevBtn) prevBtn.style.display = 'none';
+          if (nextBtn) nextBtn.style.display = 'none';
+          var counter = document.getElementById('destaques-counter');
+          if (counter) counter.style.display = 'none';
+          var dotsWrap = document.getElementById('destaques-dots');
+          if (dotsWrap) dotsWrap.style.display = 'none';
+          return;
         }
 
-        prevBtn.addEventListener('click', function() {
-          var amount = getCardWidth();
-          track.scrollBy({ left: -amount, behavior: 'smooth' });
-        });
+        var currentIndex = 0;
+        var progressInterval = null;
+        var duration = 20000; // 20 segundos exatamente como solicitado
+        var elapsed = 0;
+        var step = 100;
+        var isPaused = false;
 
-        nextBtn.addEventListener('click', function() {
-          var amount = getCardWidth();
-          track.scrollBy({ left: amount, behavior: 'smooth' });
-        });
+        function goToSlide(index) {
+          if (index < 0) {
+            index = totalSlides - 1;
+          } else if (index >= totalSlides) {
+            index = 0;
+          }
+          currentIndex = index;
+          track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
 
-        function updateButtons() {
-          var maxScroll = track.scrollWidth - track.clientWidth;
-          prevBtn.disabled = track.scrollLeft <= 5;
-          nextBtn.disabled = track.scrollLeft >= maxScroll - 5;
+          // Atualiza contador
+          if (currentNumEl) {
+            currentNumEl.textContent = currentIndex + 1;
+          }
+
+          // Atualiza dots
+          dots.forEach(function(dot, idx) {
+            if (idx === currentIndex) {
+              dot.classList.add('bg-primary', 'w-8');
+              dot.classList.remove('bg-surface-container-highest', 'w-2.5');
+            } else {
+              dot.classList.remove('bg-primary', 'w-8');
+              dot.classList.add('bg-surface-container-highest', 'w-2.5');
+            }
+          });
+
+          // Reinicia barra de progresso
+          elapsed = 0;
+          if (progressBar) progressBar.style.width = '0%';
         }
 
-        track.addEventListener('scroll', updateButtons, { passive: true });
-        window.addEventListener('resize', updateButtons, { passive: true });
-        updateButtons();
+        function nextSlide() {
+          goToSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+          goToSlide(currentIndex - 1);
+        }
+
+        // Timer de 20s com animação de barra de progresso
+        function startTimer() {
+          isPaused = false;
+          clearInterval(progressInterval);
+          progressInterval = setInterval(function() {
+            if (!isPaused) {
+              elapsed += step;
+              var percent = Math.min(100, (elapsed / duration) * 100);
+              if (progressBar) {
+                progressBar.style.width = percent + '%';
+              }
+              if (elapsed >= duration) {
+                nextSlide();
+              }
+            }
+          }, step);
+        }
+
+        function pauseTimer() {
+          isPaused = true;
+        }
+
+        function resumeTimer() {
+          isPaused = false;
+        }
+
+        // Eventos de Botões Prev / Next
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            prevSlide();
+          });
+        }
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            nextSlide();
+          });
+        }
+
+        // Eventos de Clique nos Dots
+        dots.forEach(function(dot) {
+          dot.addEventListener('click', function(e) {
+            e.preventDefault();
+            var idx = parseInt(this.getAttribute('data-dot-index'), 10);
+            goToSlide(idx);
+          });
+        });
+
+        // Pausar quando o mouse estiver em cima para ler (conforme solicitado pelo usuário)
+        var section = document.getElementById('destaques-carrossel');
+        if (section) {
+          section.addEventListener('mouseenter', pauseTimer);
+          section.addEventListener('mouseleave', resumeTimer);
+          section.addEventListener('touchstart', pauseTimer, { passive: true });
+          section.addEventListener('touchend', resumeTimer, { passive: true });
+        }
+
+        // Suporte a swipe de toque em telas móveis
+        var startX = 0;
+        var endX = 0;
+        container.addEventListener('touchstart', function(e) {
+          startX = e.changedTouches[0].screenX;
+          pauseTimer();
+        }, { passive: true });
+
+        container.addEventListener('touchend', function(e) {
+          endX = e.changedTouches[0].screenX;
+          resumeTimer();
+          var diff = endX - startX;
+          if (Math.abs(diff) > 50) {
+            if (diff < 0) {
+              nextSlide(); // swipe esquerda -> próximo
+            } else {
+              prevSlide(); // swipe direita -> anterior
+            }
+          }
+        }, { passive: true });
+
+        // Inicia o timer de 20 segundos
+        startTimer();
       }
 
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initDestaquesCarousel);
+        document.addEventListener('DOMContentLoaded', initDestaquesFullCarousel);
       } else {
-        initDestaquesCarousel();
+        initDestaquesFullCarousel();
       }
     })();
     </script>
     <?php endif; ?>
-
 
     <!-- SECTION 1: SOBRE NÓS (APRESENTAR QUEM SOMOS) -->
     <section class="w-full py-space-xl bg-surface" id="sobre-nos">
