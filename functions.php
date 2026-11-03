@@ -286,6 +286,41 @@ function aja_register_required_categories() {
             );
         }
     }
+    // Tags padrão da seção de Notícias (filtros editoriais oficiais)
+    $default_news_tags = array(
+        'cobertura' => array(
+            'name' => 'Coberturas & Eventos',
+            'slug' => 'cobertura',
+            'desc' => 'Coberturas jornalísticas, eventos, conferências e reuniões institucionais da AJA',
+        ),
+        'comunicado' => array(
+            'name' => 'Comunicados Oficiais',
+            'slug' => 'comunicado',
+            'desc' => 'Notas públicas, posicionamentos oficiais e comunicados da Aliança Jurídica pela Amazônia',
+        ),
+        'territorio' => array(
+            'name' => 'Ações em Territórios',
+            'slug' => 'territorio',
+            'desc' => 'Atuação direta nos territórios, povos indígenas, comunidades quilombolas e ribeirinhas',
+        ),
+    );
+
+    foreach ($default_news_tags as $slug => $data) {
+        $term = get_term_by('slug', $slug, 'post_tag');
+        if (!$term) {
+            $term_by_name = get_term_by('name', $data['name'], 'post_tag');
+            if (!$term_by_name) {
+                wp_insert_term(
+                    $data['name'],
+                    'post_tag',
+                    array(
+                        'description' => $data['desc'],
+                        'slug'        => $data['slug'],
+                    )
+                );
+            }
+        }
+    }
 }
 add_action('init', 'aja_register_required_categories');
 
@@ -404,6 +439,10 @@ function aja_render_post_metabox($post) {
     $pub_axis        = get_post_meta($post->ID, '_aja_pub_axis', true);
     $team_instance   = get_post_meta($post->ID, '_aja_team_instance', true) ?: 'comite';
     $tooltip         = get_post_meta($post->ID, '_aja_tooltip', true);
+    $noticia_tag     = get_post_meta($post->ID, '_aja_noticia_tag', true);
+    if (empty($noticia_tag) && function_exists('aja_get_noticia_tag')) {
+        $noticia_tag = aja_get_noticia_tag($post->ID);
+    }
 
     // Detecta a aba inicial com base nas categorias do post
     $post_categories = wp_get_post_categories($post->ID, ['fields' => 'slugs']);
@@ -788,8 +827,53 @@ function aja_render_post_metabox($post) {
             <div style="background: #fdf4ff; border-left: 4px solid #a855f7; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
                 <strong style="color: #7e22ce; font-size: 13px;">📰 Cadastrando Notícia ou Comunicado AJA</strong>
                 <p style="margin: 4px 0 0 0; font-size: 12px; color: #9333ea;">
-                    Preencha as informações da notícia ou matéria. Esta postagem aparecerá automaticamente na seção <strong>Notícias</strong> na página inicial.
+                    Preencha as informações da notícia ou matéria. Esta postagem aparecerá automaticamente na seção <strong>Notícias</strong> na página inicial e na página Notícias.
                 </p>
+            </div>
+
+            <!-- SELETOR DE TAG / CATEGORIA DA NOTÍCIA (FILTRO OBRIGATÓRIO DO SITE) -->
+            <div style="background: #ffffff; border: 2px solid #c084fc; border-radius: 8px; padding: 16px 18px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 20px;">🏷️</span>
+                        <strong style="color: #6b21a8; font-size: 14px;">Selecione a Tag / Categoria da Notícia (Obrigatório para os Filtros do Site):</strong>
+                    </div>
+                    <span style="font-size: 11px; background: #f3e8ff; color: #7e22ce; padding: 2px 8px; border-radius: 4px; font-weight: 600;">
+                        Filtro na Home e na página Notícias
+                    </span>
+                </div>
+                <p style="margin: 0 0 14px 0; font-size: 12px; color: #7e22ce;">
+                    Escolha uma das 3 tags editoriais oficiais da AJA para classificar esta notícia:
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;" id="aja-noticia-tag-group">
+                    <!-- Opção 1: Coberturas & Eventos -->
+                    <label class="aja-noticia-tag-card" style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid <?php echo ($noticia_tag === 'cobertura' || empty($noticia_tag)) ? '#9333ea' : '#e2e8f0'; ?>; background: <?php echo ($noticia_tag === 'cobertura' || empty($noticia_tag)) ? '#faf5ff' : '#ffffff'; ?>; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+                        <input type="radio" name="noticia_tag" value="cobertura" <?php checked($noticia_tag === 'cobertura' || empty($noticia_tag)); ?> style="accent-color: #9333ea; width: 18px; height: 18px; margin-top: 2px;">
+                        <div>
+                            <strong style="display: block; font-size: 13px; color: #1e293b;">🌐 Coberturas &amp; Eventos</strong>
+                            <span style="display: block; font-size: 11px; color: #64748b; margin-top: 2px;">Encontros, seminários, fóruns e cobertura jornalística de eventos.</span>
+                        </div>
+                    </label>
+
+                    <!-- Opção 2: Comunicados Oficiais -->
+                    <label class="aja-noticia-tag-card" style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid <?php echo ($noticia_tag === 'comunicado') ? '#9333ea' : '#e2e8f0'; ?>; background: <?php echo ($noticia_tag === 'comunicado') ? '#faf5ff' : '#ffffff'; ?>; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+                        <input type="radio" name="noticia_tag" value="comunicado" <?php checked($noticia_tag, 'comunicado'); ?> style="accent-color: #9333ea; width: 18px; height: 18px; margin-top: 2px;">
+                        <div>
+                            <strong style="display: block; font-size: 13px; color: #1e293b;">📢 Comunicados Oficiais</strong>
+                            <span style="display: block; font-size: 11px; color: #64748b; margin-top: 2px;">Notas públicas, posicionamentos institucionais e manifestações.</span>
+                        </div>
+                    </label>
+
+                    <!-- Opção 3: Ações em Territórios -->
+                    <label class="aja-noticia-tag-card" style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 2px solid <?php echo ($noticia_tag === 'territorio') ? '#9333ea' : '#e2e8f0'; ?>; background: <?php echo ($noticia_tag === 'territorio') ? '#faf5ff' : '#ffffff'; ?>; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+                        <input type="radio" name="noticia_tag" value="territorio" <?php checked($noticia_tag, 'territorio'); ?> style="accent-color: #9333ea; width: 18px; height: 18px; margin-top: 2px;">
+                        <div>
+                            <strong style="display: block; font-size: 13px; color: #1e293b;">🌳 Ações em Territórios</strong>
+                            <span style="display: block; font-size: 11px; color: #64748b; margin-top: 2px;">Atuação local, povos indígenas, comunidades tradicionais e clínicas.</span>
+                        </div>
+                    </label>
+                </div>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
@@ -980,6 +1064,37 @@ function aja_render_post_metabox($post) {
                 });
             }
 
+            // Atualização visual interativa do seletor de Tags de Notícia
+            var tagRadios = document.querySelectorAll('input[name="noticia_tag"]');
+            var tagCards  = document.querySelectorAll('.aja-noticia-tag-card');
+            var badgeInput = document.getElementById('noticia_badge');
+
+            tagRadios.forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    tagCards.forEach(function(card) {
+                        var cardRadio = card.querySelector('input[type="radio"]');
+                        if (cardRadio && cardRadio.checked) {
+                            card.style.borderColor = '#9333ea';
+                            card.style.background = '#faf5ff';
+                        } else {
+                            card.style.borderColor = '#e2e8f0';
+                            card.style.background = '#ffffff';
+                        }
+                    });
+
+                    // Sugestão automática do formato/selo no campo Badge caso esteja vazio ou com valor padrão
+                    if (badgeInput) {
+                        var val = this.value;
+                        var defaultBadges = ['Notícia', 'Coberturas & Eventos', 'Comunicado Oficial', 'Ações em Territórios', ''];
+                        if (defaultBadges.indexOf(badgeInput.value.trim()) !== -1) {
+                            if (val === 'cobertura') badgeInput.value = 'Coberturas & Eventos';
+                            else if (val === 'comunicado') badgeInput.value = 'Comunicado Oficial';
+                            else if (val === 'territorio') badgeInput.value = 'Ações em Territórios';
+                        }
+                    }
+                });
+            });
+
             setTimeout(listenCategoryCheckboxes, 1000);
         }
 
@@ -1087,11 +1202,24 @@ function aja_save_post_metabox($post_id) {
         }
 
     } elseif ($active_tab === 'noticias') {
-        $badge    = isset($_POST['noticia_badge']) ? sanitize_text_field($_POST['noticia_badge']) : '';
-        $subtitle = isset($_POST['noticia_subtitle']) ? sanitize_text_field($_POST['noticia_subtitle']) : '';
-        $location = isset($_POST['noticia_location']) ? sanitize_text_field($_POST['noticia_location']) : '';
-        $link     = isset($_POST['noticia_link']) ? esc_url_raw($_POST['noticia_link']) : '';
-        $btn      = isset($_POST['noticia_btn']) ? sanitize_text_field($_POST['noticia_btn']) : '';
+        $badge       = isset($_POST['noticia_badge']) ? sanitize_text_field($_POST['noticia_badge']) : '';
+        $subtitle    = isset($_POST['noticia_subtitle']) ? sanitize_text_field($_POST['noticia_subtitle']) : '';
+        $location    = isset($_POST['noticia_location']) ? sanitize_text_field($_POST['noticia_location']) : '';
+        $link        = isset($_POST['noticia_link']) ? esc_url_raw($_POST['noticia_link']) : '';
+        $btn         = isset($_POST['noticia_btn']) ? sanitize_text_field($_POST['noticia_btn']) : '';
+        $noticia_tag = isset($_POST['noticia_tag']) ? sanitize_key($_POST['noticia_tag']) : '';
+
+        // Se badge estiver vazio, preenche automaticamente com o rótulo da tag selecionada
+        if (empty($badge)) {
+            $tag_labels = array(
+                'cobertura'  => 'Coberturas & Eventos',
+                'comunicado' => 'Comunicado Oficial',
+                'territorio' => 'Ações em Territórios'
+            );
+            if (!empty($noticia_tag) && isset($tag_labels[$noticia_tag])) {
+                $badge = $tag_labels[$noticia_tag];
+            }
+        }
 
         update_post_meta($post_id, '_aja_badge', $badge);
         update_post_meta($post_id, '_aja_subtitle', $subtitle);
@@ -1100,6 +1228,20 @@ function aja_save_post_metabox($post_id) {
         update_post_meta($post_id, '_aja_action_link', $link);
         update_post_meta($post_id, '_aja_pdf_url', $link);
         update_post_meta($post_id, '_aja_action_label', $btn);
+
+        if (!empty($noticia_tag)) {
+            update_post_meta($post_id, '_aja_noticia_tag', $noticia_tag);
+
+            // Sincroniza com a taxonomia nativa de tags do WordPress (post_tag)
+            $tag_names_map = array(
+                'cobertura'  => 'Coberturas & Eventos',
+                'comunicado' => 'Comunicados Oficiais',
+                'territorio' => 'Ações em Territórios'
+            );
+            if (isset($tag_names_map[$noticia_tag])) {
+                wp_set_post_tags($post_id, array($tag_names_map[$noticia_tag]), true);
+            }
+        }
 
     } else { // Portfólio (ou geral)
         $badge    = isset($_POST['portfolio_badge']) ? sanitize_text_field($_POST['portfolio_badge']) : '';
@@ -1145,6 +1287,95 @@ add_action('save_post', 'aja_save_post_metabox');
 /**
  * 6. Funções Utilitárias para Resgate de Informações
  */
+/**
+ * Retorna o slug da tag de notícia ('cobertura', 'comunicado' ou 'territorio')
+ */
+function aja_get_noticia_tag($post_id) {
+    $tag = get_post_meta($post_id, '_aja_noticia_tag', true);
+    if (!empty($tag)) {
+        return $tag;
+    }
+
+    // Tenta detectar pelas tags nativas do WordPress
+    $wp_tags = wp_get_post_tags($post_id);
+    if (!empty($wp_tags)) {
+        foreach ($wp_tags as $t) {
+            $slug = $t->slug;
+            $name = mb_strtolower($t->name);
+            if ($slug === 'comunicado' || strpos($name, 'comunicado') !== false) {
+                return 'comunicado';
+            }
+            if ($slug === 'territorio' || strpos($name, 'territ') !== false) {
+                return 'territorio';
+            }
+            if ($slug === 'cobertura' || strpos($name, 'cobertura') !== false || strpos($name, 'evento') !== false) {
+                return 'cobertura';
+            }
+        }
+    }
+
+    // Heurística de fallback pelo texto
+    $badge = get_post_meta($post_id, '_aja_badge', true);
+    $sub   = get_post_meta($post_id, '_aja_subtitle', true);
+    $loc   = get_post_meta($post_id, '_aja_location', true);
+    $text_all = mb_strtolower(get_the_title($post_id) . ' ' . $badge . ' ' . $sub . ' ' . $loc);
+
+    if (strpos($text_all, 'comunicado') !== false || strpos($text_all, 'nota') !== false || strpos($text_all, 'oficial') !== false) {
+        return 'comunicado';
+    }
+    if (strpos($text_all, 'territór') !== false || strpos($text_all, 'comunidade') !== false || strpos($text_all, 'indígen') !== false || strpos($text_all, 'quilomb') !== false || strpos($text_all, 'tapajós') !== false || strpos($text_all, 'campo') !== false) {
+        return 'territorio';
+    }
+
+    return 'cobertura';
+}
+
+/**
+ * Retorna o rótulo formatado com ícone da tag da notícia
+ */
+function aja_get_noticia_tag_label($post_id) {
+    $tag = aja_get_noticia_tag($post_id);
+    $labels = array(
+        'cobertura'  => '🌐 Coberturas & Eventos',
+        'comunicado' => '📢 Comunicados Oficiais',
+        'territorio' => '🌳 Ações em Territórios'
+    );
+    return isset($labels[$tag]) ? $labels[$tag] : '🌐 Coberturas & Eventos';
+}
+
+/**
+ * Coluna Administrativa: Exibe a Tag de Notícia na listagem de posts
+ */
+function aja_add_noticia_tag_column($columns) {
+    $new = array();
+    foreach ($columns as $k => $v) {
+        $new[$k] = $v;
+        if ($k === 'title') {
+            $new['aja_noticia_tag'] = '🏷️ Tag da Notícia';
+        }
+    }
+    return $new;
+}
+add_filter('manage_post_posts_columns', 'aja_add_noticia_tag_column');
+
+function aja_render_noticia_tag_column($column, $post_id) {
+    if ($column === 'aja_noticia_tag') {
+        $cats = wp_get_post_categories($post_id, array('fields' => 'slugs'));
+        if (in_array('noticias', $cats)) {
+            $tag = aja_get_noticia_tag($post_id);
+            $badges = array(
+                'cobertura'  => '<span style="display:inline-block; padding: 2px 8px; border-radius: 4px; background: #ede9fe; color: #6b21a8; font-weight: 700; font-size: 11px;">🌐 Coberturas & Eventos</span>',
+                'comunicado' => '<span style="display:inline-block; padding: 2px 8px; border-radius: 4px; background: #fef3c7; color: #92400e; font-weight: 700; font-size: 11px;">📢 Comunicados</span>',
+                'territorio' => '<span style="display:inline-block; padding: 2px 8px; border-radius: 4px; background: #dcfce7; color: #166534; font-weight: 700; font-size: 11px;">🌳 Territórios</span>',
+            );
+            echo isset($badges[$tag]) ? $badges[$tag] : '<span style="color:#94a3b8;">—</span>';
+        } else {
+            echo '<span style="color:#cbd5e1;">—</span>';
+        }
+    }
+}
+add_action('manage_post_posts_custom_column', 'aja_render_noticia_tag_column', 10, 2);
+
 function aja_asset($path) {
     return get_template_directory_uri() . '/assets/' . ltrim($path, '/');
 }

@@ -94,10 +94,10 @@ get_header();
                 🌐 Coberturas & Eventos
               </button>
               <button type="button" class="noticias-filter-btn px-4 py-2 rounded-lg bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-high transition-all duration-200 shadow-sm font-semibold" data-filter="comunicado">
-                📜 Comunicados Oficiais
+                📢 Comunicados Oficiais
               </button>
               <button type="button" class="noticias-filter-btn px-4 py-2 rounded-lg bg-surface-container border border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider hover:bg-surface-container-high transition-all duration-200 shadow-sm font-semibold" data-filter="territorio">
-                📍 Ações em Territórios
+                🌳 Ações em Territórios
               </button>
             </div>
 
@@ -139,13 +139,8 @@ get_header();
               $news_thumb    = $has_thumb ? get_the_post_thumbnail_url($news_id, 'large') : '';
 
               // Categorização para os filtros
+              $filter_cat = function_exists('aja_get_noticia_tag') ? aja_get_noticia_tag($news_id) : 'cobertura';
               $text_all = mb_strtolower(get_the_title() . ' ' . $news_badge . ' ' . $news_sub . ' ' . $news_excerpt . ' ' . $news_loc);
-              $filter_cat = 'cobertura';
-              if (strpos($text_all, 'comunicado') !== false || strpos($text_all, 'nota') !== false || strpos($text_all, 'oficial') !== false) {
-                  $filter_cat = 'comunicado';
-              } elseif (strpos($text_all, 'territór') !== false || strpos($text_all, 'comunidade') !== false || strpos($text_all, 'indígen') !== false || strpos($text_all, 'quilomb') !== false || strpos($text_all, 'tapajós') !== false || strpos($text_all, 'campo') !== false) {
-                  $filter_cat = 'territorio';
-              }
               ?>
               <div class="noticia-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col border border-border-subtle group"
                    data-category="<?php echo esc_attr($filter_cat); ?>"
