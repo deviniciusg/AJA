@@ -403,8 +403,79 @@ function aja_register_post_metaboxes() {
         'normal',
         'high'
     );
+    add_meta_box(
+        'aja_carousel_side_box',
+        '⭐ Destaque no Carrossel da Home',
+        'aja_render_carousel_sidebar_metabox',
+        'post',
+        'side',
+        'high'
+    );
 }
 add_action('add_meta_boxes', 'aja_register_post_metaboxes');
+
+/**
+ * Metabox Lateral: Destaque no Carrossel da Home
+ */
+function aja_render_carousel_sidebar_metabox($post) {
+    $carousel_featured = get_post_meta($post->ID, '_aja_carousel_featured', true);
+    ?>
+    <div style="padding: 4px 0;">
+        <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 13px; font-weight: 600; color: #92400e; background: #fffbeb; padding: 10px 12px; border-radius: 6px; border: 1px solid #fde68a;">
+            <input type="checkbox" name="carousel_featured_side" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin-top: 1px; shrink: 0;">
+            <span>⭐ Adicionar em destaque no carrossel</span>
+        </label>
+        <p style="margin: 8px 0 0 4px; font-size: 11px; color: #64748b; line-height: 1.4;">
+            Disponível para <strong>Notícias</strong>, <strong>Editais</strong> e <strong>Publicações</strong>. O post aparecerá no carrossel entre a Home e o Quem Somos Nós.
+        </p>
+    </div>
+    <script>
+    (function() {
+        var sideCb = document.querySelector('input[name="carousel_featured_side"]');
+        var mainCbs = document.querySelectorAll('input[name="carousel_featured"]');
+        if (sideCb && mainCbs.length) {
+            sideCb.addEventListener('change', function() {
+                var checked = this.checked;
+                mainCbs.forEach(function(cb) { cb.checked = checked; });
+            });
+            mainCbs.forEach(function(cb) {
+                cb.addEventListener('change', function() {
+                    sideCb.checked = this.checked;
+                });
+            });
+        }
+    })();
+    </script>
+    <?php
+}
+
+/**
+ * Coluna Administrativa: Exibe o status de Destaque no Carrossel na listagem de posts
+ */
+function aja_add_carousel_column($columns) {
+    $new = array();
+    foreach ($columns as $k => $v) {
+        $new[$k] = $v;
+        if ($k === 'title') {
+            $new['aja_carousel_col'] = '⭐ Carrossel';
+        }
+    }
+    return $new;
+}
+add_filter('manage_post_posts_columns', 'aja_add_carousel_column');
+
+function aja_render_carousel_column($column, $post_id) {
+    if ($column === 'aja_carousel_col') {
+        $featured = get_post_meta($post_id, '_aja_carousel_featured', true);
+        if ($featured === '1') {
+            echo '<span style="display:inline-flex; align-items:center; gap:3px; padding: 2px 7px; border-radius: 4px; background: #fef3c7; color: #b45309; font-weight: 700; font-size: 11px; border: 1px solid #fde68a;">⭐ No Carrossel</span>';
+        } else {
+            echo '<span style="color: #cbd5e1;">—</span>';
+        }
+    }
+}
+add_action('manage_post_posts_custom_column', 'aja_render_carousel_column', 10, 2);
+
 
 function aja_render_post_metabox($post) {
     wp_nonce_field('aja_save_post_meta', 'aja_post_meta_nonce');
@@ -440,6 +511,7 @@ function aja_render_post_metabox($post) {
     $team_instance   = get_post_meta($post->ID, '_aja_team_instance', true) ?: 'comite';
     $tooltip         = get_post_meta($post->ID, '_aja_tooltip', true);
     $noticia_tag     = get_post_meta($post->ID, '_aja_noticia_tag', true);
+    $carousel_featured = get_post_meta($post->ID, '_aja_carousel_featured', true);
     if (empty($noticia_tag) && function_exists('aja_get_noticia_tag')) {
         $noticia_tag = aja_get_noticia_tag($post->ID);
     }
@@ -747,6 +819,28 @@ function aja_render_post_metabox($post) {
                 <span style="display:block; font-size:11px; color:#78350f; margin-top:4px; margin-left: 24px;">
                     Se marcado, este edital ganhará um card grande com imagem de fundo no início da lista.
                 </span>
+    
+            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DA HOME -->
+            <div style="margin-top: 18px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
+                    <input type="checkbox" name="carousel_featured" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
+                    ⭐ Adicionar em destaque no carrossel (Home)
+                </label>
+                <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
+                    Exibe este edital no carrossel de destaques entre a Home e o Quem Somos Nós
+                </span>
+            </div>
+        </div>
+
+            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DA HOME -->
+            <div style="margin-top: 18px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
+                    <input type="checkbox" name="carousel_featured" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
+                    ⭐ Adicionar em destaque no carrossel (Home)
+                </label>
+                <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
+                    Exibe este edital no carrossel de destaques entre a Home e o Quem Somos Nós
+                </span>
             </div>
         </div>
 
@@ -817,6 +911,17 @@ function aja_render_post_metabox($post) {
                     <input type="text" id="pub_btn" name="pub_btn" value="<?php echo esc_attr($action_label); ?>" style="width: 100%; max-width: 400px; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Baixar Nota Técnica (PDF), Ler Publicação, Acessar Estudo">
                     <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Padrão: "Baixar Publicação (PDF)".</span>
                 </div>
+            </div>
+
+            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DA HOME -->
+            <div style="margin-top: 18px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
+                    <input type="checkbox" name="carousel_featured" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
+                    ⭐ Adicionar em destaque no carrossel (Home)
+                </label>
+                <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
+                    Exibe esta publicação no carrossel de destaques entre a Home e o Quem Somos Nós
+                </span>
             </div>
         </div>
 
@@ -916,6 +1021,17 @@ function aja_render_post_metabox($post) {
                     <input type="text" id="noticia_btn" name="noticia_btn" value="<?php echo esc_attr($action_label); ?>" style="width: 100%; max-width: 400px; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Ler Notícia Completa, Acessar Matéria">
                     <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Padrão caso deixe em branco: "Ler Notícia Completa".</span>
                 </div>
+            </div>
+
+            <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DA HOME -->
+            <div style="margin-top: 18px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13px; color: #92400e;">
+                    <input type="checkbox" name="carousel_featured" value="1" <?php checked($carousel_featured, '1'); ?> style="accent-color: #d97706; width: 18px; height: 18px; margin: 0;">
+                    ⭐ Adicionar em destaque no carrossel (Home)
+                </label>
+                <span style="font-size: 11px; color: #b45309; background: #fef3c7; padding: 3px 10px; border-radius: 4px; font-weight: 600;">
+                    Exibe esta notícia no carrossel de destaques entre a Home e o Quem Somos Nós
+                </span>
             </div>
 
             <div style="margin-top: 16px; padding: 12px 16px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; font-size: 12px; color: #475569; display: flex; align-items: center; gap: 10px;">
@@ -1117,6 +1233,13 @@ function aja_save_post_metabox($post_id) {
     }
     if (!current_user_can('edit_post', $post_id)) {
         return;
+    }
+
+    // Salva a opção de Destaque no Carrossel da Home (válido para Notícias, Editais e Publicações)
+    if (isset($_POST['carousel_featured']) || isset($_POST['carousel_featured_side'])) {
+        update_post_meta($post_id, '_aja_carousel_featured', '1');
+    } else {
+        update_post_meta($post_id, '_aja_carousel_featured', '0');
     }
 
     $active_tab = isset($_POST['aja_active_tab']) ? sanitize_text_field($_POST['aja_active_tab']) : 'portfolio';

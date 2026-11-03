@@ -134,6 +134,266 @@ get_header();
       </div>
     </section>
 
+    <!-- ========================================================================= -->
+    <!-- SECTION DESTAQUES: CARROSSEL DE NOTÍCIAS, EDITAIS E PUBLICAÇÕES         -->
+    <!-- ========================================================================= -->
+    <?php
+    $carousel_query = new WP_Query(array(
+        'category_name'  => 'noticias,editais,publicacoes',
+        'posts_per_page' => 12,
+        'meta_query'     => array(
+            array(
+                'key'     => '_aja_carousel_featured',
+                'value'   => '1',
+                'compare' => '='
+            )
+        ),
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC'
+    ));
+
+    // Se ainda não houver nenhum post marcado manualmente com a flag, busca os mais recentes das 3 categorias
+    if (!$carousel_query->have_posts()) {
+        $carousel_query = new WP_Query(array(
+            'category_name'  => 'noticias,editais,publicacoes',
+            'posts_per_page' => 6,
+            'post_status'    => 'publish',
+            'orderby'        => 'date',
+            'order'          => 'DESC'
+        ));
+    }
+
+    if ($carousel_query->have_posts()) :
+    ?>
+    <section class="w-full py-12 lg:py-16 bg-surface-container-low border-b border-border-subtle overflow-hidden relative" id="destaques-carrossel">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+        
+        <!-- Header da Seção de Destaques -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4 reveal">
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-8 h-[2px] bg-secondary accent-line-expand"></span>
+              <span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Em Destaque</span>
+            </div>
+            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-ink-primary font-bold">
+              Destaques da Aliança
+            </h2>
+            <p class="font-body-md text-sm sm:text-base text-on-surface-variant mt-1.5 max-w-xl">
+              Notícias mais recentes, oportunidades abertas e publicações jurídicas em evidência na rede.
+            </p>
+          </div>
+
+          <!-- Controles de Navegação (Anterior / Próximo) -->
+          <div class="flex items-center gap-2 self-start sm:self-end shrink-0">
+            <button type="button" id="destaques-prev" aria-label="Slide anterior"
+                    class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary flex items-center justify-center transition-all shadow-sm active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer">
+              <span class="material-symbols-outlined text-[24px]">chevron_left</span>
+            </button>
+            <button type="button" id="destaques-next" aria-label="Próximo slide"
+                    class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-primary text-ink-primary hover:text-primary flex items-center justify-center transition-all shadow-sm active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer">
+              <span class="material-symbols-outlined text-[24px]">chevron_right</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pista do Carrossel (Snap Track) -->
+        <div class="relative -mx-margin-mobile px-margin-mobile lg:-mx-margin lg:px-margin">
+          <div id="destaques-track"
+               class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6 pt-1 items-stretch"
+               style="scrollbar-width: none; -ms-overflow-style: none;">
+            <?php
+            while ($carousel_query->have_posts()) :
+                $carousel_query->the_post();
+                $c_id       = get_the_ID();
+                $c_title    = get_the_title();
+                $c_link     = aja_get_post_action_link($c_id);
+                $c_cats     = wp_get_post_categories($c_id, array('fields' => 'slugs'));
+                $is_edital  = in_array('editais', $c_cats);
+                $is_pub     = in_array('publicacoes', $c_cats);
+                $is_news    = in_array('noticias', $c_cats);
+                
+                // Tipo e Rótulos Específicos
+                if ($is_edital) {
+                    $type_label = '📢 Edital';
+                    $type_badge_class = 'bg-amber-100 text-amber-900 border-amber-300';
+                    $c_btn_default = 'Acessar Edital';
+                    $c_icon = 'campaign';
+                } elseif ($is_pub) {
+                    $type_label = '📚 Publicação';
+                    $type_badge_class = 'bg-sky-100 text-sky-900 border-sky-300';
+                    $c_btn_default = 'Ler Publicação';
+                    $c_icon = 'menu_book';
+                } else {
+                    $type_label = '📰 Notícia';
+                    $type_badge_class = 'bg-purple-100 text-purple-900 border-purple-300';
+                    $c_btn_default = 'Ler Notícia';
+                    $c_icon = 'newspaper';
+                }
+
+                $c_badge    = aja_get_post_badge($c_id, '');
+                $c_subtitle = aja_get_post_subtitle($c_id, '');
+                $c_loc      = aja_get_post_location($c_id, '');
+                $c_btn      = aja_get_post_action_label($c_id, $c_btn_default);
+                $c_has_thumb= has_post_thumbnail($c_id);
+                $c_thumb    = $c_has_thumb ? get_the_post_thumbnail_url($c_id, 'large') : '';
+                $c_excerpt  = get_the_excerpt() ?: wp_trim_words(get_the_content(), 22);
+                $is_explicit_featured = (get_post_meta($c_id, '_aja_carousel_featured', true) === '1');
+                ?>
+                <div class="destaques-slide snap-start shrink-0 w-[85vw] sm:w-[380px] lg:w-[calc(33.333%-16px)] flex flex-col">
+                  <article class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-border-subtle shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col justify-between h-full group relative">
+                    
+                    <!-- Imagem ou Banner de Cabeçalho -->
+                    <div class="h-48 sm:h-52 w-full overflow-hidden relative bg-surface-container shrink-0">
+                      <?php if ($c_has_thumb && !empty($c_thumb)) : ?>
+                        <img src="<?php echo esc_url($c_thumb); ?>" alt="<?php echo esc_attr($c_title); ?>"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+                      <?php else : ?>
+                        <div class="w-full h-full bg-gradient-to-br from-primary/15 via-surface-container to-secondary/15 flex flex-col items-center justify-center p-6 text-center">
+                          <span class="material-symbols-outlined text-[48px] text-primary/40 group-hover:scale-110 transition-transform duration-300">
+                            <?php echo esc_attr($c_icon); ?>
+                          </span>
+                          <span class="text-xs font-label-sm uppercase tracking-wider text-outline font-bold mt-2">Aliança Jurídica pela Amazônia</span>
+                        </div>
+                      <?php endif; ?>
+
+                      <!-- Badges sobre a Imagem -->
+                      <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-label-sm font-bold uppercase tracking-wider border shadow-xs backdrop-blur-sm <?php echo esc_attr($type_badge_class); ?>">
+                          <?php echo esc_html($type_label); ?>
+                        </span>
+                        <?php if ($is_explicit_featured) : ?>
+                          <span class="px-2.5 py-1 rounded-md text-[10px] font-label-sm font-bold uppercase tracking-wider bg-amber-500 text-white shadow-xs flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">star</span>
+                            <span>Destaque</span>
+                          </span>
+                        <?php endif; ?>
+                      </div>
+
+                      <!-- Data / Local sobre a foto -->
+                      <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-semibold text-white/95 text-shadow-sm pointer-events-none drop-shadow">
+                        <?php if (!empty($c_loc)) : ?>
+                          <span class="flex items-center gap-1 truncate max-w-[65%]">
+                            <span class="material-symbols-outlined text-[14px]"><?php echo $is_edital ? 'schedule' : 'location_on'; ?></span>
+                            <span class="truncate"><?php echo esc_html($c_loc); ?></span>
+                          </span>
+                        <?php else : ?>
+                          <span></span>
+                        <?php endif; ?>
+                        <span class="flex items-center gap-1 shrink-0 ml-auto">
+                          <span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                          <span><?php echo esc_html(get_the_date('d/m/Y')); ?></span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Conteúdo do Card -->
+                    <div class="p-6 flex flex-col flex-1 justify-between">
+                      <div>
+                        <!-- Chapéu / Subtítulo / Badge adicional -->
+                        <?php if (!empty($c_badge) || !empty($c_subtitle)) : ?>
+                          <div class="flex items-center gap-2 mb-2.5 flex-wrap">
+                            <?php if (!empty($c_badge)) : ?>
+                              <span class="text-[11px] font-label-sm font-bold text-secondary uppercase tracking-wider">
+                                <?php echo esc_html($c_badge); ?>
+                              </span>
+                            <?php endif; ?>
+                            <?php if (!empty($c_badge) && !empty($c_subtitle)) : ?>
+                              <span class="text-outline text-xs">•</span>
+                            <?php endif; ?>
+                            <?php if (!empty($c_subtitle)) : ?>
+                              <span class="text-xs font-semibold text-clay-warm truncate max-w-[220px]">
+                                <?php echo esc_html($c_subtitle); ?>
+                              </span>
+                            <?php endif; ?>
+                          </div>
+                        <?php endif; ?>
+
+                        <!-- Título -->
+                        <h3 class="font-title-lg text-lg font-bold text-ink-primary group-hover:text-primary transition-colors leading-snug line-clamp-2 mb-3">
+                          <a href="<?php echo esc_url($c_link); ?>" <?php echo (filter_var($c_link, FILTER_VALIDATE_URL) && strpos($c_link, home_url()) === false) ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
+                            <?php echo esc_html($c_title); ?>
+                          </a>
+                        </h3>
+
+                        <!-- Resumo -->
+                        <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed line-clamp-3">
+                          <?php echo esc_html($c_excerpt); ?>
+                        </p>
+                      </div>
+
+                      <!-- Rodapé do Card com Botão de Ação -->
+                      <div class="pt-5 mt-5 border-t border-border-subtle flex items-center justify-between gap-3">
+                        <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">
+                          AJA • Oficial
+                        </span>
+                        <a href="<?php echo esc_url($c_link); ?>"
+                           <?php echo (filter_var($c_link, FILTER_VALIDATE_URL) && strpos($c_link, home_url()) === false) ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>
+                           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container hover:bg-primary text-ink-primary hover:text-on-primary font-bold text-xs uppercase tracking-wider transition-all duration-200 group-hover:bg-primary group-hover:text-on-primary shadow-xs">
+                          <span><?php echo esc_html($c_btn); ?></span>
+                          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </a>
+                      </div>
+                    </div>
+
+                  </article>
+                </div>
+            <?php
+            endwhile;
+            wp_reset_postdata();
+            ?>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SCRIPT DE CONTROLE DO CARROSSEL DE DESTAQUES -->
+    <script>
+    (function() {
+      function initDestaquesCarousel() {
+        var track = document.getElementById('destaques-track');
+        var prevBtn = document.getElementById('destaques-prev');
+        var nextBtn = document.getElementById('destaques-next');
+
+        if (!track || !prevBtn || !nextBtn) return;
+
+        function getCardWidth() {
+          var firstCard = track.querySelector('.destaques-slide');
+          return firstCard ? firstCard.offsetWidth + 24 : 380;
+        }
+
+        prevBtn.addEventListener('click', function() {
+          var amount = getCardWidth();
+          track.scrollBy({ left: -amount, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', function() {
+          var amount = getCardWidth();
+          track.scrollBy({ left: amount, behavior: 'smooth' });
+        });
+
+        function updateButtons() {
+          var maxScroll = track.scrollWidth - track.clientWidth;
+          prevBtn.disabled = track.scrollLeft <= 5;
+          nextBtn.disabled = track.scrollLeft >= maxScroll - 5;
+        }
+
+        track.addEventListener('scroll', updateButtons, { passive: true });
+        window.addEventListener('resize', updateButtons, { passive: true });
+        updateButtons();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDestaquesCarousel);
+      } else {
+        initDestaquesCarousel();
+      }
+    })();
+    </script>
+    <?php endif; ?>
+
 
     <!-- SECTION 1: SOBRE NÓS (APRESENTAR QUEM SOMOS) -->
     <section class="w-full py-space-xl bg-surface" id="sobre-nos">
