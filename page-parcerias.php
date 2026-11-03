@@ -47,141 +47,132 @@ get_header();
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- 1. Amazon Investor Coalition -->
-        <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
-          <div>
-            <div class="h-24 flex items-center justify-center p-2 mb-6 bg-surface-container-low rounded-xl border border-border-subtle/50">
-              <img alt="Amazon Investor Coalition" class="max-h-16 max-w-full object-contain" src="<?php echo esc_url(aja_asset('parceiros/amazon investor coalition.png')); ?>" />
-            </div>
-            <h3 class="font-title-lg text-lg font-bold text-ink-primary mb-2">Amazon Investor Coalition</h3>
-            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-4">
-              Aliança global de investidores e filantropos que canaliza recursos para a conservação florestal, bioeconomia inclusiva e o fortalecimento de salvaguardas socioambientais na Bacia Amazônica.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
-            <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Investimento & Bioeconomia</span>
-            <a href="https://amazoninvestor.org/" target="_blank" rel="noopener noreferrer" class="text-xs font-label-md text-primary font-bold hover:underline inline-flex items-center gap-1">
-              Conhecer <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-            </a>
-          </div>
-        </div>
+        <?php
+        $partners_page_query = new WP_Query(array(
+            'category_name'  => 'parceiros',
+            'posts_per_page' => -1,
+            'orderby'        => array('menu_order' => 'ASC', 'date' => 'DESC'),
+            'post_status'    => 'publish',
+        ));
 
-        <!-- 2. Center for Climate Crime Analysis (CCCA) -->
-        <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
-          <div>
-            <div class="h-24 flex items-center justify-center p-2 mb-6 bg-surface-container-low rounded-xl border border-border-subtle/50">
-              <img alt="Center for Climate Crime Analysis" class="max-h-16 max-w-full object-contain" src="<?php echo esc_url(aja_asset('parceiros/center for climate crime analysis.png')); ?>" />
-            </div>
-            <h3 class="font-title-lg text-lg font-bold text-ink-primary mb-2">Center for Climate Crime Analysis (CCCA)</h3>
-            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-4">
-              Organização pericial e investigativa sem fins lucrativos que mapeia e produz evidências criminais sobre desmatamento ilegal, invasão de terras públicas e crimes climáticos transnacionais.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
-            <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Perícia & Crimes Climáticos</span>
-            <a href="https://climatecrimeanalysis.org/" target="_blank" rel="noopener noreferrer" class="text-xs font-label-md text-primary font-bold hover:underline inline-flex items-center gap-1">
-              Conhecer <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-            </a>
-          </div>
-        </div>
+        $rendered_page_partner_count = 0;
 
-        <!-- 3. LACLIMA -->
-        <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
-          <div>
-            <div class="h-24 flex items-center justify-center p-2 mb-6 bg-surface-container-low rounded-xl border border-border-subtle/50">
-              <img alt="LACLIMA" class="max-h-16 max-w-full object-contain" src="<?php echo esc_url(aja_asset('parceiros/lacilma.png')); ?>" />
-            </div>
-            <h3 class="font-title-lg text-lg font-bold text-ink-primary mb-2">LACLIMA</h3>
-            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-4">
-              Primeira rede de advogados(as) climáticos da América Latina, conectando especialistas para construir estratégias jurídicas transformadoras, cooperação regional e governança climática sólida.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
-            <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Advocacia Climática Regional</span>
-            <a href="https://www.laclima.org/" target="_blank" rel="noopener noreferrer" class="text-xs font-label-md text-primary font-bold hover:underline inline-flex items-center gap-1">
-              Conhecer <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-            </a>
-          </div>
-        </div>
+        if ($partners_page_query->have_posts()) :
+            while ($partners_page_query->have_posts()) :
+                $partners_page_query->the_post();
+                $p_id       = get_the_ID();
+                $p_title    = get_the_title();
+                $p_badge    = get_post_meta($p_id, '_aja_badge', true) ?: 'Parceiro Institucional';
+                $p_link     = get_post_meta($p_id, '_aja_action_link', true) ?: '#';
+                $p_logo     = aja_get_partner_logo($p_id);
+                $p_desc     = get_the_excerpt();
+                if (empty($p_desc)) {
+                    $p_desc = wp_strip_all_tags(get_the_content());
+                }
+                $rendered_page_partner_count++;
+                ?>
+                <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+                  <div>
+                    <div class="h-24 flex items-center justify-center p-2 mb-6 bg-surface-container-low rounded-xl border border-border-subtle/50">
+                      <?php if (!empty($p_logo)) : ?>
+                        <img alt="<?php echo esc_attr($p_title); ?>" class="max-h-16 max-w-full object-contain" src="<?php echo esc_url($p_logo); ?>" />
+                      <?php else : ?>
+                        <span class="font-serif text-2xl font-bold tracking-tight text-primary"><?php echo esc_html($p_title); ?></span>
+                      <?php endif; ?>
+                    </div>
+                    <h3 class="font-title-lg text-lg font-bold text-ink-primary mb-2"><?php echo esc_html($p_title); ?></h3>
+                    <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-4">
+                      <?php echo esc_html($p_desc); ?>
+                    </p>
+                  </div>
+                  <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
+                    <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold"><?php echo esc_html($p_badge); ?></span>
+                    <a href="<?php echo esc_url($p_link); ?>" target="_blank" rel="noopener noreferrer" class="text-xs font-label-md text-primary font-bold hover:underline inline-flex items-center gap-1">
+                      Conhecer <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                    </a>
+                  </div>
+                </div>
+                <?php
+            endwhile;
+            wp_reset_postdata();
+        endif;
 
-        <!-- 4. Maparajuba Advocacia Popular -->
-        <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
-          <div>
-            <div class="h-24 flex items-center justify-center p-2 mb-6 bg-surface-container-low rounded-xl border border-border-subtle/50">
-              <img alt="Maparajuba Advocacia Popular" class="max-h-16 max-w-full object-contain" src="<?php echo esc_url(aja_asset('parceiros/maparajuba.png')); ?>" />
-            </div>
-            <h3 class="font-title-lg text-lg font-bold text-ink-primary mb-2">Maparajuba Advocacia Popular</h3>
-            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-4">
-              Coletivo de advocacia popular sediado no Pará que assessora juridicamente povos indígenas, comunidades quilombolas e ribeirinhas na defesa de seus territórios e modos tradicionais de vida.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
-            <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Advocacia Popular & Direitos</span>
-            <a href="https://maparajuba.org/" target="_blank" rel="noopener noreferrer" class="text-xs font-label-md text-primary font-bold hover:underline inline-flex items-center gap-1">
-              Conhecer <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- 5. Rede Amazonidas pelo Clima -->
-        <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
-          <div>
-            <div class="h-24 flex items-center justify-center p-2 mb-6 bg-surface-container-low rounded-xl border border-border-subtle/50">
-              <img alt="Rede Amazonidas pelo Clima" class="max-h-16 max-w-full object-contain" src="<?php echo esc_url(aja_asset('parceiros/rede anazonidas pelo clima.png')); ?>" />
-            </div>
-            <h3 class="font-title-lg text-lg font-bold text-ink-primary mb-2">Rede Amazonidas pelo Clima</h3>
-            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-4">
-              Articulação pan-amazônica liderada por atores locais, cientistas, comunicadores e juventudes que pauta a centralidade dos direitos humanos e territoriais na agenda climática.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
-            <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Articulação Comunitária</span>
-            <a href="https://www.rac-br.org/" target="_blank" rel="noopener noreferrer" class="text-xs font-label-md text-primary font-bold hover:underline inline-flex items-center gap-1">
-              Conhecer <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- 6. Rede Liberdade -->
-        <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
-          <div>
-            <div class="h-24 flex items-center justify-center p-2 mb-6 bg-surface-container-low rounded-xl border border-border-subtle/50">
-              <img alt="Rede Liberdade" class="max-h-16 max-w-full object-contain" src="<?php echo esc_url(aja_asset('parceiros/rede liberdade.png')); ?>" />
-            </div>
-            <h3 class="font-title-lg text-lg font-bold text-ink-primary mb-2">Rede Liberdade</h3>
-            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-4">
-              Rede de defesa jurídica e proteção legal de defensores de direitos humanos, ativistas e comunicadores sob ameaça ou criminalização no Brasil.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
-            <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Proteção de Defensores</span>
-            <a href="https://redeliberdade.org.br/" target="_blank" rel="noopener noreferrer" class="text-xs font-label-md text-primary font-bold hover:underline inline-flex items-center gap-1">
-              Conhecer <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- 7. Portal Migalhas (Parceria Editorial) -->
-        <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
-          <div>
-            <div class="h-24 flex items-center justify-center p-2 mb-6 bg-surface-container-low rounded-xl border border-border-subtle/50">
-              <div class="flex items-center gap-2">
-                <span class="w-9 h-9 rounded-xl bg-[#8C1D24] text-white flex items-center justify-center text-lg font-serif font-bold shadow-sm select-none">M</span>
-                <span class="font-serif text-2xl font-bold tracking-tight text-[#8C1D24]">Migalhas</span>
-              </div>
-            </div>
-            <h3 class="font-title-lg text-lg font-bold text-ink-primary mb-2">Portal Migalhas</h3>
-            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-4">
-              Maior portal jurídico do Brasil. Parceria editorial estratégica para veiculação periódica de artigos de opinião, teses socioambientais e notas doutrinárias de membros da AJA na coluna Migalhas de Peso.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
-            <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Parceria Editorial &amp; Mídia</span>
-            <a href="https://www.migalhas.com.br/depeso" target="_blank" rel="noopener noreferrer" class="text-xs font-label-md text-primary font-bold hover:underline inline-flex items-center gap-1">
-              Conhecer <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-            </a>
-          </div>
-        </div>
+        // Fallback gracioso com os 7 parceiros iniciais caso nenhum post tenha sido publicado ainda
+        if ($rendered_page_partner_count === 0) :
+            $fallback_full_partners = array(
+                array(
+                    'title' => 'Amazon Investor Coalition',
+                    'desc'  => 'Aliança global de investidores e filantropos que canaliza recursos para a conservação florestal, bioeconomia inclusiva e o fortalecimento de salvaguardas socioambientais na Bacia Amazônica.',
+                    'badge' => 'Investimento & Bioeconomia',
+                    'link'  => 'https://amazoninvestor.org/',
+                    'logo'  => 'parceiros/amazon investor coalition.png',
+                ),
+                array(
+                    'title' => 'Center for Climate Crime Analysis (CCCA)',
+                    'desc'  => 'Organização pericial e investigativa sem fins lucrativos que mapeia e produz evidências criminais sobre desmatamento ilegal, invasão de terras públicas e crimes climáticos transnacionais.',
+                    'badge' => 'Perícia & Crimes Climáticos',
+                    'link'  => 'https://climatecrimeanalysis.org/',
+                    'logo'  => 'parceiros/center for climate crime analysis.png',
+                ),
+                array(
+                    'title' => 'LACLIMA',
+                    'desc'  => 'Primeira rede de advogados(as) climáticos da América Latina, conectando especialistas para construir estratégias jurídicas transformadoras, cooperação regional e governança climática sólida.',
+                    'badge' => 'Advocacia Climática Regional',
+                    'link'  => 'https://www.laclima.org/',
+                    'logo'  => 'parceiros/lacilma.png',
+                ),
+                array(
+                    'title' => 'Maparajuba Advocacia Popular',
+                    'desc'  => 'Coletivo de advocacia popular sediado no Pará que assessora juridicamente povos indígenas, comunidades quilombolas e ribeirinhas na defesa de seus territórios e modos tradicionais de vida.',
+                    'badge' => 'Advocacia Popular & Direitos',
+                    'link'  => 'https://maparajuba.org/',
+                    'logo'  => 'parceiros/maparajuba.png',
+                ),
+                array(
+                    'title' => 'Rede Amazonidas pelo Clima',
+                    'desc'  => 'Articulação pan-amazônica liderada por atores locais, cientistas, comunicadores e juventudes que pauta a centralidade dos direitos humanos e territoriais na agenda climática.',
+                    'badge' => 'Articulação Comunitária',
+                    'link'  => 'https://www.rac-br.org/',
+                    'logo'  => 'parceiros/rede anazonidas pelo clima.png',
+                ),
+                array(
+                    'title' => 'Rede Liberdade',
+                    'desc'  => 'Rede de defesa jurídica e proteção legal de defensores de direitos humanos, ativistas e comunicadores sob ameaça ou criminalização no Brasil.',
+                    'badge' => 'Proteção de Defensores',
+                    'link'  => 'https://redeliberdade.org.br/',
+                    'logo'  => 'parceiros/rede liberdade.png',
+                ),
+                array(
+                    'title' => 'Portal Migalhas',
+                    'desc'  => 'Maior portal jurídico do Brasil. Parceria editorial estratégica para veiculação periódica de artigos de opinião, teses socioambientais e notas doutrinárias de membros da AJA na coluna Migalhas de Peso.',
+                    'badge' => 'Parceria Editorial & Mídia',
+                    'link'  => 'https://www.migalhas.com.br/depeso',
+                    'logo'  => 'parceiros/migalhas.svg',
+                ),
+            );
+            foreach ($fallback_full_partners as $fbp) :
+                ?>
+                <div class="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 border border-border-subtle shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+                  <div>
+                    <div class="h-24 flex items-center justify-center p-2 mb-6 bg-surface-container-low rounded-xl border border-border-subtle/50">
+                      <img alt="<?php echo esc_attr($fbp['title']); ?>" class="max-h-16 max-w-full object-contain" src="<?php echo esc_url(aja_asset($fbp['logo'])); ?>" />
+                    </div>
+                    <h3 class="font-title-lg text-lg font-bold text-ink-primary mb-2"><?php echo esc_html($fbp['title']); ?></h3>
+                    <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-4">
+                      <?php echo esc_html($fbp['desc']); ?>
+                    </p>
+                  </div>
+                  <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
+                    <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold"><?php echo esc_html($fbp['badge']); ?></span>
+                    <a href="<?php echo esc_url($fbp['link']); ?>" target="_blank" rel="noopener noreferrer" class="text-xs font-label-md text-primary font-bold hover:underline inline-flex items-center gap-1">
+                      Conhecer <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                    </a>
+                  </div>
+                </div>
+                <?php
+            endforeach;
+        endif;
+        ?>
       </div>
     </div>
   </section>

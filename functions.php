@@ -264,6 +264,11 @@ function aja_register_required_categories() {
             'category_description' => 'Notícias, comunicados, reportagens e novidades da Aliança Jurídica pela Amazônia',
             'category_nicename'    => 'noticias',
         ),
+        'parceiros' => array(
+            'cat_name'             => 'Parceiros',
+            'category_description' => 'Parceiros institucionais, redes articuladas e apoiadores da AJA',
+            'category_nicename'    => 'parceiros',
+        ),
     );
 
     foreach ($required_categories as $slug => $data) {
@@ -283,6 +288,69 @@ function aja_register_required_categories() {
     }
 }
 add_action('init', 'aja_register_required_categories');
+
+/**
+ * 4.1. Atalhos Administrativos Diretos no Menu Principal do Painel
+ *      Permite gerenciar Parceiros, Membros do Portfólio, Equipe, Editais, etc. com 1 clique
+ */
+function aja_register_custom_admin_menus() {
+    add_menu_page(
+        'Parceiros Institucionais',
+        '🤝 Parceiros',
+        'edit_posts',
+        'edit.php?category_name=parceiros',
+        '',
+        'dashicons-networking',
+        26
+    );
+    add_menu_page(
+        'Equipe e Governança',
+        '🏛️ Equipe & Governança',
+        'edit_posts',
+        'edit.php?category_name=equipe',
+        '',
+        'dashicons-groups',
+        27
+    );
+    add_menu_page(
+        'Portfólio de Membros',
+        '👤 Portfólio',
+        'edit_posts',
+        'edit.php?category_name=portfolio',
+        '',
+        'dashicons-id',
+        28
+    );
+    add_menu_page(
+        'Editais Institucionais',
+        '📢 Editais',
+        'edit_posts',
+        'edit.php?category_name=editais',
+        '',
+        'dashicons-megaphone',
+        29
+    );
+    add_menu_page(
+        'Publicações e Estudos',
+        '📚 Publicações',
+        'edit_posts',
+        'edit.php?category_name=publicacoes',
+        '',
+        'dashicons-book',
+        30
+    );
+    add_menu_page(
+        'Notícias e Artigos',
+        '📰 Notícias',
+        'edit_posts',
+        'edit.php?category_name=noticias',
+        '',
+        'dashicons-admin-post',
+        31
+    );
+}
+add_action('admin_menu', 'aja_register_custom_admin_menus');
+
 
 /**
  * 5. Metabox para Campos Personalizados dos Posts AJA
@@ -335,11 +403,14 @@ function aja_render_post_metabox($post) {
     $theme           = get_post_meta($post->ID, '_aja_theme', true);
     $pub_axis        = get_post_meta($post->ID, '_aja_pub_axis', true);
     $team_instance   = get_post_meta($post->ID, '_aja_team_instance', true) ?: 'comite';
+    $tooltip         = get_post_meta($post->ID, '_aja_tooltip', true);
 
     // Detecta a aba inicial com base nas categorias do post
     $post_categories = wp_get_post_categories($post->ID, ['fields' => 'slugs']);
     $initial_tab = 'portfolio';
-    if (in_array('noticias', $post_categories)) {
+    if (in_array('parceiros', $post_categories)) {
+        $initial_tab = 'parceiros';
+    } elseif (in_array('noticias', $post_categories)) {
         $initial_tab = 'noticias';
     } elseif (in_array('equipe', $post_categories)) {
         $initial_tab = 'equipe';
@@ -378,6 +449,9 @@ function aja_render_post_metabox($post) {
                 </button>
                 <button type="button" class="aja-tab-button" data-target="tab-noticias" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
                     <span style="font-size: 16px;">📰</span> Notícias (Atualidades & Comunicados)
+                </button>
+                <button type="button" class="aja-tab-button" data-target="tab-parceiros" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
+                    <span style="font-size: 16px;">🤝</span> Parceiros (Institucionais & Redes)
                 </button>
             </div>
         </div>
@@ -766,6 +840,67 @@ function aja_render_post_metabox($post) {
             </div>
         </div>
 
+        <!-- ========================================== -->
+        <!-- ABA 6: PARCEIROS (INSTITUCIONAIS & REDES)  -->
+        <!-- ========================================== -->
+        <div id="tab-parceiros" class="aja-tab-content" style="display: none;">
+            <div style="background: #f0fdfa; border-left: 4px solid #0d9488; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
+                <strong style="color: #115e59; font-size: 13px;">🤝 Cadastrando Parceiro Institucional / Rede Articulada</strong>
+                <p style="margin: 4px 0 0 0; font-size: 12px; color: #0f766e;">
+                    Preencha as informações do parceiro. O título da publicação é o <strong>Nome da Organização</strong> e o texto principal é o <strong>Resumo da Atuação / Parceria</strong>. Esta postagem aparecerá automaticamente na seção <em>Parceiros Institucionais</em> da Home e na página <em>Parcerias</em>.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <div>
+                    <label for="parceiro_badge" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #115e59;">
+                        🏷️ Eixo de Cooperação / Selo da Parceria:
+                    </label>
+                    <input type="text" id="parceiro_badge" name="parceiro_badge" value="<?php echo esc_attr($badge); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Investimento & Bioeconomia, Perícia & Crimes Climáticos, Advocacia Popular">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Exibido no rodapé do card na página de Parcerias.</span>
+                </div>
+
+                <div>
+                    <label for="parceiro_tooltip" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #115e59;">
+                        💬 Sigla / Nome no Balão Hover da Home:
+                    </label>
+                    <input type="text" id="parceiro_tooltip" name="parceiro_tooltip" value="<?php echo esc_attr($tooltip); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: CCCA, LACLIMA, Amazon Investor Coalition">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Texto curto que surge quando o usuário passa o mouse na Home.</span>
+                </div>
+
+                <div>
+                    <label for="parceiro_link" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #115e59;">
+                        🔗 Site Oficial do Parceiro:
+                    </label>
+                    <input type="text" id="parceiro_link" name="parceiro_link" value="<?php echo esc_attr($action_link); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: https://amazoninvestor.org/">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Link externo aberto ao clicar no logo ou no botão Conhecer.</span>
+                </div>
+
+                <div>
+                    <label for="parceiro_order" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #115e59;">
+                        🔢 Ordem de Exibição (Prioridade):
+                    </label>
+                    <input type="number" id="parceiro_order" name="parceiro_order" value="<?php echo esc_attr($post->menu_order ?: 0); ?>" style="width: 100%; max-width: 140px; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="1">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Números menores aparecem primeiro (1, 2, 3...).</span>
+                </div>
+
+                <div style="grid-column: 1 / -1; margin-top: 6px; padding: 14px 16px; background: #fff; border: 1px solid #99f6e4; border-radius: 6px;">
+                    <label style="display:inline-flex; align-items:center; gap:8px; font-weight:700; cursor:pointer; font-size: 13px; color: #115e59;">
+                        <input type="checkbox" name="parceiro_featured" value="1" <?php checked($featured !== '0'); ?>>
+                        ⭐ Exibir também na Seção de Parceiros da Página Inicial (Home)
+                    </label>
+                    <span style="display:block; font-size:11px; color:#134e4a; margin-top:4px; margin-left: 24px;">
+                        Marcado por padrão. Se desmarcado, o parceiro aparecerá somente na página completa de Parcerias.
+                    </span>
+                </div>
+            </div>
+
+            <div style="margin-top: 16px; padding: 12px 16px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; font-size: 12px; color: #475569; display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 20px;">📸</span>
+                <span><strong>Logotipo Oficial:</strong> Defina o logo do parceiro no quadro <strong>"Imagem Destacada"</strong> na coluna lateral direita (formato PNG com fundo transparente ou SVG).</span>
+            </div>
+        </div>
+
     </div>
 
     <!-- SCRIPT DE INTERAÇÃO DAS ABAS & AUTO-SELEÇÃO POR CATEGORIA -->
@@ -828,7 +963,9 @@ function aja_render_post_metabox($post) {
                 catCheckboxes.forEach(function(cb) {
                     cb.addEventListener('change', function() {
                         var label = this.parentElement ? this.parentElement.innerText.toLowerCase() : '';
-                        if (label.indexOf('notic') !== -1 && this.checked) {
+                        if (label.indexOf('parceir') !== -1 && this.checked) {
+                            switchTab('tab-parceiros');
+                        } else if (label.indexOf('notic') !== -1 && this.checked) {
                             switchTab('tab-noticias');
                         } else if (label.indexOf('equip') !== -1 && this.checked) {
                             switchTab('tab-equipe');
@@ -923,6 +1060,25 @@ function aja_save_post_metabox($post_id) {
         update_post_meta($post_id, '_aja_pdf_url', $link);
         update_post_meta($post_id, '_aja_team_order', $order);
         update_post_meta($post_id, '_aja_team_instance', $instance);
+
+        if ($order >= 0) {
+            remove_action('save_post', 'aja_save_post_metabox');
+            wp_update_post(array('ID' => $post_id, 'menu_order' => $order));
+            add_action('save_post', 'aja_save_post_metabox');
+        }
+
+    } elseif ($active_tab === 'parceiros') {
+        $badge    = isset($_POST['parceiro_badge']) ? sanitize_text_field($_POST['parceiro_badge']) : '';
+        $tooltip  = isset($_POST['parceiro_tooltip']) ? sanitize_text_field($_POST['parceiro_tooltip']) : '';
+        $link     = isset($_POST['parceiro_link']) ? esc_url_raw($_POST['parceiro_link']) : '';
+        $order    = isset($_POST['parceiro_order']) ? intval($_POST['parceiro_order']) : 0;
+        $featured = isset($_POST['parceiro_featured']) ? '1' : '0';
+
+        update_post_meta($post_id, '_aja_badge', $badge);
+        update_post_meta($post_id, '_aja_tooltip', $tooltip);
+        update_post_meta($post_id, '_aja_action_link', $link);
+        update_post_meta($post_id, '_aja_pdf_url', $link);
+        update_post_meta($post_id, '_aja_featured', $featured);
 
         if ($order >= 0) {
             remove_action('save_post', 'aja_save_post_metabox');
@@ -1415,3 +1571,164 @@ add_action('init', function() {
 
 
 
+
+
+/**
+ * Helper para resgatar o logotipo oficial do parceiro:
+ * Prioridade: 1) Imagem destacada do post, 2) Meta customizado, 3) Match com arquivos locais em assets/parceiros/
+ */
+function aja_get_partner_logo($post_id) {
+    if (has_post_thumbnail($post_id)) {
+        return get_the_post_thumbnail_url($post_id, 'full');
+    }
+
+    $custom_logo = get_post_meta($post_id, '_aja_partner_logo', true);
+    if (!empty($custom_logo)) {
+        return $custom_logo;
+    }
+
+    $title = mb_strtolower(get_the_title($post_id));
+    $slug  = get_post_field('post_name', $post_id);
+
+    if (strpos($title, 'amazon investor') !== false || strpos($slug, 'amazon-investor') !== false) {
+        return aja_asset('parceiros/amazon investor coalition.png');
+    }
+    if (strpos($title, 'climate crime') !== false || strpos($title, 'ccca') !== false || strpos($slug, 'ccca') !== false) {
+        return aja_asset('parceiros/center for climate crime analysis.png');
+    }
+    if (strpos($title, 'laclima') !== false || strpos($slug, 'laclima') !== false) {
+        return aja_asset('parceiros/lacilma.png');
+    }
+    if (strpos($title, 'maparajuba') !== false || strpos($slug, 'maparajuba') !== false) {
+        return aja_asset('parceiros/maparajuba.png');
+    }
+    if (strpos($title, 'amazonidas') !== false || strpos($title, 'rac') !== false || strpos($slug, 'amazonidas') !== false) {
+        return aja_asset('parceiros/rede anazonidas pelo clima.png');
+    }
+    if (strpos($title, 'liberdade') !== false || strpos($slug, 'liberdade') !== false) {
+        return aja_asset('parceiros/rede liberdade.png');
+    }
+    if (strpos($title, 'migalhas') !== false || strpos($slug, 'migalhas') !== false) {
+        return aja_asset('parceiros/migalhas.svg');
+    }
+
+    return '';
+}
+
+/**
+ * Seeder de Parceiros Padrão da AJA:
+ * Garante que os 7 parceiros institucionais fiquem disponíveis na categoria 'parceiros' do WordPress
+ */
+function aja_seed_default_partners() {
+    $parceiros_term = get_term_by('slug', 'parceiros', 'category');
+    if (!$parceiros_term) {
+        aja_register_required_categories();
+        $parceiros_term = get_term_by('slug', 'parceiros', 'category');
+    }
+    if (!$parceiros_term) {
+        return;
+    }
+
+    $default_partners = array(
+        array(
+            'title'    => 'Amazon Investor Coalition',
+            'content'  => 'Aliança global de investidores e filantropos que canaliza recursos para a conservação florestal, bioeconomia inclusiva e o fortalecimento de salvaguardas socioambientais na Bacia Amazônica.',
+            'badge'    => 'Investimento & Bioeconomia',
+            'tooltip'  => 'Amazon Investor Coalition',
+            'link'     => 'https://amazoninvestor.org/',
+            'order'    => 1,
+            'featured' => '1',
+        ),
+        array(
+            'title'    => 'Center for Climate Crime Analysis (CCCA)',
+            'content'  => 'Organização pericial e investigativa sem fins lucrativos que mapeia e produz evidências criminais sobre desmatamento ilegal, invasão de terras públicas e crimes climáticos transnacionais.',
+            'badge'    => 'Perícia & Crimes Climáticos',
+            'tooltip'  => 'CCCA',
+            'link'     => 'https://climatecrimeanalysis.org/',
+            'order'    => 2,
+            'featured' => '1',
+        ),
+        array(
+            'title'    => 'LACLIMA',
+            'content'  => 'Primeira rede de advogados(as) climáticos da América Latina, conectando especialistas para construir estratégias jurídicas transformadoras, cooperação regional e governança climática sólida.',
+            'badge'    => 'Advocacia Climática Regional',
+            'tooltip'  => 'LACLIMA',
+            'link'     => 'https://www.laclima.org/',
+            'order'    => 3,
+            'featured' => '1',
+        ),
+        array(
+            'title'    => 'Maparajuba Advocacia Popular',
+            'content'  => 'Coletivo de advocacia popular sediado no Pará que assessora juridicamente povos indígenas, comunidades quilombolas e ribeirinhas na defesa de seus territórios e modos tradicionais de vida.',
+            'badge'    => 'Advocacia Popular & Direitos',
+            'tooltip'  => 'Maparajuba Advocacia Popular',
+            'link'     => 'https://maparajuba.org/',
+            'order'    => 4,
+            'featured' => '1',
+        ),
+        array(
+            'title'    => 'Rede Amazonidas pelo Clima',
+            'content'  => 'Articulação pan-amazônica liderada por atores locais, cientistas, comunicadores e juventudes que pauta a centralidade dos direitos humanos e territoriais na agenda climática.',
+            'badge'    => 'Articulação Comunitária',
+            'tooltip'  => 'Rede Amazonidas pelo Clima',
+            'link'     => 'https://www.rac-br.org/',
+            'order'    => 5,
+            'featured' => '1',
+        ),
+        array(
+            'title'    => 'Rede Liberdade',
+            'content'  => 'Rede de defesa jurídica e proteção legal de defensores de direitos humanos, ativistas e comunicadores sob ameaça ou criminalização no Brasil.',
+            'badge'    => 'Proteção de Defensores',
+            'tooltip'  => 'Rede Liberdade',
+            'link'     => 'https://redeliberdade.org.br/',
+            'order'    => 6,
+            'featured' => '1',
+        ),
+        array(
+            'title'    => 'Portal Migalhas',
+            'content'  => 'Maior portal jurídico do Brasil. Parceria editorial estratégica para veiculação periódica de artigos de opinião, teses socioambientais e notas doutrinárias de membros da AJA na coluna Migalhas de Peso.',
+            'badge'    => 'Parceria Editorial & Mídia',
+            'tooltip'  => 'Portal Migalhas',
+            'link'     => 'https://www.migalhas.com.br/depeso',
+            'order'    => 7,
+            'featured' => '1',
+        ),
+    );
+
+    foreach ($default_partners as $item) {
+        $existing = get_page_by_title($item['title'], OBJECT, 'post');
+        if ($existing) {
+            continue;
+        }
+
+        $post_id = wp_insert_post(array(
+            'post_title'   => $item['title'],
+            'post_content' => $item['content'],
+            'post_excerpt' => $item['content'],
+            'post_status'  => 'publish',
+            'post_type'    => 'post',
+            'menu_order'   => $item['order'],
+            'post_category'=> array($parceiros_term->term_id),
+        ));
+
+        if ($post_id && !is_wp_error($post_id)) {
+            update_post_meta($post_id, '_aja_badge', $item['badge']);
+            update_post_meta($post_id, '_aja_tooltip', $item['tooltip']);
+            update_post_meta($post_id, '_aja_action_link', $item['link']);
+            update_post_meta($post_id, '_aja_pdf_url', $item['link']);
+            update_post_meta($post_id, '_aja_featured', $item['featured']);
+        }
+    }
+}
+
+/**
+ * Auto-inicialização dos parceiros na primeira visita ao admin se a categoria estiver vazia
+ */
+add_action('admin_init', function() {
+    if (current_user_can('edit_posts') && !get_option('aja_seeded_partners_v1')) {
+        if (aja_count_category_posts('parceiros') === 0) {
+            aja_seed_default_partners();
+        }
+        update_option('aja_seeded_partners_v1', 1);
+    }
+});

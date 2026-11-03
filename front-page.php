@@ -1407,78 +1407,76 @@ get_header();
           <h3 class="font-headline-sm text-headline-sm text-ink-primary font-medium mt-1">Parceiros Institucionais</h3>
         </div>
         <!-- Partners Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-stretch py-2 stagger-grid">
-          <!-- 1. Amazon Investor Coalition -->
-          <a href="https://amazoninvestor.org/" target="_blank" rel="noopener noreferrer"
-            class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
-            title="Amazon Investor Coalition">
-            <img alt="Amazon Investor Coalition"
-              class="max-h-16 lg:max-h-20 w-auto max-w-[90%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('parceiros/amazon investor coalition.png')); ?>" />
-            <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
-              Amazon Investor Coalition
-            </span>
-          </a>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-stretch py-2 stagger-grid">
+          <?php
+          $partners_query = new WP_Query(array(
+              'category_name'  => 'parceiros',
+              'posts_per_page' => -1,
+              'orderby'        => array('menu_order' => 'ASC', 'date' => 'DESC'),
+              'post_status'    => 'publish',
+          ));
 
-          <!-- 2. Center for Climate Crime Analysis -->
-          <a href="https://climatecrimeanalysis.org/" target="_blank" rel="noopener noreferrer"
-            class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
-            title="Center for Climate Crime Analysis">
-            <img alt="Center for Climate Crime Analysis"
-              class="max-h-16 lg:max-h-20 w-auto max-w-[90%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('parceiros/center for climate crime analysis.png')); ?>" />
-            <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
-              CCCA
-            </span>
-          </a>
+          $rendered_partner_count = 0;
 
-          <!-- 3. LACLIMA -->
-          <a href="https://www.laclima.org/" target="_blank" rel="noopener noreferrer"
-            class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
-            title="LACLIMA">
-            <img alt="LACLIMA"
-              class="max-h-16 lg:max-h-20 w-auto max-w-[90%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('parceiros/lacilma.png')); ?>" />
-            <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
-              LACLIMA
-            </span>
-          </a>
+          if ($partners_query->have_posts()) :
+              while ($partners_query->have_posts()) :
+                  $partners_query->the_post();
+                  $p_id       = get_the_ID();
+                  $p_featured = get_post_meta($p_id, '_aja_featured', true);
+                  if ($p_featured === '0') {
+                      continue; // Oculto da home se desmarcado no painel
+                  }
+                  $p_title    = get_the_title();
+                  $p_link     = get_post_meta($p_id, '_aja_action_link', true) ?: '#';
+                  $p_tooltip  = get_post_meta($p_id, '_aja_tooltip', true) ?: $p_title;
+                  $p_logo     = aja_get_partner_logo($p_id);
+                  $rendered_partner_count++;
+                  ?>
+                  <a href="<?php echo esc_url($p_link); ?>" target="_blank" rel="noopener noreferrer"
+                    class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
+                    title="<?php echo esc_attr($p_title); ?>">
+                    <?php if (!empty($p_logo)) : ?>
+                      <img alt="<?php echo esc_attr($p_title); ?>"
+                        class="max-h-16 lg:max-h-20 w-auto max-w-[90%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
+                        src="<?php echo esc_url($p_logo); ?>" />
+                    <?php else : ?>
+                      <span class="font-bold text-ink-primary text-sm group-hover:text-primary transition-colors"><?php echo esc_html($p_title); ?></span>
+                    <?php endif; ?>
+                    <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
+                      <?php echo esc_html($p_tooltip); ?>
+                    </span>
+                  </a>
+                  <?php
+              endwhile;
+              wp_reset_postdata();
+          endif;
 
-          <!-- 4. Maparajuba Advocacia Popular -->
-          <a href="https://maparajuba.org/" target="_blank" rel="noopener noreferrer"
-            class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
-            title="Maparajuba Advocacia Popular">
-            <img alt="Maparajuba Advocacia Popular"
-              class="max-h-14 lg:max-h-18 w-auto max-w-[94%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('parceiros/maparajuba.png')); ?>" />
-            <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
-              Maparajuba Advocacia Popular
-            </span>
-          </a>
-
-          <!-- 5. Rede Amazonidas pelo Clima -->
-          <a href="https://www.rac-br.org/" target="_blank" rel="noopener noreferrer"
-            class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
-            title="Rede Amazonidas pelo Clima">
-            <img alt="Rede Amazonidas pelo Clima"
-              class="max-h-16 lg:max-h-20 w-auto max-w-[90%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('parceiros/rede anazonidas pelo clima.png')); ?>" />
-            <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
-              Rede Amazonidas pelo Clima
-            </span>
-          </a>
-
-          <!-- 6. Rede Liberdade -->
-          <a href="https://redeliberdade.org.br/" target="_blank" rel="noopener noreferrer"
-            class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
-            title="Rede Liberdade">
-            <img alt="Rede Liberdade"
-              class="max-h-14 lg:max-h-18 w-auto max-w-[94%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('parceiros/rede liberdade.png')); ?>" />
-            <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
-              Rede Liberdade
-            </span>
-          </a>
+          // Fallback gracioso caso nenhum parceiro tenha sido cadastrado ainda
+          if ($rendered_partner_count === 0) :
+              $fallback_partners = array(
+                  array('title' => 'Amazon Investor Coalition', 'tooltip' => 'Amazon Investor Coalition', 'link' => 'https://amazoninvestor.org/', 'logo' => 'parceiros/amazon investor coalition.png'),
+                  array('title' => 'Center for Climate Crime Analysis', 'tooltip' => 'CCCA', 'link' => 'https://climatecrimeanalysis.org/', 'logo' => 'parceiros/center for climate crime analysis.png'),
+                  array('title' => 'LACLIMA', 'tooltip' => 'LACLIMA', 'link' => 'https://www.laclima.org/', 'logo' => 'parceiros/lacilma.png'),
+                  array('title' => 'Maparajuba Advocacia Popular', 'tooltip' => 'Maparajuba Advocacia Popular', 'link' => 'https://maparajuba.org/', 'logo' => 'parceiros/maparajuba.png'),
+                  array('title' => 'Rede Amazonidas pelo Clima', 'tooltip' => 'Rede Amazonidas pelo Clima', 'link' => 'https://www.rac-br.org/', 'logo' => 'parceiros/rede anazonidas pelo clima.png'),
+                  array('title' => 'Rede Liberdade', 'tooltip' => 'Rede Liberdade', 'link' => 'https://redeliberdade.org.br/', 'logo' => 'parceiros/rede liberdade.png'),
+              );
+              foreach ($fallback_partners as $fb) :
+                  ?>
+                  <a href="<?php echo esc_url($fb['link']); ?>" target="_blank" rel="noopener noreferrer"
+                    class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
+                    title="<?php echo esc_attr($fb['title']); ?>">
+                    <img alt="<?php echo esc_attr($fb['title']); ?>"
+                      class="max-h-16 lg:max-h-20 w-auto max-w-[90%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
+                      src="<?php echo esc_url(aja_asset($fb['logo'])); ?>" />
+                    <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
+                      <?php echo esc_html($fb['tooltip']); ?>
+                    </span>
+                  </a>
+                  <?php
+              endforeach;
+          endif;
+          ?>
         </div>
       </div>
     </section>
