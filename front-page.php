@@ -1399,15 +1399,15 @@ get_header();
     </section>
 
     <!-- SECTION 5: COOPERAÇÃO E PARCEIROS ESTRATÉGICOS -->
-    <section class="w-full py-16 bg-surface border-t border-border-subtle" id="parceiros">
+    <section class="w-full py-20 lg:py-24 bg-surface border-t border-border-subtle flex flex-col justify-center items-center" id="parceiros">
       <a id="apoiadores" class="sr-only"></a>
-      <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
-        <div class="flex flex-col items-center text-center mb-10">
+      <div class="max-w-[1440px] w-full mx-auto px-margin-mobile lg:px-margin reveal flex flex-col items-center">
+        <div class="flex flex-col items-center text-center mb-12">
           <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Articulação Coletiva</span>
           <h3 class="font-headline-sm text-headline-sm text-ink-primary font-medium mt-1">Parceiros Institucionais</h3>
         </div>
-        <!-- Partners Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-stretch py-2 stagger-grid">
+        <!-- Partners Grid (Centralizado Vertical e Horizontalmente) -->
+        <div class="flex flex-wrap items-center justify-center gap-5 lg:gap-6 py-2 stagger-grid max-w-7xl mx-auto w-full">
           <?php
           $partners_query = new WP_Query(array(
               'category_name'  => 'parceiros',
@@ -1433,14 +1433,14 @@ get_header();
                   $rendered_partner_count++;
                   ?>
                   <a href="<?php echo esc_url($p_link); ?>" target="_blank" rel="noopener noreferrer"
-                    class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
+                    class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36 w-[calc(50%-10px)] sm:w-[calc(33.333%-16px)] md:w-[calc(25%-18px)] lg:w-[calc(14.285%-21px)] min-w-[145px] max-w-[185px] flex-shrink-0"
                     title="<?php echo esc_attr($p_title); ?>">
                     <?php if (!empty($p_logo)) : ?>
                       <img alt="<?php echo esc_attr($p_title); ?>"
-                        class="max-h-16 lg:max-h-20 w-auto max-w-[90%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
+                        class="max-h-16 lg:max-h-20 w-auto max-w-[88%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105 my-auto"
                         src="<?php echo esc_url($p_logo); ?>" />
                     <?php else : ?>
-                      <span class="font-bold text-ink-primary text-sm group-hover:text-primary transition-colors"><?php echo esc_html($p_title); ?></span>
+                      <span class="font-bold text-ink-primary text-sm group-hover:text-primary transition-colors my-auto"><?php echo esc_html($p_title); ?></span>
                     <?php endif; ?>
                     <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
                       <?php echo esc_html($p_tooltip); ?>
@@ -1460,14 +1460,15 @@ get_header();
                   array('title' => 'Maparajuba Advocacia Popular', 'tooltip' => 'Maparajuba Advocacia Popular', 'link' => 'https://maparajuba.org/', 'logo' => 'parceiros/maparajuba.png'),
                   array('title' => 'Rede Amazonidas pelo Clima', 'tooltip' => 'Rede Amazonidas pelo Clima', 'link' => 'https://www.rac-br.org/', 'logo' => 'parceiros/rede anazonidas pelo clima.png'),
                   array('title' => 'Rede Liberdade', 'tooltip' => 'Rede Liberdade', 'link' => 'https://redeliberdade.org.br/', 'logo' => 'parceiros/rede liberdade.png'),
+                  array('title' => 'Portal Migalhas', 'tooltip' => 'Portal Migalhas', 'link' => 'https://www.migalhas.com.br/depeso', 'logo' => 'parceiros/migalhas.svg'),
               );
               foreach ($fallback_partners as $fb) :
                   ?>
                   <a href="<?php echo esc_url($fb['link']); ?>" target="_blank" rel="noopener noreferrer"
-                    class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36"
+                    class="relative px-5 py-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-border-subtle flex items-center justify-center text-center hover:shadow-lg hover:border-primary/50 transition-all duration-300 group h-32 lg:h-36 w-[calc(50%-10px)] sm:w-[calc(33.333%-16px)] md:w-[calc(25%-18px)] lg:w-[calc(14.285%-21px)] min-w-[145px] max-w-[185px] flex-shrink-0"
                     title="<?php echo esc_attr($fb['title']); ?>">
                     <img alt="<?php echo esc_attr($fb['title']); ?>"
-                      class="max-h-16 lg:max-h-20 w-auto max-w-[90%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
+                      class="max-h-16 lg:max-h-20 w-auto max-w-[88%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105 my-auto"
                       src="<?php echo esc_url(aja_asset($fb['logo'])); ?>" />
                     <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
                       <?php echo esc_html($fb['tooltip']); ?>

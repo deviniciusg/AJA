@@ -36,7 +36,7 @@ get_header();
   <!-- GRADE DE PARCEIROS ESTRATÉGICOS -->
   <section class="w-full py-16 lg:py-20 bg-surface border-b border-border-subtle" id="redes-parceiras">
     <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
-      <div class="flex flex-col items-start mb-12">
+      <div class="flex flex-col items-center text-center mb-12 max-w-3xl mx-auto">
         <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Conexões Ativas</span>
         <h2 class="font-headline-md text-2xl sm:text-3xl text-ink-primary font-bold mt-1">
           Organizações e Redes Articuladas
@@ -46,7 +46,7 @@ get_header();
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto items-stretch justify-center">
         <?php
         $partners_page_query = new WP_Query(array(
             'category_name'  => 'parceiros',
