@@ -1997,7 +1997,7 @@ get_header();
                     <span class="material-symbols-outlined text-[20px]">mail</span>
                   </span>
                   <div class="flex flex-col">
-                    <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline">Sede Institucional</span>
+                    <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline">Contato Institucional</span>
                     <a class="font-medium text-ink-primary hover:text-moss-light transition-colors"
                       href="mailto:sede@ajamazonia.org">sede@ajamazonia.org</a>
                   </div>
@@ -2041,16 +2041,6 @@ get_header();
                     <a class="font-medium text-ink-primary hover:text-moss-light transition-colors"
                       href="https://www.linkedin.com/company/alian%C3%A7a-jur%C3%ADdica-pela-amaz%C3%B4nia/?originalSubdomain=br" target="_blank"
                       rel="noopener noreferrer">Aliança Jurídica pela Amazônia</a>
-                  </div>
-                </div>
-                <!-- Sede Institucional -->
-                <div class="flex items-center gap-3">
-                  <span class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
-                    <span class="material-symbols-outlined text-[20px]">pin_drop</span>
-                  </span>
-                  <div class="flex flex-col">
-                    <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline">Sede Institucional</span>
-                    <span class="font-medium text-ink-primary">[Endereço a preencher]</span>
                   </div>
                 </div>
               </div>

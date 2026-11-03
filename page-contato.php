@@ -87,7 +87,7 @@ get_header();
           </div>
 
           <!-- Cards de Canais -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <!-- Email Sede -->
             <div class="p-5 rounded-2xl bg-surface-container-lowest border border-border-subtle shadow-xs flex flex-col justify-between">
               <div>
@@ -138,20 +138,6 @@ get_header();
               </div>
             </div>
 
-            <!-- Sede / Endereço Físico Placeholder -->
-            <div class="p-5 rounded-2xl bg-surface-container-lowest border border-dashed border-border-subtle shadow-xs flex flex-col justify-between">
-              <div>
-                <span class="w-10 h-10 rounded-xl bg-surface-container text-on-surface-variant flex items-center justify-center mb-3">
-                  <span class="material-symbols-outlined text-[20px]">pin_drop</span>
-                </span>
-                <span class="text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Sede Institucional</span>
-                <h4 class="font-title-md text-base font-bold text-ink-primary mt-0.5">[Endereço a preencher]</h4>
-                <p class="text-xs text-on-surface-variant mt-1">[Espaço para endereço físico ou representação territorial a preencher].</p>
-              </div>
-              <span class="mt-4 pt-3 border-t border-border-subtle text-xs font-semibold text-outline">
-                Amazônia Brasileira
-              </span>
-            </div>
           </div>
 
           <!-- Caixa do Boletim / Newsletter -->
