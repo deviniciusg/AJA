@@ -243,14 +243,88 @@ get_header();
                 $c_btn      = aja_get_post_action_label($c_id, $c_btn_default);
                 $c_has_thumb= has_post_thumbnail($c_id);
                 $c_thumb    = $c_has_thumb ? get_the_post_thumbnail_url($c_id, 'large') : '';
+                $has_image  = $c_has_thumb && !empty($c_thumb);
                 $c_excerpt  = get_the_excerpt() ?: wp_trim_words(get_the_content(), 28);
                 $is_external= filter_var($c_link, FILTER_VALIDATE_URL) && strpos($c_link, home_url()) === false;
                 ?>
                 <div class="destaques-slide w-full min-w-full shrink-0 flex flex-col justify-between" data-slide-index="<?php echo esc_attr($slide_idx); ?>">
-                  <article class="grid grid-cols-1 lg:grid-cols-12 min-h-[400px] lg:min-h-[460px] items-stretch">
-                    
-                    <!-- Coluna de Texto e Ações (7 colunas no desktop) -->
-                    <div class="lg:col-span-7 p-6 sm:p-8 lg:p-12 flex flex-col justify-between order-2 lg:order-1">
+                  <?php if ($has_image) : ?>
+                    <!-- Layout com Imagem (Grid de 2 Colunas) -->
+                    <article class="grid grid-cols-1 lg:grid-cols-12 min-h-[400px] lg:min-h-[460px] items-stretch">
+                      
+                      <!-- Coluna de Texto e Ações (7 colunas no desktop) -->
+                      <div class="lg:col-span-7 p-6 sm:p-8 lg:p-12 flex flex-col justify-between order-2 lg:order-1">
+                        <div>
+                          <!-- Badges Superiores e Data -->
+                          <div class="flex flex-wrap items-center gap-2.5 mb-4">
+                            <span class="px-3 py-1 rounded-md text-xs font-label-sm font-bold uppercase tracking-wider border shadow-2xs <?php echo esc_attr($type_badge_class); ?>">
+                              <?php echo esc_html($type_label); ?>
+                            </span>
+                            <?php if (!empty($c_badge)) : ?>
+                              <span class="px-2.5 py-1 rounded-md text-xs font-label-sm font-bold uppercase tracking-wider bg-surface-container text-secondary">
+                                <?php echo esc_html($c_badge); ?>
+                              </span>
+                            <?php endif; ?>
+                            <span class="text-xs font-label-sm text-outline flex items-center gap-1.5 ml-auto">
+                              <span class="material-symbols-outlined text-[15px]">calendar_today</span>
+                              <span><?php echo esc_html(get_the_date('d \d\e F, Y')); ?></span>
+                            </span>
+                          </div>
+
+                          <!-- Subtítulo / Chapéu -->
+                          <?php if (!empty($c_subtitle)) : ?>
+                            <p class="font-label-sm text-xs sm:text-sm font-semibold text-clay-warm uppercase tracking-wider mb-2 flex items-center gap-1">
+                              <span class="material-symbols-outlined text-[16px]">label</span>
+                              <span><?php echo esc_html($c_subtitle); ?></span>
+                            </p>
+                          <?php endif; ?>
+
+                          <!-- Título do Post -->
+                          <h3 class="font-headline-lg text-xl sm:text-2xl lg:text-3xl text-ink-primary font-bold leading-tight mb-4 group-hover:text-primary transition-colors">
+                            <a href="<?php echo esc_url($c_link); ?>" <?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
+                              <?php echo esc_html($c_title); ?>
+                            </a>
+                          </h3>
+
+                          <!-- Resumo Descritivo -->
+                          <p class="font-body-md text-sm sm:text-base text-on-surface-variant leading-relaxed line-clamp-3 sm:line-clamp-4 max-w-2xl">
+                            <?php echo esc_html($c_excerpt); ?>
+                          </p>
+
+                          <!-- Informações Complementares (Prazo de Edital ou Localidade) -->
+                          <?php if (!empty($c_loc)) : ?>
+                            <div class="mt-4 flex items-center gap-1.5 text-xs font-semibold text-primary">
+                              <span class="material-symbols-outlined text-[16px]"><?php echo $is_edital ? 'schedule' : 'location_on'; ?></span>
+                              <span><?php echo esc_html($c_loc); ?></span>
+                            </div>
+                          <?php endif; ?>
+                        </div>
+
+                        <!-- Rodapé da Coluna com Botão de Ação -->
+                        <div class="pt-6 mt-6 border-t border-border-subtle flex flex-wrap items-center justify-between gap-4">
+                          <span class="text-xs font-label-sm text-outline font-semibold uppercase tracking-wider">
+                            Destaque Oficial • Aliança Jurídica
+                          </span>
+                          <a href="<?php echo esc_url($c_link); ?>"
+                             <?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>
+                             class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary hover:bg-moss-light text-on-primary font-bold text-xs uppercase tracking-wider transition-all shadow-sm hover:shadow active:scale-95">
+                            <span><?php echo esc_html($c_btn); ?></span>
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                          </a>
+                        </div>
+                      </div>
+
+                      <!-- Coluna de Imagem / Fotografia (5 colunas no desktop) -->
+                      <div class="lg:col-span-5 relative overflow-hidden bg-surface-container min-h-[220px] sm:min-h-[280px] lg:min-h-full order-1 lg:order-2 flex items-center justify-center">
+                        <img src="<?php echo esc_url($c_thumb); ?>" alt="<?php echo esc_attr($c_title); ?>"
+                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" />
+                        <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/50 via-transparent to-transparent"></div>
+                      </div>
+
+                    </article>
+                  <?php else : ?>
+                    <!-- Layout Apenas Texto (Sem Imagem - Ocupa 100% da Largura da Seção) -->
+                    <article class="p-6 sm:p-10 lg:p-14 flex flex-col justify-between min-h-[280px] sm:min-h-[320px] lg:min-h-[350px] w-full">
                       <div>
                         <!-- Badges Superiores e Data -->
                         <div class="flex flex-wrap items-center gap-2.5 mb-4">
@@ -276,22 +350,22 @@ get_header();
                           </p>
                         <?php endif; ?>
 
-                        <!-- Título do Post -->
-                        <h3 class="font-headline-lg text-xl sm:text-2xl lg:text-3xl text-ink-primary font-bold leading-tight mb-4 group-hover:text-primary transition-colors">
+                        <!-- Título do Post (Largura Total Expandida) -->
+                        <h3 class="font-headline-lg text-xl sm:text-2xl lg:text-3xl text-ink-primary font-bold leading-tight mb-4 group-hover:text-primary transition-colors max-w-5xl">
                           <a href="<?php echo esc_url($c_link); ?>" <?php echo $is_external ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
                             <?php echo esc_html($c_title); ?>
                           </a>
                         </h3>
 
-                        <!-- Resumo Descritivo -->
-                        <p class="font-body-md text-sm sm:text-base text-on-surface-variant leading-relaxed line-clamp-3 sm:line-clamp-4 max-w-2xl">
+                        <!-- Resumo Descritivo (Mais amplo e confortável para leitura) -->
+                        <p class="font-body-md text-sm sm:text-base lg:text-lg text-on-surface-variant leading-relaxed line-clamp-4 max-w-5xl">
                           <?php echo esc_html($c_excerpt); ?>
                         </p>
 
                         <!-- Informações Complementares (Prazo de Edital ou Localidade) -->
                         <?php if (!empty($c_loc)) : ?>
-                          <div class="mt-4 flex items-center gap-1.5 text-xs font-semibold text-primary">
-                            <span class="material-symbols-outlined text-[16px]"><?php echo $is_edital ? 'schedule' : 'location_on'; ?></span>
+                          <div class="mt-4 flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-primary">
+                            <span class="material-symbols-outlined text-[16px] sm:text-[18px]"><?php echo $is_edital ? 'schedule' : 'location_on'; ?></span>
                             <span><?php echo esc_html($c_loc); ?></span>
                           </div>
                         <?php endif; ?>
@@ -309,28 +383,8 @@ get_header();
                           <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                         </a>
                       </div>
-                    </div>
-
-                    <!-- Coluna de Imagem / Fotografia (5 colunas no desktop) -->
-                    <div class="lg:col-span-5 relative overflow-hidden bg-surface-container min-h-[220px] sm:min-h-[280px] lg:min-h-full order-1 lg:order-2 flex items-center justify-center">
-                      <?php if ($c_has_thumb && !empty($c_thumb)) : ?>
-                        <img src="<?php echo esc_url($c_thumb); ?>" alt="<?php echo esc_attr($c_title); ?>"
-                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" />
-                        <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/50 via-transparent to-transparent"></div>
-                      <?php else : ?>
-                        <div class="w-full h-full bg-gradient-to-br from-primary/15 via-surface-container to-secondary/20 flex flex-col items-center justify-center p-8 text-center">
-                          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-surface-container-lowest/90 text-primary flex items-center justify-center shadow-sm mb-3">
-                            <span class="material-symbols-outlined text-[40px] sm:text-[48px]">
-                              <?php echo esc_attr($c_icon); ?>
-                            </span>
-                          </div>
-                          <span class="font-headline-sm text-xs sm:text-sm font-bold text-ink-primary">Aliança Jurídica pela Amazônia</span>
-                          <span class="text-[11px] text-on-surface-variant mt-1"><?php echo esc_html($type_label); ?></span>
-                        </div>
-                      <?php endif; ?>
-                    </div>
-
-                  </article>
+                    </article>
+                  <?php endif; ?>
                 </div>
             <?php
                 $slide_idx++;
