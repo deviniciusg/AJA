@@ -329,15 +329,7 @@ add_action('init', 'aja_register_required_categories');
  *      Permite gerenciar Parceiros, Membros do Portfólio, Equipe, Editais, etc. com 1 clique
  */
 function aja_register_custom_admin_menus() {
-    add_menu_page(
-        'Parceiros Institucionais',
-        '🤝 Parceiros',
-        'edit_posts',
-        'edit.php?category_name=parceiros',
-        '',
-        'dashicons-networking',
-        26
-    );
+    // 1. Equipe
     add_menu_page(
         'Equipe e Governança',
         '🏛️ Equipe & Governança',
@@ -345,17 +337,19 @@ function aja_register_custom_admin_menus() {
         'edit.php?category_name=equipe',
         '',
         'dashicons-groups',
+        26
+    );
+    // 2. Parceiros
+    add_menu_page(
+        'Parceiros Institucionais',
+        '🤝 Parceiros',
+        'edit_posts',
+        'edit.php?category_name=parceiros',
+        '',
+        'dashicons-networking',
         27
     );
-    add_menu_page(
-        'Portfólio de Membros',
-        '👤 Portfólio (desativado)',
-        'edit_posts',
-        'edit.php?category_name=portfolio',
-        '',
-        'dashicons-id',
-        28
-    );
+    // 3. Editais
     add_menu_page(
         'Editais Institucionais',
         '📢 Editais',
@@ -363,8 +357,9 @@ function aja_register_custom_admin_menus() {
         'edit.php?category_name=editais',
         '',
         'dashicons-megaphone',
-        29
+        28
     );
+    // 4. Publicações
     add_menu_page(
         'Publicações e Estudos',
         '📚 Publicações',
@@ -372,8 +367,9 @@ function aja_register_custom_admin_menus() {
         'edit.php?category_name=publicacoes',
         '',
         'dashicons-book',
-        30
+        29
     );
+    // 5. Notícias
     add_menu_page(
         'Notícias e Artigos',
         '📰 Notícias',
@@ -381,6 +377,16 @@ function aja_register_custom_admin_menus() {
         'edit.php?category_name=noticias',
         '',
         'dashicons-admin-post',
+        30
+    );
+    // 6. Portfólio (desativado)
+    add_menu_page(
+        'Portfólio de Membros',
+        '👤 Portfólio (desativado)',
+        'edit_posts',
+        'edit.php?category_name=portfolio',
+        '',
+        'dashicons-id',
         31
     );
 }
@@ -516,19 +522,19 @@ function aja_render_post_metabox($post) {
         $noticia_tag = aja_get_noticia_tag($post->ID);
     }
 
-    // Detecta a aba inicial com base nas categorias do post (padrão: notícias ativas)
+    // Detecta a aba inicial com base nas categorias do post (Ordem: Equipe -> Parceiros -> Editais -> Publicações -> Notícias -> Portfólio)
     $post_categories = wp_get_post_categories($post->ID, ['fields' => 'slugs']);
-    $initial_tab = 'noticias';
-    if (in_array('noticias', $post_categories)) {
-        $initial_tab = 'noticias';
+    $initial_tab = 'equipe'; // Primeira aba da nova ordem
+    if (in_array('equipe', $post_categories)) {
+        $initial_tab = 'equipe';
     } elseif (in_array('parceiros', $post_categories)) {
         $initial_tab = 'parceiros';
-    } elseif (in_array('equipe', $post_categories)) {
-        $initial_tab = 'equipe';
     } elseif (in_array('editais', $post_categories) || !empty($featured)) {
         $initial_tab = 'editais';
     } elseif (in_array('publicacoes', $post_categories)) {
         $initial_tab = 'publicacoes';
+    } elseif (in_array('noticias', $post_categories)) {
+        $initial_tab = 'noticias';
     } elseif (in_array('portfolio', $post_categories) || !empty($type)) {
         $initial_tab = 'portfolio';
     }
@@ -546,21 +552,27 @@ function aja_render_post_metabox($post) {
             </div>
             
             <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="aja-tabs-nav">
-                <button type="button" class="aja-tab-button" data-target="tab-noticias" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">📰</span> Notícias (Atualidades & Comunicados)
+                <!-- 1. Equipe -->
+                <button type="button" class="aja-tab-button" data-target="tab-equipe" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
+                    <span style="font-size: 16px;">🏛️</span> Equipe (Comitê, Conselho & GTs)
                 </button>
-                <button type="button" class="aja-tab-button" data-target="tab-editais" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">📢</span> Editais (Chamadas & Oportunidades)
-                </button>
-                <button type="button" class="aja-tab-button" data-target="tab-publicacoes" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">📚</span> Publicações (Estudos & Notas Técnicas)
-                </button>
+                <!-- 2. Parceiros -->
                 <button type="button" class="aja-tab-button" data-target="tab-parceiros" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
                     <span style="font-size: 16px;">🤝</span> Parceiros (Institucionais & Redes)
                 </button>
-                <button type="button" class="aja-tab-button" data-target="tab-equipe" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">🏛️</span> Estrutura (Comitê, Conselho & GTs)
+                <!-- 3. Editais -->
+                <button type="button" class="aja-tab-button" data-target="tab-editais" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
+                    <span style="font-size: 16px;">📢</span> Editais (Chamadas & Oportunidades)
                 </button>
+                <!-- 4. Publicações -->
+                <button type="button" class="aja-tab-button" data-target="tab-publicacoes" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
+                    <span style="font-size: 16px;">📚</span> Publicações (Estudos & Notas Técnicas)
+                </button>
+                <!-- 5. Notícias -->
+                <button type="button" class="aja-tab-button" data-target="tab-noticias" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
+                    <span style="font-size: 16px;">📰</span> Notícias (Atualidades & Comunicados)
+                </button>
+                <!-- 6. Portfólio (desativado) -->
                 <button type="button" class="aja-tab-button" data-target="tab-portfolio" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; opacity: 0.85;">
                     <span style="font-size: 16px;">👤</span> Portfólio <span style="font-size: 11px; font-weight: 700; background: #fee2e2; color: #991b1b; padding: 2px 7px; border-radius: 4px; border: 1px solid #fecaca; text-transform: uppercase;">(desativado)</span>
                 </button>
@@ -1157,7 +1169,7 @@ function aja_render_post_metabox($post) {
             });
 
             // Ativa aba inicial
-            var currentInitial = 'tab-' + (activeTabInput ? activeTabInput.value : 'noticias');
+            var currentInitial = 'tab-' + (activeTabInput ? activeTabInput.value : 'equipe');
             switchTab(currentInitial);
 
             // Escuta mudanças nos checkboxes de Categoria nativos do WordPress (Gutenberg ou Clássico)
@@ -1245,7 +1257,7 @@ function aja_save_post_metabox($post_id) {
         update_post_meta($post_id, '_aja_carousel_featured', '0');
     }
 
-    $active_tab = isset($_POST['aja_active_tab']) ? sanitize_text_field($_POST['aja_active_tab']) : 'noticias';
+    $active_tab = isset($_POST['aja_active_tab']) ? sanitize_text_field($_POST['aja_active_tab']) : 'equipe';
 
     // Salva com base na aba ativa ou prioridade do formulário
     if ($active_tab === 'editais') {
