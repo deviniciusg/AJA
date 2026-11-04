@@ -1850,7 +1850,7 @@ get_header();
     </section>
 
     <!-- SECTION 5: COOPERAÇÃO E PARCEIROS ESTRATÉGICOS -->
-    <section class="w-full py-20 lg:py-24 bg-surface border-t border-border-subtle flex flex-col justify-center items-center" id="parceiros">
+    <section class="w-full py-20 lg:py-24 bg-surface border-t border-border-subtle flex flex-col justify-center items-center overflow-x-clip" id="parceiros">
       <a id="apoiadores" class="sr-only"></a>
       <div class="max-w-[1440px] w-full mx-auto px-margin-mobile lg:px-margin reveal flex flex-col items-center">
         <div class="flex flex-col items-center text-center mb-12">
@@ -1893,7 +1893,7 @@ get_header();
                     <?php else : ?>
                       <span class="font-bold text-ink-primary text-sm group-hover:text-primary transition-colors my-auto"><?php echo esc_html($p_title); ?></span>
                     <?php endif; ?>
-                    <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
+                    <span class="hidden md:inline-block absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30 max-w-[200px] truncate">
                       <?php echo esc_html($p_tooltip); ?>
                     </span>
                   </a>
@@ -1921,7 +1921,7 @@ get_header();
                     <img alt="<?php echo esc_attr($fb['title']); ?>"
                       class="max-h-16 lg:max-h-20 w-auto max-w-[88%] object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105 my-auto"
                       src="<?php echo esc_url(aja_asset($fb['logo'])); ?>" />
-                    <span class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30">
+                    <span class="hidden md:inline-block absolute -bottom-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-md bg-earth-dark text-white text-[12px] font-label-sm font-medium whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30 max-w-[200px] truncate">
                       <?php echo esc_html($fb['tooltip']); ?>
                     </span>
                   </a>

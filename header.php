@@ -11,7 +11,7 @@
   <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary'); ?>>
+<body <?php body_class('bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary overflow-x-clip'); ?>>
 <?php 
 wp_body_open(); 
 
