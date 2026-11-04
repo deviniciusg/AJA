@@ -60,10 +60,16 @@ while (have_posts()) : the_post();
         <?php the_title(); ?>
       </h1>
 
-      <div class="flex items-center gap-4 text-body-sm font-body-sm text-on-surface-variant pt-2 border-t border-border-subtle">
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4 text-body-sm font-body-sm text-on-surface-variant pt-2 border-t border-border-subtle">
         <span>Publicado em: <strong><?php echo get_the_date('d/m/Y'); ?></strong></span>
         <span>•</span>
         <span>Por: <strong><?php echo esc_html(function_exists('aja_get_post_author') ? aja_get_post_author($post_id) : get_the_author()); ?></strong></span>
+        <?php 
+        $single_loc = function_exists('aja_get_post_location') ? aja_get_post_location($post_id, '') : get_post_meta($post_id, '_aja_location', true);
+        if (!empty($single_loc)) : ?>
+          <span>•</span>
+          <span>📍 <strong><?php echo esc_html($single_loc); ?></strong></span>
+        <?php endif; ?>
       </div>
     </header>
 
@@ -99,9 +105,16 @@ while (have_posts()) : the_post();
 
     <!-- Imagem Destacada (se houver) -->
     <?php if (has_post_thumbnail()) : ?>
-      <div class="rounded-2xl overflow-hidden shadow-md mb-10 max-h-[500px]">
+      <figure class="rounded-2xl overflow-hidden shadow-md mb-10 max-h-[500px]">
         <?php the_post_thumbnail('aja-banner', array('class' => 'w-full h-full object-cover')); ?>
-      </div>
+        <?php 
+        $photo_credit = get_post_meta($post_id, '_aja_photo_credit', true);
+        if (!empty($photo_credit)) : ?>
+          <figcaption class="text-xs text-on-surface-variant/80 mt-2 px-1 text-right italic font-body-sm">
+            📸 <?php echo esc_html($photo_credit); ?>
+          </figcaption>
+        <?php endif; ?>
+      </figure>
     <?php endif; ?>
 
     <!-- Conteúdo do Post -->
@@ -109,20 +122,26 @@ while (have_posts()) : the_post();
       <?php the_content(); ?>
 
       <!-- Botão de Ação / Link de Edital / PDF / Migalhas (se preenchido) -->
-      <?php if (!empty($action_link)) : ?>
+      <?php 
+      $display_link = !empty($action_link) ? $action_link : get_post_meta($post_id, '_aja_pdf_url', true);
+      if (!empty($display_link)) : 
+          $is_pdf = (substr(parse_url($display_link, PHP_URL_PATH) ?: '', -4) === '.pdf');
+          $default_lbl = $is_pdf ? 'Baixar Documento em PDF' : ($is_migalhas ? 'Ler Artigo Completo no Migalhas' : 'Acessar Link Externo');
+          $btn_txt = !empty($action_lbl) ? $action_lbl : $default_lbl;
+      ?>
         <div class="mt-8 pt-6 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4 <?php echo $is_migalhas ? 'bg-[#8C1D24]/5 -mx-4 p-5 sm:p-6 rounded-xl border border-[#8C1D24]/20' : ''; ?>">
           <div>
             <span class="font-label-md text-label-md uppercase tracking-wider <?php echo $is_migalhas ? 'text-[#8C1D24]' : 'text-primary'; ?> font-bold block">
-              <?php echo $is_migalhas ? '📰 Matéria Original no Portal Migalhas:' : 'Documento / Link Vinculado:'; ?>
+              <?php echo $is_migalhas ? '📰 Matéria Original no Portal Migalhas:' : ($is_pdf ? '📄 Documento Oficial em PDF:' : 'Documento / Link Vinculado:'); ?>
             </span>
             <span class="font-body-sm text-body-sm text-on-surface-variant">
-              <?php echo $is_migalhas ? 'Acesse o texto doutrinário completo com notas de rodapé no portal parceiro.' : 'Acesse o material de referência ou canal de submissão oficial.'; ?>
+              <?php echo $is_migalhas ? 'Acesse o texto doutrinário completo com notas de rodapé no portal parceiro.' : ($is_pdf ? 'Acesse a íntegra do documento ou comunicado oficial para leitura ou download.' : 'Acesse o material de referência ou canal de submissão oficial.'); ?>
             </span>
           </div>
-          <a href="<?php echo esc_url($action_link); ?>" target="_blank" rel="noopener noreferrer"
+          <a href="<?php echo esc_url($display_link); ?>" target="_blank" rel="noopener noreferrer"
             class="px-6 py-3 rounded-lg <?php echo $is_migalhas ? 'bg-[#8C1D24] hover:bg-[#6e141a]' : 'bg-primary hover:bg-moss-light'; ?> text-white font-label-md text-label-md uppercase tracking-wider font-bold transition-colors inline-flex items-center gap-2 shrink-0 shadow-sm">
-            <span><?php echo esc_html($is_migalhas && empty($action_lbl) ? 'Ler Artigo Completo no Migalhas' : $action_lbl); ?></span>
-            <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+            <span><?php echo esc_html($btn_txt); ?></span>
+            <span class="material-symbols-outlined text-[18px]"><?php echo $is_pdf ? 'picture_as_pdf' : 'open_in_new'; ?></span>
           </a>
         </div>
       <?php endif; ?>

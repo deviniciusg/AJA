@@ -403,7 +403,7 @@ add_action('admin_menu', 'aja_register_custom_admin_menus');
 function aja_register_post_metaboxes() {
     add_meta_box(
         'aja_post_settings',
-        '🌿 Configurações da Publicação AJA (Portfólio, Editais ou Publicações)',
+        '🌿 Configurações da Publicação AJA (Notícias, Publicações, Editais, Equipe ou Parceiros)',
         'aja_render_post_metabox',
         'post',
         'normal',
@@ -521,6 +521,11 @@ function aja_render_post_metabox($post) {
     $team_instance   = get_post_meta($post->ID, '_aja_team_instance', true) ?: 'comite';
     $tooltip         = get_post_meta($post->ID, '_aja_tooltip', true);
     $noticia_tag     = get_post_meta($post->ID, '_aja_noticia_tag', true);
+    $author_name     = get_post_meta($post->ID, '_aja_author', true);
+    $source_name     = get_post_meta($post->ID, '_aja_source', true);
+    $noticia_pdf     = get_post_meta($post->ID, '_aja_pdf_url', true);
+    $photo_credit    = get_post_meta($post->ID, '_aja_photo_credit', true);
+    $noticia_excerpt = $post->post_excerpt;
     $carousel_featured = get_post_meta($post->ID, '_aja_carousel_featured', true);
     $carousel_order    = get_post_meta($post->ID, '_aja_carousel_order', true);
     if ($carousel_order === '' && $carousel_featured === '1') {
@@ -530,19 +535,19 @@ function aja_render_post_metabox($post) {
         $noticia_tag = aja_get_noticia_tag($post->ID);
     }
 
-    // Detecta a aba inicial com base nas categorias do post (Ordem: Equipe -> Parceiros -> Editais -> Publicações -> Notícias -> Portfólio)
+    // Detecta a aba inicial com base nas categorias do post (Padrão para novos posts: Notícias)
     $post_categories = wp_get_post_categories($post->ID, ['fields' => 'slugs']);
-    $initial_tab = 'equipe'; // Primeira aba da nova ordem
-    if (in_array('equipe', $post_categories)) {
-        $initial_tab = 'equipe';
-    } elseif (in_array('parceiros', $post_categories)) {
-        $initial_tab = 'parceiros';
-    } elseif (in_array('editais', $post_categories) || !empty($featured)) {
-        $initial_tab = 'editais';
+    $initial_tab = 'noticias';
+    if (in_array('noticias', $post_categories)) {
+        $initial_tab = 'noticias';
     } elseif (in_array('publicacoes', $post_categories)) {
         $initial_tab = 'publicacoes';
-    } elseif (in_array('noticias', $post_categories)) {
-        $initial_tab = 'noticias';
+    } elseif (in_array('editais', $post_categories) || !empty($featured)) {
+        $initial_tab = 'editais';
+    } elseif (in_array('parceiros', $post_categories)) {
+        $initial_tab = 'parceiros';
+    } elseif (in_array('equipe', $post_categories)) {
+        $initial_tab = 'equipe';
     } elseif (in_array('portfolio', $post_categories) || !empty($type)) {
         $initial_tab = 'portfolio';
     }
@@ -560,28 +565,28 @@ function aja_render_post_metabox($post) {
             </div>
             
             <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="aja-tabs-nav">
-                <!-- 1. Equipe -->
-                <button type="button" class="aja-tab-button" data-target="tab-equipe" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">🏛️</span> Equipe (Comitê, Conselho & GTs)
-                </button>
-                <!-- 2. Parceiros -->
-                <button type="button" class="aja-tab-button" data-target="tab-parceiros" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">🤝</span> Parceiros (Institucionais & Redes)
-                </button>
-                <!-- 3. Editais -->
-                <button type="button" class="aja-tab-button" data-target="tab-editais" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">📢</span> Editais (Chamadas & Oportunidades)
-                </button>
-                <!-- 4. Publicações -->
-                <button type="button" class="aja-tab-button" data-target="tab-publicacoes" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
-                    <span style="font-size: 16px;">📚</span> Publicações (Estudos & Notas Técnicas)
-                </button>
-                <!-- 5. Notícias -->
-                <button type="button" class="aja-tab-button" data-target="tab-noticias" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s;">
+                <!-- 1. Notícias (Padrão para novidades da rede) -->
+                <button type="button" class="aja-tab-button" data-target="tab-noticias" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid <?php echo ($initial_tab === 'noticias') ? '#202115' : '#cbd5e1'; ?>; background: <?php echo ($initial_tab === 'noticias') ? '#416284' : '#f1f5f9'; ?>; color: <?php echo ($initial_tab === 'noticias') ? '#ffffff' : '#334155'; ?>; transition: all 0.2s;">
                     <span style="font-size: 16px;">📰</span> Notícias (Atualidades & Comunicados)
                 </button>
+                <!-- 2. Publicações -->
+                <button type="button" class="aja-tab-button" data-target="tab-publicacoes" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid <?php echo ($initial_tab === 'publicacoes') ? '#202115' : '#cbd5e1'; ?>; background: <?php echo ($initial_tab === 'publicacoes') ? '#416284' : '#f1f5f9'; ?>; color: <?php echo ($initial_tab === 'publicacoes') ? '#ffffff' : '#334155'; ?>; transition: all 0.2s;">
+                    <span style="font-size: 16px;">📚</span> Publicações (Estudos & Notas Técnicas)
+                </button>
+                <!-- 3. Editais -->
+                <button type="button" class="aja-tab-button" data-target="tab-editais" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid <?php echo ($initial_tab === 'editais') ? '#202115' : '#cbd5e1'; ?>; background: <?php echo ($initial_tab === 'editais') ? '#416284' : '#f1f5f9'; ?>; color: <?php echo ($initial_tab === 'editais') ? '#ffffff' : '#334155'; ?>; transition: all 0.2s;">
+                    <span style="font-size: 16px;">📢</span> Editais (Chamadas & Oportunidades)
+                </button>
+                <!-- 4. Parceiros -->
+                <button type="button" class="aja-tab-button" data-target="tab-parceiros" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid <?php echo ($initial_tab === 'parceiros') ? '#202115' : '#cbd5e1'; ?>; background: <?php echo ($initial_tab === 'parceiros') ? '#416284' : '#f1f5f9'; ?>; color: <?php echo ($initial_tab === 'parceiros') ? '#ffffff' : '#334155'; ?>; transition: all 0.2s;">
+                    <span style="font-size: 16px;">🤝</span> Parceiros (Institucionais & Redes)
+                </button>
+                <!-- 5. Equipe -->
+                <button type="button" class="aja-tab-button" data-target="tab-equipe" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid <?php echo ($initial_tab === 'equipe') ? '#202115' : '#cbd5e1'; ?>; background: <?php echo ($initial_tab === 'equipe') ? '#416284' : '#f1f5f9'; ?>; color: <?php echo ($initial_tab === 'equipe') ? '#ffffff' : '#334155'; ?>; transition: all 0.2s;">
+                    <span style="font-size: 16px;">🏛️</span> Equipe (Comitê, Conselho & GTs)
+                </button>
                 <!-- 6. Portfólio (desativado) -->
-                <button type="button" class="aja-tab-button" data-target="tab-portfolio" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; opacity: 0.85;">
+                <button type="button" class="aja-tab-button" data-target="tab-portfolio" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; border: 1px solid <?php echo ($initial_tab === 'portfolio') ? '#202115' : '#cbd5e1'; ?>; background: <?php echo ($initial_tab === 'portfolio') ? '#416284' : '#f1f5f9'; ?>; color: <?php echo ($initial_tab === 'portfolio') ? '#ffffff' : '#334155'; ?>; transition: all 0.2s; opacity: 0.85;">
                     <span style="font-size: 16px;">👤</span> Portfólio <span style="font-size: 11px; font-weight: 700; background: #fee2e2; color: #991b1b; padding: 2px 7px; border-radius: 4px; border: 1px solid #fecaca; text-transform: uppercase;">(desativado)</span>
                 </button>
             </div>
@@ -590,7 +595,7 @@ function aja_render_post_metabox($post) {
         <!-- ========================================== -->
         <!-- ABA 1: PORTFÓLIO (DESATIVADO TEMPORARIAMENTE) -->
         <!-- ========================================== -->
-        <div id="tab-portfolio" class="aja-tab-content" style="display: none;">
+        <div id="tab-portfolio" class="aja-tab-content" style="display: <?php echo ($initial_tab === 'portfolio') ? 'block' : 'none'; ?>;">
             <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <strong style="color: #991b1b; font-size: 13px;">👤 Configurações de Post de Portfólio</strong>
@@ -712,7 +717,7 @@ function aja_render_post_metabox($post) {
         <!-- ========================================== -->
         <!-- ABA 4: ESTRUTURA (GOVERNANÇA & MEMBROS)   -->
         <!-- ========================================== -->
-        <div id="tab-equipe" class="aja-tab-content" style="display: none;">
+        <div id="tab-equipe" class="aja-tab-content" style="display: <?php echo ($initial_tab === 'equipe') ? 'block' : 'none'; ?>;">
             <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
                 <strong style="color: #1e40af; font-size: 13px;">🏛️ Cadastrando Integrante da Estrutura / Governança AJA</strong>
                 <p style="margin: 4px 0 0 0; font-size: 12px; color: #1d4ed8;">
@@ -783,7 +788,7 @@ function aja_render_post_metabox($post) {
         <!-- ========================================== -->
         <!-- ABA 2: EDITAIS (CHAMADAS & OPORTUNIDADES)  -->
         <!-- ========================================== -->
-        <div id="tab-editais" class="aja-tab-content" style="display: none;">
+        <div id="tab-editais" class="aja-tab-content" style="display: <?php echo ($initial_tab === 'editais') ? 'block' : 'none'; ?>;">
             <div style="background: #fff7ed; border-left: 4px solid #ea580c; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
                 <strong style="color: #9a3412; font-size: 13px;">📢 Cadastrando Edital Institucional AJA</strong>
                 <p style="margin: 4px 0 0 0; font-size: 12px; color: #c2410c;">
@@ -869,7 +874,7 @@ function aja_render_post_metabox($post) {
         <!-- ========================================== -->
         <!-- ABA 3: PUBLICAÇÕES (NOTAS, DOSSIÊS, GUIAS) -->
         <!-- ========================================== -->
-        <div id="tab-publicacoes" class="aja-tab-content" style="display: none;">
+        <div id="tab-publicacoes" class="aja-tab-content" style="display: <?php echo ($initial_tab === 'publicacoes') ? 'block' : 'none'; ?>;">
             <div style="background: #f0f9ff; border-left: 4px solid #0284c7; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
                 <strong style="color: #0369a1; font-size: 13px;">📚 Cadastrando Publicação ou Estudo AJA</strong>
                 <p style="margin: 4px 0 0 0; font-size: 12px; color: #0284c7;">
@@ -961,27 +966,27 @@ function aja_render_post_metabox($post) {
         <!-- ========================================== -->
         <!-- ABA 5: NOTÍCIAS (ATUALIDADES & COMUNICADOS)-->
         <!-- ========================================== -->
-        <div id="tab-noticias" class="aja-tab-content" style="display: none;">
+        <div id="tab-noticias" class="aja-tab-content" style="display: <?php echo ($initial_tab === 'noticias') ? 'block' : 'none'; ?>;">
             <div style="background: #fdf4ff; border-left: 4px solid #a855f7; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
-                <strong style="color: #7e22ce; font-size: 13px;">📰 Cadastrando Notícia ou Comunicado AJA</strong>
+                <strong style="color: #7e22ce; font-size: 13px;">📰 Cadastrando Notícia, Comunicado Oficial ou Artigo da Rede AJA</strong>
                 <p style="margin: 4px 0 0 0; font-size: 12px; color: #9333ea;">
-                    Preencha as informações da notícia ou matéria. Esta postagem aparecerá automaticamente na seção <strong>Notícias</strong> na página inicial e na página Notícias.
+                    Preencha as informações editoriais da matéria. Esta postagem aparecerá automaticamente na seção <strong>Notícias</strong> na página inicial e na página dedicada de <strong>Notícias</strong>.
                 </p>
             </div>
 
-            <!-- SELETOR DE TAG / CATEGORIA DA NOTÍCIA (FILTRO OBRIGATÓRIO DO SITE) -->
+            <!-- 1. SELETOR DE TAG / CATEGORIA DA NOTÍCIA (FILTRO OBRIGATÓRIO DO SITE) -->
             <div style="background: #ffffff; border: 2px solid #c084fc; border-radius: 8px; padding: 16px 18px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
                 <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span style="font-size: 20px;">🏷️</span>
-                        <strong style="color: #6b21a8; font-size: 14px;">Selecione a Tag / Categoria da Notícia (Obrigatório para os Filtros do Site):</strong>
+                        <strong style="color: #6b21a8; font-size: 14px;">1. Selecione a Tag / Categoria Editorial da Notícia (Obrigatório para os Filtros do Site):</strong>
                     </div>
                     <span style="font-size: 11px; background: #f3e8ff; color: #7e22ce; padding: 2px 8px; border-radius: 4px; font-weight: 600;">
                         Filtro na Home e na página Notícias
                     </span>
                 </div>
                 <p style="margin: 0 0 14px 0; font-size: 12px; color: #7e22ce;">
-                    Escolha uma das 3 tags editoriais oficiais da AJA para classificar esta notícia:
+                    Escolha uma das 3 tags editoriais oficiais da AJA para classificar esta notícia nos filtros rápidos dos visitantes:
                 </p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;" id="aja-noticia-tag-group">
@@ -990,7 +995,7 @@ function aja_render_post_metabox($post) {
                         <input type="radio" name="noticia_tag" value="cobertura" <?php checked($noticia_tag === 'cobertura' || empty($noticia_tag)); ?> style="accent-color: #9333ea; width: 18px; height: 18px; margin-top: 2px;">
                         <div>
                             <strong style="display: block; font-size: 13px; color: #1e293b;">🌐 Coberturas &amp; Eventos</strong>
-                            <span style="display: block; font-size: 11px; color: #64748b; margin-top: 2px;">Encontros, seminários, fóruns e cobertura jornalística de eventos.</span>
+                            <span style="display: block; font-size: 11px; color: #64748b; margin-top: 2px;">Encontros, seminários, fóruns, painéis e cobertura jornalística de eventos.</span>
                         </div>
                     </label>
 
@@ -999,7 +1004,7 @@ function aja_render_post_metabox($post) {
                         <input type="radio" name="noticia_tag" value="comunicado" <?php checked($noticia_tag, 'comunicado'); ?> style="accent-color: #9333ea; width: 18px; height: 18px; margin-top: 2px;">
                         <div>
                             <strong style="display: block; font-size: 13px; color: #1e293b;">📢 Comunicados Oficiais</strong>
-                            <span style="display: block; font-size: 11px; color: #64748b; margin-top: 2px;">Notas públicas, posicionamentos institucionais e manifestações.</span>
+                            <span style="display: block; font-size: 11px; color: #64748b; margin-top: 2px;">Notas públicas, posicionamentos institucionais, cartas e manifestos.</span>
                         </div>
                     </label>
 
@@ -1014,7 +1019,10 @@ function aja_render_post_metabox($post) {
                 </div>
             </div>
 
+            <!-- 2. CAMPOS PRINCIPAIS DE METADADOS EDITORIAIS -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                
+                <!-- Selo Visual -->
                 <div>
                     <label for="noticia_badge" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
                         🏷️ Formato / Selo da Notícia:
@@ -1023,35 +1031,84 @@ function aja_render_post_metabox($post) {
                     <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Exibido no topo do card (destaque colorido).</span>
                 </div>
 
+                <!-- Chapéu / Eixo Temático -->
                 <div>
                     <label for="noticia_subtitle" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
                         💼 Chapéu / Eixo Temático:
                     </label>
-                    <input type="text" id="noticia_subtitle" name="noticia_subtitle" value="<?php echo esc_attr($subtitle); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: COP30 • Amazônia, Litigância Climática, Direitos Territoriais">
-                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Subtítulo temático da matéria.</span>
+                    <input type="text" id="noticia_subtitle" name="noticia_subtitle" value="<?php echo esc_attr($subtitle); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Litigância Climática • COP30, Direitos Territoriais, Bioeconomia">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Subtítulo temático curto exibido acima do título da matéria.</span>
                 </div>
 
+                <!-- Autor / Repórter / Redação -->
+                <div>
+                    <label for="noticia_author" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
+                        ✍️ Autor / Repórter / Assinatura da Matéria:
+                    </label>
+                    <input type="text" id="noticia_author" name="noticia_author" value="<?php echo esc_attr($author_name); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Redação AJA, Comunicação AJA, Yanê Amoras ou autor convidado">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Exibido na linha "Por: ..." da matéria. Se vazio, exibe o usuário autor do post.</span>
+                </div>
+
+                <!-- Localidade -->
                 <div>
                     <label for="noticia_location" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
-                        📍 Local / Fonte / Veículo:
+                        📍 Localidade do Fato / Território:
                     </label>
-                    <input type="text" id="noticia_location" name="noticia_location" value="<?php echo esc_attr($location); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Belém / PA, Brasília / DF, Agência AJA">
-                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Cidade ou veículo de publicação.</span>
+                    <input type="text" id="noticia_location" name="noticia_location" value="<?php echo esc_attr($location); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Belém / PA, Manaus / AM, Brasília / DF, Santarém / PA">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Cidade, estado ou território amazônico do fato noticiado.</span>
                 </div>
 
+                <!-- Veículo / Fonte Original -->
+                <div>
+                    <label for="noticia_source" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
+                        📰 Veículo / Fonte Original (se houver):
+                    </label>
+                    <input type="text" id="noticia_source" name="noticia_source" value="<?php echo esc_attr($source_name); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Agência Brasil, Portal Migalhas, Amazônia Real, Assessoria AJA">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Veículo de imprensa parceiro ou agência onde foi veiculado.</span>
+                </div>
+
+                <!-- Link Externo da Matéria Original -->
                 <div>
                     <label for="noticia_link" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
                         🔗 Link Externo (Fonte / Veículo Original):
                     </label>
                     <input type="text" id="noticia_link" name="noticia_link" value="<?php echo esc_attr($action_link); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: https://portaldenoticias.com/... (opcional)">
-                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Se em branco, abrirá a própria página do post no site da AJA.</span>
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Se em branco, o card abrirá a própria página da matéria no site da AJA.</span>
                 </div>
 
+                <!-- Documento Oficial / Comunicado em PDF -->
+                <div>
+                    <label for="noticia_pdf" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
+                        📄 Comunicado / Manifesto Oficial em PDF (opcional):
+                    </label>
+                    <input type="text" id="noticia_pdf" name="noticia_pdf" value="<?php echo esc_attr($noticia_pdf); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: https://ajamazonia.org/wp-content/uploads/.../comunicado.pdf">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">URL do documento PDF para download no final da notícia (suba em Mídia).</span>
+                </div>
+
+                <!-- Crédito da Foto de Capa -->
+                <div>
+                    <label for="noticia_photo_credit" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
+                        📸 Crédito da Foto de Capa (Imagem Destacada):
+                    </label>
+                    <input type="text" id="noticia_photo_credit" name="noticia_photo_credit" value="<?php echo esc_attr($photo_credit); ?>" style="width: 100%; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Foto: Bruno Kelly / Amazônia Real ou Acervo AJA">
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Exibido na legenda logo abaixo da foto destacada do post.</span>
+                </div>
+
+                <!-- Linha Fina / Resumo (Ocupa linha inteira) -->
+                <div style="grid-column: 1 / -1;">
+                    <label for="noticia_excerpt" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
+                        📝 Linha Fina / Resumo da Notícia (Lead do Card):
+                    </label>
+                    <textarea id="noticia_excerpt" name="noticia_excerpt" rows="2" style="width: 100%; padding: 8px 10px; border-radius: 4px; border: 1px solid #ccd0d4; font-size: 13px; line-height: 1.4;" placeholder="Escreva 1 ou 2 frases resumindo a matéria (exibido nos cards da Home e na página de Notícias)..."><?php echo esc_textarea($noticia_excerpt); ?></textarea>
+                    <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Sincronizado automaticamente com o campo oficial de "Resumo" do WordPress.</span>
+                </div>
+
+                <!-- Texto do Botão do Card -->
                 <div style="grid-column: 1 / -1;">
                     <label for="noticia_btn" style="display:block; font-weight:600; margin-bottom:4px; font-size: 13px; color: #7e22ce;">
                         🔘 Texto do Botão do Card:
                     </label>
-                    <input type="text" id="noticia_btn" name="noticia_btn" value="<?php echo esc_attr($action_label); ?>" style="width: 100%; max-width: 400px; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Ler Notícia Completa, Acessar Matéria">
+                    <input type="text" id="noticia_btn" name="noticia_btn" value="<?php echo esc_attr($action_label); ?>" style="width: 100%; max-width: 400px; padding: 7px 10px; border-radius: 4px; border: 1px solid #ccd0d4;" placeholder="Ex: Ler Notícia Completa, Acessar Comunicado">
                     <span style="display:block; font-size:12px; color:#666; margin-top:3px;">Padrão caso deixe em branco: "Ler Notícia Completa".</span>
                 </div>
             </div>
@@ -1080,14 +1137,14 @@ function aja_render_post_metabox($post) {
 
             <div style="margin-top: 16px; padding: 12px 16px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; font-size: 12px; color: #475569; display: flex; align-items: center; gap: 10px;">
                 <span style="font-size: 20px;">📸</span>
-                <span><strong>Foto de Capa:</strong> Defina a imagem no quadro <strong>"Imagem Destacada"</strong> na coluna lateral direita. Ela será usada como foto de cabeçalho da notícia.</span>
+                <span><strong>Foto de Capa:</strong> Defina a imagem no quadro <strong>"Imagem Destacada"</strong> na coluna lateral direita. Ela será usada como foto de cabeçalho da notícia e no card.</span>
             </div>
         </div>
 
         <!-- ========================================== -->
         <!-- ABA 6: PARCEIROS (INSTITUCIONAIS & REDES)  -->
         <!-- ========================================== -->
-        <div id="tab-parceiros" class="aja-tab-content" style="display: none;">
+        <div id="tab-parceiros" class="aja-tab-content" style="display: <?php echo ($initial_tab === 'parceiros') ? 'block' : 'none'; ?>;">
             <div style="background: #f0fdfa; border-left: 4px solid #0d9488; padding: 12px 16px; border-radius: 4px; margin-bottom: 16px;">
                 <strong style="color: #115e59; font-size: 13px;">🤝 Cadastrando Parceiro Institucional / Rede Articulada</strong>
                 <p style="margin: 4px 0 0 0; font-size: 12px; color: #0f766e;">
@@ -1158,7 +1215,7 @@ function aja_render_post_metabox($post) {
             var contents = document.querySelectorAll('.aja-tab-content');
             var activeTabInput = document.getElementById('aja_active_tab');
 
-            function switchTab(tabId) {
+            function switchTab(tabId, skipGutenbergSync) {
                 // Alterna botões
                 buttons.forEach(function(btn) {
                     var isTarget = btn.getAttribute('data-target') === tabId;
@@ -1192,6 +1249,38 @@ function aja_render_post_metabox($post) {
 
                 // Atualiza visibilidade do destaque na lateral
                 updateCarouselSideVisibility(tabId);
+
+                // Sincroniza categoria no Gutenberg (se aplicável)
+                if (!skipGutenbergSync) {
+                    syncGutenbergCategory(tabShort);
+                }
+            }
+
+            // Sincroniza a seleção da categoria nativa no Gutenberg quando o usuário clica numa aba
+            function syncGutenbergCategory(tabShort) {
+                if (!window.wp || !wp.data || !wp.data.dispatch) return;
+                var termMap = {
+                    'noticias': 26,
+                    'publicacoes': 16,
+                    'editais': 15,
+                    'parceiros': 27,
+                    'equipe': 25,
+                    'portfolio': 14
+                };
+                var targetId = termMap[tabShort];
+                if (!targetId) return;
+                try {
+                    var editorSelect = wp.data.select('core/editor');
+                    var editorDispatch = wp.data.dispatch('core/editor');
+                    if (editorSelect && editorDispatch && editorDispatch.editPost) {
+                        var current = editorSelect.getEditedPostAttribute('categories') || [];
+                        if (current.indexOf(targetId) === -1) {
+                            var updated = current.filter(function(id) { return id !== 1; }); // Remove 'sem categoria'
+                            updated.push(targetId);
+                            editorDispatch.editPost({ categories: updated });
+                        }
+                    }
+                } catch(e) {}
             }
 
             buttons.forEach(function(btn) {
@@ -1201,8 +1290,8 @@ function aja_render_post_metabox($post) {
             });
 
             // Ativa aba inicial
-            var currentInitial = 'tab-' + (activeTabInput ? activeTabInput.value : 'equipe');
-            switchTab(currentInitial);
+            var currentInitial = 'tab-' + (activeTabInput ? activeTabInput.value : 'noticias');
+            switchTab(currentInitial, true);
 
             // Sincronização bidirecional do box de Destaque e Prioridade (Sidebar <-> Abas)
             function initCarouselSync() {
@@ -1269,34 +1358,57 @@ function aja_render_post_metabox($post) {
                 }
             }
 
-            // Escuta mudanças nos checkboxes de Categoria nativos do WordPress (Gutenberg ou Clássico)
-            function listenCategoryCheckboxes() {
-                var catCheckboxes = document.querySelectorAll('input[name="post_category[]"], #categorychecklist input[type="checkbox"], .editor-post-taxonomies__hierarchical-terms-list input[type="checkbox"]');
-                catCheckboxes.forEach(function(cb) {
-                    cb.addEventListener('change', function() {
-                        var label = this.parentElement ? this.parentElement.innerText.toLowerCase() : '';
-                        if (label.indexOf('parceir') !== -1 && this.checked) {
-                            switchTab('tab-parceiros');
-                            updateCarouselSideVisibility('tab-parceiros');
-                        } else if (label.indexOf('notic') !== -1 && this.checked) {
-                            switchTab('tab-noticias');
-                            updateCarouselSideVisibility('tab-noticias');
-                        } else if (label.indexOf('equip') !== -1 && this.checked) {
-                            switchTab('tab-equipe');
-                            updateCarouselSideVisibility('tab-equipe');
-                        } else if (label.indexOf('edita') !== -1 && this.checked) {
-                            switchTab('tab-editais');
-                            updateCarouselSideVisibility('tab-editais');
-                        } else if (label.indexOf('publica') !== -1 && this.checked) {
-                            switchTab('tab-publicacoes');
-                            updateCarouselSideVisibility('tab-publicacoes');
-                        } else if (label.indexOf('portf') !== -1 && this.checked) {
-                            switchTab('tab-portfolio');
-                            updateCarouselSideVisibility('tab-portfolio');
+            // Escuta reativa nativa no Redux store do Gutenberg para troca automática da aba
+            if (window.wp && wp.data && wp.data.subscribe && wp.data.select('core/editor')) {
+                var prevCatsJson = '';
+                wp.data.subscribe(function() {
+                    try {
+                        var ed = wp.data.select('core/editor');
+                        if (!ed) return;
+                        var cats = ed.getEditedPostAttribute('categories');
+                        if (!cats || !Array.isArray(cats)) return;
+                        var json = JSON.stringify(cats);
+                        if (json === prevCatsJson) return;
+                        prevCatsJson = json;
+
+                        // Mapeamento dos Term IDs oficiais da AJA
+                        if (cats.indexOf(26) !== -1) {
+                            switchTab('tab-noticias', true);
+                        } else if (cats.indexOf(16) !== -1) {
+                            switchTab('tab-publicacoes', true);
+                        } else if (cats.indexOf(15) !== -1) {
+                            switchTab('tab-editais', true);
+                        } else if (cats.indexOf(27) !== -1) {
+                            switchTab('tab-parceiros', true);
+                        } else if (cats.indexOf(25) !== -1) {
+                            switchTab('tab-equipe', true);
+                        } else if (cats.indexOf(14) !== -1) {
+                            switchTab('tab-portfolio', true);
                         }
-                    });
+                    } catch(err) {}
                 });
             }
+
+            // Escuta mudanças de checkbox em nível de documento (Clássico ou Fallback)
+            document.addEventListener('change', function(e) {
+                var target = e.target;
+                if (!target || target.type !== 'checkbox') return;
+                var parent = target.closest('label') || target.parentElement;
+                var label = (parent ? parent.textContent : '').toLowerCase();
+                if (label.indexOf('notic') !== -1 && target.checked) {
+                    switchTab('tab-noticias', true);
+                } else if (label.indexOf('publica') !== -1 && target.checked) {
+                    switchTab('tab-publicacoes', true);
+                } else if (label.indexOf('edita') !== -1 && target.checked) {
+                    switchTab('tab-editais', true);
+                } else if (label.indexOf('parceir') !== -1 && target.checked) {
+                    switchTab('tab-parceiros', true);
+                } else if (label.indexOf('equip') !== -1 && target.checked) {
+                    switchTab('tab-equipe', true);
+                } else if (label.indexOf('portf') !== -1 && target.checked) {
+                    switchTab('tab-portfolio', true);
+                }
+            }, true);
 
             // Atualização visual interativa do seletor de Tags de Notícia
             var tagRadios = document.querySelectorAll('input[name="noticia_tag"]');
@@ -1370,26 +1482,84 @@ function aja_save_post_metabox($post_id) {
         delete_post_meta($post_id, '_aja_carousel_order');
     }
 
-    $active_tab = isset($_POST['aja_active_tab']) ? sanitize_text_field($_POST['aja_active_tab']) : 'equipe';
+    $active_tab = isset($_POST['aja_active_tab']) ? sanitize_text_field($_POST['aja_active_tab']) : '';
+    if (empty($active_tab)) {
+        $post_categories = wp_get_post_categories($post_id, ['fields' => 'slugs']);
+        if (in_array('noticias', $post_categories)) {
+            $active_tab = 'noticias';
+        } elseif (in_array('publicacoes', $post_categories)) {
+            $active_tab = 'publicacoes';
+        } elseif (in_array('editais', $post_categories)) {
+            $active_tab = 'editais';
+        } elseif (in_array('parceiros', $post_categories)) {
+            $active_tab = 'parceiros';
+        } elseif (in_array('equipe', $post_categories)) {
+            $active_tab = 'equipe';
+        } else {
+            $active_tab = 'noticias';
+        }
+    }
 
     // Salva com base na aba ativa ou prioridade do formulário
-    if ($active_tab === 'editais') {
-        $badge    = isset($_POST['edital_badge']) ? sanitize_text_field($_POST['edital_badge']) : '';
-        $subtitle = isset($_POST['edital_subtitle']) ? sanitize_text_field($_POST['edital_subtitle']) : '';
-        $location = isset($_POST['edital_location']) ? sanitize_text_field($_POST['edital_location']) : '';
-        $link     = isset($_POST['edital_link']) ? esc_url_raw($_POST['edital_link']) : '';
-        $btn      = isset($_POST['edital_btn']) ? sanitize_text_field($_POST['edital_btn']) : '';
-        $featured = isset($_POST['edital_featured']) ? '1' : '0';
+    if ($active_tab === 'noticias') {
+        $badge        = isset($_POST['noticia_badge']) ? sanitize_text_field($_POST['noticia_badge']) : '';
+        $subtitle     = isset($_POST['noticia_subtitle']) ? sanitize_text_field($_POST['noticia_subtitle']) : '';
+        $author       = isset($_POST['noticia_author']) ? sanitize_text_field($_POST['noticia_author']) : '';
+        $location     = isset($_POST['noticia_location']) ? sanitize_text_field($_POST['noticia_location']) : '';
+        $source       = isset($_POST['noticia_source']) ? sanitize_text_field($_POST['noticia_source']) : '';
+        $link         = isset($_POST['noticia_link']) ? esc_url_raw($_POST['noticia_link']) : '';
+        $pdf          = isset($_POST['noticia_pdf']) ? esc_url_raw($_POST['noticia_pdf']) : '';
+        $photo_credit = isset($_POST['noticia_photo_credit']) ? sanitize_text_field($_POST['noticia_photo_credit']) : '';
+        $btn          = isset($_POST['noticia_btn']) ? sanitize_text_field($_POST['noticia_btn']) : '';
+        $noticia_tag  = isset($_POST['noticia_tag']) ? sanitize_key($_POST['noticia_tag']) : '';
+
+        // Se badge estiver vazio, preenche automaticamente com o rótulo da tag selecionada
+        if (empty($badge)) {
+            $tag_labels = array(
+                'cobertura'  => 'Coberturas & Eventos',
+                'comunicado' => 'Comunicado Oficial',
+                'territorio' => 'Ações em Territórios'
+            );
+            if (!empty($noticia_tag) && isset($tag_labels[$noticia_tag])) {
+                $badge = $tag_labels[$noticia_tag];
+            }
+        }
 
         update_post_meta($post_id, '_aja_badge', $badge);
         update_post_meta($post_id, '_aja_subtitle', $subtitle);
         update_post_meta($post_id, '_aja_subtitle_gt', $subtitle);
+        update_post_meta($post_id, '_aja_author', $author);
         update_post_meta($post_id, '_aja_location', $location);
+        update_post_meta($post_id, '_aja_source', $source);
         update_post_meta($post_id, '_aja_action_link', $link);
-        update_post_meta($post_id, '_aja_pdf_url', $link);
+        update_post_meta($post_id, '_aja_pdf_url', !empty($pdf) ? $pdf : $link);
+        update_post_meta($post_id, '_aja_photo_credit', $photo_credit);
         update_post_meta($post_id, '_aja_action_label', $btn);
-        update_post_meta($post_id, '_aja_featured', $featured);
-        update_post_meta($post_id, '_aja_featured_edital', $featured);
+
+        // Atualiza o resumo oficial do WordPress (post_excerpt) se preenchido
+        if (isset($_POST['noticia_excerpt'])) {
+            $new_excerpt = sanitize_textarea_field($_POST['noticia_excerpt']);
+            $curr_p = get_post($post_id);
+            if ($curr_p && $curr_p->post_excerpt !== $new_excerpt) {
+                remove_action('save_post', 'aja_save_post_metabox');
+                wp_update_post(array('ID' => $post_id, 'post_excerpt' => $new_excerpt));
+                add_action('save_post', 'aja_save_post_metabox');
+            }
+        }
+
+        if (!empty($noticia_tag)) {
+            update_post_meta($post_id, '_aja_noticia_tag', $noticia_tag);
+
+            // Sincroniza com a taxonomia nativa de tags do WordPress (post_tag)
+            $tag_names_map = array(
+                'cobertura'  => 'Coberturas & Eventos',
+                'comunicado' => 'Comunicados Oficiais',
+                'territorio' => 'Ações em Territórios'
+            );
+            if (isset($tag_names_map[$noticia_tag])) {
+                wp_set_post_tags($post_id, array($tag_names_map[$noticia_tag]), true);
+            }
+        }
 
     } elseif ($active_tab === 'publicacoes') {
         $badge    = isset($_POST['pub_badge']) ? sanitize_text_field($_POST['pub_badge']) : '';
@@ -1409,6 +1579,43 @@ function aja_save_post_metabox($post_id) {
         update_post_meta($post_id, '_aja_featured_edital', '0');
         $pub_axis = isset($_POST['pub_axis']) ? sanitize_text_field($_POST['pub_axis']) : '';
         update_post_meta($post_id, '_aja_pub_axis', $pub_axis);
+
+    } elseif ($active_tab === 'editais') {
+        $badge    = isset($_POST['edital_badge']) ? sanitize_text_field($_POST['edital_badge']) : '';
+        $subtitle = isset($_POST['edital_subtitle']) ? sanitize_text_field($_POST['edital_subtitle']) : '';
+        $location = isset($_POST['edital_location']) ? sanitize_text_field($_POST['edital_location']) : '';
+        $link     = isset($_POST['edital_link']) ? esc_url_raw($_POST['edital_link']) : '';
+        $btn      = isset($_POST['edital_btn']) ? sanitize_text_field($_POST['edital_btn']) : '';
+        $featured = isset($_POST['edital_featured']) ? '1' : '0';
+
+        update_post_meta($post_id, '_aja_badge', $badge);
+        update_post_meta($post_id, '_aja_subtitle', $subtitle);
+        update_post_meta($post_id, '_aja_subtitle_gt', $subtitle);
+        update_post_meta($post_id, '_aja_location', $location);
+        update_post_meta($post_id, '_aja_action_link', $link);
+        update_post_meta($post_id, '_aja_pdf_url', $link);
+        update_post_meta($post_id, '_aja_action_label', $btn);
+        update_post_meta($post_id, '_aja_featured', $featured);
+        update_post_meta($post_id, '_aja_featured_edital', $featured);
+
+    } elseif ($active_tab === 'parceiros') {
+        $badge    = isset($_POST['parceiro_badge']) ? sanitize_text_field($_POST['parceiro_badge']) : '';
+        $tooltip  = isset($_POST['parceiro_tooltip']) ? sanitize_text_field($_POST['parceiro_tooltip']) : '';
+        $link     = isset($_POST['parceiro_link']) ? esc_url_raw($_POST['parceiro_link']) : '';
+        $order    = isset($_POST['parceiro_order']) ? intval($_POST['parceiro_order']) : 0;
+        $featured = isset($_POST['parceiro_featured']) ? '1' : '0';
+
+        update_post_meta($post_id, '_aja_badge', $badge);
+        update_post_meta($post_id, '_aja_tooltip', $tooltip);
+        update_post_meta($post_id, '_aja_action_link', $link);
+        update_post_meta($post_id, '_aja_pdf_url', $link);
+        update_post_meta($post_id, '_aja_featured', $featured);
+
+        if ($order >= 0) {
+            remove_action('save_post', 'aja_save_post_metabox');
+            wp_update_post(array('ID' => $post_id, 'menu_order' => $order));
+            add_action('save_post', 'aja_save_post_metabox');
+        }
 
     } elseif ($active_tab === 'equipe') {
         $badge    = isset($_POST['equipe_role']) ? sanitize_text_field($_POST['equipe_role']) : '';
@@ -1431,67 +1638,6 @@ function aja_save_post_metabox($post_id) {
             remove_action('save_post', 'aja_save_post_metabox');
             wp_update_post(array('ID' => $post_id, 'menu_order' => $order));
             add_action('save_post', 'aja_save_post_metabox');
-        }
-
-    } elseif ($active_tab === 'parceiros') {
-        $badge    = isset($_POST['parceiro_badge']) ? sanitize_text_field($_POST['parceiro_badge']) : '';
-        $tooltip  = isset($_POST['parceiro_tooltip']) ? sanitize_text_field($_POST['parceiro_tooltip']) : '';
-        $link     = isset($_POST['parceiro_link']) ? esc_url_raw($_POST['parceiro_link']) : '';
-        $order    = isset($_POST['parceiro_order']) ? intval($_POST['parceiro_order']) : 0;
-        $featured = isset($_POST['parceiro_featured']) ? '1' : '0';
-
-        update_post_meta($post_id, '_aja_badge', $badge);
-        update_post_meta($post_id, '_aja_tooltip', $tooltip);
-        update_post_meta($post_id, '_aja_action_link', $link);
-        update_post_meta($post_id, '_aja_pdf_url', $link);
-        update_post_meta($post_id, '_aja_featured', $featured);
-
-        if ($order >= 0) {
-            remove_action('save_post', 'aja_save_post_metabox');
-            wp_update_post(array('ID' => $post_id, 'menu_order' => $order));
-            add_action('save_post', 'aja_save_post_metabox');
-        }
-
-    } elseif ($active_tab === 'noticias') {
-        $badge       = isset($_POST['noticia_badge']) ? sanitize_text_field($_POST['noticia_badge']) : '';
-        $subtitle    = isset($_POST['noticia_subtitle']) ? sanitize_text_field($_POST['noticia_subtitle']) : '';
-        $location    = isset($_POST['noticia_location']) ? sanitize_text_field($_POST['noticia_location']) : '';
-        $link        = isset($_POST['noticia_link']) ? esc_url_raw($_POST['noticia_link']) : '';
-        $btn         = isset($_POST['noticia_btn']) ? sanitize_text_field($_POST['noticia_btn']) : '';
-        $noticia_tag = isset($_POST['noticia_tag']) ? sanitize_key($_POST['noticia_tag']) : '';
-
-        // Se badge estiver vazio, preenche automaticamente com o rótulo da tag selecionada
-        if (empty($badge)) {
-            $tag_labels = array(
-                'cobertura'  => 'Coberturas & Eventos',
-                'comunicado' => 'Comunicado Oficial',
-                'territorio' => 'Ações em Territórios'
-            );
-            if (!empty($noticia_tag) && isset($tag_labels[$noticia_tag])) {
-                $badge = $tag_labels[$noticia_tag];
-            }
-        }
-
-        update_post_meta($post_id, '_aja_badge', $badge);
-        update_post_meta($post_id, '_aja_subtitle', $subtitle);
-        update_post_meta($post_id, '_aja_subtitle_gt', $subtitle);
-        update_post_meta($post_id, '_aja_location', $location);
-        update_post_meta($post_id, '_aja_action_link', $link);
-        update_post_meta($post_id, '_aja_pdf_url', $link);
-        update_post_meta($post_id, '_aja_action_label', $btn);
-
-        if (!empty($noticia_tag)) {
-            update_post_meta($post_id, '_aja_noticia_tag', $noticia_tag);
-
-            // Sincroniza com a taxonomia nativa de tags do WordPress (post_tag)
-            $tag_names_map = array(
-                'cobertura'  => 'Coberturas & Eventos',
-                'comunicado' => 'Comunicados Oficiais',
-                'territorio' => 'Ações em Territórios'
-            );
-            if (isset($tag_names_map[$noticia_tag])) {
-                wp_set_post_tags($post_id, array($tag_names_map[$noticia_tag]), true);
-            }
         }
 
     } else { // Portfólio (ou geral)
@@ -1652,8 +1798,14 @@ function aja_get_post_subtitle($post_id, $default = '') {
 }
 
 function aja_get_post_location($post_id, $default = '') {
-    $loc = get_post_meta($post_id, '_aja_location', true);
-    return !empty($loc) ? $loc : $default;
+    $loc    = get_post_meta($post_id, '_aja_location', true);
+    $source = get_post_meta($post_id, '_aja_source', true);
+    if (!empty($loc) && !empty($source)) {
+        return $loc . ' • ' . $source;
+    }
+    if (!empty($loc)) return $loc;
+    if (!empty($source)) return $source;
+    return $default;
 }
 
 function aja_get_post_action_link($post_id) {

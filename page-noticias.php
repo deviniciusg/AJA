@@ -130,7 +130,7 @@ get_header();
               $news_id       = get_the_ID();
               $news_badge    = aja_get_post_badge($news_id, 'Notícia');
               $news_sub      = aja_get_post_subtitle($news_id, 'Comunicação AJA');
-              $news_loc      = get_post_meta($news_id, '_aja_location', true);
+              $news_loc      = function_exists('aja_get_post_location') ? aja_get_post_location($news_id, '') : get_post_meta($news_id, '_aja_location', true);
               $news_link     = aja_get_post_action_link($news_id);
               $news_btn      = aja_get_post_action_label($news_id, 'Ler Notícia Completa');
               $news_date     = get_the_date('d \d\e F, Y');
