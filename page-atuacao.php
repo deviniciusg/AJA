@@ -57,7 +57,7 @@ get_header();
           </div>
         </div>
         <div class="lg:col-span-5 relative min-h-[220px] lg:min-h-full overflow-hidden bg-surface-container-high group">
-          <img src="<?php echo esc_url(aja_asset('fotos/advocacia-juridica-amazonia.jpg')); ?>" alt="Profissional do Direito em análise jurídica com a Deusa da Justiça (Thêmis) ao fundo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <img src="<?php echo esc_url(aja_asset('fotos/advocacia-juridica-amazonia.jpg')); ?>" alt="Integrantes da Aliança Jurídica pela Amazônia reunidos em evento institucional" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/25 to-transparent flex flex-col justify-end p-5 text-surface-container-lowest">
             <span class="font-label-sm text-[10px] uppercase tracking-widest text-tertiary-fixed font-bold">Prática Jurídica &amp; Estado de Direito</span>
             <p class="text-sm font-bold text-surface-container-lowest mt-0.5">Rigor Técnico e Defesa Socioambiental</p>
