@@ -847,6 +847,7 @@ function aja_render_post_metabox($post) {
                 <span style="display:block; font-size:11px; color:#78350f; margin-top:4px; margin-left: 24px;">
                     Se marcado, este edital ganhará um card grande com imagem de fundo no início da lista.
                 </span>
+            </div>
     
             <!-- OPÇÃO DE DESTAQUE NO CARROSSEL DO TOPO -->
             <div class="aja-carousel-metabox-card" style="margin-top: 20px; padding: 14px 18px; background: #fffbeb; border: 2px solid #fde68a; border-radius: 8px;">
