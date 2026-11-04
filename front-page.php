@@ -200,16 +200,16 @@ get_header();
         <!-- Wrapper do Carrossel com as Setas < e > nas Laterais dos Posts -->
         <div class="relative group/carousel">
           
-          <!-- Seta Esquerda (<) na Esquerda do Post -->
+          <!-- Seta Esquerda (<) na Esquerda do Post (Oculta no modo mobile) -->
           <button type="button" id="destaques-prev-side" aria-label="Post anterior"
-                  class="absolute -left-2 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-container-lowest/95 hover:bg-primary text-ink-primary hover:text-on-primary border border-border-subtle shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-90 focus:outline-none">
-            <span class="material-symbols-outlined text-[24px] sm:text-[28px]">chevron_left</span>
+                  class="hidden md:flex absolute md:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-surface-container-lowest/95 hover:bg-primary text-ink-primary hover:text-on-primary border border-border-subtle shadow-lg hover:shadow-xl items-center justify-center transition-all duration-200 cursor-pointer active:scale-90 focus:outline-none">
+            <span class="material-symbols-outlined text-[24px] lg:text-[28px]">chevron_left</span>
           </button>
 
-          <!-- Seta Direita (>) na Direita do Post -->
+          <!-- Seta Direita (>) na Direita do Post (Oculta no modo mobile) -->
           <button type="button" id="destaques-next-side" aria-label="Próximo post"
-                  class="absolute -right-2 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-surface-container-lowest/95 hover:bg-primary text-ink-primary hover:text-on-primary border border-border-subtle shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-90 focus:outline-none">
-            <span class="material-symbols-outlined text-[24px] sm:text-[28px]">chevron_right</span>
+                  class="hidden md:flex absolute md:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-surface-container-lowest/95 hover:bg-primary text-ink-primary hover:text-on-primary border border-border-subtle shadow-lg hover:shadow-xl items-center justify-center transition-all duration-200 cursor-pointer active:scale-90 focus:outline-none">
+            <span class="material-symbols-outlined text-[24px] lg:text-[28px]">chevron_right</span>
           </button>
 
           <!-- Container do Carrossel em Largura Total (O post ocupa toda a seção) -->
