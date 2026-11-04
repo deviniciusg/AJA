@@ -8,7 +8,7 @@
   <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin reveal">
     
     <!-- Caixa Destaque de Conversão -->
-    <div class="bg-surface-container-lowest rounded-3xl p-8 lg:p-14 border border-border-subtle shadow-md relative overflow-hidden interactive-card">
+    <div class="bg-surface-container-lowest rounded-3xl p-5 sm:p-8 lg:p-14 border border-border-subtle shadow-md relative overflow-hidden interactive-card">
       <!-- Elemento Decorativo Sutil de Fundo -->
       <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-primary/5 pointer-events-none blur-3xl"></div>
       <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-secondary/5 pointer-events-none blur-3xl"></div>
@@ -45,12 +45,12 @@
         </div>
 
         <!-- Coluna de Ação Direta (Card de Conversão) -->
-        <div class="lg:col-span-5 flex flex-col gap-4 bg-surface-container-low p-6 lg:p-8 rounded-2xl border border-border-subtle shadow-xs">
-          <div class="flex items-center justify-between pb-3 border-b border-border-subtle">
-            <span class="px-3 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-xs font-bold uppercase tracking-wider">
+        <div class="lg:col-span-5 flex flex-col gap-4 bg-surface-container-low p-4 sm:p-6 lg:p-8 rounded-2xl border border-border-subtle shadow-xs">
+          <div class="flex items-center justify-between gap-3 pb-3 border-b border-border-subtle">
+            <span class="px-2.5 sm:px-3 py-1 rounded-md bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-[11px] sm:text-xs font-bold uppercase tracking-wider whitespace-nowrap shrink-0 shadow-2xs">
               Adesão Aberta
             </span>
-            <span class="text-xs font-semibold text-outline">Formulário Oficial</span>
+            <span class="text-[11px] sm:text-xs font-semibold text-outline whitespace-nowrap text-right">Formulário Oficial</span>
           </div>
 
           <p class="text-xs text-on-surface-variant leading-relaxed">

@@ -1970,12 +1970,12 @@ get_header();
 
           <!-- Conversion Action Box -->
           <div class="lg:col-span-6">
-            <div class="bg-surface-container-lowest p-8 lg:p-12 rounded-2xl shadow-sm border border-border-subtle flex flex-col gap-6 interactive-card">
-              <div class="flex items-center justify-between">
-                <span class="px-3 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold uppercase tracking-wider">
+            <div class="bg-surface-container-lowest p-5 sm:p-8 lg:p-12 rounded-2xl shadow-sm border border-border-subtle flex flex-col gap-6 interactive-card">
+              <div class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-3">
+                <span class="px-3 py-1 rounded-md bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold uppercase tracking-wider whitespace-nowrap shrink-0 shadow-2xs">
                   Adesão Aberta
                 </span>
-                <span class="font-label-sm text-label-sm text-outline">Processo Contínuo</span>
+                <span class="font-label-sm text-label-sm text-outline whitespace-nowrap">Processo Contínuo</span>
               </div>
 
               <div class="flex flex-col gap-3">

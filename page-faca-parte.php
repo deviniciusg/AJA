@@ -69,12 +69,12 @@ get_header();
 
         <!-- Coluna da Direita: Card de Conversão / Formulário -->
         <div class="lg:col-span-5 sticky top-28">
-          <div class="bg-surface-container-lowest p-8 lg:p-10 rounded-3xl border border-border-subtle shadow-md flex flex-col gap-6">
-            <div class="flex items-center justify-between">
-              <span class="px-3.5 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-xs font-bold uppercase tracking-wider">
+          <div class="bg-surface-container-lowest p-5 sm:p-8 lg:p-10 rounded-3xl border border-border-subtle shadow-md flex flex-col gap-6">
+            <div class="flex items-center justify-between gap-3">
+              <span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-[11px] sm:text-xs font-bold uppercase tracking-wider whitespace-nowrap shrink-0 shadow-2xs">
                 Inscrição Aberta
               </span>
-              <span class="text-xs text-outline font-semibold">Ciclo Contínuo</span>
+              <span class="text-[11px] sm:text-xs text-outline font-semibold whitespace-nowrap text-right">Ciclo Contínuo</span>
             </div>
 
             <div>
