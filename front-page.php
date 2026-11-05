@@ -43,6 +43,28 @@ get_header();
 <main class="w-full pt-20 bg-surface min-h-[calc(100vh-80px)]">
   <div class="flex flex-col w-full">
 
+    <?php
+    // Suporte ao Elementor: Permite carregar o editor visual sem o erro "área de conteúdo não encontrada"
+    if (have_posts()) :
+        while (have_posts()) : the_post();
+            if (class_exists('\Elementor\Plugin') && (\Elementor\Plugin::$instance->editor->is_edit_mode() || \Elementor\Plugin::$instance->preview->is_preview_mode())) :
+    ?>
+      <div class="aja-elementor-area w-full bg-surface-container py-6 border-b border-border-subtle">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+          <div class="p-4 bg-surface-container-lowest rounded-xl border border-primary/20 shadow-xs mb-4 text-xs text-on-surface-variant">
+            <strong class="text-primary font-bold uppercase tracking-wider block mb-1">Área de Edição do Elementor</strong>
+            Você pode adicionar e personalizar blocos do Elementor nesta área. Lembre-se de que os cards dinâmicos do site (Destaques, Notícias, Editais, Equipe e Parceiros) continuam sendo gerenciados através do menu <strong>Posts</strong> do WordPress.
+          </div>
+          <?php the_content(); ?>
+        </div>
+      </div>
+    <?php
+            endif;
+        endwhile;
+        rewind_posts();
+    endif;
+    ?>
+
     <!-- HERO SECTION: PLATAFORMA DE ARTICULAÇÃO & ESTADO DE DIREITO -->
     <section class="relative w-full overflow-hidden bg-primary -mt-20 pt-28 pb-12 lg:pb-16 min-h-[660px] lg:min-h-[100vh] xl:min-h-[100vh] flex items-center">
       <!-- Split Background: Cor Sólida à Esquerda e Foto da Garça em Voo à Direita -->
