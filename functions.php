@@ -2421,6 +2421,13 @@ function aja_get_home_photos_config() {
             'default'     => 'ece721c3-6d0e-4960-855e-b27860c911aa.jpg',
             'locations'   => 'Página Inicial (Faixa Panorâmica)'
         ),
+        'aja_foto_ariranha' => array(
+            'label'       => '7. Transição Fotográfica: Fauna Amazônica (Ariranha)',
+            'desc'        => 'Faixa fotográfica horizontal de transição localizada logo antes da seção Contato ("Vamos conversar?").',
+            'dimensions'  => '1280 x 600 px ou 1600 x 600 px (Panorâmica horizontal)',
+            'default'     => 'fotos/pexels-jeangc-28587106.png',
+            'locations'   => 'Página Inicial (Faixa antes de Contato)'
+        ),
     );
 }
 
@@ -2504,7 +2511,7 @@ function aja_render_home_photos_metabox($post) {
     ?>
     <div style="background: #f8fafc; padding: 14px 18px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
         <p style="margin: 0; font-size: 13px; color: #334155;">
-            <strong>📸 Personalização de Fotos:</strong> Substitua qualquer uma das 6 fotos institucionais da Home selecionando um arquivo da sua biblioteca de mídia. Você também pode acessar a tela dedicada em <a href="<?php echo esc_url(admin_url('themes.php?page=aja-fotos-home')); ?>" target="_blank" style="font-weight: 600; text-decoration: underline;">Aparência &gt; Fotos da Home</a>.
+            <strong>📸 Personalização de Fotos:</strong> Substitua qualquer uma das fotos institucionais da Home selecionando um arquivo da sua biblioteca de mídia. Você também pode acessar a tela dedicada em <a href="<?php echo esc_url(admin_url('themes.php?page=aja-fotos-home')); ?>" target="_blank" style="font-weight: 600; text-decoration: underline;">Aparência &gt; Fotos da Home</a>.
         </p>
     </div>
     <?php
@@ -2579,7 +2586,7 @@ function aja_render_home_photos_admin_page() {
             <span>📸 Fotos Institucionais da Página Inicial</span>
         </h1>
         <p style="color: #64748b; font-size: 14px; margin-top: 0; margin-bottom: 24px;">
-            Substitua com facilidade as 6 fotos fixas da Home escolhendo imagens da sua Biblioteca de Mídia. Se preferir voltar a qualquer momento, basta clicar em <strong>Restaurar Padrão</strong>.
+            Substitua com facilidade as fotos fixas da Home escolhendo imagens da sua Biblioteca de Mídia. Se preferir voltar a qualquer momento, basta clicar em <strong>Restaurar Padrão</strong>.
         </p>
 
         <?php if ($saved_notice) : ?>

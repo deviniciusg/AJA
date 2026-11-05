@@ -2523,7 +2523,7 @@ get_header();
     <div class="relative w-full h-64 sm:h-80 md:h-96 lg:h-[420px] overflow-hidden border-t border-border-subtle bg-earth-dark group">
       <img alt="Ariranha nadando nas águas de rio amazônico"
         class="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out"
-        src="<?php echo esc_url(aja_asset('fotos/pexels-jeangc-28587106.png')); ?>" />
+        src="<?php echo esc_url(aja_get_home_photo('aja_foto_ariranha', 'fotos/pexels-jeangc-28587106.png')); ?>" />
       <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 pointer-events-none"></div>
     </div>
 
