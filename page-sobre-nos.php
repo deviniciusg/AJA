@@ -62,7 +62,7 @@ get_header();
           <div class="relative overflow-hidden rounded-2xl bg-surface-container-high h-[300px] lg:h-[320px] shadow-md group">
             <img alt="Integrantes e parceiros da Aliança Jurídica pela Amazônia reunidos em encontro da rede"
               class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('fotos/encontro-rede-aja.jpg')); ?>" />
+              src="<?php echo esc_url(aja_get_home_photo('aja_foto_encontro_rede', 'fotos/encontro-rede-aja.jpg')); ?>" />
             <div
               class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/35 to-transparent flex flex-col justify-end p-5 text-surface-container-lowest">
               <span class="font-label-sm text-[11px] uppercase tracking-widest text-primary-fixed-dim font-bold">Plataforma de Articulação</span>
@@ -75,7 +75,7 @@ get_header();
           <div class="relative overflow-hidden rounded-2xl bg-surface-container-high h-[210px] shadow-sm group">
             <img alt="Painel de debates e construção coletiva da Aliança Jurídica pela Amazônia"
               class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('fotos/painel-debate-aja.jpg')); ?>" />
+              src="<?php echo esc_url(aja_get_home_photo('aja_foto_painel_debate', 'fotos/painel-debate-aja.jpg')); ?>" />
             <div
               class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/30 to-transparent flex flex-col justify-end p-4 text-surface-container-lowest">
               <span class="font-label-sm text-[10px] uppercase tracking-widest text-tertiary-fixed font-bold">Diálogo &amp; Cooperação</span>

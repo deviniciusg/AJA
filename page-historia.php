@@ -47,7 +47,7 @@ get_header();
           <div class="relative rounded-2xl overflow-hidden shadow-md group border border-border-subtle bg-surface-container-high">
             <img alt="Coquetel de lançamento da Aliança Jurídica pela Amazônia"
               class="w-full h-64 object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('fotos/coquetel-lancamento-aja.jpg')); ?>" />
+              src="<?php echo esc_url(aja_get_home_photo('aja_foto_historia', 'fotos/coquetel-lancamento-aja.jpg')); ?>" />
             <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/25 to-transparent flex flex-col justify-end p-4 text-surface-container-lowest">
               <span class="font-label-sm text-[10px] uppercase tracking-widest text-secondary-fixed font-bold">Construção Coletiva</span>
               <p class="text-sm font-bold text-surface-container-lowest mt-0.5">Coquetel de Lançamento da AJA</p>
@@ -88,7 +88,7 @@ get_header();
           <div class="relative rounded-2xl overflow-hidden shadow-md group border border-border-subtle bg-surface-container-high">
             <img alt="Integrantes da Aliança Jurídica pela Amazônia reunidos em encontro da rede"
               class="w-full h-60 object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              src="<?php echo esc_url(aja_asset('fotos/encontro-rede-aja.jpg')); ?>" />
+              src="<?php echo esc_url(aja_get_home_photo('aja_foto_encontro_rede', 'fotos/encontro-rede-aja.jpg')); ?>" />
             <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/25 to-transparent flex flex-col justify-end p-4 text-surface-container-lowest">
               <span class="font-label-sm text-[10px] uppercase tracking-widest text-secondary-fixed font-bold">Rede Articulada</span>
               <p class="text-sm font-bold text-surface-container-lowest mt-0.5">A Aliança em Construção Permanente</p>

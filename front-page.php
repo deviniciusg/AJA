@@ -73,7 +73,7 @@ get_header();
         <div class="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2 xl:w-[52%] h-full overflow-hidden hero-garca-wrap">
           <img alt="Garça em voo sobre as águas amazônicas - Aliança Jurídica pela Amazônia"
             class="w-full h-full object-cover object-[center_center] hero-garca-img"
-            src="<?php echo esc_url(aja_asset('home-garca.jpg')); ?>" />
+            src="<?php echo esc_url(aja_get_home_photo('aja_foto_hero', 'home-garca.jpg')); ?>" />
           <!-- Suave transição degradê na borda esquerda para fundir na cor sólida -->
           <div class="absolute inset-y-0 left-0 w-36 xl:w-52 bg-gradient-to-r from-primary via-primary/75 to-transparent"></div>
           <!-- Vinhetas suaves no topo e rodapé para harmonizar com o header e indicadores -->
@@ -85,7 +85,7 @@ get_header();
         <div class="lg:hidden absolute inset-0 overflow-hidden">
           <img alt="Garça em voo sobre as águas amazônicas"
             class="w-full h-full object-cover object-center hero-garca-img"
-            src="<?php echo esc_url(aja_asset('home-garca.jpg')); ?>" />
+            src="<?php echo esc_url(aja_get_home_photo('aja_foto_hero', 'home-garca.jpg')); ?>" />
           <div class="absolute inset-0 bg-primary/90 backdrop-blur-[1px]"></div>
         </div>
 
@@ -145,7 +145,7 @@ get_header();
             <div class="lg:hidden mt-4 w-full aspect-[4/3] rounded-xl overflow-hidden shadow-2xl border border-white/15 relative">
               <img alt="Garça sobrevoando rio na Amazônia"
                 class="w-full h-full object-cover object-center"
-                src="<?php echo esc_url(aja_asset('home-garca.jpg')); ?>" />
+                src="<?php echo esc_url(aja_get_home_photo('aja_foto_hero', 'home-garca.jpg')); ?>" />
             </div>
           </div>
 
@@ -651,7 +651,7 @@ get_header();
             <div class="relative overflow-hidden rounded-2xl bg-surface-container-high h-[300px] lg:h-[320px] shadow-md group interactive-card">
               <img alt="Integrantes e parceiros da Aliança Jurídica pela Amazônia reunidos em encontro da rede"
                 class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                src="<?php echo esc_url(aja_asset('fotos/encontro-rede-aja.jpg')); ?>" />
+                src="<?php echo esc_url(aja_get_home_photo('aja_foto_encontro_rede', 'fotos/encontro-rede-aja.jpg')); ?>" />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/35 to-transparent flex flex-col justify-end p-5 text-surface-container-lowest">
                 <span class="font-label-sm text-[11px] uppercase tracking-widest text-primary-fixed-dim font-bold">Plataforma de Articulação</span>
@@ -664,7 +664,7 @@ get_header();
             <div class="relative overflow-hidden rounded-2xl bg-surface-container-high h-[210px] shadow-sm group interactive-card">
               <img alt="Painel de debates e construção coletiva da Aliança Jurídica pela Amazônia"
                 class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                src="<?php echo esc_url(aja_asset('fotos/painel-debate-aja.jpg')); ?>" />
+                src="<?php echo esc_url(aja_get_home_photo('aja_foto_painel_debate', 'fotos/painel-debate-aja.jpg')); ?>" />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/30 to-transparent flex flex-col justify-end p-4 text-surface-container-lowest">
                 <span class="font-label-sm text-[10px] uppercase tracking-widest text-tertiary-fixed font-bold">Diálogo &amp; Cooperação</span>
@@ -702,7 +702,7 @@ get_header();
             <div class="relative rounded-2xl overflow-hidden shadow-md group interactive-card border border-border-subtle bg-surface-container-high">
               <img alt="Coquetel de lançamento da Aliança Jurídica pela Amazônia"
                 class="w-full h-64 object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                src="<?php echo esc_url(aja_asset('fotos/coquetel-lancamento-aja.jpg')); ?>" />
+                src="<?php echo esc_url(aja_get_home_photo('aja_foto_historia', 'fotos/coquetel-lancamento-aja.jpg')); ?>" />
               <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/25 to-transparent flex flex-col justify-end p-4 text-surface-container-lowest">
                 <span class="font-label-sm text-[10px] uppercase tracking-widest text-secondary-fixed font-bold">Construção Coletiva</span>
                 <p class="text-sm font-bold text-surface-container-lowest mt-0.5">Coquetel de Lançamento da AJA</p>
@@ -786,7 +786,7 @@ get_header();
             </div>
           </div>
           <div class="lg:col-span-5 relative min-h-[250px] lg:min-h-full overflow-hidden bg-surface-container-high group">
-            <img src="<?php echo esc_url(aja_asset('fotos/advocacia-juridica-amazonia.jpg')); ?>"
+            <img src="<?php echo esc_url(aja_get_home_photo('aja_foto_atuacao', 'fotos/advocacia-juridica-amazonia.jpg')); ?>"
                  alt="Integrantes da Aliança Jurídica pela Amazônia reunidos em evento institucional"
                  class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
             <div class="absolute inset-0 bg-gradient-to-t from-earth-dark/90 via-earth-dark/25 to-transparent flex flex-col justify-end p-5 text-surface-container-lowest">
@@ -1569,7 +1569,7 @@ get_header();
     <div class="relative w-full h-64 sm:h-80 md:h-96 lg:h-[420px] overflow-hidden border-t border-border-subtle bg-earth-dark group">
       <img alt="Integrantes da Aliança Jurídica pela Amazônia em painel de debates durante evento da rede"
         class="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out"
-        src="<?php echo esc_url(aja_asset('ece721c3-6d0e-4960-855e-b27860c911aa.jpg')); ?>" />
+        src="<?php echo esc_url(aja_get_home_photo('aja_foto_transicao', 'ece721c3-6d0e-4960-855e-b27860c911aa.jpg')); ?>" />
       <div class="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/35 pointer-events-none"></div>
     </div>
 

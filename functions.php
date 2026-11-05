@@ -2367,3 +2367,427 @@ add_action('admin_init', function() {
         update_option('aja_seeded_partners_v1', 1);
     }
 });
+
+
+/**
+ * =========================================================================
+ * GERENCIADOR DE FOTOS INSTITUCIONAIS DA PÁGINA INICIAL (AJA)
+ * Permite que administradores alterem as fotos fixas da Home pela biblioteca
+ * de mídia do WordPress, com fallback automático para os assets padrão.
+ * =========================================================================
+ */
+
+function aja_get_home_photos_config() {
+    return array(
+        'aja_foto_hero' => array(
+            'label'       => '1. Foto Principal do Topo (Hero / Garça em Voo)',
+            'desc'        => 'Exibida na lateral direita do banner principal da Home (desktop) e como fundo suave (mobile).',
+            'dimensions'  => '1200 x 800 px (Paisagem)',
+            'default'     => 'home-garca.jpg',
+            'locations'   => 'Página Inicial (Topo / Hero)'
+        ),
+        'aja_foto_encontro_rede' => array(
+            'label'       => '2. Quem Somos: Membros e Parceiros em Encontro da Rede',
+            'desc'        => 'Card principal da seção Quem Somos com a legenda "Membros e parceiros em encontro da rede".',
+            'dimensions'  => '1024 x 680 px ou 1200 x 800 px (Paisagem)',
+            'default'     => 'fotos/encontro-rede-aja.jpg',
+            'locations'   => 'Página Inicial, Sobre Nós e Nossa História'
+        ),
+        'aja_foto_painel_debate' => array(
+            'label'       => '3. Quem Somos: Espaços de Construção Contínua',
+            'desc'        => 'Card secundário com a legenda "Espaços de construção contínua e incidência política".',
+            'dimensions'  => '1024 x 680 px ou 1200 x 600 px (Paisagem)',
+            'default'     => 'fotos/painel-debate-aja.jpg',
+            'locations'   => 'Página Inicial e Sobre Nós'
+        ),
+        'aja_foto_historia' => array(
+            'label'       => '4. Nossa História: Coquetel de Lançamento da AJA',
+            'desc'        => 'Card na linha do tempo histórica com a legenda "Coquetel de Lançamento da AJA".',
+            'dimensions'  => '1000 x 1000 px (Quadrada) ou 1200 x 800 px',
+            'default'     => 'fotos/coquetel-lancamento-aja.jpg',
+            'locations'   => 'Página Inicial e Nossa História'
+        ),
+        'aja_foto_atuacao' => array(
+            'label'       => '5. Nossa Atuação: Rigor Técnico e Defesa Socioambiental',
+            'desc'        => 'Card de introdução aos Grupos Temáticos (GTs) com a legenda "Rigor Técnico e Defesa Socioambiental".',
+            'dimensions'  => '1024 x 680 px ou 1200 x 800 px (Paisagem)',
+            'default'     => 'fotos/advocacia-juridica-amazonia.jpg',
+            'locations'   => 'Página Inicial e Nossa Atuação'
+        ),
+        'aja_foto_transicao' => array(
+            'label'       => '6. Transição Panorâmica: Painel de Debates da Rede',
+            'desc'        => 'Faixa fotográfica horizontal de transição localizada logo após a seção da Equipe.',
+            'dimensions'  => '1280 x 600 px ou 1600 x 600 px (Panorâmica horizontal)',
+            'default'     => 'ece721c3-6d0e-4960-855e-b27860c911aa.jpg',
+            'locations'   => 'Página Inicial (Faixa Panorâmica)'
+        ),
+    );
+}
+
+/**
+ * Helper global para resgatar a URL da foto institucional (com fallback)
+ */
+function aja_get_home_photo($key, $default_relative_asset = '') {
+    $custom = get_option($key);
+    if (!empty($custom)) {
+        return esc_url($custom);
+    }
+    return esc_url(aja_asset($default_relative_asset));
+}
+
+/**
+ * 1. Registra a página no menu Aparência > 📸 Fotos da Home
+ */
+add_action('admin_menu', function() {
+    add_theme_page(
+        'Fotos da Página Inicial',
+        '📸 Fotos da Home',
+        'edit_theme_options',
+        'aja-fotos-home',
+        'aja_render_home_photos_admin_page'
+    );
+});
+
+/**
+ * 2. Adiciona atalho na barra superior do WordPress ao visualizar o site
+ */
+add_action('admin_bar_menu', function($wp_admin_bar) {
+    if (is_admin() || !current_user_can('edit_theme_options')) {
+        return;
+    }
+    if (is_front_page()) {
+        $wp_admin_bar->add_node(array(
+            'id'    => 'aja_edit_home_photos',
+            'title' => '📸 Fotos da Home',
+            'href'  => admin_url('themes.php?page=aja-fotos-home'),
+            'meta'  => array('title' => 'Gerenciar as 6 fotos institucionais da Página Inicial')
+        ));
+    }
+}, 80);
+
+/**
+ * 3. Registra metabox dentro de Páginas > Home
+ */
+add_action('add_meta_boxes_page', function($post) {
+    $front_id = get_option('page_on_front');
+    $template = get_post_meta($post->ID, '_wp_page_template', true);
+    if ($post->ID == $front_id || $template === 'template-home.php' || $post->post_name === 'home') {
+        add_meta_box(
+            'aja_home_photos_metabox',
+            '📸 Fotos Institucionais da Página Inicial (AJA)',
+            'aja_render_home_photos_metabox',
+            'page',
+            'normal',
+            'high'
+        );
+    }
+});
+
+/**
+ * Enfileira os scripts de mídia do WordPress
+ */
+add_action('admin_enqueue_scripts', function($hook) {
+    global $post, $pagenow;
+    $is_photos_page = ($hook === 'appearance_page_aja-fotos-home');
+    $is_home_edit = ($pagenow === 'post.php' && $post && ($post->ID == get_option('page_on_front') || get_post_meta($post->ID, '_wp_page_template', true) === 'template-home.php'));
+
+    if ($is_photos_page || $is_home_edit) {
+        wp_enqueue_media();
+    }
+});
+
+/**
+ * Renderiza o conteúdo do metabox em Páginas > Home
+ */
+function aja_render_home_photos_metabox($post) {
+    wp_nonce_field('aja_save_home_photos_metabox_action', 'aja_home_photos_metabox_nonce');
+    ?>
+    <div style="background: #f8fafc; padding: 14px 18px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+        <p style="margin: 0; font-size: 13px; color: #334155;">
+            <strong>📸 Personalização de Fotos:</strong> Substitua qualquer uma das 6 fotos institucionais da Home selecionando um arquivo da sua biblioteca de mídia. Você também pode acessar a tela dedicada em <a href="<?php echo esc_url(admin_url('themes.php?page=aja-fotos-home')); ?>" target="_blank" style="font-weight: 600; text-decoration: underline;">Aparência &gt; Fotos da Home</a>.
+        </p>
+    </div>
+    <?php
+    aja_render_home_photos_form_cards(true);
+}
+
+/**
+ * Salva os dados do metabox em Páginas > Home
+ */
+add_action('save_post_page', function($post_id) {
+    if (!isset($_POST['aja_home_photos_metabox_nonce']) || !wp_verify_nonce($_POST['aja_home_photos_metabox_nonce'], 'aja_save_home_photos_metabox_action')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (!current_user_can('edit_page', $post_id)) {
+        return;
+    }
+
+    $configs = aja_get_home_photos_config();
+    $updated = false;
+
+    foreach ($configs as $key => $conf) {
+        if (isset($_POST[$key])) {
+            $val = trim($_POST[$key]);
+            if ($val === '') {
+                delete_option($key);
+            } else {
+                update_option($key, esc_url_raw($val));
+            }
+            $updated = true;
+        }
+    }
+
+    if ($updated && has_action('litespeed_purge_all')) {
+        do_action('litespeed_purge_all');
+    }
+});
+
+/**
+ * Renderiza a página dedicada em Aparência > 📸 Fotos da Home
+ */
+function aja_render_home_photos_admin_page() {
+    if (!current_user_can('edit_theme_options')) {
+        wp_die('Você não tem permissão para acessar esta página.');
+    }
+
+    $configs = aja_get_home_photos_config();
+    $saved_notice = false;
+
+    // Processar Salvamento
+    if (isset($_POST['aja_save_home_photos']) && check_admin_referer('aja_save_home_photos_action', 'aja_home_photos_nonce')) {
+        foreach ($configs as $key => $conf) {
+            if (isset($_POST[$key])) {
+                $val = trim($_POST[$key]);
+                if ($val === '') {
+                    delete_option($key);
+                } else {
+                    update_option($key, esc_url_raw($val));
+                }
+            }
+        }
+        if (has_action('litespeed_purge_all')) {
+            do_action('litespeed_purge_all');
+        }
+        $saved_notice = true;
+    }
+    ?>
+    <div class="wrap" style="max-width: 1200px;">
+        <h1 style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">
+            <span>📸 Fotos Institucionais da Página Inicial</span>
+        </h1>
+        <p style="color: #64748b; font-size: 14px; margin-top: 0; margin-bottom: 24px;">
+            Substitua com facilidade as 6 fotos fixas da Home escolhendo imagens da sua Biblioteca de Mídia. Se preferir voltar a qualquer momento, basta clicar em <strong>Restaurar Padrão</strong>.
+        </p>
+
+        <?php if ($saved_notice) : ?>
+            <div class="notice notice-success is-dismissible" style="border-left-color: #10b981; padding: 12px 16px;">
+                <p style="margin: 0; font-size: 14px; font-weight: 600; color: #065f46;">
+                    ✅ Fotos atualizadas com sucesso! O cache do site foi limpo automaticamente e as alterações já estão visíveis na Home.
+                </p>
+            </div>
+        <?php endif; ?>
+
+        <form method="post" action="">
+            <?php wp_nonce_field('aja_save_home_photos_action', 'aja_home_photos_nonce'); ?>
+            
+            <?php aja_render_home_photos_form_cards(false); ?>
+
+            <div style="margin-top: 28px; padding: 18px 24px; background: #ffffff; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: 0 1px 3px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between;">
+                <button type="submit" name="aja_save_home_photos" class="button button-primary button-large" style="background: #194627; border-color: #12331c; font-size: 14px; padding: 4px 22px; height: auto; font-weight: 600; box-shadow: 0 2px 4px rgba(25, 70, 39, 0.2);">
+                    💾 Salvar Todas as Fotos
+                </button>
+                <span style="color: #64748b; font-size: 13px;">
+                    Ao salvar, o cache do LiteSpeed é purgado automaticamente.
+                </span>
+            </div>
+        </form>
+    </div>
+    <?php
+}
+
+/**
+ * Renderiza o Grid de Cards com Previews e Botões de Mídia
+ */
+function aja_render_home_photos_form_cards($is_metabox = false) {
+    $configs = aja_get_home_photos_config();
+    ?>
+    <style>
+        .aja-photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+            margin-top: 16px;
+        }
+        .aja-photo-card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .aja-photo-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .aja-photo-preview-wrap {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            background: #0f172a;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 12px 0 14px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #cbd5e1;
+        }
+        .aja-photo-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s;
+        }
+        .aja-photo-status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 9px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .badge-custom {
+            background: #10b981;
+            color: #ffffff;
+        }
+        .badge-default {
+            background: rgba(15, 23, 42, 0.75);
+            color: #f1f5f9;
+        }
+    </style>
+
+    <div class="aja-photos-grid">
+        <?php foreach ($configs as $key => $conf) : 
+            $custom_url = get_option($key);
+            $default_url = esc_url(aja_asset($conf['default']));
+            $current_url = !empty($custom_url) ? esc_url($custom_url) : $default_url;
+            $is_custom = !empty($custom_url);
+        ?>
+            <div class="aja-photo-card" id="card-<?php echo esc_attr($key); ?>">
+                <div>
+                    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
+                        <h3 style="margin: 0; font-size: 14px; font-weight: 700; color: #0f172a; line-height: 1.35;">
+                            <?php echo esc_html($conf['label']); ?>
+                        </h3>
+                    </div>
+                    
+                    <p style="margin: 6px 0 0 0; font-size: 12px; color: #64748b; line-height: 1.45;">
+                        <?php echo esc_html($conf['desc']); ?>
+                    </p>
+
+                    <div style="margin-top: 8px; font-size: 11px; color: #0f766e; background: #f0fdfa; padding: 4px 8px; border-radius: 4px; display: inline-block;">
+                        📐 <strong>Tamanho sugerido:</strong> <?php echo esc_html($conf['dimensions']); ?>
+                    </div>
+
+                    <!-- Preview Container -->
+                    <div class="aja-photo-preview-wrap">
+                        <img src="<?php echo $current_url; ?>" 
+                             id="preview-<?php echo esc_attr($key); ?>" 
+                             class="aja-photo-preview-img" 
+                             alt="Preview <?php echo esc_attr($conf['label']); ?>" />
+                        
+                        <span id="badge-<?php echo esc_attr($key); ?>" 
+                              class="aja-photo-status-badge <?php echo $is_custom ? 'badge-custom' : 'badge-default'; ?>">
+                            <?php echo $is_custom ? '★ Personalizada' : 'Padrão do Tema'; ?>
+                        </span>
+                    </div>
+
+                    <div style="font-size: 11px; color: #64748b; margin-bottom: 12px;">
+                        <strong>Onde aparece:</strong> <?php echo esc_html($conf['locations']); ?>
+                    </div>
+                </div>
+
+                <!-- Hidden Input -->
+                <input type="hidden" 
+                       name="<?php echo esc_attr($key); ?>" 
+                       id="input-<?php echo esc_attr($key); ?>" 
+                       value="<?php echo esc_attr($custom_url); ?>" 
+                       data-default="<?php echo $default_url; ?>" />
+
+                <!-- Action Buttons -->
+                <div style="display: flex; gap: 8px; align-items: center; pt-2;">
+                    <button type="button" 
+                            class="button button-primary aja-media-upload-btn" 
+                            data-key="<?php echo esc_attr($key); ?>"
+                            style="flex: 1; text-align: center; font-weight: 600;">
+                        📸 Selecionar Imagem
+                    </button>
+                    
+                    <button type="button" 
+                            class="button aja-media-reset-btn" 
+                            data-key="<?php echo esc_attr($key); ?>"
+                            title="Voltar para a foto padrão do tema"
+                            style="color: #64748b; font-size: 12px;">
+                        Restaurar
+                    </button>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <script>
+    jQuery(document).ready(function($) {
+        // 1. Upload Button
+        $('.aja-media-upload-btn').on('click', function(e) {
+            e.preventDefault();
+            var key = $(this).data('key');
+            var input = $('#input-' + key);
+            var preview = $('#preview-' + key);
+            var badge = $('#badge-' + key);
+
+            var frame = wp.media({
+                title: 'Selecionar Foto para a Página Inicial',
+                button: { text: 'Usar esta Imagem' },
+                multiple: false,
+                library: { type: 'image' }
+            });
+
+            frame.on('select', function() {
+                var attachment = frame.state().get('selection').first().toJSON();
+                input.val(attachment.url);
+                preview.attr('src', attachment.url);
+                badge.removeClass('badge-default').addClass('badge-custom').text('★ Personalizada');
+            });
+
+            frame.open();
+        });
+
+        // 2. Reset Button
+        $('.aja-media-reset-btn').on('click', function(e) {
+            e.preventDefault();
+            var key = $(this).data('key');
+            var input = $('#input-' + key);
+            var preview = $('#preview-' + key);
+            var badge = $('#badge-' + key);
+            var defaultUrl = input.data('default');
+
+            input.val('');
+            preview.attr('src', defaultUrl);
+            badge.removeClass('badge-custom').addClass('badge-default').text('Padrão do Tema');
+        });
+    });
+    </script>
+    <?php
+}
+
